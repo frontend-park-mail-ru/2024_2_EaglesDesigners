@@ -15,6 +15,6 @@
 
 ### Правила оформления Pull Requests
   1. Ветка создается с названием `EAGDES-###`, где ### - номер задачи в jira.
-  2. Название Pull Request`а соответствует названию задачки в jira: `EAGDES-###: description`, где description - название из jira.
+  2. Название Pull Request'а соответствует названию задачки в jira: `EAGDES-###: description`, где description - название из jira.
   3. При создании Pull Request'а нужно указать в описании ссылку на задачу в jira.
   4. Для того, чтобы залить изменения в ветку main нужен апрув от [Кости](https://t.me/PassPort_Guardian)
