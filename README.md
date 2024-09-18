@@ -8,10 +8,10 @@
  4. [Дмитрий Селянинов](https://github.com/nonrep)
 
 ### Внешние ссылки
- - [Figma]()
+ - Figma
  - [Backend](https://github.com/go-park-mail-ru/2024_2_EaglesDesigners)
- - [Deploy]()
- - [Jira]()
+ - Deploy
+ - Jira
 
 ### Правила оформления Pull Requests
   1. Ветка создается с названием `EAGDES-###`, где ### - номер задачи в jira.
