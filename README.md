@@ -8,7 +8,7 @@
  4. [Дмитрий Селянинов](https://github.com/nonrep)
 
 ### Внешние ссылки
- - Figma
+ - [Figma](https://www.figma.com/design/qZIoxUlx6qRxjXrYho4Qll/Telegram-test-design?node-id=0-1&node-type=canvas&t=3ZUlzFaSQLT4vWAK-0)
  - [Backend](https://github.com/go-park-mail-ru/2024_2_EaglesDesigners)
  - Deploy
  - Jira
