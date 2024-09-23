@@ -7,6 +7,36 @@ function createInput(type, text, name) {
     return input;
 }
 
+function createButton(type, text){
+    const button = document.createElement('Button');
+    button.type = type;
+    button.textContent = text;
+
+    return button;
+}
+
+function ajax(method, url, body = null, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.withCredentials = true;
+
+    xhr.addEventListener('readystatechange', function() {
+        if (xhr.readyState != XMLHttpRequest.DONE) {
+            return;
+        }
+
+        callback(xhr.status, xhr.responseText);
+    });
+
+    if (body) {
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
+        xhr.send(JSON.stringify(body));
+        return;
+    }
+
+    xhr.send();
+}
+
 function renderLogin() {
     const form = document.createElement('form');
     form.className = 'LoginForm';
@@ -17,21 +47,33 @@ function renderLogin() {
     const emailInput = createInput('email', 'Емайл', 'email');
     const passwordInput = createInput('password', 'Пароль', 'password');
 
-    const submitBtn = document.createElement('button');
-    submitBtn.type = 'submit';
-    submitBtn.textContent = 'Войти';
-    submitBtn.className = 'Enter';
+    const submitBtn = createButton('submit', 'Войти');
+    submitBtn.className = 'btn';
+    submitBtn.id = 'Enter';
 
-    const submitBtnCreate = document.createElement('button');
-    submitBtn.type = 'submit';
-    submitBtnCreate.textContent = 'Создать аккаунт';
-    submitBtnCreate.className = 'Create';
+    const submitBtnCreate = createButton('submit', 'Создать аккаунт');
+    submitBtnCreate.className = 'btn';
+    submitBtnCreate.id = 'Create';
 
     form.appendChild(text);
     form.appendChild(emailInput);
     form.appendChild(passwordInput);
     form.appendChild(submitBtn);
     form.appendChild(submitBtnCreate);
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        
+        ajax('POST', '/', {email, password}, (status) => {
+            if (status == 200) {
+                alert('Победа!!!');
+                return
+            }
+            alert(status);
+        });
+    })
 
     return form;
 }
@@ -49,5 +91,4 @@ const login = renderLogin();
 
 element.appendChild(elementLeft);
 element.appendChild(elementRight);
-
 elementRight.appendChild(login);
