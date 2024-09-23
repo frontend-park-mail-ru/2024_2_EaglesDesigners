@@ -1,5 +1,5 @@
 # 2024_2_EaglesDesigners
-Фронтенд проекта Telegram команды "EaglesDesigners"
+Фронтенд проекта Patefon команды "EaglesDesigners"
 
 ### Участники команды
  1. [Станислав Кригер](https://github.com/MoyStasik)
@@ -14,7 +14,7 @@
  - [Jira](https://ru.yougile.com/team/343b17e1c7b0/Patefon)
 
 ### Правила оформления Pull Requests
-  1. Ветка создается с названием `EAGDES-###`, где ### - номер задачи в jira.
-  2. Название Pull Request'а соответствует названию задачки в jira: `EAGDES-###: description`, где description - название из jira.
+  1. Ветка создается с названием `PFN-###`, где ### - номер задачи в jira.
+  2. Название Pull Request'а соответствует названию задачки в jira: `PFN-###: description`, где description - название из jira.
   3. При создании Pull Request'а нужно указать в описании ссылку на задачу в jira.
   4. Для того, чтобы залить изменения в ветку main нужен апрув от [Кости](https://t.me/PassPort_Guardian)
