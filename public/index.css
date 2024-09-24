@@ -1,0 +1,27 @@
+@import "../../source/pages/MainPage/ui/MainPage.css";
+@import "../source/widgets/ChatList/ui/ChatList.css";
+
+
+body {
+  margin: 0 0 0 0;
+}
+
+:root {
+  --background: #090707;
+  --primary: #101723;
+
+  --text-over-primary: #FFFFFF;
+}
+
+a{
+  text-decoration: none;
+}
+
+p{
+  color: var(--text-over-primary);
+  font-family: "Inter";
+  line-height: 21px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
