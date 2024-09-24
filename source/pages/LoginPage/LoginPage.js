@@ -1,94 +1,79 @@
-function createInput(type, text, name) {
-    const input = document.createElement('input')
-    input.type = type;
-    input.name = name;
-    input.placeholder = text;
+import {Form} from './Form/form.js';
+import {ajax} from './api/ajax.js';
+import { validateEmail } from '../../shared/validation/EmailValidation.js';
+import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 
-    return input;
-}
 
-function createButton(type, text){
-    const button = document.createElement('Button');
-    button.type = type;
-    button.textContent = text;
+export function renderLogin() {
+    const formElement = document.createElement('form');
+    const form = new Form(formElement);
+    const element = document.getElementById('root');
 
-    return button;
-}
+    const elementLeft = document.createElement('div');
+    elementLeft.className = 'left';
+    const elementRight = document.createElement('div');
+    elementRight.className = 'right';
+    
+    form.renderTemplate();
 
-function ajax(method, url, body = null, callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
-    xhr.withCredentials = true;
+    const loginForm = form.parent;
+    element.appendChild(elementLeft);
+    element.appendChild(elementRight);
+    elementRight.innerHTML = loginForm;
 
-    xhr.addEventListener('readystatechange', function() {
-        if (xhr.readyState != XMLHttpRequest.DONE) {
-            return;
-        }
+    const documentForm = document.querySelector('form');
+    const btn = document.getElementById('Create');
 
-        callback(xhr.status, xhr.responseText);
-    });
-
-    if (body) {
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
-        xhr.send(JSON.stringify(body));
-        return;
-    }
-
-    xhr.send();
-}
-
-function renderLogin() {
-    const form = document.createElement('form');
-    form.className = 'LoginForm';
-
-    const text = document.createElement('p');
-    text.textContent = 'Войдите в Patefon';
-
-    const emailInput = createInput('email', 'Емайл', 'email');
-    const passwordInput = createInput('password', 'Пароль', 'password');
-
-    const submitBtn = createButton('submit', 'Войти');
-    submitBtn.className = 'btn';
-    submitBtn.id = 'Enter';
-
-    const submitBtnCreate = createButton('submit', 'Создать аккаунт');
-    submitBtnCreate.className = 'btn';
-    submitBtnCreate.id = 'Create';
-
-    form.appendChild(text);
-    form.appendChild(emailInput);
-    form.appendChild(passwordInput);
-    form.appendChild(submitBtn);
-    form.appendChild(submitBtnCreate);
-
-    form.addEventListener('submit', (e) => {
+    documentForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-        
-        ajax('POST', '/', {email, password}, (status) => {
-            if (status == 200) {
-                alert('Победа!!!');
-                return
-            }
-            alert(status);
-        });
+        const email = document.getElementsByClassName('login')[0].value.trim();
+        const password = document.getElementsByClassName('password')[0].value;
+
+        if (!validateEmail(email) || !validatePassword(password)) {
+            const text = document.getElementById('errorMessage');
+            const loginInput = document.getElementsByClassName('login')[0];
+            loginInput.classList.add('error');
+            const passwordInput = document.getElementsByClassName('password')[0];
+            passwordInput.classList.add('error');
+            text.textContent = "Неверный пароль или логин";
+        } else {
+
+            ajax('POST', '/signin', {email, password}, (status, body) => {
+                if (status == 200) {
+                    element.removeChild(elementRight);
+                    ajax('GET', '/auth', null, (status) => {
+                        if (status == 200) {
+                            alert('я тут');
+                        }
+                    })
+                    return
+                } else {
+                    
+                    
+                
+                
+                }
+                
+            });
+        }
     })
 
-    return form;
+    btn.addEventListener('click', () => {
+        ajax('GET', '/signup', null, (status) => {
+            if (status == 200) {
+                alert('Its okey');
+            }
+            else {
+                alert('bad');
+            }
+        });
+    })
 }
 
-const element = document.getElementById('root');
-
-const elementLeft = document.createElement('div');
-elementLeft.className = 'left';
 
 
-const elementRight = document.createElement('div');
-elementRight.className = 'right';
 
-const login = renderLogin();
 
-element.appendChild(elementLeft);
-element.appendChild(elementRight);
-elementRight.appendChild(login);
+
+
+

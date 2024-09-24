@@ -1,0 +1,6 @@
+(function() {
+  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['form.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<form class=\"LoginForm\">\n    <p>Войдите в Patefon</p>\n    <div class=\"errorDiv\">\n    <span id=\"errorMessage\"></span>\n    </div>\n    <input class=\"login not_error\" type=\"email\" placeholder=\"Емайл\" name=\"email\">\n    <input class=\"password not_error\" type=\"password\" placeholder=\"Пароль\" name=\"password\">\n    \n    <button class=\"btn\" type=\"submit\" id=\"Enter\">Войти</button>\n    \n</form>\n<button class=\"btn\" type=\"submit\" id=\"Create\">Создать аккаунт</button>\n";
+},"useData":true});
+})();

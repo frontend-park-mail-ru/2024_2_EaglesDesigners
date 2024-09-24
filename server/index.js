@@ -5,8 +5,10 @@ const express = require('express');
 
 let app = express();
 
-app.use(express.static(require('path').join(__dirname, '..', '/public')))
-app.use(express.static(require('path').join(__dirname, '..', '/source')))
+
+app.use(express.static(require('path').join(__dirname, '..', '/public')));
+app.use(express.static(require('path').join(__dirname, '..', '/source')));
+app.use(express.static(require('path').resolve(__dirname, '..', 'node_modules')));
 app.use(body.json());
 
 const users = {
@@ -33,7 +35,7 @@ const users = {
 
 const ids = {};
 
-app.post('/', (req, res) => {
+app.post('/signin', (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
     if (!password || !email) {
@@ -60,6 +62,14 @@ app.get('/', (req, res) => {
   // Устанавливаем HTTP-заголовок ответа с HTTP статусом и Content type
   res.sendFile(require('path').join(__dirname, '..', '/source/index.html'))
 });
+
+app.get('/signup', (req, res) => {
+    return res.status(200).json({});
+})
+
+app.get('/auth', (req, res) => {
+    return res.status(400).json({});
+})
 
 // Выводим лог как только сервер будет запущен
 app.listen(port, hostname, () => {

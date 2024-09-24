@@ -28,7 +28,6 @@ body {
     font-family: sans-serif;
     color: #ffffff;
     background-color: #101723;
-    border: 2px solid #4F82BF;
     margin-bottom: 30px;
 }
 
@@ -66,5 +65,24 @@ body {
     color: #ffffff;
     font-family: sans-serif;
     margin-top: 235px;
-    margin-bottom: 96px;
+    margin-bottom: 80px;
+}
+
+#errorMessage {
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: red;
+}
+
+.not_error {
+    border: 2px solid #4F82BF;
+}
+
+.error {
+    border: 2px solid red;
+}
+
+.errorDiv{
+    height: 16px;
 }
