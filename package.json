@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "prestart": "npm run compile:templates",
+    "start": "node server/index.js",
+    "compile:templates": "handlebars source/pages/LoginPage/Form/form.hbs -f source/pages/LoginPage/Form/form.precompiled.hbs"
+    
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.0",
+    "handlebars": "^4.7.8",
     "uuid": "^10.0.0"
   }
 }
