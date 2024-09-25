@@ -57,8 +57,6 @@
         "avatar low";
     grid-template-columns: min-content auto;
     grid-template-rows: 50% 50%;
-
-    border: 1px solid #f7f7f7
 }
 
 .chat-card-img {
