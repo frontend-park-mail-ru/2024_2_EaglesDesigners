@@ -1,4 +1,4 @@
-import {Form} from '../../widgets/loginForm/form.js';
+import {LoginForm} from '../../widgets/loginForm/loginForm.js';
 import {ajax} from './api/ajax.js';
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
@@ -11,11 +11,10 @@ export class RenderLogin {
     }
 
     render() {
-        const form = new Form();
+        const form = new LoginForm();
         
         const loginForm = form.renderTemplate();
         this.#parent.innerHTML = loginForm;
-
 
         const documentForm = document.querySelector('form');
         const btn = document.getElementById('Create');

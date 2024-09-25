@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run compile:templates",
     "start": "node server/index.js",
-    "compile:templates": "handlebars source/widgets/loginForm/form.hbs -f source/widgets/loginForm/form.precompiled.hbs & handlebars source/pages/SignupPage/Form/form.hbs -f source/pages/SignupPage/Form/form.precompiled.hbs"
+    "compile:templates": "handlebars source/widgets/loginForm/loginForm.hbs -f source/widgets/loginForm/loginForm.precompiled.hbs & handlebars source/widgets/SignUp/signUpForm.hbs -f source/widgets/SignUp/signUpForm.precompiled.hbs"
     
   },
   "author": "",

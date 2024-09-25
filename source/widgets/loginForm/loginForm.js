@@ -1,6 +1,6 @@
 'use strict'
 
-export class Form {
+export class LoginForm {
     #parent
     constructor(parent) {
         this.#parent = parent
@@ -8,7 +8,7 @@ export class Form {
 
 
     renderTemplate() {
-        const template = Handlebars.templates['form.hbs'];  
+        const template = Handlebars.templates['loginForm.hbs'];  
         
         return template();
     }

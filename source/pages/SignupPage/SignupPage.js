@@ -1,4 +1,3 @@
-import { signupForm } from "./Form/form";
+import { SignupForm } from "../../widgets/SignUp/signUpForm";
 
-const form = new signupForm();
-
+const form = new SignupForm();
