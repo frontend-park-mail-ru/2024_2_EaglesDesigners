@@ -6,11 +6,11 @@ body {
     margin: auto auto;
     display: flex;
 }
-.left {
+#left {
     width: 50%;
 }
 
-.right {
+#right {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -59,7 +59,7 @@ body {
     color: #ffffff;
 }
 
-.right p {
+#right p {
     text-align: center;
     font-size: 30px;
     color: #ffffff;
