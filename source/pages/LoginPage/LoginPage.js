@@ -26,17 +26,35 @@ export function renderLogin() {
 
     documentForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const text = document.getElementById('errorPassword');
+        const textPass = document.getElementById('errorMessage');
+
+        text.textContent = '';
+        textPass.textContent = '';
+
+        const loginInput = document.getElementsByClassName('login')[0];
+        loginInput.classList.remove('error');
+
+        const passwordInput = document.getElementsByClassName('password')[0];
+        passwordInput.classList.remove('error');
+        
+
         const email = document.getElementsByClassName('login')[0].value.trim();
         const password = document.getElementsByClassName('password')[0].value;
 
-        if (!validateEmail(email) || !validatePassword(password)) {
-            const text = document.getElementById('errorMessage');
+        if (!validateEmail(email)) {
             const loginInput = document.getElementsByClassName('login')[0];
             loginInput.classList.add('error');
+            text.textContent = "Неверный логин";
+        } 
+        if (!validatePassword(password)) {
             const passwordInput = document.getElementsByClassName('password')[0];
             passwordInput.classList.add('error');
-            text.textContent = "Неверный пароль или логин";
-        } else {
+            textPass.textContent = "Неверный пароль";
+        }
+
+
+        if  (validateEmail(email) && validatePassword(password)){
 
             ajax('POST', '/signin', {email, password}, (status, body) => {
                 if (status == 200) {
@@ -48,9 +66,15 @@ export function renderLogin() {
                     })
                     return
                 } else {
+                    const message = JSON.parse(body);
+                    const text = document.getElementById('errorMessage');
+                    const loginInput = document.getElementsByClassName('login')[0];
+                    loginInput.classList.add('error');
+                    const passwordInput = document.getElementsByClassName('password')[0];
+                    passwordInput.classList.add('error');
+                    text.textContent = message.error;
                     
                     
-                
                 
                 }
                 
