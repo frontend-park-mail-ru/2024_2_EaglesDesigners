@@ -16,34 +16,32 @@ export class RenderLogin {
         const loginForm = form.renderTemplate();
         this.#parent.innerHTML = loginForm;
 
-        const documentForm = document.querySelector('form');
-        const btn = document.getElementById('Create');
+        const documentForm = this.#parent.querySelector('form');
+
+        const btn = this.#parent.querySelector('#Create');
 
         documentForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const text = document.getElementById('errorPassword');
-            const textPass = document.getElementById('errorMessage');
+            const textPass = this.#parent.querySelector('#errorPassword');
+            const textLogin = this.#parent.querySelector('#errorLogin');
 
-            text.textContent = '';
+            textLogin.textContent = '';
             textPass.textContent = '';
 
-            const loginInput = document.getElementsByClassName('login')[0];
+            const loginInput = this.#parent.querySelector('#login');
             loginInput.classList.remove('error');
 
-            const passwordInput = document.getElementsByClassName('password')[0];
+            const passwordInput = this.#parent.querySelector('#password');
             passwordInput.classList.remove('error');
             
 
-            const email = document.getElementsByClassName('login')[0].value.trim();
-            const password = document.getElementsByClassName('password')[0].value;
-
-            if (!validateEmail(email)) {
-                const loginInput = document.getElementsByClassName('login')[0];
+            const email = loginInput.value.trim();
+            const password = passwordInput.value;
+            if (!validateEmail(email)) { 
                 loginInput.classList.add('error');
-                text.textContent = "Неверный логин";
+                textLogin.textContent = "Неверный логин";
             } 
             if (!validatePassword(password)) {
-                const passwordInput = document.getElementsByClassName('password')[0];
                 passwordInput.classList.add('error');
                 textPass.textContent = "Неверный пароль";
             }
@@ -52,8 +50,8 @@ export class RenderLogin {
 
                 ajax('POST', '/signin', {email, password}, (status, body) => {
                     if (status == 200) {
-                        this.#parent.removeChild(document.getElementById('left'));
-                        this.#parent.removeChild(document.getElementById('right'));
+                        this.#parent.removeChild(this.#parent.querySelector('#left'));
+                        this.#parent.removeChild(this.#parent.querySelector('#right'));
                         ajax('GET', '/auth', null, (status) => {
                             if (status == 200) {
                                 alert('я тут');
@@ -62,13 +60,9 @@ export class RenderLogin {
                         return
                     } else {
                         const message = JSON.parse(body);
-                        const text = document.getElementById('errorMessage');
-                        const loginInput = document.getElementsByClassName('login')[0];
                         loginInput.classList.add('error');
-                        const passwordInput = document.getElementsByClassName('password')[0];
                         passwordInput.classList.add('error');
-                        text.textContent = message.error;
-                        
+                        textLogin.textContent = message.error;
                     }
                     
                 });
