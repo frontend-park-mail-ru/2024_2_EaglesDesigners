@@ -6,11 +6,11 @@ body {
     margin: auto auto;
     display: flex;
 }
-#left {
+.left {
     width: 50%;
 }
 
-#right {
+.right {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -48,18 +48,18 @@ body {
     
 }
 
-#Enter{
+.Enter{
     margin-top: 50px;
     background-color: #AFCBEE;
     color: #101723;
 }
 
-#Create{
+.Create{
     background-color: #121518;
     color: #ffffff;
 }
 
-#right p {
+.right p {
     text-align: center;
     font-size: 30px;
     color: #ffffff;
