@@ -1,4 +1,3 @@
-'use strict'
 
 export const sendLoginRequest = (method, url, body = null, callback) => {
     const xhr = new XMLHttpRequest();
