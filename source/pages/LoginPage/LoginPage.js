@@ -1,5 +1,5 @@
 import {LoginForm} from '../../widgets/loginForm/loginForm.js';
-import {ajax} from './api/ajax.js';
+import {sendLoginRequest} from './api/ajax.js';
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 
@@ -48,11 +48,11 @@ export class RenderLogin {
                 return;
             }
 
-            ajax('POST', '/signin', {email, password}, (status, body) => {
+            sendLoginRequest('POST', '/signin', {email, password}, (status, body) => {
                 if (status == 200) {
                     this.#parent.removeChild(this.#parent.querySelector('#left'));
                     this.#parent.removeChild(this.#parent.querySelector('#right'));
-                    ajax('GET', '/auth', null, (status) => {
+                    sendLoginRequest('GET', '/auth', null, (status) => {
                         if (status == 200) {
                             alert('я тут');
                         }

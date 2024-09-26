@@ -1,6 +1,6 @@
 'use strict'
 
-export const ajax = (method, url, body = null, callback) => {
+export const sendLoginRequest = (method, url, body = null, callback) => {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.withCredentials = true;
