@@ -1,12 +1,13 @@
+'use strict'
+
 export class SignupForm {
-
-    constructor() {
-
+    #parent
+    constructor(parent) {
+        this.#parent = parent;
     }
 
     renderTemplate() {
-        const template = Handlebars.template['signUpForm.hbs'];
-
+        const template = Handlebars.templates['signUpForm.hbs'];  
         return template();
     }
 }

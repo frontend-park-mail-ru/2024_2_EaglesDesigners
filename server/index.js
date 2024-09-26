@@ -39,10 +39,10 @@ app.post('/signin', (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
     if (!password || !email) {
-        return res.status(400).json({ error: 'Не указан E-Mail или пароль' });
+        return res.status(400).json({ error: 'Не указан логин или пароль' });
     }
     if (!users[email] || users[email].password !== password) {
-        return res.status(400).json({ error: 'Не верный E-Mail и/или пароль' });
+        return res.status(400).json({ error: 'Не верный логин и/или пароль' });
     }
 
     const id = uuid();
@@ -54,6 +54,15 @@ app.post('/signin', (req, res) => {
     res.status(200).json({ id });
 });
 
+
+app.post('/signup', (req, res) => {
+    const password = req.body.password;
+    const email = req.body.email;
+    if (!password || !email) {
+        return res.status(400).json({ error: 'Не указан логин или пароль' });
+    }
+    
+})
 const port = 3001
 const hostname = '127.0.0.1'
 

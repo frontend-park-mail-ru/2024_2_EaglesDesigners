@@ -9,7 +9,7 @@ export class LoginForm {
 
     renderTemplate() {
         const template = Handlebars.templates['loginForm.hbs'];  
-        
+        console.log(template);
         return template();
     }
 

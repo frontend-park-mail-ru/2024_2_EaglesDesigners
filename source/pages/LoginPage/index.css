@@ -1,3 +1,5 @@
+@import url('../SignupPage/sign.css');
+
 body {
     background-color: #000000;
 }
@@ -18,7 +20,7 @@ body {
 }
 
 
-.LoginForm input{
+form input{
     display: block;
     padding-left: 10px;
     width: 356px;
@@ -49,17 +51,17 @@ body {
 }
 
 #Enter{
-    margin-top: 50px;
+    margin-top: 40px;
     background-color: #AFCBEE;
     color: #101723;
 }
 
 #Create{
-    background-color: #121518;
+    background-color: #2D3339;
     color: #ffffff;
 }
 
-#right p {
+.LoginForm p {
     text-align: center;
     font-size: 30px;
     color: #ffffff;
@@ -73,6 +75,7 @@ body {
     font-size: 16px;
     font-family: sans-serif;
     color: red;
+    
 }
 
 .not_error {
@@ -81,8 +84,11 @@ body {
 
 .error {
     border: 2px solid red;
+    
 }
 
 .errorDiv{
     height: 16px;
+    padding-bottom: 5px;
 }
+

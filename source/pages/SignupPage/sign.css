@@ -1,0 +1,31 @@
+.signupForm p{
+    text-align: center;
+    font-size: 30px;
+    color: #ffffff;
+    font-family: sans-serif;
+    margin-top: 210px;
+    margin-bottom: 50px;
+}
+
+.signupForm a {
+    color: #99C3FF;
+    font-size: 14px;
+    font-family: sans-serif;
+    margin-left: 20px;
+}
+
+.signupForm {
+    align-items: center;
+}
+
+.signupForm input{
+    margin-left: 20px;
+}
+
+.signupForm__button {
+    margin-left: 25px;
+}
+
+.signupForm__div {
+    padding-left: 20px;
+}
