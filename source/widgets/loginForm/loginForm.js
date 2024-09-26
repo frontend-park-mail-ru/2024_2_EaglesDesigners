@@ -1,4 +1,4 @@
-import {sendLoginRequest} from '../../pages/LoginPage/api/ajax.js';
+import {sendLoginRequest} from '../api/ajax.js';
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 
@@ -21,8 +21,6 @@ export class LoginForm {
         })
 
         const documentForm = this.#parent.querySelector('form');
-
-        const btn = this.#parent.querySelector('#Create');
 
         documentForm.addEventListener('submit', (e) => {
             e.preventDefault();
