@@ -40,33 +40,32 @@ export class RenderLogin {
             if (!validateEmail(email)) { 
                 loginInput.classList.add('error');
                 textLogin.textContent = "Неверный логин";
+                return;
             } 
             if (!validatePassword(password)) {
                 passwordInput.classList.add('error');
                 textPass.textContent = "Неверный пароль";
+                return;
             }
 
-            if  (validateEmail(email) && validatePassword(password)){
-
-                ajax('POST', '/signin', {email, password}, (status, body) => {
-                    if (status == 200) {
-                        this.#parent.removeChild(this.#parent.querySelector('#left'));
-                        this.#parent.removeChild(this.#parent.querySelector('#right'));
-                        ajax('GET', '/auth', null, (status) => {
-                            if (status == 200) {
-                                alert('я тут');
-                            }
-                        })
-                        return
-                    } else {
-                        const message = JSON.parse(body);
-                        loginInput.classList.add('error');
-                        passwordInput.classList.add('error');
-                        textLogin.textContent = message.error;
-                    }
-                    
-                });
-            }
+            ajax('POST', '/signin', {email, password}, (status, body) => {
+                if (status == 200) {
+                    this.#parent.removeChild(this.#parent.querySelector('#left'));
+                    this.#parent.removeChild(this.#parent.querySelector('#right'));
+                    ajax('GET', '/auth', null, (status) => {
+                        if (status == 200) {
+                            alert('я тут');
+                        }
+                    })
+                    return
+                } else {
+                    const message = JSON.parse(body);
+                    loginInput.classList.add('error');
+                    passwordInput.classList.add('error');
+                    textLogin.textContent = message.error;
+                }
+                
+            });
         })
 
         btn.addEventListener('click', () => {
