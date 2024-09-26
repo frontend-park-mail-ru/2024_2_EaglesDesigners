@@ -1,5 +1,5 @@
 import {LoginForm} from '../../widgets/loginForm/loginForm.js';
-import {ajax} from './api/ajax.js';
+import {ajax} from '../../widgets/loginForm/api/ajax.js';
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 import { RenderSignup } from '../SignupPage/SignupPage.js';

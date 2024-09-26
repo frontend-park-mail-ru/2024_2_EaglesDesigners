@@ -1,8 +1,6 @@
 // Базовый скрипт для отображения всех остальных страниц
 
-import { RenderLogin } from "./pages/LoginPage/LoginPage.js";
+import { App } from "./app/app.js"; 
 
-const root = document.getElementById('root');
-const login = new RenderLogin(root);
-
-login.render();
+const pageManager = new App();
+pageManager.start();

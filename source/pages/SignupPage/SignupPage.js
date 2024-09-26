@@ -4,7 +4,7 @@ import { validateEmail } from "../../shared/validation/EmailValidation.js";
 import { validatePassword } from "../../shared/validation/PasswordValidation.js";
 import { validateNickname } from "../../shared/validation/nicknameValidation.js";
 import { validateForm } from "../../shared/validation/validateForm.js";
-import { ajax } from "../LoginPage/api/ajax.js";
+import { ajax } from "../../widgets/loginForm/api/ajax.js";
 
 export class RenderSignup {
     #parent
