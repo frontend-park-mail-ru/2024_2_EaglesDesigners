@@ -1,5 +1,4 @@
-import { MainPage } from "./pages/MainPage/ui/MainPage.js";
+import { App } from "./app/App.js";
 
-const parent = document.getElementById("root");
-const mainPage = new MainPage(parent);
-mainPage.render()
+const app = new App();
+app.loadMainPage();

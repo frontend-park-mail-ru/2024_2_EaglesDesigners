@@ -1,10 +1,4 @@
 
-.config{
-    --primary: #101723;
-
-    --text-over-primary: #FFFFFF;
-}
-
 .chat-list-container {
     background: transparent;
 
