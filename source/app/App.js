@@ -1,6 +1,16 @@
 import { RenderLogin } from "../pages/LoginPage/LoginPage.js";
 
-const root = document.getElementById('root');
-const login = new RenderLogin(root);
+export class App{
 
-login.render();
+    constructor() {
+
+    }
+
+    start() {
+        const root = document.getElementById('root');
+        const login = new RenderLogin(root);
+    
+        login.render();
+    }
+    
+}

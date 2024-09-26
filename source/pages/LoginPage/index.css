@@ -55,7 +55,7 @@ body {
 }
 
 .Create{
-    background-color: #121518;
+    background-color: #2D3339;
     color: #ffffff;
 }
 
@@ -68,11 +68,12 @@ body {
     margin-bottom: 80px;
 }
 
-.errorDiv span{
+.LoginForm span{
     text-align: center;
     font-size: 16px;
     font-family: sans-serif;
     color: red;
+    height: 16px;
 }
 
 .not_error {
@@ -83,6 +84,6 @@ body {
     border: 2px solid red;
 }
 
-.errorDiv{
+.errorDiv {
     height: 16px;
 }

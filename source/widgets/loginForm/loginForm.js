@@ -44,14 +44,14 @@ export class LoginForm {
             if (!validateEmail(email)) { 
                 loginInput.classList.add('error');
                 textLogin.textContent = "Неверный логин";
-                return;
             } 
             if (!validatePassword(password)) {
                 passwordInput.classList.add('error');
                 textPass.textContent = "Неверный пароль";
+            }
+            if (!validatePassword(password) || !validateEmail(email)) {
                 return;
             }
-
             sendLoginRequest('POST', '/signin', {email, password}, (status, body) => {
                 if (status == 200) {
                     this.#parent.removeChild(this.#parent.querySelector('#left'));
