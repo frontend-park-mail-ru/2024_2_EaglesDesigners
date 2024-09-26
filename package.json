@@ -4,14 +4,16 @@
   "description": "Фронтенд проекта Telegram команды \"EaglesDesigners\"",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run compile:templates",
     "start": "node ./server/server.js",
-    "precompile": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile:templates": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js & handlebars source/widgets/loginForm/loginForm.hbs -f source/widgets/loginForm/loginForm.precompiled.js & handlebars source/widgets/SignUp/signUpForm.hbs -f source/widgets/SignUp/signUpForm.precompiled.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.0",
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "uuid": "^10.0.0"
   }
 }
