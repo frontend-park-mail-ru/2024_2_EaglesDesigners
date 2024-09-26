@@ -69,14 +69,9 @@ export class RenderLogin {
         })
 
         btn.addEventListener('click', () => {
-            ajax('GET', '/signup', null, (status) => {
-                if (status == 200) {
-                    alert('Its okey');
-                }
-                else {
-                    alert('bad');
-                }
-            });
+            this.#parent.removeChild(this.#parent.querySelector('#left'));
+            this.#parent.removeChild(this.#parent.querySelector('#right'));
+            // будет рендер
         })
     }
     
