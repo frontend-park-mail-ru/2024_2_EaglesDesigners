@@ -1,4 +1,4 @@
-import {sendLoginRequest} from '../api/ajax.js';
+import {sendLoginRequest} from './api/ajax.js';
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 
