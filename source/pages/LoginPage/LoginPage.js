@@ -1,7 +1,5 @@
 import {LoginForm} from '../../widgets/loginForm/loginForm.js';
 
-
-
 export class RenderLogin {
     #parent
     constructor(parent) {
@@ -16,11 +14,3 @@ export class RenderLogin {
     }
     
 }
-
-
-
-
-
-
-
-
