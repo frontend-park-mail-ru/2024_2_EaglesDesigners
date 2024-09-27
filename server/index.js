@@ -51,7 +51,7 @@ app.post('/signin', (req, res) => {
     res.cookie('podvorot', id, {
         expires: new Date(Date.now() + 1000 * 60 * 10)
     });
-    res.status(200).json({ message: "Registration successful" });
+    res.status(200).json({ message: "authentication successful" });
 });
 
 const port = 3001
@@ -69,14 +69,14 @@ app.get('/signup', (req, res) => {
 
 app.get('/auth', (req, res) => {
     return res.status(404).json({
-      "error": "Unauthorized",
-      "status": "error"
+       "error": "Unauthorized",
+       "status": "error"
     })
-    // return res.status(200).json({"user": {
-    //     "id": 0,
-    //     "username": "user2",
-    //     "name": "Жабка пепе"
-    // }});
+    return res.status(200).json({"user": {
+        "id": 0,
+        "username": "user2",
+        "name": "Жабка пепе"
+    }});
 })
 
 // Выводим лог как только сервер будет запущен

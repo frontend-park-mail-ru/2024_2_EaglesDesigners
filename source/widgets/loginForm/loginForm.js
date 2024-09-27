@@ -1,5 +1,5 @@
 import {sendLoginRequest} from './api/ajax.js';
-import { api } from '../../shared/api/api.js'; 
+import { API } from '../../shared/api/api.js'; 
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 
@@ -16,8 +16,6 @@ export class LoginForm {
         const template = Handlebars.templates['loginForm.hbs'];
         this.#parent.innerHTML = template();  
         this.#parent.querySelector('#Create').addEventListener('click', () => {
-            this.#parent.removeChild(this.#parent.querySelector('#left'));
-            this.#parent.removeChild(this.#parent.querySelector('#right'));
             // будет рендер регистрации
         })
 
@@ -52,16 +50,15 @@ export class LoginForm {
                 return;
             }
 
-            const response = await api.post('signin', {email, password});
+            const response = await API.post('signin', {email, password});
             console.log(response)
-            if (response.ok) {
-                this.#parent.removeChild(this.#parent.querySelector('#left'));
-                this.#parent.removeChild(this.#parent.querySelector('#right'));
-                // рендер чатов
-            } else{
+            if (response.error) {
                 loginInput.classList.add('error');
                 passwordInput.classList.add('error');
                 textLogin.textContent = 'Неверный логин или пароль';
+                
+            } else{
+                // рендер чатов
             }
                   
         })
