@@ -1,11 +1,8 @@
+
 class Api{
     #baseURl
     constructor() {
         this.#baseURl = 'http://212.233.98.59:8080'
-    }
-
-    post(){
-        
     }
 
     async get(path){
@@ -19,8 +16,9 @@ class Api{
                 },
                 credentials: 'include',
             });
-            console.log(response)
+            console.log(response.ok)
             const json = await response.json();
+            console.log(json)
             return json;
         } catch{
             return {error: "could not fetch"}
@@ -35,11 +33,13 @@ class Api{
                 method: 'POST',
                 mode: 'cors',
                 headers: {
+                    'Access-Control-Allow-Credentials': true,
                     'Content-Type': 'application/json;charset=utf-8',
                 },
                 body: JSON.stringify(body),
                 credentials: "include"
             })
+            console.log(response)
             return await response.json()
         } catch {
             return {error: "could not fetch"}

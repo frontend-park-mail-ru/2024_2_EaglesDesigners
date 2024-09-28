@@ -50,7 +50,7 @@ export class LoginForm {
                 return;
             }
 
-            const response = await API.post('signin', {email, password});
+            const response = await API.post('/signin', {email, password});
             console.log(response)
             if (response.error) {
                 loginInput.classList.add('error');

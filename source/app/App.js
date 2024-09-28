@@ -8,6 +8,7 @@ export class App{
     }
 
     async start() {
+        
         const root = document.getElementById('root');
         const response = await API.get('/auth');
         console.log(response)
