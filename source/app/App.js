@@ -10,20 +10,16 @@ export class App{
         
         const root = document.getElementById('root');
         const response = await API.get('/auth');
-        console.log(response)
 
         if (response.error) {
             const login = new RenderLogin(root);
     
             login.render();
         } else {
-            // рендер чатов
+            const mainPage = new MainPage(this.#root);
+            mainPage.render()
         }
 
     }
 
-    loadMainPage(){
-        const mainPage = new MainPage(this.#root);
-        mainPage.render()
-    }
 }

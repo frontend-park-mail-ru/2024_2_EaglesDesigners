@@ -51,14 +51,15 @@ export class LoginForm {
             }
 
             const response = await API.post('/signin', {email, password});
-            console.log(response)
             if (response.error) {
                 loginInput.classList.add('error');
                 passwordInput.classList.add('error');
                 textLogin.textContent = 'Неверный логин или пароль';
                 return
             }
-            // рендер чатов
+
+            const mainPage = new MainPage(this.#parent);
+            mainPage.render()
                   
         })
     }

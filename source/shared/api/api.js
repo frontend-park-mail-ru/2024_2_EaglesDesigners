@@ -1,8 +1,8 @@
 
 class Api{
     #baseURl
-    constructor() {
-        this.#baseURl = 'http://212.233.98.59:8080'
+    constructor(baseUrl) {
+        this.#baseURl = baseUrl
     }
 
     async get(path){
@@ -16,9 +16,7 @@ class Api{
                 },
                 credentials: 'include',
             });
-            console.log(response.ok)
             const json = await response.json();
-            console.log(json)
             return json;
         } catch{
             return {error: "could not fetch"}
@@ -39,7 +37,6 @@ class Api{
                 body: JSON.stringify(body),
                 credentials: "include"
             })
-            console.log(response)
             return await response.json()
         } catch {
             return {error: "could not fetch"}
@@ -50,4 +47,4 @@ class Api{
 }
 
 
-export const API = new Api();
+export const API = new Api('http://212.233.98.59:8080');

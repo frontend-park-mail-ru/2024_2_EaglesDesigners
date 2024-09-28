@@ -13,6 +13,6 @@ export class ChatList{
         { id : "prop3", name : "Коллектор", lastMessage: "мы тебе дверь снесем слышиш выходи пока можешь" }
     ];
         const template = Handlebars.templates.ChatList;
-        this.#parent.innerHTML = template({chat:chat});   
+        this.#parent.innerHTML = template({chat});   
     }
 }

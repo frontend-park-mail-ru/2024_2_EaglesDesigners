@@ -27,12 +27,6 @@ align-content: center;
 justify-content: center;
 
 }
-#logo-svg{
-  fill: var(--text-over-primary);
-}
-#logo-svg-vinyl{
-  fill: var(--secondary);
-}
 
 .buttons-container{
   display: flex;
@@ -53,10 +47,6 @@ justify-content: center;
   width: 42px; 
   height: 42px;
   align-self: center;
-}
-
-#exit-btn-svg{
-  stroke: var(--text-over-primary);
 }
 
 :chat-list-import{
