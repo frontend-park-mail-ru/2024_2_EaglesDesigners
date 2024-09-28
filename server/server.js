@@ -37,7 +37,7 @@ const users = {
 
 const ids = {};
 
-app.post('/signin', (req, res) => {
+app.post('/login', (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
     if (!password || !email) {
