@@ -1,6 +1,6 @@
 import { API } from '../../shared/api/api.js'; 
-import { validateEmail } from '../../shared/validation/EmailValidation.js';
-import { validatePassword } from '../../shared/validation/PasswordValidation.js';
+import { validateEmail } from '../../shared/validation/emailValidation.js';
+import { validatePassword } from '../../shared/validation/passwordValidation.js';
 import { MainPage } from '../../pages/MainPage/ui/MainPage.js';
 
 export class LoginForm {
