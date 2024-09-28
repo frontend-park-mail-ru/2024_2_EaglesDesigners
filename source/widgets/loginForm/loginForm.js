@@ -56,10 +56,9 @@ export class LoginForm {
                 loginInput.classList.add('error');
                 passwordInput.classList.add('error');
                 textLogin.textContent = 'Неверный логин или пароль';
-                
-            } else{
-                // рендер чатов
+                return
             }
+            // рендер чатов
                   
         })
     }

@@ -54,7 +54,7 @@ app.post('/signin', (req, res) => {
     res.status(200).json({ message: "authentication successful" });
 });
 
-const port = 3001
+const port = 8001
 const hostname = '127.0.0.1'
 
 // Создаём HTTP-сервер

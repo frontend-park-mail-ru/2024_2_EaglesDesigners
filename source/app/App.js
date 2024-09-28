@@ -9,7 +9,7 @@ export class App{
 
     async start() {
         const root = document.getElementById('root');
-        const response = await API.get('auth');
+        const response = await API.get('/auth');
         console.log(response)
 
         if (response.error) {
