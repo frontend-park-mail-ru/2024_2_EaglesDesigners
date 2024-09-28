@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:wght@300;400;500&display=swap');
+
+@import "../pages/MainPage/ui/MainPage.css";
+@import "../pages/LoginPage/index.css";
+@import "../widgets/ChatList/ui/ChatList.css";
+
+body {
+  margin: 0 0 0 0;
+}
+
+:root {
+  --background: #090707;
+  --primary: #101723;
+  --secondary: #4F82BF;
+
+  --text-over-primary: #FFFFFF;
+}
+
+a{
+  text-decoration: none;
+}
+
+p{
+  color: var(--text-over-primary);
+  font-family: "Inter";
+  line-height: 21px;
+  font-weight: 400;
+  font-size: 16px;
+}
+

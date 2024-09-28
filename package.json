@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run compile:templates",
-    "start": "node server/index.js",
-    "compile:templates": "handlebars source/widgets/loginForm/loginForm.hbs -f source/widgets/loginForm/loginForm.precompiled.js & handlebars source/widgets/SignUp/signUpForm.hbs -f source/widgets/SignUp/signUpForm.precompiled.js"
+    "start": "node ./server/server.js",
+    "compile:templates": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js & handlebars source/widgets/loginForm/loginForm.hbs -f source/widgets/loginForm/loginForm.precompiled.js & handlebars source/widgets/SignUp/signUpForm.hbs -f source/widgets/SignUp/signUpForm.precompiled.js"
   },
   "author": "",
   "license": "ISC",

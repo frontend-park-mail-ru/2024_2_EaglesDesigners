@@ -1,11 +1,8 @@
-import { App } from "./app/App.js"; 
-
-console.log('Я тут')
+import { App } from "./app/App.js";
 
 const pageManager = new App();
 pageManager.start();
 
-// render чата
 
 
 
