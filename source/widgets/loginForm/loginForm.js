@@ -1,4 +1,3 @@
-import {sendLoginRequest} from './api/ajax.js';
 import { API } from '../../shared/api/api.js'; 
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
@@ -9,8 +8,6 @@ export class LoginForm {
         this.#parent = parent
         
     }
-
-    
 
     renderTemplate() {
         const template = Handlebars.templates['loginForm.hbs'];
@@ -36,9 +33,9 @@ export class LoginForm {
             passwordInput.classList.remove('error');
             
 
-            const email = loginInput.value.trim();
+            const username = loginInput.value.trim();
             const password = passwordInput.value;
-            if (!validateEmail(email)) { 
+            if (!validateEmail(username)) { 
                 loginInput.classList.add('error');
                 textLogin.textContent = "Неверный логин";
             } 
@@ -46,11 +43,11 @@ export class LoginForm {
                 passwordInput.classList.add('error');
                 textPass.textContent = "Неверный пароль";
             }
-            if (!validatePassword(password) || !validateEmail(email)) {
+            if (!validatePassword(password) || !validateEmail(username)) {
                 return;
             }
 
-            const response = await API.post('/signin', {email, password});
+            const response = await API.post('/login', {username, password});
             console.log(response)
             if (response.error) {
                 loginInput.classList.add('error');
