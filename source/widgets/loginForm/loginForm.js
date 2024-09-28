@@ -1,4 +1,5 @@
 import {sendLoginRequest} from './api/ajax.js';
+import { API } from '../../shared/api/api.js'; 
 import { validateEmail } from '../../shared/validation/EmailValidation.js';
 import { validatePassword } from '../../shared/validation/PasswordValidation.js';
 
@@ -15,14 +16,12 @@ export class LoginForm {
         const template = Handlebars.templates['loginForm.hbs'];
         this.#parent.innerHTML = template();  
         this.#parent.querySelector('#Create').addEventListener('click', () => {
-            this.#parent.removeChild(this.#parent.querySelector('#left'));
-            this.#parent.removeChild(this.#parent.querySelector('#right'));
-            // будет рендер
+            // будет рендер регистрации
         })
 
         const documentForm = this.#parent.querySelector('form');
 
-        documentForm.addEventListener('submit', (e) => {
+        documentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const textPass = this.#parent.querySelector('#errorPassword');
             const textLogin = this.#parent.querySelector('#errorLogin');
@@ -50,24 +49,17 @@ export class LoginForm {
             if (!validatePassword(password) || !validateEmail(email)) {
                 return;
             }
-            sendLoginRequest('POST', '/signin', {email, password}, (status, body) => {
-                if (status == 200) {
-                    this.#parent.removeChild(this.#parent.querySelector('#left'));
-                    this.#parent.removeChild(this.#parent.querySelector('#right'));
-                    sendLoginRequest('GET', '/auth', null, (status) => {
-                        if (status == 200) {
-                            alert('я тут');
-                        }
-                    })
-                    return
-                } else {
-                    const message = JSON.parse(body);
-                    loginInput.classList.add('error');
-                    passwordInput.classList.add('error');
-                    textLogin.textContent = message.error;
-                }
-                
-            });
+
+            const response = await API.post('/signin', {email, password});
+            console.log(response)
+            if (response.error) {
+                loginInput.classList.add('error');
+                passwordInput.classList.add('error');
+                textLogin.textContent = 'Неверный логин или пароль';
+                return
+            }
+            // рендер чатов
+                  
         })
     }
 

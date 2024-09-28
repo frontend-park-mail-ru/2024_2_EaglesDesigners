@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:wght@300;400;500&display=swap');
 
 @import "../pages/MainPage/ui/MainPage.css";
+@import "../pages/LoginPage/index.css";
 @import "../widgets/ChatList/ui/ChatList.css";
 
 body {
