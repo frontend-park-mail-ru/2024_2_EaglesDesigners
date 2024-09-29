@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Inter:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Inter:wght@300;400;500&display=swap");
 
 @import "../pages/MainPage/ui/MainPage.css";
 @import "../pages/LoginPage/index.css";
@@ -12,20 +12,19 @@ body {
 :root {
   --background: #090707;
   --primary: #101723;
-  --secondary: #4F82BF;
+  --secondary: #4f82bf;
 
-  --text-over-primary: #FFFFFF;
+  --text-over-primary: #ffffff;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-p{
+p {
   color: var(--text-over-primary);
   font-family: "Inter";
   line-height: 21px;
   font-weight: 400;
   font-size: 16px;
 }
-

@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run compile:templates",
     "start": "node ./server/server.js",
+    "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server && npx eslint ./server",
     "compile:templates": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js & handlebars source/widgets/loginForm/loginForm.hbs -f source/widgets/loginForm/loginForm.precompiled.js & handlebars source/widgets/SignUp/signUpForm.hbs -f source/widgets/SignUp/signUpForm.precompiled.js"
   },
   "author": "",
@@ -15,5 +16,12 @@
     "express": "^4.21.0",
     "handlebars": "^4.7.8",
     "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.11.1",
+    "@html-eslint/parser": "^0.27.0",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0"
   }
 }
