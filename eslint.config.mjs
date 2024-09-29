@@ -5,10 +5,10 @@ import js from "@eslint/js";
 
 export default [
     js.configs.recommended,
-   // myConfig,
     {
         rules: {
-            semi: ["warn", "always"]
+            semi: ["warn", "always"],
+            quotes: "off",
         },
     },
     {
@@ -28,4 +28,4 @@ export default [
     },
     
     
-]
+];
