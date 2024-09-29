@@ -1,5 +1,5 @@
 import { RenderLogin } from "../../pages/LoginPage/LoginPage.js";
-import { validateEmail } from "../../shared/validation/emailValidation.js";
+import { validateLogin } from "../../shared/validation/loginValidation.js";
 import { validateNickname } from "../../shared/validation/nicknameValidation.js";
 import { validateForm } from "../../shared/validation/formValidation.js";
 import { validatePassword } from "../../shared/validation/passwordValidation.js";
@@ -61,7 +61,7 @@ export class SignupForm {
                 validateForm(nick, 'Допустимы только латинские и русские буквы, пробелы, цифры и нижние подчеркивания.', nickText);
                 flagError = true;
             }
-            if (!validateEmail(login)) {
+            if (!validateLogin(login)) {
                 validateForm(log, 'Допустимы только латинские буквы, цифры и нижние подчеркивания.', loginText);
                 flagError = true;
             }
@@ -86,11 +86,17 @@ export class SignupForm {
                 nickText.textContent = 'Такой пользователь уже существует';
                 return
             }
-            if (response.error === 'Invalid format JSON') {
+            if (response.error === 'Could not fetch') {
+                nick.classList.add('error');
+                nickText.textContent = 'Ошибка сети, попробуйте еще';
+                return
+            }
+            if (response.error) {
                 nick.classList.add('error');
                 nickText.textContent = 'Ошибка сервера, попробуйте еще';
                 return
             }
+            
             const mainPage = new MainPage(this.#parent);
             mainPage.render()
         });
