@@ -4,12 +4,20 @@ import { validatePassword } from "../../shared/validation/passwordValidation.js"
 import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
 import { RenderSignup } from "../../pages/SignupPage/SignupPage.js";
 
+/**
+ * Class provides Login form
+ */
 export class LoginForm {
   #parent;
   constructor(parent) {
     this.#parent = parent;
   }
 
+  /**
+   * Render login form
+   * @param {}
+   * @returns {}
+   */
   renderTemplate() {
     const template = Handlebars.templates["loginForm.hbs"];
     this.#parent.innerHTML = template();

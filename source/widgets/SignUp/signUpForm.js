@@ -6,12 +6,20 @@ import { validatePassword } from "../../shared/validation/passwordValidation.js"
 import { API } from "../../shared/api/api.js";
 import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
 
+/**
+ * Class provides signup form
+ */
 export class SignupForm {
   #parent;
   constructor(parent) {
     this.#parent = parent;
   }
 
+  /**
+   * Render signup form
+   * @param {}
+   * @returns {}
+   */
   renderTemplate() {
     const template = Handlebars.templates["signUpForm.hbs"];
     this.#parent.innerHTML = template();
