@@ -1,4 +1,6 @@
 import { ChatList } from "../../../widgets/ChatList/ui/ChatList.js";
+import { RenderLogin } from "../../LoginPage/LoginPage.js";
+import { API } from "../../../shared/api/api.js";
 
 export class MainPage{
     #parent
@@ -16,6 +18,16 @@ export class MainPage{
  
     const chatList = new ChatList(chatListParent);
     chatList.render();
+
+    const exitButton = this.#parent.querySelector('.exit-btn');        
+
+        exitButton.addEventListener('click', async () => {
+            const response = await API.post('/logout');
+
+            const login = new RenderLogin(this.#parent);
+            login.render();
+                  
+        })
 }
 
 }
