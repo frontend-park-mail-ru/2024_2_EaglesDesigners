@@ -3,6 +3,7 @@
 @import "../pages/MainPage/ui/MainPage.css";
 @import "../pages/LoginPage/index.css";
 @import "../widgets/ChatList/ui/ChatList.css";
+@import "../widgets/SignUp/signUpForm.css";
 
 body {
   margin: 0 0 0 0;

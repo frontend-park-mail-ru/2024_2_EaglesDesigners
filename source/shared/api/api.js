@@ -37,6 +37,7 @@ class Api{
                 body: JSON.stringify(body),
                 credentials: "include"
             })
+
             return await response.json()
         } catch {
             return {error: "could not fetch"}
