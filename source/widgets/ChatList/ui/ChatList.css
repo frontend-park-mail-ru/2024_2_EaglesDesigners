@@ -40,7 +40,6 @@
 }
 
 .chat-card {
-
    border-radius: 15px;
    margin-inline: 9px;
    padding-inline: 10px;
@@ -51,6 +50,11 @@
         "avatar low";
     grid-template-columns: min-content auto;
     grid-template-rows: 50% 50%;
+}
+
+.chat-card-href{
+    pointer-events: none;
+    cursor: default;
 }
 
 .chat-card-img {
