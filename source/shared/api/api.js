@@ -27,7 +27,9 @@ class Api{
     async post(path, body){
         try {
             const url = this.#baseURl + path
-            const response = await fetch(url, {
+            console.log(JSON.stringify(body))
+            const response = await fetch('/signup', {
+                
                 method: 'POST',
                 mode: 'cors',
                 headers: {
@@ -37,6 +39,7 @@ class Api{
                 body: JSON.stringify(body),
                 credentials: "include"
             })
+            console.log(response)
             return await response.json()
         } catch {
             return {error: "could not fetch"}

@@ -20,6 +20,17 @@ app.get('/', (req, res) => {
   res.sendFile(require('path').join(__dirname, '..', '/source/index.html'))
 });
 
+app.post('/signup', (req, res) => {
+    console.log('я тут')
+    const password = req.body.password;
+    const email = req.body.login;
+    const nickname = req.body.nickname;
+    console.log(password, email, nickname)
+    return res.status(200).json({ message: 'Окей' });
+    
+    
+})
+
 
 
 

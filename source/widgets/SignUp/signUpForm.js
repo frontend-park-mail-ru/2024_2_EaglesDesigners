@@ -31,15 +31,15 @@ export class SignupForm {
         btnElement.addEventListener('click', async (e) =>  {
             e.preventDefault();
 
-            const nickname = this.#parent.querySelector('#nickname');
-            const login = this.#parent.querySelector('#login');
-            const password = this.#parent.querySelector('#password');
-            const password2 = this.#parent.querySelector('#password2');
+            const nick = this.#parent.querySelector('#nickname');
+            const log = this.#parent.querySelector('#login');
+            const pass = this.#parent.querySelector('#password');
+            const pass2 = this.#parent.querySelector('#password2');
             
-            nickname.classList.remove('error');
-            login.classList.remove('error');
-            password.classList.remove('error');
-            password2.classList.remove('error');
+            nick.classList.remove('error');
+            log.classList.remove('error');
+            pass.classList.remove('error');
+            pass2.classList.remove('error');
 
             const nickText = this.#parent.querySelector('#errorNickname');
             const loginText = this.#parent.querySelector('#errorLogin');
@@ -51,34 +51,42 @@ export class SignupForm {
             passText.textContent = '';
             pass2Text.textContent = '';
 
-            const nickValue = nickname.value;
-            const loginValue = nickname.value.trim();
-            const passValue = nickname.value;
-            const pass2Value = nickname.value;
+            const nickname = nick.value;
+            const login = log.value.trim();
+            const password = pass.value;
+            const password2 = pass2.value;
+            let flagError = false 
 
-            if (!validateNickname(nickValue)) {
-                validateForm(nickValue, 'Неверный никнейм', nickText);
+            if (!validateNickname(nickname)) {
+                validateForm(nick, 'Допустимы только латинские и русские буквы, пробелы, цифры и нижние подчеркивания.', nickText);
+                flagError = true;
             }
-            if (!validateEmail(loginValue)) {
-                validateForm(loginValue, 'Неверный логин', loginText);
+            if (!validateEmail(login)) {
+                validateForm(log, 'Допустимы только латинские буквы, цифры и нижние подчеркивания.', loginText);
+                flagError = true;
             }
-            if (!validatePassword(passValue)) {
-                validateForm(passValue, 'Пароль должен состоять минимум из 8 символов', passText);
+            if (!validatePassword(password)) {
+                validateForm(pass, 'Пароль должен состоять минимум из 8 латинских букв, цифр или нижних подчеркиваний.', passText);
+                flagError = true;
             }
-            if (!validatePassword(pass2Value)) {
-                validateForm(pass2Value, 'Неверный пароль', pass2Text);
+            if (!validatePassword(password2) || password != password2) {
+                validateForm(pass2, 'Неверный пароль', pass2Text);
+                flagError = true;
             }
-
-            const response = await API.post('/signup', {nickValue, loginValue, passValue});
+            
+            if (flagError) {
+                return
+            }
+            const response = await API.post('/signup', {nickname, login, password});
             if (response.error) {
-                login.classList.add('error');
-                nickname.classList.add('error');
-                password.classList.add('error');
-                password2.classList.add('error');
+                log.classList.add('error');
+                nick.classList.add('error');
+                pass.classList.add('error');
+                pass2.classList.add('error');
                 nickText.textContent = 'Такой пользователь уже существует';
                 return
             }
-
+            console.log(response.json());
             const mainPage = new MainPage(this.#parent);
             mainPage.render()
         });
