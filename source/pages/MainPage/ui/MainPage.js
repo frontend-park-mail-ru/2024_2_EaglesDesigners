@@ -23,9 +23,11 @@ export class MainPage{
 
         exitButton.addEventListener('click', async () => {
             const response = await API.post('/logout');
-
-            const login = new RenderLogin(this.#parent);
-            login.render();
+            
+            if(response.ok){
+                const login = new RenderLogin(this.#parent);
+                login.render();
+            }
                   
         })
 }
