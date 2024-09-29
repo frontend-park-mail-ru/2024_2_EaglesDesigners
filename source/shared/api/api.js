@@ -1,9 +1,18 @@
+/**
+ * API class provides API-functions.
+ */
 class Api {
   #baseURl;
   constructor(baseUrl) {
     this.#baseURl = baseUrl;
   }
 
+  /**
+   * get request method api
+   * @param {string} path - url for request
+   * if could not fetch, return error
+   * @returns {json} response from server
+   */
   async get(path) {
     try {
       const url = this.#baseURl + path;
@@ -22,6 +31,12 @@ class Api {
     }
   }
 
+  /**
+   * post request method api
+   * @param {string, json} path - url for request, body - body of request
+   * if could not fetch, return error
+   * @returns {json} response from server
+   */
   async post(path, body) {
     try {
       const url = this.#baseURl + path;
