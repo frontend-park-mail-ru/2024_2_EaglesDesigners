@@ -6,28 +6,29 @@
 
       </div>
     </div>
+
     <div class="chat-list">
-      <a class="chat-card-href" href={{this.id}}>
-        {{#each chat}}
+      <a class="chat-card-href" href={{this.chatId}}>
+        {{#each chats}}
           <div class="chat-card">
             <img class="chat-card-img" src="{{this.avatarURL}}" />
 
             <div class="chat-card-upper-row">
               <div class="main-text-container">
                 <span class="chat-name">
-                  {{this.name}}
+                  {{this.chatName}}
                 </span>
               </div>
               <div class="side-text-container">
                 <span class="last-message-date">
-                  Sep 31
+                  Sep 30
                 </span>
               </div>
             </div>
             <div class="chat-card-lower-row">
               <div class="main-text-container-lower">
                 <span class="last-messanger-name">
-                  {{this.name}}
+                  {{this.chatName}}
                 </span>
                 <span class="split-column">:&nbsp;</span>
                 <span class="last-message">
@@ -47,5 +48,4 @@
       </a>
     </div>
   </div>
-
 </div>

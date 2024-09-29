@@ -151,6 +151,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: none;
 }
 
 .split-column {
@@ -162,6 +163,7 @@
   display: block;
   color: var(--text-over-primary);
   filter: brightness(50%);
+  display: none;
 }
 
 .last-message {
