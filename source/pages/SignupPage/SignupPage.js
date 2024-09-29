@@ -1,3 +1,17 @@
-import { SignupForm } from "../../widgets/SignUp/signUpForm";
+import { SignupForm } from "../../widgets/SignUp/signUpForm.js";
 
-const form = new SignupForm();
+export class RenderSignup {
+    #root = document.getElementById("root");
+    constructor() {
+        
+    }
+
+    render() {
+        const form = new SignupForm(this.#root);
+        form.renderTemplate()
+
+        
+    }
+    
+}
+

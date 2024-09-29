@@ -2,6 +2,7 @@ import { API } from '../../shared/api/api.js';
 import { validateEmail } from '../../shared/validation/emailValidation.js';
 import { validatePassword } from '../../shared/validation/passwordValidation.js';
 import { MainPage } from '../../pages/MainPage/ui/MainPage.js';
+import { RenderSignup } from '../../pages/SignupPage/SignupPage.js';
 
 export class LoginForm {
     #parent
@@ -15,11 +16,13 @@ export class LoginForm {
     renderTemplate() {
         const template = Handlebars.templates['loginForm.hbs'];
         this.#parent.innerHTML = template();  
-        this.#parent.querySelector('#Create').addEventListener('click', () => {
-            // будет рендер регистрации
+        this.#parent.querySelector('#Create').addEventListener('click', (e) => {
+            e.preventDefault();
+            const SignUp = new RenderSignup()
+            SignUp.render()
         })
 
-        const documentForm = this.#parent.querySelector('form');
+        const documentForm = this.#parent.querySelector('form');        
 
         documentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
