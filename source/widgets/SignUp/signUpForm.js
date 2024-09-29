@@ -77,16 +77,20 @@ export class SignupForm {
             if (flagError) {
                 return
             }
-            const response = await API.post('/signup', {nickname, login, password});
-            if (response.error) {
-                log.classList.add('error');
+            const username = login
+            const name = nickname
+            const response = await API.post('/signup', {name, username, password});
+            //console.log(response)
+            if (response.error === 'A user with that username already exists') {
                 nick.classList.add('error');
-                pass.classList.add('error');
-                pass2.classList.add('error');
                 nickText.textContent = 'Такой пользователь уже существует';
                 return
             }
-            console.log(response.json());
+            if (response.error === 'Invalid format JSON') {
+                nick.classList.add('error');
+                nickText.textContent = 'Ошибка сервера, попробуйте еще';
+                return
+            }
             const mainPage = new MainPage(this.#parent);
             mainPage.render()
         });
