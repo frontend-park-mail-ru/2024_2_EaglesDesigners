@@ -3,7 +3,7 @@
   font-size: 30px;
   color: #ffffff;
   font-family: sans-serif;
-  margin-top: 160px;
+  margin-top: 100px;
   margin-bottom: 50px;
 }
 
@@ -36,12 +36,11 @@
 }
 
 .signupForm span {
-  font-size: 14px;
+  font-size: 10px;
   font-family: sans-serif;
   color: red;
-  height: 16px;
-}
-
-.signupForm .errorDiv {
-  margin-left: 20px;
+  min-height: 16px;
+  height: fit-content;
+  display: inline-block;
+  align-self: flex-start;
 }

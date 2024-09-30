@@ -62,12 +62,12 @@ body {
   font-size: 30px;
   color: #ffffff;
   font-family: sans-serif;
-  margin-top: 235px;
+  margin-top: 175px;
   margin-bottom: 80px;
 }
 
 .LoginForm span {
-  font-size: 14px;
+  font-size: 10px;
   font-family: sans-serif;
   color: red;
   height: 16px;
@@ -82,9 +82,16 @@ body {
 }
 
 .errorDiv {
-  width: 356px;
+  min-height: 24px;
+  max-width: 356px;
+  margin-left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .LoginForm .errorDiv {
-  height: 16px;
+  margin-left: 0px;
 }
+
