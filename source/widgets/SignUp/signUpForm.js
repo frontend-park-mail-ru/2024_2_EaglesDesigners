@@ -33,15 +33,17 @@ export class SignupForm {
       login.render();
     });
 
-    const password = this.#parent.querySelector('#password')
-    const togglePassword = this.#parent.querySelector("#password-visibility-toggle")
-    togglePassword.addEventListener( 'click', function () {
+    const password = this.#parent.querySelector("#password");
+    const togglePassword = this.#parent.querySelector(
+      "#password-visibility-toggle",
+    );
+    togglePassword.addEventListener("click", function () {
       if (password.type === "password") {
-          password.type = "text";
+        password.type = "text";
       } else {
-          password.type = "password";
+        password.type = "password";
       }
-    } );
+    });
 
     const btnElement = document.querySelector("button");
 
