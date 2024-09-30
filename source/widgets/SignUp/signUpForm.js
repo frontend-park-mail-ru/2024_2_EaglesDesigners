@@ -35,11 +35,12 @@ export class SignupForm {
 
     const password = this.#parent.querySelector('#password2')
     const togglePassword = this.#parent.querySelector("#password-visibility-toggle")
-    togglePassword.addEventListener( 'mousedown', function ( e ) {
-      password.type = "text";
-    } );
-    togglePassword.addEventListener( 'mouseup', function ( e ) {
-      password.type = "password";
+    togglePassword.addEventListener( 'click', function () {
+      if (password.type === "password") {
+          password.type = "text";
+      } else {
+          password.type = "password";
+      }
     } );
 
     const btnElement = document.querySelector("button");
