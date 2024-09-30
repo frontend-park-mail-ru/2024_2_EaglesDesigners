@@ -6,7 +6,7 @@ const regex = /^[a-zA-Z0-9_]+$/; // Регулярное выражение дл
  * @returns {bool} if username is valid - true, else false
  */
 export const validateLogin = (username) => {
-  if (!regex.test(username)) {
+  if (username.length < 6 || !regex.test(username)) {
     return false;
   }
   return true;
