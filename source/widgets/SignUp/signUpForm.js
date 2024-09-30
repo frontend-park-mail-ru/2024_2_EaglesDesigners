@@ -85,7 +85,7 @@ export class SignupForm {
       if (!validateLogin(login)) {
         validateForm(
           log,
-          "Допустимы только латинские буквы, цифры и нижние подчеркивания.",
+          "Логин должен состоять минимум из 5 латинских букв, цифр и нижних подчеркиваний.",
           loginText,
         );
         flagError = true;

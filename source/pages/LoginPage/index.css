@@ -67,8 +67,7 @@ body {
 }
 
 .LoginForm span {
-  text-align: center;
-  font-size: 10px;
+  font-size: 14px;
   font-family: sans-serif;
   color: red;
   height: 16px;
@@ -83,5 +82,9 @@ body {
 }
 
 .errorDiv {
+  width: 356px;
+}
+
+.LoginForm .errorDiv{
   height: 16px;
 }

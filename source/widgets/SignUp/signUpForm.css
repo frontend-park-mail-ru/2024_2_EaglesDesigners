@@ -36,10 +36,13 @@
 }
 
 .signupForm span {
-  text-align: center;
-  font-size: 10px;
+  font-size: 14px;
   font-family: sans-serif;
   color: red;
   height: 16px;
+  
+}
+
+.signupForm .errorDiv{
   margin-left: 20px;
 }
