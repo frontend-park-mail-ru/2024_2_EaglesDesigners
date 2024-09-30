@@ -101,8 +101,8 @@ export class SignupForm {
       const response = await API.post("/signup", { name, username, password });
       //console.log(response)
       if (response.error === "A user with that username already exists") {
-        nick.classList.add("error");
-        nickText.textContent = "Такой пользователь уже существует";
+        log.classList.add("error");
+        loginText.textContent = "Такой пользователь уже существует";
         return;
       }
       if (response.error === "Could not fetch") {
