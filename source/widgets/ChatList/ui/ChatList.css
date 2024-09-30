@@ -188,6 +188,19 @@
   white-space: nowrap;
 }
 
+.empty-chat-list-notice-container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-chat-list-notice {
+  filter: brightness(50%);
+  margin: 46.1% auto;
+}
+
+
 .side-text-container-lower {
   grid-area: last-message-timel;
 

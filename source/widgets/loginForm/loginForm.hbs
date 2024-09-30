@@ -15,13 +15,16 @@
     <div class="errorDiv">
       <span class="errorPassword" id="errorPassword"></span>
     </div>
-    <input
-      id="password"
-      class="password not_error"
-      type="password"
-      placeholder="Пароль"
-      name="password"
-    />
+    <div style="position: relative;">
+      <input
+        id="password"
+        class="password not_error"
+        type="password"
+        placeholder="Пароль"
+        name="password"
+      />
+      <img id="password-visibility-toggle" style="width: 20px; height: 20px;position: absolute; right: 20px; top: 50%;transform: translateY(-50%);" src="/assets/image/eye.svg">
+    </div>
     <button class="btn Enter" type="submit" id="Enter">Войти</button>
 
   </form>

@@ -8,8 +8,9 @@
     </div>
 
     <div class="chat-list">
+      {{#each chats}}
       <a class="chat-card-href" href={{this.chatId}}>
-        {{#each chats}}
+        
           <div class="chat-card">
             <img class="chat-card-img" src="{{this.avatarURL}}" />
 
@@ -43,9 +44,12 @@
 
             </div>
           </div>
-        {{/each}}
-
       </a>
+      {{else}}
+        <div class="empty-chat-list-notice-container">
+          <p class="empty-chat-list-notice">У вас нет чатов</p>
+        </div>
+      {{/each}}
     </div>
   </div>
 </div>
