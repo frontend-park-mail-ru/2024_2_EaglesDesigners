@@ -1,18 +1,12 @@
-(function () {
-  var template = Handlebars.template,
-    templates = (Handlebars.templates = Handlebars.templates || {});
-  templates["ChatList"] = template({
-    1: function (container, depth0, helpers, partials, data) {
-      var alias1 = container.lambda,
-        alias2 = container.escapeExpression,
-        lookupProperty =
-          container.lookupProperty ||
-          function (parent, propertyName) {
-            if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-              return parent[propertyName];
-            }
-            return undefined;
-          };
+(function() {
+  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['ChatList'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
 
       return (
         '          <div class="chat-card">\n            <img class="chat-card-img" src="' +

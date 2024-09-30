@@ -33,6 +33,16 @@ export class SignupForm {
       login.render();
     });
 
+    const password = this.#parent.querySelector('#password2')
+    const togglePassword = this.#parent.querySelector("#password-visibility-toggle")
+    togglePassword.addEventListener( 'click', function () {
+      if (password.type === "password") {
+          password.type = "text";
+      } else {
+          password.type = "password";
+      }
+    } );
+
     const btnElement = document.querySelector("button");
 
     btnElement.addEventListener("click", async (e) => {
