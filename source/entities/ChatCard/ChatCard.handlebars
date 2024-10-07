@@ -1,0 +1,42 @@
+{{#each chat}}
+    <a class="chat-card-href" href={{this.chatId}}>
+
+        <div class="chat-card">
+        <img class="chat-card-img" src="{{this.avatarURL}}" />
+
+        <div class="chat-card-upper-row">
+            <div class="main-text-container">
+            <span class="chat-name">
+                {{this.chatName}}
+            </span>
+            </div>
+            <div class="side-text-container">
+            <span class="last-message-date">
+                Sep 30
+            </span>
+            </div>
+        </div>
+        <div class="chat-card-lower-row">
+            <div class="main-text-container-lower">
+            <span class="last-messanger-name">
+                {{this.chatName}}
+            </span>
+            <span class="split-column">:&nbsp;</span>
+            <span class="last-message">
+                {{this.lastMessage}}
+            </span>
+
+            </div>
+            <div class="side-text-container-lower">
+            <span class="last-message-date">
+            </span>
+            </div>
+
+        </div>
+        </div>
+    </a>
+{{else}}
+    <div class="empty-chat-list-notice-container">
+        <p class="empty-chat-list-notice">У вас нет чатов</p>
+    </div>
+{{/each}}
