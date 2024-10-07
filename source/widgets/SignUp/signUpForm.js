@@ -20,11 +20,11 @@ export class SignupForm {
    * @param {}
    * @returns {}
    */
-  renderTemplate() {
+  render() {
     const template = Handlebars.templates["signUpForm.hbs"];
     this.#parent.innerHTML = template();
 
-    const aElement = document.querySelector("a");
+    const aElement = document.querySelector(".login_href");
 
     aElement.addEventListener("click", (e) => {
       e.preventDefault();

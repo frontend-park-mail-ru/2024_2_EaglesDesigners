@@ -16,6 +16,6 @@ export class LoginPage {
   render() {
     const form = new LoginForm(this.#parent);
 
-    form.renderTemplate();
+    form.render();
   }
 }

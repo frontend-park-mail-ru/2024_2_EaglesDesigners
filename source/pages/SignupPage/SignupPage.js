@@ -14,6 +14,6 @@ export class SignupPage {
    */
   render() {
     const form = new SignupForm(this.#root);
-    form.renderTemplate();
+    form.render();
   }
 }

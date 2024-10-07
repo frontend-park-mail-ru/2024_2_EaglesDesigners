@@ -18,7 +18,7 @@ export class LoginForm {
    * @param {}
    * @returns {}
    */
-  renderTemplate() {
+  render() {
     const template = Handlebars.templates["loginForm.hbs"];
     this.#parent.innerHTML = template();
     this.#parent.querySelector("#Create").addEventListener("click", (e) => {
