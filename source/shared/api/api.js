@@ -24,8 +24,7 @@ class Api {
         },
         credentials: "include",
       });
-      const json = await response.json();
-      return json;
+      return await response.json();
     } catch {
       return { error: "could not fetch" };
     }

@@ -3,7 +3,7 @@ import { LoginForm } from "../../widgets/loginForm/loginForm.js";
 /**
  * Class provides render login form
  */
-export class RenderLogin {
+export class LoginPage {
   #parent;
   constructor(parent) {
     this.#parent = parent;

@@ -44,3 +44,13 @@
   display: inline-block;
   align-self: flex-start;
 }
+
+.password-visibility-toggle{
+  width: 20px; 
+  height: 20px;
+  position: absolute; 
+  right: 30px; 
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

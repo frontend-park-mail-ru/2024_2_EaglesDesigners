@@ -44,6 +44,7 @@ body {
   border-radius: 60px 60px 60px 60px;
   font-size: 22px;
   font-family: sans-serif;
+  cursor: pointer;
 }
 
 .Enter {

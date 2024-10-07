@@ -1,5 +1,5 @@
 import { ChatList } from "../../../widgets/ChatList/ui/ChatList.js";
-import { RenderLogin } from "../../LoginPage/LoginPage.js";
+import { LoginPage } from "../../LoginPage/LoginPage.js";
 import { API } from "../../../shared/api/api.js";
 
 /**
@@ -30,7 +30,7 @@ export class MainPage {
       const response = await API.post("/logout");
 
       if (!response.error) {
-        const login = new RenderLogin(this.#parent);
+        const login = new LoginPage(this.#parent);
         login.render();
       }
     });

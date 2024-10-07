@@ -2,7 +2,7 @@ import { API } from "../../shared/api/api.js";
 import { validateLogin } from "../../shared/validation/loginValidation.js";
 import { validatePassword } from "../../shared/validation/passwordValidation.js";
 import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
-import { RenderSignup } from "../../pages/SignupPage/SignupPage.js";
+import { SignupPage } from "../../pages/SignupPage/SignupPage.js";
 
 /**
  * Class provides Login form
@@ -23,7 +23,7 @@ export class LoginForm {
     this.#parent.innerHTML = template();
     this.#parent.querySelector("#Create").addEventListener("click", (e) => {
       e.preventDefault();
-      const SignUp = new RenderSignup();
+      const SignUp = new SignupPage();
       SignUp.render();
     });
 

@@ -3,7 +3,7 @@ import { SignupForm } from "../../widgets/SignUp/signUpForm.js";
 /**
  * Class provides render signup form
  */
-export class RenderSignup {
+export class SignupPage {
   #root = document.getElementById("root");
   constructor() {}
 
