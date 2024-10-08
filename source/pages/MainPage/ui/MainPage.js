@@ -2,6 +2,7 @@ import { ChatList } from "../../../widgets/ChatList/ui/ChatList.js";
 import { RenderLogin } from "../../LoginPage/LoginPage.js";
 import { API } from "../../../shared/api/api.js";
 import MainPageTemplate from './MainPage.handlebars'
+import './MainPage.scss'
 
 /**
  * Mainpage class provides functions for rendering main page
