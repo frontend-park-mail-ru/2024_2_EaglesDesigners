@@ -5,6 +5,7 @@ import { validateForm } from "../../shared/validation/formValidation.js";
 import { validatePassword } from "../../shared/validation/passwordValidation.js";
 import { API } from "../../shared/api/api.js";
 import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
+import signUpFormTemplate from "./signUpForm.hbs";
 
 /**
  * Class provides signup form
@@ -21,8 +22,7 @@ export class SignupForm {
    * @returns {}
    */
   renderTemplate() {
-    const template = Handlebars.templates["signUpForm.hbs"];
-    this.#parent.innerHTML = template();
+    this.#parent.innerHTML = signUpFormTemplate();
 
     const aElement = document.querySelector("a");
 

@@ -1,4 +1,5 @@
 import { API } from "../../../shared/api/api.js";
+import ChatListTemplate from './ChatList.handlebars';
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -21,7 +22,6 @@ export class ChatList {
       chats = response.chats;
     }
 
-    const template = Handlebars.templates.ChatList;
-    this.#parent.innerHTML = template({ chats });
+    this.#parent.innerHTML = ChatListTemplate({ chats });
   }
 }
