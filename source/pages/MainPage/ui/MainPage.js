@@ -1,6 +1,7 @@
 import { ChatList } from "../../../widgets/ChatList/ui/ChatList.js";
 import { RenderLogin } from "../../LoginPage/LoginPage.js";
 import { API } from "../../../shared/api/api.js";
+import MainPageTemplate from './MainPage.handlebars'
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -16,8 +17,7 @@ export class MainPage {
    * @async
    */
   render() {
-    const template = Handlebars.templates.MainPage;
-    this.#parent.innerHTML = template({});
+    this.#parent.innerHTML = MainPageTemplate({});
 
     const chatListParent = this.#parent.querySelector("#chat-list-import");
 

@@ -3,6 +3,7 @@ import { validateLogin } from "../../shared/validation/loginValidation.js";
 import { validatePassword } from "../../shared/validation/passwordValidation.js";
 import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
 import { RenderSignup } from "../../pages/SignupPage/SignupPage.js";
+import loginFormTemplate from './loginForm.hbs'
 
 /**
  * Class provides Login form
@@ -19,8 +20,7 @@ export class LoginForm {
    * @returns {}
    */
   renderTemplate() {
-    const template = Handlebars.templates["loginForm.hbs"];
-    this.#parent.innerHTML = template();
+    this.#parent.innerHTML = loginFormTemplate();
     this.#parent.querySelector("#Create").addEventListener("click", (e) => {
       e.preventDefault();
       const SignUp = new RenderSignup();
