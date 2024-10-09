@@ -27,7 +27,6 @@ body {
   font-family: var(--main-font-family);
   color: var(--text-over-primary);
   background-color: var(--primary);
-  margin-bottom: 14px;
 }
 
 .btn {
@@ -68,7 +67,7 @@ body {
 }
 
 .LoginForm span {
-  font-size: 10px;
+  font-size: var(--error-font-size);
   font-family: var(--main-font-family);
   color: var(--text-error-message);
   height: 16px;
@@ -83,7 +82,7 @@ body {
 }
 
 .errorDiv {
-  min-height: 24px;
+  min-height: 32px;
   max-width: var(--input-width);
   margin-left: 20px;
 

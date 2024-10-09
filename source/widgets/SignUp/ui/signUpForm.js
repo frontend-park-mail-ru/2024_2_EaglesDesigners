@@ -1,10 +1,10 @@
-import { LoginPage } from "../../pages/LoginPage/LoginPage.js";
-import { validateLogin } from "../../shared/validation/loginValidation.js";
-import { validateNickname } from "../../shared/validation/nicknameValidation.js";
-import { validateForm } from "../../shared/validation/formValidation.js";
-import { validatePassword } from "../../shared/validation/passwordValidation.js";
-import { API } from "../../shared/api/api.js";
-import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
+import { LoginPage } from "../../../pages/LoginPage/ui/LoginPage.js";
+import { validateLogin } from "../../../shared/validation/loginValidation.js";
+import { validateNickname } from "../../../shared/validation/nicknameValidation.js";
+import { validateForm } from "../../../shared/validation/formValidation.js";
+import { validatePassword } from "../../../shared/validation/passwordValidation.js";
+import { API } from "../../../shared/api/api.js";
+import { MainPage } from "../../../pages/MainPage/ui/MainPage.js";
 
 /**
  * Class provides signup form
@@ -136,7 +136,7 @@ export class SignupForm {
       const username = login;
       const name = nickname;
       const response = await API.post("/signup", { name, username, password });
-      //console.log(response)
+
       if (response.error === "A user with that username already exists") {
         log.classList.add("error");
         loginText.textContent = "Такой пользователь уже существует";
@@ -154,7 +154,7 @@ export class SignupForm {
       }
 
       const mainPage = new MainPage(this.#parent);
-      mainPage.render();
+      mainPage.render("user");
     });
   }
 }

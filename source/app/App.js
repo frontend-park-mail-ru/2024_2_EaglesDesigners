@@ -1,4 +1,4 @@
-import { LoginPage } from "../pages/LoginPage/LoginPage.js";
+import { LoginPage } from "../pages/LoginPage/ui/LoginPage.js";
 import { MainPage } from "../pages/MainPage/ui/MainPage.js";
 import { API } from "../shared/api/api.js";
 
