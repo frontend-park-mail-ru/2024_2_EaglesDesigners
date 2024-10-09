@@ -1,0 +1,56 @@
+.signupForm p {
+  text-align: center;
+  font-size: 30px;
+  color: var(--text-over-primary);
+  font-family: var(--main-font-family);
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.signupForm input {
+  display: block;
+  padding-left: 10px;
+  width: var(--input-width);
+  height: var(--input-height);
+  border-radius: 15px 15px 15px 15px;
+  font-size: var(--form-font-size);
+  font-family: var(--main-font-family);
+  color: var(--text-over-primary);
+  background-color: var(--primary);
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.signupForm a {
+  color: var(--a-element);
+  font-size: var(--base-font-size);
+  font-family: var(--main-font-family);
+  margin-left: 25px;
+  text-decoration: underline;
+}
+
+.signupForm__button {
+  margin-top: 30px;
+  margin-left: 25px;
+  background: var(--form-button-access);
+}
+
+.signupForm span {
+  font-size: var(--error-font-size);
+  font-family: var(--main-font-family);
+  color: var(--text-error-message);
+  min-height: 16px;
+  height: fit-content;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.password-visibility-toggle{
+  width: 20px; 
+  height: 20px;
+  position: absolute; 
+  right: 30px; 
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
