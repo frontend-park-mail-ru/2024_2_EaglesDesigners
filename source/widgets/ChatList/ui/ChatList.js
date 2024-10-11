@@ -28,8 +28,10 @@ export class ChatList {
 
     const chatList = this.#parent.querySelector("#chat-list");
     const chatCard = new ChatCard(chatList);
-    chatCard.render(chats);
 
+    chats.map(chat => {
+      chatCard.render(chat);
+    });
     
   }
 }

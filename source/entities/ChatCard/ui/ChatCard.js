@@ -4,12 +4,9 @@ export class ChatCard{
       this.#parent = parent;
     }
   
-    render(chats){
+    render(chat){
       const template = Handlebars.templates.ChatCard;
-      chats.map(chat => {
-        console.log(chat);
-        this.#parent.innerHTML += template({chat});
-      });
-      
+      this.#parent.insertAdjacentHTML('beforeend', template({chat}));
+ 
     }
   }
