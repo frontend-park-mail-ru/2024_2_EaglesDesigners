@@ -1,7 +1,7 @@
-import { RenderLogin } from "../pages/LoginPage/LoginPage.js";
-import { MainPage } from "../pages/MainPage/ui/MainPage.js";
+import { LoginPage } from "../pages/LoginPage/index.js";
+import { MainPage } from "../pages/MainPage/index.js";
 import { API } from "../shared/api/api.js";
-
+import '../../public/index.css'
 /**
  * Class provides class App, the initial class
  */
@@ -17,12 +17,12 @@ export class App {
     const response = await API.get("/auth");
 
     if (response.error) {
-      const login = new RenderLogin(root);
+      const login = new LoginPage(root);
 
       login.render();
     } else {
       const mainPage = new MainPage(this.#root);
-      mainPage.render();
+      mainPage.render(response.user.name);
     }
   }
 }

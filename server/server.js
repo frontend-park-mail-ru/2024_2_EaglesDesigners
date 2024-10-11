@@ -15,7 +15,7 @@ app.use(body.json());
 const port = 8001;
 
 // Создаём HTTP-сервер
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   // Устанавливаем HTTP-заголовок ответа с HTTP статусом и Content type
   res.sendFile(require("path").join(__dirname, "..", "/dist/index.html"));
 });

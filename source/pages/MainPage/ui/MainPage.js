@@ -1,5 +1,5 @@
-import { ChatList } from "../../../widgets/ChatList/ui/ChatList.js";
-import { RenderLogin } from "../../LoginPage/LoginPage.js";
+import { ChatList } from "../../../widgets/ChatList/index.js";
+import { LoginPage } from "../../LoginPage/index.js";
 import { API } from "../../../shared/api/api.js";
 import MainPageTemplate from './MainPage.handlebars'
 import './MainPage.scss'
@@ -17,8 +17,8 @@ export class MainPage {
    * @function render
    * @async
    */
-  render() {
-    this.#parent.innerHTML = MainPageTemplate({});
+  render(user) {
+    this.#parent.innerHTML = MainPageTemplate({user});
 
     const chatListParent = this.#parent.querySelector("#chat-list-import");
 
@@ -31,7 +31,7 @@ export class MainPage {
       const response = await API.post("/logout");
 
       if (!response.error) {
-        const login = new RenderLogin(this.#parent);
+        const login = new LoginPage(this.#parent);
         login.render();
       }
     });

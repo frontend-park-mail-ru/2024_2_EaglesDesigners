@@ -1,9 +1,10 @@
-import { LoginForm } from "../../widgets/loginForm/loginForm.js";
+import { LoginForm } from "../../../widgets/loginForm/index.js";
+import './index.css'
 
 /**
  * Class provides render login form
  */
-export class RenderLogin {
+export class LoginPage {
   #parent;
   constructor(parent) {
     this.#parent = parent;
@@ -16,6 +17,6 @@ export class RenderLogin {
   render() {
     const form = new LoginForm(this.#parent);
 
-    form.renderTemplate();
+    form.render();
   }
 }

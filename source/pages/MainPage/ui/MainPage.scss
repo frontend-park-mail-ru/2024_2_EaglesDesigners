@@ -116,3 +116,9 @@ $background: var(--background);
   flex: 312 0 0;
   height: auto;
 }
+
+.username {
+  color: var(--text-over-primary);
+  font-family: var(--main-font-family);
+  font-family: var(--base-font-size);
+}
