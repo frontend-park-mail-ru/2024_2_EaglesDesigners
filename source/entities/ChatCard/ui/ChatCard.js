@@ -1,4 +1,5 @@
 import ChatCardTemplate from './ChatCard.handlebars'
+import'./ChatCard.css'
 
 export class ChatCard{
     #parent;

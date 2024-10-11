@@ -1,0 +1,150 @@
+.chat-card {
+    border-radius: 15px;
+    margin-inline: 9px;
+    padding-inline: 10px;
+  
+    display: grid;
+    grid-template-areas:
+      "avatar up"
+      "avatar low";
+    grid-template-columns: min-content auto;
+    grid-template-rows: 50% 50%;
+  }
+  
+  .chat-card-href {
+    pointer-events: none;
+    cursor: default;
+  }
+  
+  .chat-card-img {
+    grid-area: avatar;
+    border-radius: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      var(--primary);
+  
+    box-sizing: border-box;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    margin: 10px;
+    margin-left: 0;
+    align-self: center;
+    justify-self: center;
+  }
+  
+  .chat-card-upper-row {
+    grid-area: up;
+    width: auto;
+    height: fit-content;
+  
+    padding-bottom: 4px;
+  
+    align-self: flex-end;
+    display: grid;
+    grid-template-areas: "chat-name-container last-message-time";
+    grid-template-columns: auto fit-content;
+  }
+  
+  .main-text-container {
+    grid-area: chat-name-container;
+    overflow: hidden;
+  }
+  .chat-name {
+    font-family: "Inter";
+    line-height: 21px;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+  
+    display: block;
+    max-width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .side-text-container {
+    grid-area: last-message-time;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .last-message-date {
+    font-family: "Inter";
+    line-height: 16px;
+    font-weight: 300;
+    font-size: 12px;
+    color: var(--text-over-primary);
+    filter: brightness(50%);
+  
+    justify-self: flex-start;
+  }
+  .chat-card-lower-row {
+    grid-area: low;
+    width: auto;
+    height: fit-content;
+  
+    padding-top: 4px;
+  
+    display: grid;
+    grid-template-areas: "chat-name-containerl last-message-timel";
+    grid-template-columns: auto fit-content;
+  }
+  
+  .main-text-container-lower {
+    grid-area: chat-name-containerl;
+    overflow: hidden;
+    display: inline-flex;
+  }
+  
+  .last-messanger-name {
+    font-family: "Inter";
+    line-height: 21px;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+  
+    flex-shrink: 1;
+    flex-grow: 0;
+  
+    display: block;
+    width: min-content;
+    max-width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: none;
+  }
+  
+  .split-column {
+    font-family: "Inter";
+    line-height: 21px;
+    font-weight: 400;
+  
+    font-size: 16px;
+    display: block;
+    color: var(--text-over-primary);
+    filter: brightness(50%);
+    display: none;
+  }
+  
+  .last-message {
+    font-family: "Inter";
+    line-height: 21px;
+    font-weight: 400;
+    font-size: 16px;
+    display: block;
+    color: var(--text-over-primary);
+    filter: brightness(50%);
+  
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 0px;
+    min-width: 0px;
+  
+    display: block;
+    min-width: none;
+    max-width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
