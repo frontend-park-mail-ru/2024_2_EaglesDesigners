@@ -1,10 +1,10 @@
-import { RenderLogin } from "../../pages/LoginPage/LoginPage.js";
-import { validateLogin } from "../../shared/validation/loginValidation.js";
-import { validateNickname } from "../../shared/validation/nicknameValidation.js";
-import { validateForm } from "../../shared/validation/formValidation.js";
-import { validatePassword } from "../../shared/validation/passwordValidation.js";
-import { API } from "../../shared/api/api.js";
-import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
+import { LoginPage } from "../../../pages/LoginPage/index.js";
+import { validateLogin } from "../../../shared/validation/loginValidation.js";
+import { validateNickname } from "../../../shared/validation/nicknameValidation.js";
+import { validateForm } from "../../../shared/validation/formValidation.js";
+import { validatePassword } from "../../../shared/validation/passwordValidation.js";
+import { API } from "../../../shared/api/api.js";
+import { MainPage } from "../../../pages/MainPage/index.js";
 
 /**
  * Class provides signup form
@@ -20,16 +20,16 @@ export class SignupForm {
    * @param {}
    * @returns {}
    */
-  renderTemplate() {
+  render() {
     const template = Handlebars.templates["signUpForm.hbs"];
     this.#parent.innerHTML = template();
 
-    const aElement = document.querySelector("a");
+    const aElement = document.querySelector("#login_href");
 
     aElement.addEventListener("click", (e) => {
       e.preventDefault();
 
-      const login = new RenderLogin(this.#parent);
+      const login = new LoginPage(this.#parent);
       login.render();
     });
 
@@ -84,10 +84,26 @@ export class SignupForm {
         );
         flagError = true;
       }
+      if (nickname.length > 20) {
+        validateForm(
+          nick,
+          "Имя пользователя должно состоять максимум из 20 символов",
+          nickText,
+        );
+        flagError = true;
+      }
       if (!validateLogin(login)) {
         validateForm(
           log,
           "Логин должен состоять минимум из 6 латинских букв, цифр или нижних подчеркиваний.",
+          loginText,
+        );
+        flagError = true;
+      }
+      if (login.length > 20) {
+        validateForm(
+          log,
+          "Логин должен состоять максимум из 20 символов",
           loginText,
         );
         flagError = true;
@@ -100,10 +116,19 @@ export class SignupForm {
         );
         flagError = true;
       }
-      if (!validatePassword(password2) || password != password2) {
+      if (password.length > 20) {
+        validateForm(
+          pass,
+          "Пароль должен состоять максимум из 20 символов",
+          passText,
+        );
+        flagError = true;
+      }
+      else if (!validatePassword(password2) || password != password2) {
         validateForm(pass2, "Неверный пароль", pass2Text);
         flagError = true;
       }
+
 
       if (flagError) {
         return;
@@ -111,7 +136,7 @@ export class SignupForm {
       const username = login;
       const name = nickname;
       const response = await API.post("/signup", { name, username, password });
-      //console.log(response)
+
       if (response.error === "A user with that username already exists") {
         log.classList.add("error");
         loginText.textContent = "Такой пользователь уже существует";
@@ -129,7 +154,7 @@ export class SignupForm {
       }
 
       const mainPage = new MainPage(this.#parent);
-      mainPage.render();
+      mainPage.render(nickname);
     });
   }
 }

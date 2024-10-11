@@ -1,8 +1,8 @@
-import { API } from "../../shared/api/api.js";
-import { validateLogin } from "../../shared/validation/loginValidation.js";
-import { validatePassword } from "../../shared/validation/passwordValidation.js";
-import { MainPage } from "../../pages/MainPage/ui/MainPage.js";
-import { RenderSignup } from "../../pages/SignupPage/SignupPage.js";
+import { API } from "../../../shared/api/api.js";
+import { validateLogin } from "../../../shared/validation/loginValidation.js";
+import { validatePassword } from "../../../shared/validation/passwordValidation.js";
+import { MainPage } from "../../../pages/MainPage/index.js";
+import { SignupPage } from "../../../pages/SignupPage/index.js";
 
 /**
  * Class provides Login form
@@ -18,12 +18,12 @@ export class LoginForm {
    * @param {}
    * @returns {}
    */
-  renderTemplate() {
+  render() {
     const template = Handlebars.templates["loginForm.hbs"];
     this.#parent.innerHTML = template();
     this.#parent.querySelector("#Create").addEventListener("click", (e) => {
       e.preventDefault();
-      const SignUp = new RenderSignup();
+      const SignUp = new SignupPage();
       SignUp.render();
     });
 
@@ -77,8 +77,17 @@ export class LoginForm {
         return;
       }
 
+      const responseAuth = await API.get("/auth", {});
+      let nickname;
+      if (responseAuth.error) {
+        nickname = "user";
+      } 
+      else {
+        nickname = responseAuth.user.name;
+      }
+
       const mainPage = new MainPage(this.#parent);
-      mainPage.render();
+      mainPage.render(nickname);
     });
   }
 }

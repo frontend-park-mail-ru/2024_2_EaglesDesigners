@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Inter:wght@300;400;500&display=swap");
 
 @import "../pages/MainPage/ui/MainPage.css";
-@import "../pages/LoginPage/index.css";
+@import "../pages/LoginPage/ui/index.css";
 @import "../widgets/ChatList/ui/ChatList.css";
-@import "../widgets/SignUp/signUpForm.css";
+@import "../widgets/SignUp/ui/signUpForm.css";
 
 body {
   margin: 0 0 0 0;
@@ -13,8 +13,17 @@ body {
   --background: #090707;
   --primary: #101723;
   --secondary: #4f82bf;
-
+  --text-error-message: red;
   --text-over-primary: #ffffff;
+  --form-button-access: #afcbee;
+  --a-element: #99c3ff;
+  --render-signup-button: #2d3339;
+  --input-width: 356px;
+  --input-height: 55px;
+  --main-font-family: sans-serif;
+  --form-font-size: 22px;
+  --error-font-size: 14px;
+  --base-font-size: 16px;
 }
 
 a {

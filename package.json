@@ -8,12 +8,12 @@
     "prestart": "npm run compile:templates",
     "start": "node ./server/server.js",
     "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server && npx eslint ./server",
-    "compile:templates": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js & handlebars source/widgets/loginForm/loginForm.hbs -f source/widgets/loginForm/loginForm.precompiled.js & handlebars source/widgets/SignUp/signUpForm.hbs -f source/widgets/SignUp/signUpForm.precompiled.js"
+    "compile:templates": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js & handlebars source/widgets/loginForm/ui/loginForm.hbs -f source/widgets/loginForm/ui/loginForm.precompiled.js & handlebars source/widgets/SignUp/ui/signUpForm.hbs -f source/widgets/SignUp/ui/signUpForm.precompiled.js & handlebars ./source/entities/ChatCard/ui/ChatCard.handlebars -f ./source/entities/ChatCard/ui/ChatCard.precompiled.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0",
+    "express": "^4.21.1",
     "handlebars": "^4.7.8",
     "uuid": "^10.0.0"
   },
