@@ -1,4 +1,4 @@
-import { LoginForm } from "../../../widgets/loginForm/ui/loginForm.js";
+import { LoginForm } from "../../../widgets/loginForm/index.js";
 
 /**
  * Class provides render login form

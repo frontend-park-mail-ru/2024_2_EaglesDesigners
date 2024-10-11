@@ -1,4 +1,4 @@
-import { SignupForm } from "../../widgets/SignUp/ui/signUpForm.js";
+import { SignupForm } from "../../../widgets/SignUp/index.js";
 
 /**
  * Class provides render signup form
