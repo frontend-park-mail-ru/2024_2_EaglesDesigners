@@ -22,7 +22,7 @@ export class App {
       login.render();
     } else {
       const mainPage = new MainPage(this.#root);
-      mainPage.render();
+      mainPage.render(response.user.name);
     }
   }
 }

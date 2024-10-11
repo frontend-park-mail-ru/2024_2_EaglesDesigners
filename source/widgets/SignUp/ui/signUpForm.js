@@ -1,10 +1,10 @@
-import { LoginPage } from "../../../pages/LoginPage/ui/LoginPage.js";
+import { LoginPage } from "../../../pages/LoginPage/index.js";
 import { validateLogin } from "../../../shared/validation/loginValidation.js";
 import { validateNickname } from "../../../shared/validation/nicknameValidation.js";
 import { validateForm } from "../../../shared/validation/formValidation.js";
 import { validatePassword } from "../../../shared/validation/passwordValidation.js";
 import { API } from "../../../shared/api/api.js";
-import { MainPage } from "../../../pages/MainPage/ui/MainPage.js";
+import { MainPage } from "../../../pages/MainPage/index.js";
 
 /**
  * Class provides signup form
@@ -154,7 +154,7 @@ export class SignupForm {
       }
 
       const mainPage = new MainPage(this.#parent);
-      mainPage.render("user");
+      mainPage.render(nickname);
     });
   }
 }

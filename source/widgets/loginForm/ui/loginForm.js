@@ -77,8 +77,17 @@ export class LoginForm {
         return;
       }
 
+      const responseAuth = await API.get("/auth", {});
+      let nickname;
+      if (responseAuth.error) {
+        nickname = "user";
+      } 
+      else {
+        nickname = responseAuth.user.name;
+      }
+
       const mainPage = new MainPage(this.#parent);
-      mainPage.render("user");
+      mainPage.render(nickname);
     });
   }
 }
