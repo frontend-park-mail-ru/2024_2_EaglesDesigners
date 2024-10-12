@@ -1,6 +1,6 @@
 import { API } from "../../../shared/api/api.js";
-import { validateLogin } from "../../../shared/validation/loginValidation.js";
-import { validatePassword } from "../../../shared/validation/passwordValidation.js";
+import { validateLogin } from "../../../shared/validation/loginValidation.ts";
+import { validatePassword } from "../../../shared/validation/passwordValidation.ts";
 import { MainPage } from "../../../pages/MainPage";
 import { SignupPage } from "../../../pages/SignupPage";
 
