@@ -1,4 +1,4 @@
-import'./ChatCard.css'
+import'./ChatCard.scss'
 
 export class ChatCard{
     #parent;

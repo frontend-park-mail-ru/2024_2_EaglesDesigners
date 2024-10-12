@@ -1,6 +1,6 @@
 import { API } from "../../../shared/api/api.js";
 import { ChatCard } from "../../../entities/ChatCard";
-import './ChatList.css'
+import './ChatList.scss'
 
 /**
  * ChatList class provides functions for rendering list of user's chats

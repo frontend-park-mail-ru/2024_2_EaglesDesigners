@@ -5,7 +5,7 @@ import { validateForm } from "../../../shared/validation/formValidation.js";
 import { validatePassword } from "../../../shared/validation/passwordValidation.js";
 import { API } from "../../../shared/api/api.js";
 import { MainPage } from "../../../pages/MainPage";
-import './signUpForm.css'
+import './signUpForm.scss'
 
 /**
  * Class provides signup form
