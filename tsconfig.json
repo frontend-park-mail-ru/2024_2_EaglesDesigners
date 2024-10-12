@@ -4,7 +4,7 @@
         "moduleResolution":"node",
     },
     "include": [
-        "**/*.ts",
+        "**/*.ts", "source/shared/api/api.js",
     ],
     "exclude": ["node_modules"]
 }

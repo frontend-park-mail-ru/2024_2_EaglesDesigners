@@ -5,7 +5,6 @@ module.exports = {
   entry: './source/index.ts',
   module: {
     rules: [
-      { test: /\.ts$/, use: 'ts-loader' },
       { test: /\.(js|ts)$/, use: 'babel-loader'},
       { test: /\.(scss|css)$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
       { test: /\.(handlebars|hbs)$/, use: 'handlebars-loader' },
