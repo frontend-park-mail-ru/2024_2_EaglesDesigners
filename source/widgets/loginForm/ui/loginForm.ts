@@ -74,7 +74,7 @@ export class LoginForm {
       }
 
       const responseAuth = await API.get("/auth", {});
-      let nickname = (responseAuth?.user?.name) ? responseAuth.user.name : "user";
+      const nickname = responseAuth?.user?.name || "user";
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
