@@ -1,4 +1,5 @@
-import { LoginForm } from "../../../widgets/loginForm/index.js";
+import { LoginForm } from "@/widgets/loginForm";
+import './index.scss'
 
 /**
  * Class provides render login form

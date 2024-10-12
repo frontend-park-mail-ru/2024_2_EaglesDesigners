@@ -1,6 +1,8 @@
-import { ChatList } from "../../../widgets/ChatList/index.js";
-import { LoginPage } from "../../LoginPage/index.js";
-import { API } from "../../../shared/api/api.js";
+import { ChatList } from "@/widgets/ChatList";
+import { LoginPage } from "@/pages/LoginPage";
+import { API } from "@/shared/api/api.ts";
+import MainPageTemplate from './MainPage.handlebars'
+import './MainPage.scss'
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -16,8 +18,7 @@ export class MainPage {
    * @async
    */
   render(user) {
-    const template = Handlebars.templates.MainPage;
-    this.#parent.innerHTML = template({user});
+    this.#parent.innerHTML = MainPageTemplate({user});
 
     const chatListParent = this.#parent.querySelector("#chat-list-import");
 
@@ -26,13 +27,15 @@ export class MainPage {
 
     const exitButton = this.#parent.querySelector(".exit-btn");
 
-    exitButton.addEventListener("click", async () => {
+    const handleExitClick = async () => {
       const response = await API.post("/logout");
-
+    
       if (!response.error) {
         const login = new LoginPage(this.#parent);
         login.render();
       }
-    });
+    };
+
+    exitButton.addEventListener("click", handleExitClick);
   }
 }

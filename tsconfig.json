@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "moduleResolution":"node",
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
+    },
+    "include": [
+        "**/*.ts", "source/shared/api/api.js",
+    ],
+    "exclude": ["node_modules"]
+}

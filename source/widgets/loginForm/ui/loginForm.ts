@@ -1,8 +1,9 @@
-import { API } from "../../../shared/api/api.js";
-import { validateLogin } from "../../../shared/validation/loginValidation.js";
-import { validatePassword } from "../../../shared/validation/passwordValidation.js";
-import { MainPage } from "../../../pages/MainPage/index.js";
-import { SignupPage } from "../../../pages/SignupPage/index.js";
+import { API } from "@/shared/api/api.ts";
+import { validateLogin } from "@/shared/validation/loginValidation.ts";
+import { validatePassword } from "@/shared/validation/passwordValidation.ts";
+import { MainPage } from "@/pages/MainPage";
+import { SignupPage } from "@/pages/SignupPage";
+import LoginFormTemplate from './loginForm.hbs'
 
 /**
  * Class provides Login form
@@ -19,29 +20,24 @@ export class LoginForm {
    * @returns {}
    */
   render() {
-    const template = Handlebars.templates["loginForm.hbs"];
-    this.#parent.innerHTML = template();
-    this.#parent.querySelector("#Create").addEventListener("click", (e) => {
+    this.#parent.innerHTML = LoginFormTemplate();
+
+    const handleCreateClick = (e) => {
       e.preventDefault();
-      const SignUp = new SignupPage();
-      SignUp.render();
-    });
+      const signUp = new SignupPage();
+      signUp.render();
+    };
+    this.#parent.querySelector("#Create").addEventListener("click", handleCreateClick);
 
     const password = this.#parent.querySelector("#password");
-    const togglePassword = this.#parent.querySelector(
-      "#password-visibility-toggle",
-    );
-    togglePassword.addEventListener("click", function () {
-      if (password.type === "password") {
-        password.type = "text";
-      } else {
-        password.type = "password";
-      }
-    });
-
+    const handleTogglePasswordVisibility = () => {
+      password.type = password.type === "password" ? "text" : "password";
+    };
+    this.#parent.querySelector("#password-visibility-toggle").addEventListener("click", handleTogglePasswordVisibility);
+  
     const documentForm = this.#parent.querySelector("form");
 
-    documentForm.addEventListener("submit", async (e) => {
+    const handleFormSubmit = async (e) => {
       e.preventDefault();
       const textPass = this.#parent.querySelector("#errorPassword");
       const textLogin = this.#parent.querySelector("#errorLogin");
@@ -78,16 +74,11 @@ export class LoginForm {
       }
 
       const responseAuth = await API.get("/auth", {});
-      let nickname;
-      if (responseAuth.error) {
-        nickname = "user";
-      } 
-      else {
-        nickname = responseAuth.user.name;
-      }
+      const nickname = responseAuth?.user?.name || "user";
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
-    });
+    }
+    documentForm.addEventListener("submit", handleFormSubmit);
   }
 }

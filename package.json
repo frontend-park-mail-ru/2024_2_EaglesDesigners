@@ -5,23 +5,35 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "npm run compile:templates",
+    "build": "webpack",
     "start": "node ./server/server.js",
-    "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server && npx eslint ./server",
-    "compile:templates": "handlebars ./source/widgets/ChatList/ui/ChatList.handlebars -f  ./source/widgets/ChatList/ui/ChatList.precompiled.js & handlebars ./source/pages/MainPage/ui/MainPage.handlebars -f  ./source/pages/MainPage/ui/MainPage.precompiled.js & handlebars source/widgets/loginForm/ui/loginForm.hbs -f source/widgets/loginForm/ui/loginForm.precompiled.js & handlebars source/widgets/SignUp/ui/signUpForm.hbs -f source/widgets/SignUp/ui/signUpForm.precompiled.js & handlebars ./source/entities/ChatCard/ui/ChatCard.handlebars -f ./source/entities/ChatCard/ui/ChatCard.precompiled.js"
+    "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server && npx eslint ./server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-loader": "^9.2.1",
     "express": "^4.21.1",
     "handlebars": "^4.7.8",
-    "uuid": "^10.0.0"
+    "sass": "^1.79.4",
+    "uuid": "^10.0.0",
+    "webpack-dev-server": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.11.1",
     "@html-eslint/parser": "^0.27.0",
+    "css-loader": "^7.1.2",
     "eslint": "^9.11.1",
-    "globals": "^15.9.0"
+    "globals": "^15.9.0",
+    "handlebars-loader": "^1.7.3",
+    "html-webpack-plugin": "^5.6.0",
+    "sass-loader": "^16.0.2",
+    "style-loader": "^4.0.0",
+    "svg-inline-loader": "^0.8.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   }
 }

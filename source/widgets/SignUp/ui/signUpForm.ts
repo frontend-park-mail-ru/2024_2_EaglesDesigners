@@ -1,10 +1,12 @@
-import { LoginPage } from "../../../pages/LoginPage/index.js";
-import { validateLogin } from "../../../shared/validation/loginValidation.js";
-import { validateNickname } from "../../../shared/validation/nicknameValidation.js";
-import { validateForm } from "../../../shared/validation/formValidation.js";
-import { validatePassword } from "../../../shared/validation/passwordValidation.js";
-import { API } from "../../../shared/api/api.js";
-import { MainPage } from "../../../pages/MainPage/index.js";
+import { LoginPage } from "@/pages/LoginPage";
+import { validateLogin } from "@/shared/validation/loginValidation.ts";
+import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
+import { validateForm } from "@/shared/validation/formValidation.ts";
+import { validatePassword } from "@/shared/validation/passwordValidation.ts";
+import { API } from "@/shared/api/api.ts";
+import { MainPage } from "@/pages/MainPage";
+import SignUpFormTemplate from './signUpForm.hbs'
+import './signUpForm.scss'
 
 /**
  * Class provides signup form
@@ -21,33 +23,28 @@ export class SignupForm {
    * @returns {}
    */
   render() {
-    const template = Handlebars.templates["signUpForm.hbs"];
-    this.#parent.innerHTML = template();
+    this.#parent.innerHTML = SignUpFormTemplate();
 
     const aElement = document.querySelector("#login_href");
 
-    aElement.addEventListener("click", (e) => {
+    const handleLoginClick = (e) => {
       e.preventDefault();
-
+    
       const login = new LoginPage(this.#parent);
       login.render();
-    });
+    };
+    
+    aElement.addEventListener("click", handleLoginClick);
 
     const password = this.#parent.querySelector("#password");
-    const togglePassword = this.#parent.querySelector(
-      "#password-visibility-toggle",
-    );
-    togglePassword.addEventListener("click", function () {
-      if (password.type === "password") {
-        password.type = "text";
-      } else {
-        password.type = "password";
-      }
-    });
+    const handleTogglePasswordVisibility = () => {
+      password.type = password.type === "password" ? "text" : "password";
+    };
+    this.#parent.querySelector("#password-visibility-toggle").addEventListener("click", handleTogglePasswordVisibility);
 
     const btnElement = document.querySelector("button");
 
-    btnElement.addEventListener("click", async (e) => {
+    const handleButtonClick = async (e) => {
       e.preventDefault();
 
       const nick = this.#parent.querySelector("#nickname");
@@ -155,6 +152,8 @@ export class SignupForm {
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
-    });
+    }
+
+    btnElement.addEventListener("click", handleButtonClick);
   }
 }
