@@ -1,8 +1,8 @@
 import { API } from "../../../shared/api/api.js";
 import { validateLogin } from "../../../shared/validation/loginValidation.js";
 import { validatePassword } from "../../../shared/validation/passwordValidation.js";
-import { MainPage } from "../../../pages/MainPage/index.js";
-import { SignupPage } from "../../../pages/SignupPage/index.js";
+import { MainPage } from "../../../pages/MainPage";
+import { SignupPage } from "../../../pages/SignupPage";
 
 /**
  * Class provides Login form

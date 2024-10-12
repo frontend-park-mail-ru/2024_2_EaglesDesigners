@@ -1,5 +1,5 @@
-import { LoginPage } from "../pages/LoginPage/index.js";
-import { MainPage } from "../pages/MainPage/index.js";
+import { LoginPage } from "../pages/LoginPage";
+import { MainPage } from "../pages/MainPage";
 import { API } from "../shared/api/api.js";
 import '../../public/index.css'
 /**

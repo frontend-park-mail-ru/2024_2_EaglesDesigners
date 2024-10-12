@@ -1,5 +1,5 @@
-import { ChatList } from "../../../widgets/ChatList/index.js";
-import { LoginPage } from "../../LoginPage/index.js";
+import { ChatList } from "../../../widgets/ChatList";
+import { LoginPage } from "../../LoginPage";
 import { API } from "../../../shared/api/api.js";
 import './MainPage.scss'
 
