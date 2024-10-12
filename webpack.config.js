@@ -6,12 +6,13 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts$/, use: 'ts-loader' },
+      { test: /\.(js|ts)$/, use: 'babel-loader'},
       { test: /\.(scss|css)$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
       { test: /\.(handlebars|hbs)$/, use: 'handlebars-loader' },
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.scss', '.css', '.hbs']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
