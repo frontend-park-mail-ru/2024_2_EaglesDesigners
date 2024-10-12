@@ -27,13 +27,15 @@ export class MainPage {
 
     const exitButton = this.#parent.querySelector(".exit-btn");
 
-    exitButton.addEventListener("click", async () => {
+    const handleExitClick = async () => {
       const response = await API.post("/logout");
-
+    
       if (!response.error) {
         const login = new LoginPage(this.#parent);
         login.render();
       }
-    });
+    };
+
+    exitButton.addEventListener("click", handleExitClick);
   }
 }

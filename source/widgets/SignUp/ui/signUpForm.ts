@@ -27,28 +27,24 @@ export class SignupForm {
 
     const aElement = document.querySelector("#login_href");
 
-    aElement.addEventListener("click", (e) => {
+    const handleLoginClick = (e) => {
       e.preventDefault();
-
+    
       const login = new LoginPage(this.#parent);
       login.render();
-    });
+    };
+    
+    aElement.addEventListener("click", handleLoginClick);
 
     const password = this.#parent.querySelector("#password");
-    const togglePassword = this.#parent.querySelector(
-      "#password-visibility-toggle",
-    );
-    togglePassword.addEventListener("click", function () {
-      if (password.type === "password") {
-        password.type = "text";
-      } else {
-        password.type = "password";
-      }
-    });
+    const handleTogglePasswordVisibility = () => {
+      password.type = password.type === "password" ? "text" : "password";
+    };
+    this.#parent.querySelector("#password-visibility-toggle").addEventListener("click", handleTogglePasswordVisibility);
 
     const btnElement = document.querySelector("button");
 
-    btnElement.addEventListener("click", async (e) => {
+    const handleButtonClick = async (e) => {
       e.preventDefault();
 
       const nick = this.#parent.querySelector("#nickname");
@@ -156,6 +152,8 @@ export class SignupForm {
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
-    });
+    }
+
+    btnElement.addEventListener("click", handleButtonClick);
   }
 }
