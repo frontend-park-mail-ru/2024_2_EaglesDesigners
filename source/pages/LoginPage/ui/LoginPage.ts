@@ -1,4 +1,4 @@
-import { LoginForm } from "../../../widgets/loginForm";
+import { LoginForm } from "#widgets/loginForm";
 import './index.scss'
 
 /**

@@ -1,5 +1,5 @@
-import { API } from "../../../shared/api/api.js";
-import { ChatCard } from "../../../entities/ChatCard";
+import { API } from "#shared/api/api.js";
+import { ChatCard } from "#entities/ChatCard";
 import './ChatList.scss'
 
 /**

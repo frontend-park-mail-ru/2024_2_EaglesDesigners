@@ -1,7 +1,7 @@
-import { LoginPage } from "../pages/LoginPage";
-import { MainPage } from "../pages/MainPage";
-import { API } from "../shared/api/api.js";
-import '../../public/index.scss'
+import { LoginPage } from "#pages/LoginPage";
+import { MainPage } from "#pages/MainPage";
+import { API } from "#shared/api/api.js";
+import '#public/index.scss'
 /**
  * Class provides class App, the initial class
  */

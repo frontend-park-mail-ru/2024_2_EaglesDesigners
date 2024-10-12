@@ -1,4 +1,4 @@
-import { SignupForm } from "../../../widgets/SignUp";
+import { SignupForm } from "#widgets/SignUp";
 
 /**
  * Class provides render signup form
