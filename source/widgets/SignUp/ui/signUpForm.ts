@@ -5,7 +5,6 @@ import { validateForm } from "../../../shared/validation/formValidation.js";
 import { validatePassword } from "../../../shared/validation/passwordValidation.js";
 import { API } from "../../../shared/api/api.js";
 import { MainPage } from "../../../pages/MainPage/index.js";
-import signUpFormTemplate from "./signUpForm.hbs";
 import './signUpForm.css'
 
 /**
@@ -22,8 +21,9 @@ export class SignupForm {
    * @param {}
    * @returns {}
    */
-  renderTemplate() {
-    this.#parent.innerHTML = signUpFormTemplate();
+  render() {
+    const template = require("./signUpForm.hbs");
+    this.#parent.innerHTML = template();
 
     const aElement = document.querySelector("#login_href");
 

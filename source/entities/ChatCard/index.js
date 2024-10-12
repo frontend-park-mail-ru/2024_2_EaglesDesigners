@@ -1,1 +1,1 @@
-export { ChatCard } from "./ui/ChatCard.js";
+export { ChatCard } from "./ui/ChatCard.ts";

@@ -1,1 +1,1 @@
-export { LoginPage } from "./ui/LoginPage.js";
+export { LoginPage } from "./ui/LoginPage.ts";

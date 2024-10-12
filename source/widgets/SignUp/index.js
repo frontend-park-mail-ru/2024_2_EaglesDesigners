@@ -1,1 +1,1 @@
-export { SignupForm } from "./ui/signUpForm.js";
+export { SignupForm } from "./ui/signUpForm.ts";

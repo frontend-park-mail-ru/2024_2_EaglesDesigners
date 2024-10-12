@@ -1,4 +1,3 @@
-import ChatCardTemplate from './ChatCard.handlebars'
 import'./ChatCard.css'
 
 export class ChatCard{
@@ -8,7 +7,8 @@ export class ChatCard{
     }
   
     render(chat){
-      this.#parent.insertAdjacentHTML('beforeend', ChatCardTemplate({chat}));
+      const template = require('./ChatCard.handlebars');
+      this.#parent.insertAdjacentHTML('beforeend', template({chat}));
  
     }
   }
