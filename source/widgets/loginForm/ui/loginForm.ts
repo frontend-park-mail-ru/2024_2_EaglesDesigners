@@ -74,13 +74,7 @@ export class LoginForm {
       }
 
       const responseAuth = await API.get("/auth", {});
-      let nickname;
-      if (responseAuth.error) {
-        nickname = "user";
-      } 
-      else {
-        nickname = responseAuth.user.name;
-      }
+      let nickname = (responseAuth?.user?.name) ? responseAuth.user.name : "user";
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
