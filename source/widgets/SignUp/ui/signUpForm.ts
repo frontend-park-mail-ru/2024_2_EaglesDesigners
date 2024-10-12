@@ -1,10 +1,11 @@
-import { LoginPage } from "#pages/LoginPage";
-import { validateLogin } from "#shared/validation/loginValidation.ts";
-import { validateNickname } from "#shared/validation/nicknameValidation.ts";
-import { validateForm } from "#shared/validation/formValidation.ts";
-import { validatePassword } from "#shared/validation/passwordValidation.ts";
-import { API } from "#shared/api/api.ts";
-import { MainPage } from "#pages/MainPage";
+import { LoginPage } from "@/pages/LoginPage";
+import { validateLogin } from "@/shared/validation/loginValidation.ts";
+import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
+import { validateForm } from "@/shared/validation/formValidation.ts";
+import { validatePassword } from "@/shared/validation/passwordValidation.ts";
+import { API } from "@/shared/api/api.ts";
+import { MainPage } from "@/pages/MainPage";
+import SignUpFormTemplate from './signUpForm.hbs'
 import './signUpForm.scss'
 
 /**
@@ -22,8 +23,7 @@ export class SignupForm {
    * @returns {}
    */
   render() {
-    const template = require("./signUpForm.hbs");
-    this.#parent.innerHTML = template();
+    this.#parent.innerHTML = SignUpFormTemplate();
 
     const aElement = document.querySelector("#login_href");
 

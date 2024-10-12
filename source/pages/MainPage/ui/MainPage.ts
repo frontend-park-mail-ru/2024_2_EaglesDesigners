@@ -1,6 +1,7 @@
-import { ChatList } from "#widgets/ChatList";
-import { LoginPage } from "#pages/LoginPage";
-import { API } from "#shared/api/api.ts";
+import { ChatList } from "@/widgets/ChatList";
+import { LoginPage } from "@/pages/LoginPage";
+import { API } from "@/shared/api/api.ts";
+import MainPageTemplate from './MainPage.handlebars'
 import './MainPage.scss'
 
 /**
@@ -17,8 +18,7 @@ export class MainPage {
    * @async
    */
   render(user) {
-    const template = require('./MainPage.handlebars');
-    this.#parent.innerHTML = template({user});
+    this.#parent.innerHTML = MainPageTemplate({user});
 
     const chatListParent = this.#parent.querySelector("#chat-list-import");
 

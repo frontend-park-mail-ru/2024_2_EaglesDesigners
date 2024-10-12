@@ -12,11 +12,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "#public": path.resolve(__dirname, 'public'),
-      "#pages": path.resolve(__dirname, 'source/pages'),
-      "#widgets": path.resolve(__dirname, 'source/widgets'),
-      "#entities": path.resolve(__dirname, 'source/entities'),
-      "#shared": path.resolve(__dirname, 'source/shared'),
+      "@": path.resolve(__dirname, 'source'),
     },
     extensions: ['.ts', '.js', '.scss', '.css', '.hbs']
   },

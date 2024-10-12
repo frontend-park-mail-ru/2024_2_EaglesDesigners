@@ -1,46 +1,41 @@
-<body>
-  <div id="root">
-    <div class="main-container">
-      <div class="sidebar-container">
-        <div class="logo-container">
-          <img src="/assets/image/Patefon.svg" />
+
+<div class="main-container">
+  <div class="sidebar-container">
+    <div class="logo-container">
+      <img src="/assets/image/Patefon.svg" />
+
+    </div>
+    <div class="buttons-container">
+      <span class="username">{{user}}</span>
+      <button type="button" class="exit-btn">
+        <div class="exit-btn-svg-container">
+          <img src="/assets/image/IconLogout.svg" />
 
         </div>
-        <div class="buttons-container">
-          <span class="username">{{user}}</span>
-          <button type="button" class="exit-btn">
-            <div class="exit-btn-svg-container">
-              <img src="/assets/image/IconLogout.svg" />
+      </button>
+    </div>
 
-            </div>
-          </button>
+  </div>
+
+  <div id="chat-list-import">
+
+  </div>
+
+  <div class="chat-window">
+    <div class="chat-container">
+      <div class="chat-box">
+        <div class="chat-feed">
+          <p class="placeholder-text">
+            Пока здесь ничего нет
+          </p>
         </div>
+        <div class="input-row">
 
-      </div>
-
-      <div id="chat-list-import">
-
-      </div>
-
-      <div class="chat-window">
-        <div class="chat-container">
-          <div class="chat-box">
-            <div class="chat-feed">
-              <p class="placeholder-text">
-                Пока здесь ничего нет
-              </p>
-            </div>
-            <div class="input-row">
-
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="chat-info-container">
-
       </div>
     </div>
   </div>
+  <div class="chat-info-container">
 
-  <script type="module" src="MainPage.js"></script>
-</body>
+  </div>
+</div>

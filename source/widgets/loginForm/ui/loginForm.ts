@@ -1,8 +1,9 @@
-import { API } from "#shared/api/api.ts";
-import { validateLogin } from "#shared/validation/loginValidation.ts";
-import { validatePassword } from "#shared/validation/passwordValidation.ts";
-import { MainPage } from "#pages/MainPage";
-import { SignupPage } from "#pages/SignupPage";
+import { API } from "@/shared/api/api.ts";
+import { validateLogin } from "@/shared/validation/loginValidation.ts";
+import { validatePassword } from "@/shared/validation/passwordValidation.ts";
+import { MainPage } from "@/pages/MainPage";
+import { SignupPage } from "@/pages/SignupPage";
+import LoginFormTemplate from './loginForm.hbs'
 
 /**
  * Class provides Login form
@@ -19,8 +20,7 @@ export class LoginForm {
    * @returns {}
    */
   render() {
-    const template = require('./loginForm.hbs');
-    this.#parent.innerHTML = template();
+    this.#parent.innerHTML = LoginFormTemplate();
 
     const handleCreateClick = (e) => {
       e.preventDefault();

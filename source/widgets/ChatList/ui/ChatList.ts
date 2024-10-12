@@ -1,5 +1,6 @@
-import { API } from "#shared/api/api.ts";
-import { ChatCard } from "#entities/ChatCard";
+import { API } from "@/shared/api/api.ts";
+import { ChatCard } from "@/entities/ChatCard";
+import ChatListTemplate from './ChatList.handlebars'
 import './ChatList.scss'
 
 /**
@@ -24,8 +25,7 @@ export class ChatList {
       chats = response.chats;
     }
 
-    const template = require('./ChatList.handlebars');
-    this.#parent.innerHTML = template({});
+    this.#parent.innerHTML = ChatListTemplate({});
 
     const chatList = this.#parent.querySelector("#chat-list");
     const chatCard = new ChatCard(chatList);
