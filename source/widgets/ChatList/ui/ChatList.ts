@@ -1,4 +1,4 @@
-import { API } from "#shared/api/api.js";
+import { API } from "#shared/api/api.ts";
 import { ChatCard } from "#entities/ChatCard";
 import './ChatList.scss'
 

@@ -3,7 +3,7 @@ import { validateLogin } from "#shared/validation/loginValidation.ts";
 import { validateNickname } from "#shared/validation/nicknameValidation.ts";
 import { validateForm } from "#shared/validation/formValidation.ts";
 import { validatePassword } from "#shared/validation/passwordValidation.ts";
-import { API } from "#shared/api/api.js";
+import { API } from "#shared/api/api.ts";
 import { MainPage } from "#pages/MainPage";
 import './signUpForm.scss'
 

@@ -20,7 +20,7 @@ class Api {
         method: "GET",
         mode: "cors",
         headers: {
-          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Credentials": "true",
         },
         credentials: "include",
       });
@@ -43,7 +43,7 @@ class Api {
         method: "POST",
         mode: "cors",
         headers: {
-          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Credentials": "true",
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(body),

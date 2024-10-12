@@ -1,6 +1,6 @@
 import { ChatList } from "#widgets/ChatList";
 import { LoginPage } from "#pages/LoginPage";
-import { API } from "#shared/api/api.js";
+import { API } from "#shared/api/api.ts";
 import './MainPage.scss'
 
 /**
