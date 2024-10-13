@@ -10,7 +10,7 @@ import './ChatList.scss'
 export class ChatList {
   #parent;
 
-  constructor(parent) {
+  constructor(parent:Element) {
     this.#parent = parent;
   }
   /**
@@ -28,7 +28,7 @@ export class ChatList {
 
     this.#parent.innerHTML = ChatListTemplate({});
 
-    const chatList = this.#parent.querySelector("#chat-list");
+    const chatList = this.#parent.querySelector("#chat-list")!;
     const chatCard = new ChatCard(chatList);
 
     chats.map(chat => {

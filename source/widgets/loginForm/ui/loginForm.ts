@@ -10,7 +10,7 @@ import LoginFormTemplate from './loginForm.hbs'
  */
 export class LoginForm {
   #parent;
-  constructor(parent) {
+  constructor(parent:Element) {
     this.#parent = parent;
   }
 
@@ -22,33 +22,33 @@ export class LoginForm {
   render() {
     this.#parent.innerHTML = LoginFormTemplate();
 
-    const handleCreateClick = (e) => {
+    const handleCreateClick = (e:Event) => {
       e.preventDefault();
       const signUp = new SignupPage();
       signUp.render();
     };
-    this.#parent.querySelector("#Create").addEventListener("click", handleCreateClick);
+    this.#parent.querySelector("#Create")!.addEventListener("click", handleCreateClick);
 
-    const password = this.#parent.querySelector("#password");
+    const password:HTMLInputElement = this.#parent.querySelector("#password")!;
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
-    this.#parent.querySelector("#password-visibility-toggle").addEventListener("click", handleTogglePasswordVisibility);
+    this.#parent.querySelector("#password-visibility-toggle")!.addEventListener("click", handleTogglePasswordVisibility);
   
-    const documentForm = this.#parent.querySelector("form");
+    const documentForm = this.#parent.querySelector("form")!;
 
-    const handleFormSubmit = async (e) => {
+    const handleFormSubmit = async (e:Event) => {
       e.preventDefault();
-      const textPass = this.#parent.querySelector("#errorPassword");
-      const textLogin = this.#parent.querySelector("#errorLogin");
+      const textPass = this.#parent.querySelector("#errorPassword")!;
+      const textLogin = this.#parent.querySelector("#errorLogin")!;
 
       textLogin.textContent = "";
       textPass.textContent = "";
 
-      const loginInput = this.#parent.querySelector("#login");
+      const loginInput:HTMLInputElement = this.#parent.querySelector("#login")!;
       loginInput.classList.remove("error");
 
-      const passwordInput = this.#parent.querySelector("#password");
+      const passwordInput:HTMLInputElement = this.#parent.querySelector("#password")!;
       passwordInput.classList.remove("error");
 
       const username = loginInput.value.trim();
@@ -73,7 +73,7 @@ export class LoginForm {
         return;
       }
 
-      const responseAuth = await API.get("/auth", {});
+      const responseAuth = await API.get("/auth");
       const nickname = responseAuth?.user?.name || "user";
 
       const mainPage = new MainPage(this.#parent);
