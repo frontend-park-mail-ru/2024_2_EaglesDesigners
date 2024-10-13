@@ -4,6 +4,7 @@
   "description": "Фронтенд проекта Telegram команды \"EaglesDesigners\"",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc --project tsconfig.json --noEmit",
     "build": "webpack",
     "start": "node ./server/server.js",
     "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server && npx eslint ./server"
