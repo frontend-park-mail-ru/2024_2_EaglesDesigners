@@ -4,7 +4,7 @@ import'./ChatCard.scss'
 
 export class ChatCard{
     #parent;
-    constructor(parent){
+    constructor(parent:Element){
       this.#parent = parent;
     }
   
