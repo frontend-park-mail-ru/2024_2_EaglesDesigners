@@ -5,11 +5,14 @@
         "allowImportingTsExtensions": true,
         "noEmit": true,
 
+        "strict": true,
         "noImplicitAny": true,
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
         "strictPropertyInitialization": true,
         "strictNullChecks": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true, 
 
         "paths": {
             "@/*": ["./source/*"]
