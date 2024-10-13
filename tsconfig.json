@@ -4,6 +4,10 @@
         "moduleResolution":"node",
         "allowImportingTsExtensions": true,
         "noEmit": true,
+
+        "paths": {
+            "@/*": ["./source/*"]
+        },
     },
     "include": [
         "**/*.ts", "source/shared/api/api.js",
