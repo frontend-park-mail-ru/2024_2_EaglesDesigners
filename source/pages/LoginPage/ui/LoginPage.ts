@@ -6,7 +6,7 @@ import './index.scss'
  */
 export class LoginPage {
   #parent;
-  constructor(parent) {
+  constructor(parent:Element) {
     this.#parent = parent;
   }
   /**
