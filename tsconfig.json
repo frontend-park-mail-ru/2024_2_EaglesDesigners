@@ -5,12 +5,18 @@
         "allowImportingTsExtensions": true,
         "noEmit": true,
 
+        "noImplicitAny": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true,
+        "strictNullChecks": true,
+
         "paths": {
             "@/*": ["./source/*"]
         },
     },
     "include": [
-        "**/*.ts", "source/shared/api/api.js",
+        "**/*.ts",
     ],
     "exclude": ["node_modules"]
 }
