@@ -1,3 +1,4 @@
+import { ChatModel } from '@/shared/api/types';
 import ChatCardTemplate from './ChatCard.handlebars'
 import'./ChatCard.scss'
 
@@ -7,7 +8,7 @@ export class ChatCard{
       this.#parent = parent;
     }
   
-    render(chat){
+    render(chat:ChatModel){
       this.#parent.insertAdjacentHTML('beforeend', ChatCardTemplate({chat}));
     }
   }

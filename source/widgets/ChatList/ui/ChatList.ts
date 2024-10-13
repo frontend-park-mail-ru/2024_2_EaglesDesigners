@@ -1,5 +1,6 @@
 import { API } from "@/shared/api/api.ts";
 import { ChatCard } from "@/entities/ChatCard";
+import { ChatListModel } from "@/shared/api/types";
 import ChatListTemplate from './ChatList.handlebars'
 import './ChatList.scss'
 
@@ -18,7 +19,7 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats = [
+    let chats:ChatListModel = [
     ];
     const response = await API.get("/chats");
     if (response.chats) {
