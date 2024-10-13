@@ -1,4 +1,4 @@
-.chat-card {
+.container-a__div {
   border-radius: 15px;
   margin-inline: 9px;
   padding-inline: 10px;
@@ -11,12 +11,12 @@
   grid-template-rows: 50% 50%;
 }
 
-.chat-card-href {
+.container-a {
   pointer-events: none;
   cursor: default;
 }
 
-.chat-card-img {
+.container-a__div__img {
   grid-area: avatar;
   border-radius: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
@@ -31,7 +31,7 @@
   justify-self: center;
 }
 
-.chat-card-upper-row {
+.container-a__div-chatinfo {
   grid-area: up;
   width: auto;
   height: fit-content;
@@ -44,11 +44,11 @@
   grid-template-columns: auto fit-content;
 }
 
-.main-text-container {
+.container-a__div-chatinfo__div-chatname {
   grid-area: chat-name-container;
   overflow: hidden;
 }
-.chat-name {
+.container-a__div-chatinfo__div-chatname__span {
   font-family: "Inter";
   line-height: 21px;
   font-weight: 500;
@@ -61,14 +61,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.side-text-container {
+.container-a__div-chatinfo-date {
   grid-area: last-message-time;
 
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-.last-message-date {
+.container-a__div-chatinfo-date__span {
   font-family: "Inter";
   line-height: 16px;
   font-weight: 300;
@@ -78,7 +78,7 @@
 
   justify-self: flex-start;
 }
-.chat-card-lower-row {
+.container-a__div-message-div {
   grid-area: low;
   width: auto;
   height: fit-content;
@@ -90,44 +90,44 @@
   grid-template-columns: auto fit-content;
 }
 
-.main-text-container-lower {
+.container-a__div-message-div__div {
   grid-area: chat-name-containerl;
   overflow: hidden;
   display: inline-flex;
 }
 
-.last-messanger-name {
-  font-family: "Inter";
-  line-height: 21px;
-  font-weight: 500;
-  font-size: 16px;
-  color: white;
+// .last-messanger-name {
+//   font-family: "Inter";
+//   line-height: 21px;
+//   font-weight: 500;
+//   font-size: 16px;
+//   color: white;
 
-  flex-shrink: 1;
-  flex-grow: 0;
+//   flex-shrink: 1;
+//   flex-grow: 0;
 
-  display: block;
-  width: min-content;
-  max-width: auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: none;
-}
+//   display: block;
+//   width: min-content;
+//   max-width: auto;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   display: none;
+// }
 
-.split-column {
-  font-family: "Inter";
-  line-height: 21px;
-  font-weight: 400;
+// .split-column {
+//   font-family: "Inter";
+//   line-height: 21px;
+//   font-weight: 400;
 
-  font-size: 16px;
-  display: block;
-  color: var(--text-over-primary);
-  filter: brightness(50%);
-  display: none;
-}
+//   font-size: 16px;
+//   display: block;
+//   color: var(--text-over-primary);
+//   filter: brightness(50%);
+//   display: none;
+// }
 
-.last-message {
+.container-a__div-message-div__div__span {
   font-family: "Inter";
   line-height: 21px;
   font-weight: 400;

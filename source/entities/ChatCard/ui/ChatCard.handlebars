@@ -1,33 +1,24 @@
-<a class="chat-card-href" href={{chat.chatId}}>
+<a class="container-a" href={{chat.chatId}}>
 
-  <div class="chat-card">
-    <img class="chat-card-img" src="{{chat.avatarURL}}" />
+  <div class="container-a__div">
+    <img class="container-a__div__img" src="{{chat.avatarURL}}" />
 
-    <div class="chat-card-upper-row">
-      <div class="main-text-container">
-        <span class="chat-name">
+    <div class="container-a__div-chatinfo">
+      <div class="container-a__div-chatinfo__div-chatname">
+        <span class="container-a__div-chatinfo__div-chatname__span">
           {{chat.chatName}}
         </span>
       </div>
-      <div class="side-text-container">
-        <span class="last-message-date">
+      <div class="container-a__div-chatinfo-date">
+        <span class="container-a__div-chatinfo-date__span">
           Окт 10
         </span>
       </div>
     </div>
-    <div class="chat-card-lower-row">
-      <div class="main-text-container-lower">
-        <span class="last-messanger-name">
-          {{chat.chatName}}
-        </span>
-        <span class="split-column">:&nbsp;</span>
-        <span class="last-message">
+    <div class="container-a__div-message-div">
+      <div class="container-a__div-message-div__div">
+        <span class="container-a__div-message-div__div__span">
           {{chat.lastMessage}}
-        </span>
-
-      </div>
-      <div class="side-text-container-lower">
-        <span class="last-message-date">
         </span>
       </div>
 
