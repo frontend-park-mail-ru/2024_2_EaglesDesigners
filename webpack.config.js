@@ -6,7 +6,15 @@ module.exports = {
   entry: './source/index.ts',
   module: {
     rules: [
-      { test: /\.(js|ts)$/, use: 'babel-loader'},
+      { test: /\.(js|ts)$/, use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [
+              ['@babel/preset-typescript', { allowNamespaces: true }]
+          ],
+        }
+      }]
+      },
       { test: /\.(scss|css)$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
       { test: /\.(handlebars|hbs)$/, use: 'handlebars-loader' },
     ]
