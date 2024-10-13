@@ -25,6 +25,7 @@ export class MainPage {
     const chatList = new ChatList(chatListParent);
     chatList.render();
 
+
     const exitButton = this.#parent.querySelector(".exit-btn");
 
     const handleExitClick = async () => {

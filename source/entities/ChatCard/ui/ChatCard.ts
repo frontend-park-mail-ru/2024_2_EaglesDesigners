@@ -9,5 +9,11 @@ export class ChatCard {
 
   render(chat) {
     this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ chat }));
+    
+    const chatCardElement = document.querySelector(".container-a");
+    const handleChatCard = (e) => {
+      e.preventDefault();
+    }
+    chatCardElement.addEventListener("click", handleChatCard);
   }
 }
