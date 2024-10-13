@@ -1,47 +1,61 @@
-<div id="left" class="left"></div>
-<div id="right" class="right">
-  <form class="signupForm">
-    <p>Зарегистрируйтесь в Patefon</p>
-    <div class="errorDiv"><span id="errorNickname"></span></div>
+<div id="right" class="container">
+  <form class="container__signup-form">
+    <p class="container__signup-form__p">Зарегистрируйтесь в Patefon</p>
+    <div class="container__signup-form__error-div">
+      <span class="container__signup-form__error-div__span" id="errorNickname"></span>
+    </div>
     <input
       id="nickname"
-      class="nickname not_error"
+      class="container__signup-form__input nickname not_error"
       type="text"
       placeholder="Имя пользователя"
       name="text"
     />
-    <div class="errorDiv"><span id="errorLogin"></span></div>
+    <div class="container__signup-form__error-div">
+      <span class="container__signup-form__error-div__span" id="errorLogin"></span>
+    </div>
     <input
       id="login"
-      class="login not_error"
+      class="container__signup-form__input login not_error"
       type="text"
       placeholder="Логин"
       name="text"
     />
-    <div class="errorDiv"><span id="errorPassword"></span></div>
-    <div style="position: relative;">
+    <div class="container__signup-form__error-div">
+      <span class="container__signup-form__error-div__span" id="errorPassword"></span>
+    </div>
+    <div class="container__signup-form__div-password" style="position: relative;">
       <input
         id="password"
-        class="password not_error"
+        class="container__signup-form__div-password__input not_error"
         type="password"
         placeholder="Пароль"
         name="password"
       />
       <img
         id="password-visibility-toggle"
-        class="password-visibility-toggle"
+        class="container__signup-form__div-password__img password-visibility-toggle"
         src="/assets/image/eye.svg"
       />
     </div>
-    <div class="errorDiv"><span id="errorPassword2"></span></div>
-    <input
-      id="password2"
-      class="password2 not_error"
-      type="password"
-      placeholder="Повторите пароль"
-      name="password"
-    />
-    <a id="login_href" href="/login">Уже есть аккаунт? Войти</a>
-    <button type="submit" class="btn signupForm__button">Создать аккаунт</button>
+    <div class="container__signup-form__error-div">
+      <span class="container__signup-form__error-div__span" id="errorPassword2"></span>
+    </div>
+    <div class="container__signup-form__div-password" style="position: relative;">
+      <input
+        id="password2"
+        class="container__signup-form__div-password__input not_error"
+        type="password"
+        placeholder="Повторите пароль"
+        name="password"
+      />
+      <img
+        id="password-visibility-toggle"
+        class="container__signup-form__div-password__img password-visibility-toggle"
+        src="/assets/image/eye.svg"
+      />
+    </div>
+    <a class="container__login-form__a" id="login_href" href="/login">Уже есть аккаунт? Войти</a>
+    <button type="submit" class="container__login-form_button">Создать аккаунт</button>
   </form>
 </div>

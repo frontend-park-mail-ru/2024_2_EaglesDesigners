@@ -72,7 +72,8 @@ $background: var(--background);
   grid-template-rows: 1fr 16fr;
 }
 .chat-container {
-  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), $primary;
+  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    $primary;
   width: 100%;
   height: 100%;
 

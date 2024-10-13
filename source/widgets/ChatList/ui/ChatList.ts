@@ -1,7 +1,7 @@
 import { API } from "@/shared/api/api.ts";
 import { ChatCard } from "@/entities/ChatCard";
-import ChatListTemplate from './ChatList.handlebars'
-import './ChatList.scss'
+import ChatListTemplate from "./ChatList.handlebars";
+import "./ChatList.scss";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -18,8 +18,7 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats = [
-    ];
+    let chats = [];
     const response = await API.get("/chats");
     if (response.chats) {
       chats = response.chats;
@@ -30,9 +29,8 @@ export class ChatList {
     const chatList = this.#parent.querySelector("#chat-list");
     const chatCard = new ChatCard(chatList);
 
-    chats.map(chat => {
+    chats.map((chat) => {
       chatCard.render(chat);
     });
-    
   }
 }

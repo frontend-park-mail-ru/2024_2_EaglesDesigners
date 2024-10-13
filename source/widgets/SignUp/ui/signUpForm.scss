@@ -1,4 +1,4 @@
-.signupForm p {
+.container__signup-form__p {
   text-align: center;
   font-size: 30px;
   color: var(--text-over-primary);
@@ -7,7 +7,7 @@
   margin-bottom: 50px;
 }
 
-.signupForm input {
+.container__signup-form__input {
   display: block;
   padding-left: 10px;
   width: var(--input-width);
@@ -21,7 +21,21 @@
   margin-left: 20px;
 }
 
-.signupForm a {
+.container__signup-form__div-password__input {
+  display: block;
+  padding-left: 10px;
+  width: var(--input-width);
+  height: var(--input-height);
+  border-radius: 15px 15px 15px 15px;
+  font-size: var(--form-font-size);
+  font-family: var(--main-font-family);
+  color: var(--text-over-primary);
+  background-color: var(--primary);
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.container__login-form__a {
   color: var(--a-element);
   font-size: var(--base-font-size);
   font-family: var(--main-font-family);
@@ -29,13 +43,13 @@
   text-decoration: underline;
 }
 
-.signupForm__button {
+.container__login-form_button {
   margin-top: 30px;
   margin-left: 25px;
   background: var(--form-button-access);
 }
 
-.signupForm span {
+.container__signup-form__error-div__span {
   font-size: var(--error-font-size);
   font-family: var(--main-font-family);
   color: var(--text-error-message);
@@ -45,12 +59,38 @@
   align-self: flex-start;
 }
 
-.password-visibility-toggle{
-  width: 20px; 
+.container__signup-form__div-password__img {
+  width: 20px;
   height: 20px;
-  position: absolute; 
-  right: 30px; 
+  position: absolute;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.container__signup-form__error-div{
+  min-height: 32px;
+  max-width: var(--input-width);
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.container__login-form_button{
+  align-items: center;
+  margin-bottom: 20px;
+  display: block;
+  border-top: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-right: 0px;
+  margin-left: 30px;
+  width: var(--input-width);
+  height: var(--input-height);
+  border-radius: 60px 60px 60px 60px;
+  font-size: var(--form-font-size);
+  font-family: var(--main-font-family);
   cursor: pointer;
 }
