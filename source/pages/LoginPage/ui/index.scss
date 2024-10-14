@@ -7,16 +7,18 @@ body {
   display: flex;
 }
 
-.container {
+.auth-form {
   display: flex;
   flex-direction: column;
   width: 50%;
   align-items: center;
 }
 
-.container__login-form__input {
+
+.auth-form__form__input {
   display: block;
   padding-left: 10px;
+  margin-bottom: 10px;
   width: var(--input-width);
   height: var(--input-height);
   border-radius: 15px 15px 15px 15px;
@@ -34,7 +36,6 @@ body {
   border-left: 0px;
   border-bottom: 0px;
   border-right: 0px;
-  margin-left: 7px;
   width: var(--input-width);
   height: var(--input-height);
   border-radius: 60px 60px 60px 60px;
@@ -43,18 +44,22 @@ body {
   cursor: pointer;
 }
 
-.container__login-form__button {
+.auth_btn{
+  margin-left: 7px;
+}
+
+.auth-form__form__button {
   margin-top: 50px;
   background-color: var(--form-button-access);
   color: var(--primary);
 }
 
-.container__button {
+.auth-form__button {
   background-color: var(--render-signup-button);
   color: var(--text-over-primary);
 }
 
-.container__login-form__p {
+.auth-form__form__p {
   text-align: center;
   font-size: 30px;
   color: var(--text-over-primary);
@@ -63,11 +68,14 @@ body {
   margin-bottom: 80px;
 }
 
-.container__login-form__error-div__span {
+.auth-form__form__error__span {
   font-size: var(--error-font-size);
   font-family: var(--main-font-family);
   color: var(--text-error-message);
-  height: 16px;
+  min-height: 16px;
+  height: fit-content;
+  display: inline-block;
+  align-self: flex-start;
 }
 
 .not_error {
@@ -78,8 +86,8 @@ body {
   border: 2px solid red;
 }
 
-.container__login-form__error-div {
-  min-height: 32px;
+.auth-form__form__login-error {
+  min-height: 16px;
   max-width: var(--input-width);
 
   display: flex;
@@ -88,7 +96,7 @@ body {
 
 }
 
-.container__login-form__password-div__img {
+.auth-form__form__password__img {
   width: 20px;
   height: 20px;
   position: absolute;

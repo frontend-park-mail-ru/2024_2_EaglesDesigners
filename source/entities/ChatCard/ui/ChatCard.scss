@@ -1,4 +1,4 @@
-.container-a__div {
+.chat-card__div {
   border-radius: 15px;
   margin-inline: 9px;
   padding-inline: 10px;
@@ -11,13 +11,13 @@
   grid-template-rows: 50% 50%;
 }
 
-.container-a {
+.chat-card {
   pointer-events: none;
   cursor: pointer;
   text-decoration: none;
 }
 
-.container-a__div__img {
+.chat-card__div__img {
   grid-area: avatar;
   border-radius: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
@@ -32,7 +32,7 @@
   justify-self: center;
 }
 
-.container-a__div-chatinfo {
+.chat-card__div__chat-info {
   grid-area: up;
   width: auto;
   height: fit-content;
@@ -45,11 +45,11 @@
   grid-template-columns: auto fit-content;
 }
 
-.container-a__div-chatinfo__div-chatname {
+.chat-card__div__chat-info__div-chat-name {
   grid-area: chat-name-container;
   overflow: hidden;
 }
-.container-a__div-chatinfo__div-chatname__span {
+.chat-card__div__chat-info__div-chat-name__span {
   font-family: "Inter";
   line-height: 21px;
   font-weight: 500;
@@ -62,14 +62,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.container-a__div-chatinfo-date {
+.chat-card__div__chat-info__date {
   grid-area: last-message-time;
 
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-.container-a__div-chatinfo-date__span {
+.chat-card__div__chat-info__date__span {
   font-family: "Inter";
   line-height: 16px;
   font-weight: 300;
@@ -79,7 +79,7 @@
 
   justify-self: flex-start;
 }
-.container-a__div-message-div {
+.chat-card__div__div-message {
   grid-area: low;
   width: auto;
   height: fit-content;
@@ -91,13 +91,13 @@
   grid-template-columns: auto fit-content;
 }
 
-.container-a__div-message-div__div {
+.chat-card__div__div-message__div {
   grid-area: chat-name-containerl;
   overflow: hidden;
   display: inline-flex;
 }
 
-.container-a__div-message-div__div__span {
+.chat-card__div__div-message__div__span {
   font-family: "Inter";
   line-height: 21px;
   font-weight: 400;

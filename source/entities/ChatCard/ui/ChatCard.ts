@@ -10,7 +10,7 @@ export class ChatCard {
   render(chat) {
     this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ chat }));
     
-    const chatCardElement = document.querySelector(".container-a");
+    const chatCardElement = document.querySelector(".chat-card");
     const handleChatCard = (e) => {
       e.preventDefault();
     }
