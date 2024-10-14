@@ -1,36 +1,35 @@
-<div id="left" class="left"></div>
-<div id="right" class="right">
-  <form class="LoginForm" method="post">
-    <p>Войдите в Patefon</p>
-    <div class="errorDiv">
-      <span class="errorLogin" id="errorLogin"></span>
+<div id="right" class="auth-form">
+  <form class="auth-form__form" method="post">
+    <p class="auth-form__form__p">Войдите в Patefon</p>
+    <div class="auth-form__form__login-error">
+      <span class="auth-form__form__error__span errorLogin" id="errorLogin"></span>
     </div>
     <input
       id="login"
-      class="login not_error"
+      class="auth-form__form__input login not_error"
       type="text"
       placeholder="Логин"
       name="text"
     />
-    <div class="errorDiv">
-      <span class="errorPassword" id="errorPassword"></span>
+    <div class="auth-form__form__login-error">
+      <span class="auth-form__form__error__span errorPassword" id="errorPassword"></span>
     </div>
-    <div style="position: relative;">
+    <div class="auth-form__form__password" style="position: relative;">
       <input
         id="password"
-        class="password not_error"
+        class="auth-form__form__password__input auth-form__form__input password not_error"
         type="password"
         placeholder="Пароль"
         name="password"
       />
       <img
         id="password-visibility-toggle"
-        class="password-visibility-toggle"
+        class="auth-form__form__password__img password-visibility-toggle"
         src="/assets/image/eye.svg"
       />
     </div>
-    <button class="btn Enter" type="submit" id="Enter">Войти</button>
+    <button class="auth-form__form__button btn auth-btn Enter" type="submit" id="Enter">Войти</button>
 
   </form>
-  <button class="btn Create" type="submit" id="Create">Создать аккаунт</button>
+  <button class="auth-form__button btn auth-btn Create" type="submit" id="Create">Создать аккаунт</button>
 </div>

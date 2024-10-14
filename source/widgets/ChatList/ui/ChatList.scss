@@ -12,7 +12,7 @@
   line-height: 22px;
 }
 
-.chat-list-box {
+.chat-list-container__div {
   width: 404px;
 
   grid-area: cl-box;
@@ -20,7 +20,7 @@
   flex-direction: column;
 }
 
-.search-box {
+.chat-list-container__div__search-div {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     var(--primary);
   height: 85px;
@@ -32,27 +32,7 @@
   margin-bottom: 10px;
 }
 
-.chat-list {
+.chat-list-container__div__chatlist-div {
   --avatar-size: 60px;
   height: 100%;
-}
-
-.empty-chat-list-notice-container {
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.empty-chat-list-notice {
-  filter: brightness(50%);
-  margin: 46.1% auto;
-}
-
-.side-text-container-lower {
-  grid-area: last-message-timel;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 }

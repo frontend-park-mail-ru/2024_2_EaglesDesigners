@@ -3,7 +3,7 @@ import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
-import LoginFormTemplate from './loginForm.hbs'
+import LoginFormTemplate from "./loginForm.hbs";
 
 /**
  * Class provides Login form
@@ -78,7 +78,7 @@ export class LoginForm {
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
-    }
+    };
     documentForm.addEventListener("submit", handleFormSubmit);
   }
 }

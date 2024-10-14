@@ -5,8 +5,8 @@ import { validateForm } from "@/shared/validation/formValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { API } from "@/shared/api/api.ts";
 import { MainPage } from "@/pages/MainPage";
-import SignUpFormTemplate from './signUpForm.hbs'
-import './signUpForm.scss'
+import SignUpFormTemplate from "./signUpForm.hbs";
+import "./signUpForm.scss";
 
 /**
  * Class provides signup form
@@ -29,11 +29,11 @@ export class SignupForm {
 
     const handleLoginClick = (e:Event) => {
       e.preventDefault();
-    
+
       const login = new LoginPage(this.#parent);
       login.render();
     };
-    
+
     aElement.addEventListener("click", handleLoginClick);
 
     const password:HTMLInputElement = this.#parent.querySelector("#password")!;
@@ -120,12 +120,10 @@ export class SignupForm {
           passText,
         );
         flagError = true;
-      }
-      else if (!validatePassword(password2) || password != password2) {
+      } else if (!validatePassword(password2) || password != password2) {
         validateForm(pass2, "Неверный пароль", pass2Text);
         flagError = true;
       }
-
 
       if (flagError) {
         return;
@@ -152,7 +150,7 @@ export class SignupForm {
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
-    }
+    };
 
     btnElement.addEventListener("click", handleButtonClick);
   }

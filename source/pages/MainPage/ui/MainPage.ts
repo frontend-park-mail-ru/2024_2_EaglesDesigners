@@ -1,8 +1,8 @@
 import { ChatList } from "@/widgets/ChatList";
 import { LoginPage } from "@/pages/LoginPage";
 import { API } from "@/shared/api/api.ts";
-import MainPageTemplate from './MainPage.handlebars'
-import './MainPage.scss'
+import MainPageTemplate from "./MainPage.handlebars";
+import "./MainPage.scss";
 
 /**
  * Mainpage class provides functions for rendering main page
