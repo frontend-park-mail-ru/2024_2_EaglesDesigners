@@ -13,7 +13,7 @@ import "./signUpForm.scss";
  */
 export class SignupForm {
   #parent;
-  constructor(parent) {
+  constructor(parent:Element) {
     this.#parent = parent;
   }
 
@@ -25,9 +25,9 @@ export class SignupForm {
   render() {
     this.#parent.innerHTML = SignUpFormTemplate();
 
-    const aElement = document.querySelector("#login_href");
+    const aElement = document.querySelector("#login_href")!;
 
-    const handleLoginClick = (e) => {
+    const handleLoginClick = (e:Event) => {
       e.preventDefault();
 
       const login = new LoginPage(this.#parent);
@@ -36,33 +36,31 @@ export class SignupForm {
 
     aElement.addEventListener("click", handleLoginClick);
 
-    const password = this.#parent.querySelector("#password");
+    const password:HTMLInputElement = this.#parent.querySelector("#password")!;
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
-    this.#parent
-      .querySelector("#password-visibility-toggle")
-      .addEventListener("click", handleTogglePasswordVisibility);
+    this.#parent.querySelector("#password-visibility-toggle")!.addEventListener("click", handleTogglePasswordVisibility);
 
-    const btnElement = document.querySelector("button");
+    const btnElement = document.querySelector("button")!;
 
-    const handleButtonClick = async (e) => {
+    const handleButtonClick = async (e:Event) => {
       e.preventDefault();
 
-      const nick = this.#parent.querySelector("#nickname");
-      const log = this.#parent.querySelector("#login");
-      const pass = this.#parent.querySelector("#password");
-      const pass2 = this.#parent.querySelector("#password2");
+      const nick: HTMLInputElement = this.#parent.querySelector("#nickname")!;
+      const log: HTMLInputElement = this.#parent.querySelector("#login")!;
+      const pass: HTMLInputElement = this.#parent.querySelector("#password")!;
+      const pass2: HTMLInputElement = this.#parent.querySelector("#password2")!;
 
       nick.classList.remove("error");
       log.classList.remove("error");
       pass.classList.remove("error");
       pass2.classList.remove("error");
 
-      const nickText = this.#parent.querySelector("#errorNickname");
-      const loginText = this.#parent.querySelector("#errorLogin");
-      const passText = this.#parent.querySelector("#errorPassword");
-      const pass2Text = this.#parent.querySelector("#errorPassword2");
+      const nickText: HTMLSpanElement = this.#parent.querySelector("#errorNickname")!;
+      const loginText: HTMLSpanElement = this.#parent.querySelector("#errorLogin")!;
+      const passText: HTMLSpanElement = this.#parent.querySelector("#errorPassword")!;
+      const pass2Text: HTMLSpanElement = this.#parent.querySelector("#errorPassword2")!;
 
       nickText.textContent = "";
       loginText.textContent = "";

@@ -1,14 +1,15 @@
-import ChatCardTemplate from "./ChatCard.handlebars";
-import "./ChatCard.scss";
+import { ChatModel } from '@/shared/api/types';
+import ChatCardTemplate from './ChatCard.handlebars'
+import'./ChatCard.scss'
 
-export class ChatCard {
+export class ChatCard{
   #parent;
-  constructor(parent) {
+  constructor(parent:Element){
     this.#parent = parent;
   }
 
-  render(chat) {
-    this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ chat }));
-    
+  render(chat:ChatModel){
+    this.#parent.insertAdjacentHTML('beforeend', ChatCardTemplate({chat}));
+  
   }
 }
