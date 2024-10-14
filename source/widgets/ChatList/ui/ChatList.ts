@@ -18,7 +18,8 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats = [];
+    let chats = [
+    ];
     const response = await API.get("/chats");
     if (response.chats) {
       chats = response.chats;
@@ -31,6 +32,13 @@ export class ChatList {
 
     chats.map((chat) => {
       chatCard.render(chat);
+    });
+
+    const chatCardElements = document.querySelectorAll(".chat-card");
+    chatCardElements.forEach( elem =>{
+      elem.addEventListener('click', (e) =>{
+        e.preventDefault();
+      });
     });
   }
 }
