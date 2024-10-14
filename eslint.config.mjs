@@ -1,5 +1,4 @@
 import globals from "globals";
-//import js from "@eslint/js";
 import ts from "typescript";
 
 export default [
