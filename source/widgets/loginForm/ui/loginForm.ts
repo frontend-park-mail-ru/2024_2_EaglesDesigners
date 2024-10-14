@@ -3,7 +3,7 @@ import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
-import LoginFormTemplate from './loginForm.hbs'
+import LoginFormTemplate from "./loginForm.hbs";
 
 /**
  * Class provides Login form
@@ -27,14 +27,18 @@ export class LoginForm {
       const signUp = new SignupPage();
       signUp.render();
     };
-    this.#parent.querySelector("#Create").addEventListener("click", handleCreateClick);
+    this.#parent
+      .querySelector("#Create")
+      .addEventListener("click", handleCreateClick);
 
     const password = this.#parent.querySelector("#password");
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
-    this.#parent.querySelector("#password-visibility-toggle").addEventListener("click", handleTogglePasswordVisibility);
-  
+    this.#parent
+      .querySelector("#password-visibility-toggle")
+      .addEventListener("click", handleTogglePasswordVisibility);
+
     const documentForm = this.#parent.querySelector("form");
 
     const handleFormSubmit = async (e) => {
@@ -78,7 +82,7 @@ export class LoginForm {
 
       const mainPage = new MainPage(this.#parent);
       mainPage.render(nickname);
-    }
+    };
     documentForm.addEventListener("submit", handleFormSubmit);
   }
 }

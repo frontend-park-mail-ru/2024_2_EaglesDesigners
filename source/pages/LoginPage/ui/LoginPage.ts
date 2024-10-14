@@ -1,5 +1,5 @@
 import { LoginForm } from "@/widgets/loginForm";
-import './index.scss'
+import "./index.scss";
 
 /**
  * Class provides render login form

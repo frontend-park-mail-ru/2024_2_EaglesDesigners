@@ -1,7 +1,7 @@
 $primary: var(--primary);
 $background: var(--background);
 
-.main-container {
+.main-page {
   background: $primary;
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@ $background: var(--background);
   height: 100vh;
 }
 
-.sidebar-container {
+.main-page__div-sidebar {
   background: $background;
   width: 100px;
   flex: 100 0 0;
@@ -19,7 +19,7 @@ $background: var(--background);
   flex-direction: column;
 }
 
-.logo-container {
+.main-page__div-sidebar__logo-div {
   display: flex;
   width: 100px;
   height: 100px;
@@ -27,14 +27,14 @@ $background: var(--background);
   justify-content: center;
 }
 
-.buttons-container {
+.main-page__div-sidebar__buttons-div {
   display: flex;
   height: 100%;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-.exit-btn {
+.main-page__div-sidebar__buttons-div__button {
   background: none;
   color: inherit;
   border: none;
@@ -50,17 +50,17 @@ $background: var(--background);
   justify-content: center;
 }
 
-.exit-btn-svg-container {
+.main-page__div-sidebar__buttons-div__button__div-container {
   width: 42px;
   height: 42px;
   align-self: center;
 }
 
-:chat-list-import {
+.main-page__div-chat-list {
   flex: 382 0 0;
 }
 
-.chat-window {
+.main-page__chat-content-div {
   background: transparent;
   flex: 1133 0 0;
   height: auto;
@@ -71,8 +71,9 @@ $background: var(--background);
     "cw-box";
   grid-template-rows: 1fr 16fr;
 }
-.chat-container {
-  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), $primary;
+.main-page__chat-content-div__container-chat-div {
+  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    $primary;
   width: 100%;
   height: 100%;
 
@@ -86,7 +87,7 @@ $background: var(--background);
   align-items: center;
   justify-content: flex-end;
 }
-.chat-box {
+.main-page__chat-content-div__container-chat-div__div-chat-box {
   width: 38vw;
   height: 100%;
 
@@ -95,7 +96,7 @@ $background: var(--background);
   align-items: center;
   justify-content: flex-end;
 }
-.chat-feed {
+.main-page__chat-content-div__container-chat-div__div-chat-box__feed-div {
   width: 100%;
   height: 100%;
 
@@ -103,22 +104,29 @@ $background: var(--background);
   align-items: center;
   justify-content: center;
 }
-.input-row {
+.main-page__chat-div__container-chat-div__div-chat-box__div-input {
   width: 100%;
   height: 114px;
 }
-.placeholder-text {
-  opacity: 50%;
-}
 
-.chat-info-container {
+.main-page__info-container-div {
   background: transparent;
   flex: 312 0 0;
   height: auto;
 }
 
-.username {
+.main-page__div-sidebar__buttons-div__span{
   color: var(--text-over-primary);
   font-family: var(--main-font-family);
   font-family: var(--base-font-size);
+}
+
+
+.main-page__chat-content-div__container-chat-div__div-chat-box__feed-div__p{
+  color: var(--text-over-primary);
+  font-family: "Inter";
+  line-height: 21px;
+  font-weight: 400;
+  font-size: 16px;
+  opacity: 50%;
 }

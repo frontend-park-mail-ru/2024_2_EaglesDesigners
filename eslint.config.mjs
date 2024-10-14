@@ -1,10 +1,8 @@
 import globals from "globals";
-import js from "@eslint/js";
-//import customConfig from "./custom-config.js";
-//import myConfig from "eslint-config-my-config";
+import ts from "typescript";
 
 export default [
-    js.configs.recommended,
+    ts.configs.recommended,
     {
         rules: {
             semi: ["warn", "always"],
