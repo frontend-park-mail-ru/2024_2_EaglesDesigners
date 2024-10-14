@@ -4,7 +4,7 @@ import { SignupForm } from "@/widgets/SignUp";
  * Class provides render signup form
  */
 export class SignupPage {
-  #root = document.getElementById("root");
+  #root = document.getElementById("root")!;
   constructor() {}
 
   /**

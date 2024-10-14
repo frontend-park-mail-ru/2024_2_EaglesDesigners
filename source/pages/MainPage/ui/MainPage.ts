@@ -9,7 +9,7 @@ import "./MainPage.scss";
  */
 export class MainPage {
   #parent;
-  constructor(parent) {
+  constructor(parent:Element) {
     this.#parent = parent;
   }
   /**
@@ -17,20 +17,19 @@ export class MainPage {
    * @function render
    * @async
    */
-  render(user) {
-    this.#parent.innerHTML = MainPageTemplate({ user });
+  render(user:string) {
+    this.#parent.innerHTML = MainPageTemplate({user});
 
-    const chatListParent = this.#parent.querySelector("#chat-list-import");
+    const chatListParent = this.#parent.querySelector("#chat-list-import")!;
 
     const chatList = new ChatList(chatListParent);
     chatList.render();
 
-
-    const exitButton = this.#parent.querySelector(".exit-btn");
+    const exitButton = this.#parent.querySelector(".exit-btn")!;
 
     const handleExitClick = async () => {
-      const response = await API.post("/logout");
-
+      const response = await API.post("/logout",{});
+    
       if (!response.error) {
         const login = new LoginPage(this.#parent);
         login.render();

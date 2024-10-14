@@ -1,17 +1,18 @@
-import ChatCardTemplate from "./ChatCard.handlebars";
-import "./ChatCard.scss";
+import { ChatModel } from '@/shared/api/types';
+import ChatCardTemplate from './ChatCard.handlebars'
+import'./ChatCard.scss'
 
-export class ChatCard {
+export class ChatCard{
   #parent;
-  constructor(parent) {
+  constructor(parent:Element){
     this.#parent = parent;
   }
 
-  render(chat) {
-    this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ chat }));
-    
-    const chatCardElement = document.querySelector(".chat-card");
-    const handleChatCard = (e) => {
+  render(chat:ChatModel){
+    this.#parent.insertAdjacentHTML('beforeend', ChatCardTemplate({chat}));
+  
+    const chatCardElement = document.querySelector(".chat-card")!;
+    const handleChatCard = (e:Event) => {
       e.preventDefault();
     }
     chatCardElement.addEventListener("click", handleChatCard);
