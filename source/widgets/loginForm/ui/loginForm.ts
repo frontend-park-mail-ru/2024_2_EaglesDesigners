@@ -1,4 +1,5 @@
 import { API } from "@/shared/api/api.ts";
+import { AuthResponse, LoginRequest } from "@/shared/api/types";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { MainPage } from "@/pages/MainPage";
@@ -65,7 +66,7 @@ export class LoginForm {
         return;
       }
 
-      const response = await API.post("/login", { username, password });
+      const response = await API.post<AuthResponse, LoginRequest>("/login", { username, password });
       if (response.error) {
         loginInput.classList.add("error");
         passwordInput.classList.add("error");
@@ -73,7 +74,7 @@ export class LoginForm {
         return;
       }
 
-      const responseAuth = await API.get("/auth");
+      const responseAuth = await API.get<AuthResponse>("/auth");
       const nickname = responseAuth?.user?.name || "user";
 
       const mainPage = new MainPage(this.#parent);

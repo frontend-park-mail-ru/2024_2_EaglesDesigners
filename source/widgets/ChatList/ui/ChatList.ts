@@ -1,9 +1,9 @@
 import { API } from "@/shared/api/api.ts";
+import { ChatsResponse } from "@/shared/api/types";
 import { TChat } from "@/entities/Chat";
 import { ChatCard } from "@/entities/ChatCard";
-import ChatListTemplate from './ChatList.handlebars'
-import './ChatList.scss'
-import { ChatsResponse } from "@/shared/api/types";
+import ChatListTemplate from './ChatList.handlebars';
+import './ChatList.scss';
 
 /**
  * ChatList class provides functions for rendering list of user's chats
