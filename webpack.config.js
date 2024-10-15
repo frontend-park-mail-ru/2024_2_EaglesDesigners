@@ -32,5 +32,16 @@ module.exports = {
         template: './public/index.html',
     })
   ],
-  mode: 'development'
+  mode: 'development',
+
+  devServer: {
+    historyApiFallback: true,
+    static:[
+      path.resolve(__dirname, './dist'), path.resolve(__dirname, './public'),
+    ],
+    open: true,
+    compress: true,
+    hot: true,
+    port: 8001,
+  }
 }
