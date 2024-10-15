@@ -151,7 +151,9 @@ export class SignupForm extends View{
         return;
       }
 
-      const mainPage = new MainPage(this.#parent, nickname);
+      localStorage.setItem('user', nickname);
+
+      const mainPage = new MainPage(this.#parent);
       mainPage.render();
     };
 

@@ -1,7 +1,7 @@
 import { ChatList } from "@/widgets/ChatList";
 import { LoginPage } from "@/pages/LoginPage";
 import { API } from "@/shared/api/api.ts";
-import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
+import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
@@ -11,19 +11,19 @@ import { View } from "@/app/View";
  */
 export class MainPage extends View {
   #parent;
-  #user;
-  constructor(parent:Element, user:string) {
+  constructor(parent:Element) {
     super();
     this.#parent = parent;
-    this.#user = user;
   }
   /**
    * Render MainPage
    * @function render
    * @async
    */
-  render() {
-    const user = this.#user;
+  async render() {
+
+    const user = localStorage.getItem('user');
+
     this.#parent.innerHTML = MainPageTemplate({user});
 
     const chatListParent = this.#parent.querySelector("#chat-list-import")!;

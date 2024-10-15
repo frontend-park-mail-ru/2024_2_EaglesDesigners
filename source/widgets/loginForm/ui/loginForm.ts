@@ -79,7 +79,9 @@ export class LoginForm extends View {
       const responseAuth = await API.get<AuthResponse>("/auth");
       const nickname = responseAuth?.user?.name || "user";
 
-      const mainPage = new MainPage(this.#parent, nickname);
+      localStorage.setItem('user', nickname);
+
+      const mainPage = new MainPage(this.#parent);
       mainPage.render();
     };
     documentForm.addEventListener("submit", handleFormSubmit);
