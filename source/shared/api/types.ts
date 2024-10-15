@@ -1,3 +1,14 @@
+import { TUser } from "@/entities/User";
+
+export interface AuthResponse{
+    message: string;
+    user: TUser;
+}
+export interface ResponseError{
+    error: string;
+    status: string;
+}
+
 export interface ChatModel{
     avatarURL?: string;
     chatId?: number;
