@@ -5,6 +5,9 @@ export interface ResponseError{
     error: string;
     status: string;
 }
+export interface EmptyResponse{
+    message: string;
+}
 export interface AuthResponse{
     message: string;
     user: TUser;
@@ -12,4 +15,17 @@ export interface AuthResponse{
 export interface ChatsResponse{
     message: string;
     chats: TChat[];
+}
+
+export type EmptyRequest = {
+    [K in string] : never
+}
+export interface LoginRequest{
+    username: string;
+    password: string;
+}
+export interface SignUpRequest{
+    name: string;
+    username: string;
+    password: string;
 }
