@@ -1,20 +1,15 @@
+import { TChat } from "@/entities/Chat";
 import { TUser } from "@/entities/User";
 
-export interface AuthResponse{
-    message: string;
-    user: TUser;
-}
 export interface ResponseError{
     error: string;
     status: string;
 }
-
-export interface ChatModel{
-    avatarURL?: string;
-    chatId?: number;
-    chatName?: string;
-    chatType?: 'personalMessages' | 'group' | 'channel';
-    lastMessage?: string;
-    usersId?: number[];
+export interface AuthResponse{
+    message: string;
+    user: TUser;
 }
-export type ChatListModel = ChatModel[];
+export interface ChatsResponse{
+    message: string;
+    chats: TChat[];
+}
