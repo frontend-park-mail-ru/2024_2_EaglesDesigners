@@ -15,10 +15,8 @@ class Api {
    * if could not fetch, return error
    * @returns {json} response from server
    */
-  async get<T>(path:string) {
-    type Response = {
-      [K in keyof T | keyof ResponseError]?: K extends keyof T ? T[K] : K extends keyof ResponseError ? ResponseError[K] : never;
-     };
+  async get<TResponse>(path:string) {
+    type Response = TResponse&ResponseError;
     try {
       const url = this.#baseURl + path;
       const response = await fetch(url, {
@@ -42,10 +40,8 @@ class Api {
    * if could not fetch, return error
    * @returns {json} response from server
    */
-  async post<TRequest,TResponse>(path:string, body: TRequest) {
-    type Response = {
-      [K in keyof T | keyof ResponseError]?: K extends keyof T ? T[K] : K extends keyof ResponseError ? ResponseError[K] : never;
-     };
+  async post<TResponse, TRequest>(path:string, body: TRequest) {
+    type Response = TResponse&ResponseError;
     try {
       const url = this.#baseURl + path;
       const response = await fetch(url, {
@@ -58,10 +54,10 @@ class Api {
         body: JSON.stringify(body),
         credentials: "include",
       });
-
-      return await response.json();
+      const responseBody: Response = await response.json();
+      return responseBody;
     } catch {
-      return { error: "could not fetch" };
+      return { error: "could not fetch" } as Response;
     }
   }
 }
