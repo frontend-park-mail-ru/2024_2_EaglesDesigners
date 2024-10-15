@@ -1,7 +1,7 @@
 import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage";
 import { API } from "@/shared/api/api.ts";
-import "./index.scss";
+import "./ui/index.scss";
 /**
  * Class provides class App, the initial class
  */
