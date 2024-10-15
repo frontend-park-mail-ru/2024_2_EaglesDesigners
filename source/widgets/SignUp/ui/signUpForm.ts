@@ -7,13 +7,15 @@ import { API } from "@/shared/api/api.ts";
 import { MainPage } from "@/pages/MainPage";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
+import { View } from "@/app/View";
 
 /**
  * Class provides signup form
  */
-export class SignupForm {
+export class SignupForm extends View{
   #parent;
   constructor(parent:Element) {
+    super();
     this.#parent = parent;
   }
 
@@ -148,8 +150,8 @@ export class SignupForm {
         return;
       }
 
-      const mainPage = new MainPage(this.#parent);
-      mainPage.render(nickname);
+      const mainPage = new MainPage(this.#parent, nickname);
+      mainPage.render();
     };
 
     btnElement.addEventListener("click", handleButtonClick);

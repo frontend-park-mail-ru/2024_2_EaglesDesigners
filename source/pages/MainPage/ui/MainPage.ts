@@ -3,21 +3,26 @@ import { LoginPage } from "@/pages/LoginPage";
 import { API } from "@/shared/api/api.ts";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
+import { View } from "@/app/View";
 
 /**
  * Mainpage class provides functions for rendering main page
  */
-export class MainPage {
+export class MainPage extends View {
   #parent;
-  constructor(parent:Element) {
+  #user;
+  constructor(parent:Element, user:string) {
+    super();
     this.#parent = parent;
+    this.#user = user;
   }
   /**
    * Render MainPage
    * @function render
    * @async
    */
-  render(user:string) {
+  render() {
+    const user = this.#user;
     this.#parent.innerHTML = MainPageTemplate({user});
 
     const chatListParent = this.#parent.querySelector("#chat-list-import")!;

@@ -4,13 +4,15 @@ import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
 import LoginFormTemplate from "./loginForm.hbs";
+import { View } from "@/app/View";
 
 /**
  * Class provides Login form
  */
-export class LoginForm {
+export class LoginForm extends View {
   #parent;
   constructor(parent:Element) {
+    super();
     this.#parent = parent;
   }
 
@@ -76,8 +78,8 @@ export class LoginForm {
       const responseAuth = await API.get("/auth");
       const nickname = responseAuth?.user?.name || "user";
 
-      const mainPage = new MainPage(this.#parent);
-      mainPage.render(nickname);
+      const mainPage = new MainPage(this.#parent, nickname);
+      mainPage.render();
     };
     documentForm.addEventListener("submit", handleFormSubmit);
   }

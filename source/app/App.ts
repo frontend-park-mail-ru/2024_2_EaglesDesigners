@@ -20,8 +20,8 @@ export class App {
 
       login.render();
     } else {
-      const mainPage = new MainPage(this.#root);
-      mainPage.render(response.user.name);
+      const mainPage = new MainPage(this.#root, response.user.name);
+      mainPage.render();
     }
   }
 }
