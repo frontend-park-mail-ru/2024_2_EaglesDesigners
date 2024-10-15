@@ -2,6 +2,7 @@ import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage";
 import { API } from "@/shared/api/api.ts";
 import "./ui/index.scss";
+import { AuthResponse } from "@/shared/api/types";
 /**
  * Class provides class App, the initial class
  */
@@ -13,7 +14,7 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    const response = await API.get("/auth");
+    const response = await API.get<AuthResponse>("/auth");
 
     if (response.error) {
       const login = new LoginPage(this.#root);
