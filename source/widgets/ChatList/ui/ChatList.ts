@@ -1,8 +1,9 @@
 import { API } from "@/shared/api/api.ts";
+import { ChatsResponse } from "@/shared/api/types";
+import { TChat } from "@/entities/Chat";
 import { ChatCard } from "@/entities/ChatCard";
-import { ChatListModel } from "@/shared/api/types";
-import ChatListTemplate from './ChatList.handlebars'
-import './ChatList.scss'
+import ChatListTemplate from './ChatList.handlebars';
+import './ChatList.scss';
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -19,10 +20,10 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats:ChatListModel = [
+    let chats:TChat[] = [
 
     ];
-    const response = await API.get("/chats");
+    const response = await API.get<ChatsResponse>("/chats");
     if (response.chats) {
       chats = response.chats;
     }

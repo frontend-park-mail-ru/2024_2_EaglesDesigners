@@ -1,3 +1,5 @@
+import { ResponseError } from "./types";
+
 /**
  * API class provides API-functions.
  */
@@ -13,7 +15,8 @@ class Api {
    * if could not fetch, return error
    * @returns {json} response from server
    */
-  async get(path:string) {
+  async get<TResponse>(path:string) {
+    type Response = TResponse&ResponseError;
     try {
       const url = this.#baseURl + path;
       const response = await fetch(url, {
@@ -24,9 +27,10 @@ class Api {
         },
         credentials: "include",
       });
-      return await response.json();
+      const body: Response = await response.json();
+      return body;
     } catch {
-      return { error: "could not fetch" };
+      return { error: "could not fetch" } as Response;
     }
   }
 
@@ -36,7 +40,8 @@ class Api {
    * if could not fetch, return error
    * @returns {json} response from server
    */
-  async post(path:string, body:object) {
+  async post<TResponse, TRequest>(path:string, body: TRequest) {
+    type Response = TResponse&ResponseError;
     try {
       const url = this.#baseURl + path;
       const response = await fetch(url, {
@@ -49,10 +54,10 @@ class Api {
         body: JSON.stringify(body),
         credentials: "include",
       });
-
-      return await response.json();
+      const responseBody: Response = await response.json();
+      return responseBody;
     } catch {
-      return { error: "could not fetch" };
+      return { error: "could not fetch" } as Response;
     }
   }
 }
