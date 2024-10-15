@@ -1,6 +1,7 @@
 import { ChatList } from "@/widgets/ChatList";
 import { LoginPage } from "@/pages/LoginPage";
 import { API } from "@/shared/api/api.ts";
+import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 
@@ -28,7 +29,7 @@ export class MainPage {
     const exitButton = this.#parent.querySelector(".exit-btn")!;
 
     const handleExitClick = async () => {
-      const response = await API.post("/logout",{});
+      const response = await API.post<EmptyResponse, EmptyRequest>("/logout",{});
     
       if (!response.error) {
         const login = new LoginPage(this.#parent);
