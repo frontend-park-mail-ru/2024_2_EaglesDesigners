@@ -4,6 +4,7 @@ import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
 import { validateForm } from "@/shared/validation/formValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { API } from "@/shared/api/api.ts";
+import { EmptyResponse, SignUpRequest } from "@/shared/api/types";
 import { MainPage } from "@/pages/MainPage";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
@@ -130,7 +131,7 @@ export class SignupForm {
       }
       const username = login;
       const name = nickname;
-      const response = await API.post("/signup", { name, username, password });
+      const response = await API.post<EmptyResponse,SignUpRequest>("/signup", { name, username, password });
 
       if (response.error === "A user with that username already exists") {
         log.classList.add("error");
