@@ -12,7 +12,7 @@ export class Router{
 
 
         window.onpopstate = (event : Event) =>{ 
-            
+            console.log(event);
         }
      }
 
@@ -29,7 +29,12 @@ export class Router{
     }
 
     go(url : string, addToHistory = true) {
+        const currentURL = this.#routes.paths.find( 
+            (elem) => elem.path.exec(url) !== null,
+        );
         
+
+        currentURL.view.render();
     }
 
 

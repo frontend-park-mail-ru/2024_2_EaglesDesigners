@@ -13,6 +13,7 @@ export class SignupPage {
    * @returns {}
    */
   render() {
+    window.history.pushState(null, '', "/signup");
     const form = new SignupForm(this.#root);
     form.render();
   }
