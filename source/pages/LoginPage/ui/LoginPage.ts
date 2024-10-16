@@ -6,10 +6,9 @@ import { View } from "@/app/View";
  * Class provides render login form
  */
 export class LoginPage extends View {
-  #parent;
-  constructor(parent:Element) {
+  #parent = document.getElementById("root")!;
+  constructor() {
     super();
-    this.#parent = parent;
   }
   /**
    * render login page
@@ -17,6 +16,7 @@ export class LoginPage extends View {
    * @returns {}
    */
   render() {
+    window.history.pushState(null, '', "/login");
     const form = new LoginForm(this.#parent);
 
     form.render();

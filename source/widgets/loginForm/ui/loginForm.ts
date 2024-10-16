@@ -81,7 +81,7 @@ export class LoginForm extends View {
 
       localStorage.setItem('user', nickname);
 
-      const mainPage = new MainPage(this.#parent);
+      const mainPage = new MainPage();
       mainPage.render();
     };
     documentForm.addEventListener("submit", handleFormSubmit);

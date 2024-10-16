@@ -33,7 +33,7 @@ export class SignupForm extends View{
     const handleLoginClick = (e:Event) => {
       e.preventDefault();
 
-      const login = new LoginPage(this.#parent);
+      const login = new LoginPage();
       login.render();
     };
 
@@ -153,7 +153,7 @@ export class SignupForm extends View{
 
       localStorage.setItem('user', nickname);
 
-      const mainPage = new MainPage(this.#parent);
+      const mainPage = new MainPage();
       mainPage.render();
     };
 

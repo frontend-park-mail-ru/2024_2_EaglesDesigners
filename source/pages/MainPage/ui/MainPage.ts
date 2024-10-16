@@ -10,10 +10,8 @@ import { View } from "@/app/View";
  * Mainpage class provides functions for rendering main page
  */
 export class MainPage extends View {
-  #parent;
-  constructor(parent:Element) {
+  constructor() {
     super();
-    this.#parent = parent;
   }
   /**
    * Render MainPage
@@ -21,23 +19,23 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-
+    const parent = document.getElementById("root")!;
     const user = localStorage.getItem('user');
 
-    this.#parent.innerHTML = MainPageTemplate({user});
+    parent.innerHTML = MainPageTemplate({user});
 
-    const chatListParent = this.#parent.querySelector("#chat-list-import")!;
+    const chatListParent = parent.querySelector("#chat-list-import")!;
 
     const chatList = new ChatList(chatListParent);
     chatList.render();
 
-    const exitButton = this.#parent.querySelector(".exit-btn")!;
+    const exitButton = parent.querySelector(".exit-btn")!;
 
     const handleExitClick = async () => {
       const response = await API.post<EmptyResponse, EmptyRequest>("/logout",{});
     
       if (!response.error) {
-        const login = new LoginPage(this.#parent);
+        const login = new LoginPage();
         login.render();
       }
     };

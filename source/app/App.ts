@@ -17,23 +17,47 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    const router = new Router('/');
-    router.register('/', MainPage);
-    router.register('/login', LoginPage);
-    router.register('/signup', SignupPage);
+    document.addEventListener("DOMContentLoaded", async () => {
+      const router = new Router();
 
-    const response = await API.get<AuthResponse>("/auth");
+      const routes = {
+        paths: [
+          {
+            path: /\/login/,
+            view: new LoginPage(),
+          },
+          {
+            path: /\/signup/,
+            view: new SignupPage(),
+          },
+          {
+            path: /\//,
+            view: new MainPage(),
+          },
+        ],
+      };
 
-    if (response.error) {
-      const login = new LoginPage(this.#root);
 
-      login.render();
-      router.start()
-    } else {
-      localStorage.setItem('user', response.user.name);
-      const mainPage = new MainPage(this.#root);
-      mainPage.render();
-    }
 
+
+      router.register('/', MainPage);
+      router.register('/login', LoginPage);
+      router.register('/signup', SignupPage);
+
+      const response = await API.get<AuthResponse>("/auth");
+
+      if (response.error) {
+        const login = new LoginPage();
+        login.render();
+        
+      } else {
+        localStorage.setItem('user', response.user.name);
+        const mainPage = new MainPage();
+        mainPage.render();
+      }
+
+    })
+  
+    
   }
 }

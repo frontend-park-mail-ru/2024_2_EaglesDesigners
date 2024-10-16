@@ -10,9 +10,13 @@ export interface ChatModel{
 }
 export type ChatListModel = ChatModel[];
 
-export interface Routes{
+
+interface configRoute{
     path?: string;
     view?: View;
+}
+export interface Routes{
+    paths : configRoute[];
 }
 import { TChat } from "@/entities/Chat";
 import { TUser } from "@/entities/User";
