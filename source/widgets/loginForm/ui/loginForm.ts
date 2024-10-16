@@ -6,15 +6,18 @@ import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
 import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
+import { Router } from "@/app/Router";
 
 /**
  * Class provides Login form
  */
 export class LoginForm extends View {
   #parent;
-  constructor(parent:Element) {
+  #router;
+  constructor(parent:Element, router : Router) {
     super();
     this.#parent = parent;
+    this.#router = router;
   }
 
   /**
@@ -27,8 +30,7 @@ export class LoginForm extends View {
 
     const handleCreateClick = (e:Event) => {
       e.preventDefault();
-      const signUp = new SignupPage();
-      signUp.render();
+      this.#router.go('/signup');
     };
     this.#parent.querySelector("#Create")!.addEventListener("click", handleCreateClick);
 
@@ -81,8 +83,7 @@ export class LoginForm extends View {
 
       localStorage.setItem('user', nickname);
 
-      const mainPage = new MainPage();
-      mainPage.render();
+      this.#router.go('/');
     };
     documentForm.addEventListener("submit", handleFormSubmit);
   }

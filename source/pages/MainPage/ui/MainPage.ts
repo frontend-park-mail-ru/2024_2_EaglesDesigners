@@ -5,13 +5,16 @@ import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
+import { Router } from "@/app/Router";
 
 /**
  * Mainpage class provides functions for rendering main page
  */
 export class MainPage extends View {
-  constructor() {
+  #router
+  constructor(router : Router) {
     super();
+    this.#router = router;
   }
   /**
    * Render MainPage
@@ -19,7 +22,6 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-    window.history.pushState(null, '', "/");
     const parent = document.getElementById("root")!;
     const user = localStorage.getItem('user');
 
@@ -36,8 +38,7 @@ export class MainPage extends View {
       const response = await API.post<EmptyResponse, EmptyRequest>("/logout",{});
     
       if (!response.error) {
-        const login = new LoginPage();
-        login.render();
+        this.#router.go('/login')
       }
     };
 

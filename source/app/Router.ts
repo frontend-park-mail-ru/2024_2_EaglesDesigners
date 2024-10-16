@@ -13,6 +13,7 @@ export class Router{
 
         window.onpopstate = (event : Event) =>{ 
             console.log(event);
+            this.go(event.state.url, false);
         }
      }
 
@@ -32,8 +33,13 @@ export class Router{
         const currentURL = this.#routes.paths.find( 
             (elem) => elem.path.exec(url) !== null,
         );
-        
+        console.log(url);
 
+        const state = {
+            url: url,
+        }
+        history.pushState(state, '', url);
+        console.log(currentURL);
         currentURL.view.render();
     }
 

@@ -24,21 +24,20 @@ export class App {
         paths: [
           {
             path: /\/login/,
-            view: new LoginPage(),
+            view: new LoginPage(router),
           },
           {
             path: /\/signup/,
-            view: new SignupPage(),
+            view: new SignupPage(router),
           },
           {
             path: /\//,
-            view: new MainPage(),
+            view: new MainPage(router),
           },
         ],
       };
 
       router.setRoutes(routes);
-
 
       const currentURL = window.location.pathname;
       const response = await API.get<AuthResponse>("/auth");
@@ -55,8 +54,11 @@ export class App {
           router.go(currentURL);
           return;
         case '/login':
+          console.log(' ятут');
           if (!response.error){
+            
             const responseLogout = await API.post<EmptyResponse, EmptyRequest>("/logout", {});
+            
             if (!responseLogout.error) {
               router.go(currentURL);
             }

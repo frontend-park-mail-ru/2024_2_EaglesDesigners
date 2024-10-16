@@ -1,11 +1,17 @@
+import { Router } from "@/app/Router";
+import { View } from "@/app/View";
 import { SignupForm } from "@/widgets/SignUp";
 
 /**
  * Class provides render signup form
  */
-export class SignupPage {
+export class SignupPage extends View{
   #root = document.getElementById("root")!;
-  constructor() {}
+  #router
+  constructor(router : Router) {
+    super();
+    this.#router = router;
+  }
 
   /**
    * render signup page
@@ -13,8 +19,7 @@ export class SignupPage {
    * @returns {}
    */
   render() {
-    window.history.pushState(null, '', "/signup");
-    const form = new SignupForm(this.#root);
+    const form = new SignupForm(this.#root, this.#router);
     form.render();
   }
 }
