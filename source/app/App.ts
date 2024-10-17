@@ -46,7 +46,10 @@ export class App {
       const response = await API.get<AuthResponse>('/auth');
       const index = routes.paths.find((element) => element.path.exec(currentURL) !== null);
       if (index !== undefined) {
-        if (response.error){
+        if (currentURL == '/signup') {
+          router.go(currentURL);
+          return;
+        } else if (response.error){
           router.go('/login');
           return;
         } 
