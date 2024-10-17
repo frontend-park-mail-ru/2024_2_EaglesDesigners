@@ -11,6 +11,7 @@ import { SignupPage } from "@/pages/SignupPage";
  */
 export class App {
   #root = document.getElementById("root")!;
+  #currentUser = ''
   /**
    * start our application
    * @param {}
@@ -44,35 +45,9 @@ export class App {
 
       switch (currentURL) {
         case '/signup':
-          if (!response.error){
-            const responseLogout = await API.post<EmptyResponse, EmptyRequest>("/logout", {});
-            if (!responseLogout.error) {
-              router.go(currentURL);
-            }
-            return;
-          }
-          router.go(currentURL);
-          return;
         case '/login':
-          console.log(' ятут');
-          if (!response.error){
-            
-            const responseLogout = await API.post<EmptyResponse, EmptyRequest>("/logout", {});
-            
-            if (!responseLogout.error) {
-              router.go(currentURL);
-            }
-            return;
-          }
-          router.go(currentURL);
-          return;
         case '/':
-          if (!response.error){
-            localStorage.setItem('user', response.user.name);
-            router.go(currentURL);
-            return;
-          }
-          router.go('/login');
+          router.go(currentURL);
           return;
       }
 

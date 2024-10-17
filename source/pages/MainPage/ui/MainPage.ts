@@ -22,8 +22,16 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-    const parent = document.getElementById("root")!;
+    const response = await API.get<AuthResponse>('/auth');
+    if (response.error){
+      this.#router.go('/login');
+      return;
+    }
+    
+
     const user = localStorage.getItem('user');
+
+    const parent = document.getElementById("root")!;
 
     parent.innerHTML = MainPageTemplate({user});
 
