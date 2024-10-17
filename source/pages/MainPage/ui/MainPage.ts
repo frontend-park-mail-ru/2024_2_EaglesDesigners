@@ -1,7 +1,6 @@
 import { ChatList } from "@/widgets/ChatList";
-import { LoginPage } from "@/pages/LoginPage";
 import { API } from "@/shared/api/api.ts";
-import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
+import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
@@ -22,12 +21,6 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-    const response = await API.get<AuthResponse>('/auth');
-    if (response.error){
-      this.#router.go('/login');
-      return;
-    }
-    
 
     const user = localStorage.getItem('user');
 

@@ -5,6 +5,7 @@ import "./ui/index.scss";
 import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router.ts";
 import { SignupPage } from "@/pages/SignupPage";
+import { Page404 } from "@/pages/Page404";
 
 /**
  * Class provides class App, the initial class
@@ -24,15 +25,15 @@ export class App {
       const routes = {
         paths: [
           {
-            path: /\/login/,
+            path: /^\/login$/,
             view: new LoginPage(router),
           },
           {
-            path: /\/signup/,
+            path: /^\/signup$/,
             view: new SignupPage(router),
           },
           {
-            path: /\//,
+            path: /^\/$/,
             view: new MainPage(router),
           },
         ],
@@ -41,15 +42,19 @@ export class App {
       router.setRoutes(routes);
 
       const currentURL = window.location.pathname;
-      const response = await API.get<AuthResponse>("/auth");
 
-      switch (currentURL) {
-        case '/signup':
-        case '/login':
-        case '/':
-          router.go(currentURL);
+      const response = await API.get<AuthResponse>('/auth');
+      const index = routes.paths.find((element) => element.path.exec(currentURL) !== null);
+      if (index !== undefined) {
+        if (response.error){
+          router.go('/login');
           return;
+        } 
+        router.go(currentURL);
+      } else {
+        router.go('/404');
       }
+      
 
     })
   
