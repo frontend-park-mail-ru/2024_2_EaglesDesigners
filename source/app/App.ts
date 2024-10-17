@@ -1,28 +1,66 @@
 import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage";
 import { API } from "@/shared/api/api.ts";
-import { AuthResponse } from "@/shared/api/types";
-import "./index.scss";
+import "./ui/index.scss";
+import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
+import { Router } from "@/shared/Router.ts";
+import { SignupPage } from "@/pages/SignupPage";
+import { Page404 } from "@/pages/Page404";
+
 /**
  * Class provides class App, the initial class
  */
 export class App {
   #root = document.getElementById("root")!;
+  #currentUser = ''
   /**
    * start our application
    * @param {}
    * @returns {bool}
    */
   async start() {
-    const response = await API.get<AuthResponse>("/auth");
+    document.addEventListener("DOMContentLoaded", async () => {
+      const router = new Router();
 
-    if (response.error) {
-      const login = new LoginPage(this.#root);
+      const routes = {
+        paths: [
+          {
+            path: /^\/login$/,
+            view: new LoginPage(router),
+          },
+          {
+            path: /^\/signup$/,
+            view: new SignupPage(router),
+          },
+          {
+            path: /^\/$/,
+            view: new MainPage(router),
+          },
+        ],
+      };
 
-      login.render();
-    } else {
-      const mainPage = new MainPage(this.#root);
-      mainPage.render(response.user.name);
-    }
+      router.setRoutes(routes);
+
+      const currentURL = window.location.pathname;
+
+      const response = await API.get<AuthResponse>('/auth');
+      const index = routes.paths.find((element) => element.path.exec(currentURL) !== null);
+      if (index !== undefined) {
+        if (currentURL == '/signup') {
+          router.go(currentURL);
+          return;
+        } else if (response.error){
+          router.go('/login');
+          return;
+        } 
+        router.go(currentURL);
+      } else {
+        router.go('/404');
+      }
+      
+
+    })
+  
+    
   }
 }

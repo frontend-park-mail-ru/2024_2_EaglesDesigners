@@ -8,14 +8,19 @@ import { EmptyResponse, SignUpRequest } from "@/shared/api/types";
 import { MainPage } from "@/pages/MainPage";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
+import { View } from "@/app/View";
+import { Router } from "@/shared/Router";
 
 /**
  * Class provides signup form
  */
-export class SignupForm {
+export class SignupForm extends View{
   #parent;
-  constructor(parent:Element) {
+  #router;
+  constructor(parent:Element, router : Router) {
+    super();
     this.#parent = parent;
+    this.#router = router;
   }
 
   /**
@@ -30,9 +35,7 @@ export class SignupForm {
 
     const handleLoginClick = (e:Event) => {
       e.preventDefault();
-
-      const login = new LoginPage(this.#parent);
-      login.render();
+      this.#router.go('/login');
     };
 
     aElement.addEventListener("click", handleLoginClick);
@@ -149,8 +152,9 @@ export class SignupForm {
         return;
       }
 
-      const mainPage = new MainPage(this.#parent);
-      mainPage.render(nickname);
+      localStorage.setItem('user', nickname);
+
+      this.#router.go('/');
     };
 
     btnElement.addEventListener("click", handleButtonClick);

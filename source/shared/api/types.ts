@@ -1,3 +1,35 @@
+import { View } from "@/app/View";
+
+export interface ChatModel{
+    avatarURL?: string;
+    chatId?: number;
+    chatName?: string;
+    chatType?: 'personalMessages' | 'group' | 'channel';
+    lastMessage?: string;
+    usersId?: number[];
+}
+export type ChatListModel = ChatModel[];
+
+// paths: ({
+//     path: RegExp;
+//     view: LoginPage;
+// } | {
+//     path: RegExp;
+//     view: SignupPage;
+// } | {
+//     path: RegExp;
+//     view: MainPage;
+// })[]
+
+interface configRoute{
+    path?: string;
+    view?: View;
+}
+
+
+export interface Routes{
+    
+}
 import { TChat } from "@/entities/Chat";
 import { TUser } from "@/entities/User";
 
