@@ -1,7 +1,7 @@
 import { LoginForm } from "@/widgets/loginForm";
 import "./index.scss";
 import { View } from "@/app/View";
-import { Router } from "@/app/Router";
+import { Router } from "@/shared/Router";
 
 /**
  * Class provides render login form

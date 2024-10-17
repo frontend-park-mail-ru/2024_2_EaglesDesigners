@@ -2,11 +2,9 @@ import { API } from "@/shared/api/api.ts";
 import { AuthResponse, LoginRequest } from "@/shared/api/types";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
-import { MainPage } from "@/pages/MainPage";
-import { SignupPage } from "@/pages/SignupPage";
 import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
-import { Router } from "@/app/Router";
+import { Router } from "@/shared/Router";
 
 /**
  * Class provides Login form

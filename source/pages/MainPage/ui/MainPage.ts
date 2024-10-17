@@ -5,7 +5,7 @@ import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
-import { Router } from "@/app/Router";
+import { Router } from "@/shared/Router";
 
 /**
  * Mainpage class provides functions for rendering main page

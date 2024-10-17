@@ -1,4 +1,4 @@
-import { Router } from "@/app/Router";
+import { Router } from "@/shared/Router";
 import { View } from "@/app/View";
 import { SignupForm } from "@/widgets/SignUp";
 
