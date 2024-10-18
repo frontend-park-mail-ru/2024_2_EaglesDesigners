@@ -57,9 +57,8 @@ export class App {
         router.go('/404');
       }
       
+     
 
     })
-  
-    
   }
 }

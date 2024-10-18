@@ -10,19 +10,24 @@ export class Router{
         this.#routes = {paths: []};
         this.#strictRoutes = ["/login", "/signup"]
 
-        window.onpopstate = (event : Event) =>{ 
-            console.log(history);
+        window.onpopstate = (async (event) => {
+            const isAuth = await this.isAuth();
+            if (!isAuth && event.state.url !== '/signup'){
+                this.go('/login', false);
+                return;
+            }
             this.go(event.state.url, false);
-        }
+        });
      }
 
     setRoutes(routes : Routes) {
         this.#routes = routes;
     }
     
-    async loginCheck() {
+    async isAuth() {
         const response = await API.get<EmptyResponse>('/auth');
         if (!response.error){
+            console.log(response);
             return true;
         } 
         return false;
@@ -33,39 +38,49 @@ export class Router{
     }
 
     async go(url : string, addToHistory = true) {
+
         const index = this.#strictRoutes.findIndex((elem) => url === elem);
-        const authResult = await this.loginCheck();
+        const authResult = await this.isAuth();
         if (index >= 0 && authResult ) {
             this.go('/');
             return;
         } 
-
+        
         if (url === '/404') {
-            history.pushState({url: '/404'}, '', url);
+            if (!addToHistory) {
+                history.replaceState({url: '/404'}, '', url);
+            } else {
+                history.pushState({url: '/404'}, '', url);
+            }
+            
             const page = new Page404();
             page.render();
         } else {
             const currentURL = this.#routes.paths.find( 
                 (elem) => elem.path.exec(url) !== null,
             );
-            console.log(url);
     
             const state = {
                 url: url,
             }
-            history.pushState(state, '', url);
-            console.log(currentURL);
+            if (!addToHistory) {
+                history.replaceState(state, '', url);
+            } else {
+                history.pushState(state, '', url);
+            }
+            
             currentURL.view.render();
         }
+        console.log(history);
     }
 
 
     back() {
-        window.history.back();
+        history.back();
     }
 
     forward() {
-        window.history.forward();
+        history.forward();
     }
 
 }
