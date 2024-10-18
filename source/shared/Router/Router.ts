@@ -1,7 +1,7 @@
 import { Page404 } from "@/pages/Page404";
-import { View } from "../app/View";
-import { EmptyResponse, Routes } from "@/shared/api/types";
-import { API } from "./api/api";
+import { EmptyResponse} from "@/shared/api/types";
+import { API } from "../api/api";
+import { Routes } from "./RouterTypes";
 
 export class Router{
     #routes : Routes; 
@@ -37,7 +37,7 @@ export class Router{
 
         const index = this.#strictRoutes.findIndex((elem) => url === elem);
         const authResult = await this.isAuth();
-        if (index >= 0 && authResult ) {
+        if (index !== -1 && authResult ) {
             this.go('/');
             return;
         } 
@@ -74,7 +74,6 @@ export class Router{
             } else {
                 history.pushState(state, '', url);
             }
-            console.log(currentURL);
             if (currentURL?.view) {
                 currentURL.view.render();
             }

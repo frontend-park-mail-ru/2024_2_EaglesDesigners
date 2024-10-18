@@ -1,4 +1,6 @@
 import { View } from "@/app/View";
+import { TChat } from "@/entities/Chat";
+import { TUser } from "@/entities/User";
 
 export interface ChatModel{
     avatarURL?: string;
@@ -9,21 +11,6 @@ export interface ChatModel{
     usersId?: number[];
 }
 export type ChatListModel = ChatModel[];
-
-interface configRoute{
-    path?: RegExp;
-    view?: View;
-}
-
-
-export interface Routes{
-    paths?: (
-        configRoute[]
-    )
-}
-
-import { TChat } from "@/entities/Chat";
-import { TUser } from "@/entities/User";
 
 export interface ResponseError{
     error: string;
