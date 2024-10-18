@@ -4,18 +4,16 @@ import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
-import { Router } from "@/shared/Router";
+import { RouterObj as Router } from "@/shared/Router/Router";
 
 /**
  * Class provides Login form
  */
 export class LoginForm extends View {
   #parent;
-  #router;
-  constructor(parent:Element, router : Router) {
+  constructor(parent:Element) {
     super();
     this.#parent = parent;
-    this.#router = router;
   }
 
   /**
@@ -28,7 +26,7 @@ export class LoginForm extends View {
 
     const handleCreateClick = (e:Event) => {
       e.preventDefault();
-      this.#router.go('/signup');
+      Router.go('/signup');
     };
     this.#parent.querySelector("#Create")!.addEventListener("click", handleCreateClick);
 
@@ -81,7 +79,7 @@ export class LoginForm extends View {
 
       localStorage.setItem('user', nickname);
 
-      this.#router.go('/');
+      Router.go('/');
     };
     documentForm.addEventListener("submit", handleFormSubmit);
   }

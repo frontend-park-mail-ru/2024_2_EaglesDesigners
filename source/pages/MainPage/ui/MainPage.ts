@@ -4,16 +4,14 @@ import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
-import { Router } from "@/shared/Router";
+import { RouterObj as Router } from "@/shared/Router/Router";
 
 /**
  * Mainpage class provides functions for rendering main page
  */
 export class MainPage extends View {
-  #router
-  constructor(router : Router) {
+  constructor() {
     super();
-    this.#router = router;
   }
   /**
    * Render MainPage
@@ -39,7 +37,7 @@ export class MainPage extends View {
       const response = await API.post<EmptyResponse, EmptyRequest>("/logout",{});
     
       if (!response.error) {
-        this.#router.go('/login')
+        Router.go('/login')
       }
     };
 

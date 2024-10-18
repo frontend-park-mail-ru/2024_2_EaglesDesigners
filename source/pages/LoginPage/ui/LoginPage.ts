@@ -1,16 +1,13 @@
 import { LoginForm } from "@/widgets/loginForm";
 import "./index.scss";
 import { View } from "@/app/View";
-import { Router } from "@/shared/Router";
 /**
  * Class provides render login form
  */
 export class LoginPage extends View {
   #parent = document.getElementById("root")!;
-  #router
-  constructor(router : Router) {
+  constructor() {
     super();
-    this.#router = router;
   }
   /**
    * render login page
@@ -18,7 +15,7 @@ export class LoginPage extends View {
    * @returns {}
    */
   async render() {
-    const form = new LoginForm(this.#parent, this.#router);
+    const form = new LoginForm(this.#parent);
 
     form.render();
   }

@@ -1,4 +1,3 @@
-import { View } from "@/app/View";
 import { TChat } from "@/entities/Chat";
 import { TUser } from "@/entities/User";
 

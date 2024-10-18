@@ -1,4 +1,3 @@
-import { Router } from "@/shared/Router";
 import { View } from "@/app/View";
 import { SignupForm } from "@/widgets/SignUp";
 
@@ -7,10 +6,8 @@ import { SignupForm } from "@/widgets/SignUp";
  */
 export class SignupPage extends View{
   #root = document.getElementById("root")!;
-  #router
-  constructor(router : Router) {
+  constructor() {
     super();
-    this.#router = router;
   }
 
   /**
@@ -20,7 +17,7 @@ export class SignupPage extends View{
    */
   async render() {
 
-    const form = new SignupForm(this.#root, this.#router);
+    const form = new SignupForm(this.#root);
     form.render();
   }
 }

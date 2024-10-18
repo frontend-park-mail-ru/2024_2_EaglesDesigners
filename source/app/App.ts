@@ -2,8 +2,8 @@ import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage";
 import { API } from "@/shared/api/api.ts";
 import "./ui/index.scss";
-import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
-import { Router } from "@/shared/Router.ts";
+import { AuthResponse} from "@/shared/api/types";
+import { RouterObj as Router } from "@/shared/Router/Router.ts";
 import { SignupPage } from "@/pages/SignupPage";
 
 /**
@@ -16,26 +16,25 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    const router = new Router();
 
     const routes = {
       paths: [
         {
           path: /^\/login$/,
-          view: new LoginPage(router),
+          view: new LoginPage(),
         },
         {
           path: /^\/signup$/,
-          view: new SignupPage(router),
+          view: new SignupPage(),
         },
         {
           path: /^\/$/,
-          view: new MainPage(router),
+          view: new MainPage(),
         },
       ],
     };
 
-    router.setRoutes(routes);
+    Router.setRoutes(routes);
     document.addEventListener("DOMContentLoaded", async () => {
       const currentURL = window.location.pathname;
 
@@ -43,15 +42,15 @@ export class App {
       const index = routes.paths.find((element) => element.path.exec(currentURL) !== null);
       if (index !== undefined) {
         if (currentURL == '/signup') {
-          router.go(currentURL);
+          Router.go(currentURL);
           return;
         } else if (response.error){
-          router.go('/login');
+          Router.go('/login');
           return;
         } 
-        router.go(currentURL);
+        Router.go(currentURL);
       } else {
-        router.go('/404');
+        Router.go('/404');
       }
       
      

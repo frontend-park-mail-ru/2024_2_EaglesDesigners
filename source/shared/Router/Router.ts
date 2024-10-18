@@ -3,7 +3,7 @@ import { EmptyResponse} from "@/shared/api/types";
 import { API } from "../api/api";
 import { Routes } from "./RouterTypes";
 
-export class Router{
+class Router{
     #routes : Routes; 
     #strictRoutes : string[];
     constructor () {
@@ -91,3 +91,5 @@ export class Router{
     }
 
 }
+
+export const RouterObj = new Router();
