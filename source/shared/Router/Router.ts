@@ -6,9 +6,11 @@ import { Routes } from "./RouterTypes";
 class Router{
     #routes : Routes; 
     #strictRoutes : string[];
+    #defaultAuthRoutes : string[]
     constructor () {
-        this.#routes = {}
-        this.#strictRoutes = ["/login", "/signup"]
+        this.#routes = {};
+        this.#strictRoutes = [];
+        this.#defaultAuthRoutes = [];
 
         window.onpopstate = (async (event) => {
             const isAuth = await this.isAuth();
@@ -20,8 +22,10 @@ class Router{
         });
      }
 
-    setRoutes(routes : Routes) {
+    setRoutes(routes : Routes, strictRoutes : string[], defaultAuthRoutes : string[]) {
         this.#routes = routes;
+        this.#strictRoutes = strictRoutes;
+        this.#defaultAuthRoutes = defaultAuthRoutes;
     }
     
     async isAuth() {

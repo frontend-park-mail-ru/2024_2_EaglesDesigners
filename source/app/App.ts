@@ -34,7 +34,10 @@ export class App {
       ],
     };
 
-    Router.setRoutes(routes);
+    const strictRoutes = ["/login", "/signup"];
+    const defaultAuthRoutes : string[] = [];
+
+    Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
     document.addEventListener("DOMContentLoaded", async () => {
       const currentURL = window.location.pathname;
 
