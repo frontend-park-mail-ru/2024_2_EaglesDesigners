@@ -7,7 +7,7 @@ export class Router{
     #routes : Routes; 
     #strictRoutes : string[];
     constructor () {
-        this.#routes = {paths: []};
+        this.#routes = {}
         this.#strictRoutes = ["/login", "/signup"]
 
         window.onpopstate = (async (event) => {
@@ -27,15 +27,11 @@ export class Router{
     async isAuth() {
         const response = await API.get<EmptyResponse>('/auth');
         if (!response.error){
-            console.log(response);
             return true;
         } 
         return false;
     }
 
-    register(path : string, view : View) {
-        
-    }
 
     async go(url : string, addToHistory = true) {
 
@@ -56,9 +52,19 @@ export class Router{
             const page = new Page404();
             page.render();
         } else {
-            const currentURL = this.#routes.paths.find( 
-                (elem) => elem.path.exec(url) !== null,
-            );
+            let currentURL;
+            if (this.#routes.paths!) {
+                
+                currentURL = this.#routes.paths.find( 
+                    (elem) => {
+                        if (elem.path!) {
+                            return elem.path.exec(url) !== null
+                        }
+                        
+                    }
+                );
+            }
+            
     
             const state = {
                 url: url,
@@ -68,10 +74,12 @@ export class Router{
             } else {
                 history.pushState(state, '', url);
             }
+            console.log(currentURL);
+            if (currentURL?.view) {
+                currentURL.view.render();
+            }
             
-            currentURL.view.render();
         }
-        console.log(history);
     }
 
 

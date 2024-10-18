@@ -4,4 +4,7 @@ export class View {
 
     }
 
+    render() {
+        
+    }
 }

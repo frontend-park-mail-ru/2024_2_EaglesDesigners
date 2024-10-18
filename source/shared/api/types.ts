@@ -10,26 +10,18 @@ export interface ChatModel{
 }
 export type ChatListModel = ChatModel[];
 
-// paths: ({
-//     path: RegExp;
-//     view: LoginPage;
-// } | {
-//     path: RegExp;
-//     view: SignupPage;
-// } | {
-//     path: RegExp;
-//     view: MainPage;
-// })[]
-
 interface configRoute{
-    path?: string;
+    path?: RegExp;
     view?: View;
 }
 
 
 export interface Routes{
-    
+    paths?: (
+        configRoute[]
+    )
 }
+
 import { TChat } from "@/entities/Chat";
 import { TUser } from "@/entities/User";
 

@@ -5,14 +5,11 @@ import "./ui/index.scss";
 import { AuthResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router.ts";
 import { SignupPage } from "@/pages/SignupPage";
-import { Page404 } from "@/pages/Page404";
 
 /**
  * Class provides class App, the initial class
  */
 export class App {
-  #root = document.getElementById("root")!;
-  #currentUser = ''
   /**
    * start our application
    * @param {}
