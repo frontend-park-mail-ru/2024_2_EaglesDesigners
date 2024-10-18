@@ -39,7 +39,6 @@ module.exports = {
     static:[
       path.resolve(__dirname, './dist'), path.resolve(__dirname, './public'),
     ],
-
     compress: true,
     hot: true,
     port: 8001,
