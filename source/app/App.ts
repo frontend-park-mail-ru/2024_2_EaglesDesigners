@@ -19,28 +19,27 @@ export class App {
    * @returns {bool}
    */
   async start() {
+    const router = new Router();
+
+    const routes = {
+      paths: [
+        {
+          path: /^\/login$/,
+          view: new LoginPage(router),
+        },
+        {
+          path: /^\/signup$/,
+          view: new SignupPage(router),
+        },
+        {
+          path: /^\/$/,
+          view: new MainPage(router),
+        },
+      ],
+    };
+
+    router.setRoutes(routes);
     document.addEventListener("DOMContentLoaded", async () => {
-      const router = new Router();
-
-      const routes = {
-        paths: [
-          {
-            path: /^\/login$/,
-            view: new LoginPage(router),
-          },
-          {
-            path: /^\/signup$/,
-            view: new SignupPage(router),
-          },
-          {
-            path: /^\/$/,
-            view: new MainPage(router),
-          },
-        ],
-      };
-
-      router.setRoutes(routes);
-
       const currentURL = window.location.pathname;
 
       const response = await API.get<AuthResponse>('/auth');

@@ -1,19 +1,17 @@
 import { Page404 } from "@/pages/Page404";
 import { View } from "../app/View";
-import { Routes } from "@/shared/api/types";
+import { EmptyResponse, Routes } from "@/shared/api/types";
+import { API } from "./api/api";
 
 export class Router{
     #routes : Routes; 
-    currentURI : string;
-    currentPage: any;
-    interval: any;
+    #strictRoutes : string[];
     constructor () {
         this.#routes = {paths: []};
-        this.currentURI = '';
-
+        this.#strictRoutes = ["/login", "/signup"]
 
         window.onpopstate = (event : Event) =>{ 
-            console.log(event);
+            console.log(history);
             this.go(event.state.url, false);
         }
      }
@@ -22,15 +20,26 @@ export class Router{
         this.#routes = routes;
     }
     
-    delSlashes(path : string) {
-        return path.replace(/^\//, '').replace(/\/$/, '');
+    async loginCheck() {
+        const response = await API.get<EmptyResponse>('/auth');
+        if (!response.error){
+            return true;
+        } 
+        return false;
     }
 
     register(path : string, view : View) {
         
     }
 
-    go(url : string, addToHistory = true) {
+    async go(url : string, addToHistory = true) {
+        const index = this.#strictRoutes.findIndex((elem) => url === elem);
+        const authResult = await this.loginCheck();
+        if (index >= 0 && authResult ) {
+            this.go('/');
+            return;
+        } 
+
         if (url === '/404') {
             history.pushState({url: '/404'}, '', url);
             const page = new Page404();
