@@ -1,18 +1,22 @@
+import { View } from "@/app/View";
 import { SignupForm } from "@/widgets/SignUp";
 
 /**
  * Class provides render signup form
  */
-export class SignupPage {
+export class SignupPage extends View{
   #root = document.getElementById("root")!;
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   /**
    * render signup page
    * @param {} nick
    * @returns {}
    */
-  render() {
+  async render() {
+
     const form = new SignupForm(this.#root);
     form.render();
   }

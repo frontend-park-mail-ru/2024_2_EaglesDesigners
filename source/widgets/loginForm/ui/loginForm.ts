@@ -2,16 +2,17 @@ import { API } from "@/shared/api/api.ts";
 import { AuthResponse, LoginRequest } from "@/shared/api/types";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
-import { MainPage } from "@/pages/MainPage";
-import { SignupPage } from "@/pages/SignupPage";
 import LoginFormTemplate from "./loginForm.hbs";
+import { View } from "@/app/View";
+import { RouterObj as Router } from "@/shared/Router/Router";
 
 /**
  * Class provides Login form
  */
-export class LoginForm {
+export class LoginForm extends View {
   #parent;
   constructor(parent:Element) {
+    super();
     this.#parent = parent;
   }
 
@@ -25,8 +26,7 @@ export class LoginForm {
 
     const handleCreateClick = (e:Event) => {
       e.preventDefault();
-      const signUp = new SignupPage();
-      signUp.render();
+      Router.go('/signup');
     };
     this.#parent.querySelector("#Create")!.addEventListener("click", handleCreateClick);
 
@@ -77,8 +77,9 @@ export class LoginForm {
       const responseAuth = await API.get<AuthResponse>("/auth");
       const nickname = responseAuth?.user?.name || "user";
 
-      const mainPage = new MainPage(this.#parent);
-      mainPage.render(nickname);
+      localStorage.setItem('user', nickname);
+
+      Router.go('/');
     };
     documentForm.addEventListener("submit", handleFormSubmit);
   }

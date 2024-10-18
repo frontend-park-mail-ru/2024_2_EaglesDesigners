@@ -1,20 +1,21 @@
-import { LoginPage } from "@/pages/LoginPage";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
 import { validateForm } from "@/shared/validation/formValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { API } from "@/shared/api/api.ts";
 import { EmptyResponse, SignUpRequest } from "@/shared/api/types";
-import { MainPage } from "@/pages/MainPage";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
+import { View } from "@/app/View";
+import { RouterObj as Router } from "@/shared/Router/Router";
 
 /**
  * Class provides signup form
  */
-export class SignupForm {
+export class SignupForm extends View{
   #parent;
   constructor(parent:Element) {
+    super();
     this.#parent = parent;
   }
 
@@ -30,9 +31,7 @@ export class SignupForm {
 
     const handleLoginClick = (e:Event) => {
       e.preventDefault();
-
-      const login = new LoginPage(this.#parent);
-      login.render();
+      Router.go('/login');
     };
 
     aElement.addEventListener("click", handleLoginClick);
@@ -149,8 +148,9 @@ export class SignupForm {
         return;
       }
 
-      const mainPage = new MainPage(this.#parent);
-      mainPage.render(nickname);
+      localStorage.setItem('user', nickname);
+
+      Router.go('/');
     };
 
     btnElement.addEventListener("click", handleButtonClick);
