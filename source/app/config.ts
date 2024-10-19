@@ -22,5 +22,4 @@ export const routes = {
 export const strictRoutes = ["/login", "/signup"];
 export const defaultAuthRoutes: string[] = [];
 
-export const serverHost = "http://212.233.98.59:8080";
-export const localHost = "http://localhost:8080";
+

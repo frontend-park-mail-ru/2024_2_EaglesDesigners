@@ -1,16 +1,18 @@
+import { TUser } from "../model/type";
+
 class UserStore {
-  #userNickname : string;
+  #user : TUser;
 
   constructor() {
-    this.#userNickname = '';
+    this.#user = {id: 0, name: '', username: ''};
   }
 
   setUserName(nick: string) {
-    this.#userNickname = nick;
+    this.#user.name = nick;
   }
 
   getUserName() {
-    return this.#userNickname;
+    return this.#user.name;
   }
 }
 
