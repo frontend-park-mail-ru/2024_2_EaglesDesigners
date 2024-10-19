@@ -5,7 +5,7 @@ import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
 import { RouterObj as Router } from "@/shared/Router/Router";
-import { user as User } from "@/app/User";
+import { User } from "@/entities/User/lib/UserStroage";
 
 /**
  * Mainpage class provides functions for rendering main page

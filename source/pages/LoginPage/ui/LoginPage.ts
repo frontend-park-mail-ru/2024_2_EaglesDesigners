@@ -14,7 +14,7 @@ export class LoginPage extends View {
    * @param {}
    * @returns {}
    */
-  async render() {
+  render() {
     const form = new LoginForm(this.#parent);
 
     form.render();

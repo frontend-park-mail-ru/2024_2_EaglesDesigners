@@ -15,7 +15,7 @@ export class SignupPage extends View {
    * @param {} nick
    * @returns {}
    */
-  async render() {
+  render() {
     const form = new SignupForm(this.#root);
     form.render();
   }

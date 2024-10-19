@@ -8,7 +8,7 @@ import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
 import { View } from "@/app/View";
 import { RouterObj as Router } from "@/shared/Router/Router";
-import { user as User } from "@/app/User";
+import { User } from "@/entities/User/lib/UserStroage";
 
 /**
  * Class provides signup form

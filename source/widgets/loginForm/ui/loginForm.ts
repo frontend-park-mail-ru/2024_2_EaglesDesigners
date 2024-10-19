@@ -5,7 +5,7 @@ import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
 import { RouterObj as Router } from "@/shared/Router/Router";
-import { user as User } from "@/app/User";
+import { User } from "@/entities/User/lib/UserStroage";
 
 /**
  * Class provides Login form

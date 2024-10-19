@@ -1,9 +1,8 @@
 import "./ui/index.scss";
 import { RouterObj as Router } from "@/shared/Router/Router.ts";
-import { user as User } from "./User";
-import { routes } from "@/config";
-import { strictRoutes } from "@/config";
-import { defaultAuthRoutes } from "@/config";
+import { User } from "@/entities/User/lib/UserStroage.ts";
+import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
+
 
 /**
  * Class provides class App, the initial class
