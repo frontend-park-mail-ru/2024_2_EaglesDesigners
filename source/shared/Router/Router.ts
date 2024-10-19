@@ -12,8 +12,10 @@ class Router {
     this.#defaultAuthRoutes = [];
 
     window.onpopstate = async (event) => {
-      const index = this.#strictRoutes.findIndex((element) => element === event.state.url);
-      if (User.getUserName() === "" &&  index === -1){
+      const index = this.#strictRoutes.findIndex(
+        (element) => element === event.state.url,
+      );
+      if (User.getUserName() === "" && index === -1) {
         this.go("/login", false);
         return;
       }
