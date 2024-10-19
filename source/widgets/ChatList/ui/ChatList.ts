@@ -2,8 +2,8 @@ import { API } from "@/shared/api/api.ts";
 import { ChatsResponse } from "@/shared/api/types";
 import { TChat } from "@/entities/Chat";
 import { ChatCard } from "@/entities/ChatCard";
-import ChatListTemplate from './ChatList.handlebars';
-import './ChatList.scss';
+import ChatListTemplate from "./ChatList.handlebars";
+import "./ChatList.scss";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -11,7 +11,7 @@ import './ChatList.scss';
 export class ChatList {
   #parent;
 
-  constructor(parent:Element) {
+  constructor(parent: Element) {
     this.#parent = parent;
   }
   /**
@@ -20,9 +20,7 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats:TChat[] = [
-
-    ];
+    let chats: TChat[] = [];
     const response = await API.get<ChatsResponse>("/chats");
     if (response.chats) {
       chats = response.chats;
@@ -38,8 +36,8 @@ export class ChatList {
     });
 
     const chatCardElements = document.querySelectorAll(".chat-card");
-    chatCardElements.forEach( elem =>{
-      elem.addEventListener('click', (e) =>{
+    chatCardElements.forEach((elem) => {
+      elem.addEventListener("click", (e) => {
         e.preventDefault();
       });
     });

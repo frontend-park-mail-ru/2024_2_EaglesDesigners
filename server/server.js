@@ -1,16 +1,14 @@
-const body = require("body-parser");
+import { json } from "body-parser";
 
-const express = require("express");
+import express, { static } from "express";
 
 let app = express();
 
-app.use(express.static(require("path").join(__dirname, "..", "/dist")));
-app.use(express.static(require("path").join(__dirname, "..", "/public")));
-app.use(express.static(require("path").join(__dirname, "..", "/source")));
-app.use(
-  express.static(require("path").resolve(__dirname, "..", "node_modules")),
-);
-app.use(body.json());
+app.use(static(require("path").join(__dirname, "..", "/dist")));
+app.use(static(require("path").join(__dirname, "..", "/public")));
+app.use(static(require("path").join(__dirname, "..", "/source")));
+app.use(static(require("path").resolve(__dirname, "..", "node_modules")));
+app.use(json());
 
 const port = 8001;
 

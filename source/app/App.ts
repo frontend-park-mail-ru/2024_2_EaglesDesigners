@@ -1,28 +1,37 @@
-import { LoginPage } from "@/pages/LoginPage";
-import { MainPage } from "@/pages/MainPage";
-import { API } from "@/shared/api/api.ts";
 import "./ui/index.scss";
-import { AuthResponse } from "@/shared/api/types";
+import { Router } from "@/shared/Router/Router.ts";
+import { UserStorage } from "@/entities/User";
+import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
 /**
  * Class provides class App, the initial class
  */
 export class App {
-  #root = document.getElementById("root")!;
   /**
    * start our application
    * @param {}
    * @returns {bool}
    */
   async start() {
-    const response = await API.get<AuthResponse>("/auth");
+    UserStorage.init();
 
-    if (response.error) {
-      const login = new LoginPage(this.#root);
+    Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 
-      login.render();
+    const currentURL = window.location.pathname;
+
+    const index = routes.paths.find(
+      (element) => element.path.exec(currentURL) !== null,
+    );
+    if (index !== undefined) {
+      if (currentURL == "/signup") {
+        Router.go(currentURL);
+        return;
+      } else if (UserStorage.getUser().name === "") {
+        Router.go("/login");
+        return;
+      }
+      Router.go(currentURL);
     } else {
-      const mainPage = new MainPage(this.#root);
-      mainPage.render(response.user.name);
+      Router.go("/404");
     }
   }
 }

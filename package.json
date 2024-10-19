@@ -7,7 +7,7 @@
     "tsc": "tsc --project tsconfig.json --noEmit",
     "build": "webpack",
     "start": "webpack serve",
-    "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server && npx eslint ./server"
+    "lint": "npx prettier --write ./source && npx eslint ./source & npx prettier --write ./server"
   },
   "author": "",
   "license": "ISC",

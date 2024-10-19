@@ -1,20 +1,22 @@
-import { LoginPage } from "@/pages/LoginPage";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
 import { validateForm } from "@/shared/validation/formValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { API } from "@/shared/api/api.ts";
 import { EmptyResponse, SignUpRequest } from "@/shared/api/types";
-import { MainPage } from "@/pages/MainPage";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
+import { View } from "@/app/View";
+import { Router } from "@/shared/Router/Router";
+import { UserStorage } from "@/entities/User";
 
 /**
  * Class provides signup form
  */
-export class SignupForm {
+export class SignupForm extends View {
   #parent;
-  constructor(parent:Element) {
+  constructor(parent: Element) {
+    super();
     this.#parent = parent;
   }
 
@@ -28,24 +30,24 @@ export class SignupForm {
 
     const aElement = document.querySelector("#login_href")!;
 
-    const handleLoginClick = (e:Event) => {
+    const handleLoginClick = (e: Event) => {
       e.preventDefault();
-
-      const login = new LoginPage(this.#parent);
-      login.render();
+      Router.go("/login");
     };
 
     aElement.addEventListener("click", handleLoginClick);
 
-    const password:HTMLInputElement = this.#parent.querySelector("#password")!;
+    const password: HTMLInputElement = this.#parent.querySelector("#password")!;
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
-    this.#parent.querySelector("#password-visibility-toggle")!.addEventListener("click", handleTogglePasswordVisibility);
+    this.#parent
+      .querySelector("#password-visibility-toggle")!
+      .addEventListener("click", handleTogglePasswordVisibility);
 
     const btnElement = document.querySelector("button")!;
 
-    const handleButtonClick = async (e:Event) => {
+    const handleButtonClick = async (e: Event) => {
       e.preventDefault();
 
       const nick: HTMLInputElement = this.#parent.querySelector("#nickname")!;
@@ -58,10 +60,14 @@ export class SignupForm {
       pass.classList.remove("error");
       pass2.classList.remove("error");
 
-      const nickText: HTMLSpanElement = this.#parent.querySelector("#errorNickname")!;
-      const loginText: HTMLSpanElement = this.#parent.querySelector("#errorLogin")!;
-      const passText: HTMLSpanElement = this.#parent.querySelector("#errorPassword")!;
-      const pass2Text: HTMLSpanElement = this.#parent.querySelector("#errorPassword2")!;
+      const nickText: HTMLSpanElement =
+        this.#parent.querySelector("#errorNickname")!;
+      const loginText: HTMLSpanElement =
+        this.#parent.querySelector("#errorLogin")!;
+      const passText: HTMLSpanElement =
+        this.#parent.querySelector("#errorPassword")!;
+      const pass2Text: HTMLSpanElement =
+        this.#parent.querySelector("#errorPassword2")!;
 
       nickText.textContent = "";
       loginText.textContent = "";
@@ -131,7 +137,11 @@ export class SignupForm {
       }
       const username = login;
       const name = nickname;
-      const response = await API.post<EmptyResponse,SignUpRequest>("/signup", { name, username, password });
+      const response = await API.post<EmptyResponse, SignUpRequest>("/signup", {
+        name,
+        username,
+        password,
+      });
 
       if (response.error === "A user with that username already exists") {
         log.classList.add("error");
@@ -149,8 +159,9 @@ export class SignupForm {
         return;
       }
 
-      const mainPage = new MainPage(this.#parent);
-      mainPage.render(nickname);
+      UserStorage.setUser({ id: 0, name: nickname, username: login });
+
+      Router.go("/");
     };
 
     btnElement.addEventListener("click", handleButtonClick);

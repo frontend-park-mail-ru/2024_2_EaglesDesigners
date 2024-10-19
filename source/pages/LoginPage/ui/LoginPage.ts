@@ -1,13 +1,13 @@
 import { LoginForm } from "@/widgets/loginForm";
 import "./index.scss";
-
+import { View } from "@/app/View";
 /**
  * Class provides render login form
  */
-export class LoginPage {
-  #parent;
-  constructor(parent:Element) {
-    this.#parent = parent;
+export class LoginPage extends View {
+  #parent = document.getElementById("root")!;
+  constructor() {
+    super();
   }
   /**
    * render login page

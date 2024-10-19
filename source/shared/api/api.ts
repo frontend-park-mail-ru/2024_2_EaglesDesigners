@@ -1,11 +1,12 @@
 import { ResponseError } from "./types";
+import { serverHost } from "@/app/config";
 
 /**
  * API class provides API-functions.
  */
 class Api {
-  #baseURl:string;
-  constructor(baseUrl:string) {
+  #baseURl: string;
+  constructor(baseUrl: string) {
     this.#baseURl = baseUrl;
   }
 
@@ -15,8 +16,8 @@ class Api {
    * if could not fetch, return error
    * @returns {json} response from server
    */
-  async get<TResponse>(path:string) {
-    type Response = TResponse&ResponseError;
+  async get<TResponse>(path: string) {
+    type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
       const response = await fetch(url, {
@@ -40,8 +41,8 @@ class Api {
    * if could not fetch, return error
    * @returns {json} response from server
    */
-  async post<TResponse, TRequest>(path:string, body: TRequest) {
-    type Response = TResponse&ResponseError;
+  async post<TResponse, TRequest>(path: string, body: TRequest) {
+    type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
       const response = await fetch(url, {
@@ -62,4 +63,4 @@ class Api {
   }
 }
 
-export const API = new Api("http://212.233.98.59:8080");
+export const API = new Api(serverHost);
