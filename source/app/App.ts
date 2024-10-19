@@ -1,8 +1,7 @@
 import "./ui/index.scss";
-import { RouterObj as Router } from "@/shared/Router/Router.ts";
-import { User } from "@/entities/User/lib/UserStroage.ts";
+import { Router } from "@/shared/Router/Router.ts";
+import { UserStroage } from "@/entities/User/lib/UserStroage.ts";
 import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
-
 
 /**
  * Class provides class App, the initial class
@@ -25,7 +24,7 @@ export class App {
       if (currentURL == "/signup") {
         Router.go(currentURL);
         return;
-      } else if (User.getUserName() === "") {
+      } else if (UserStroage.getUserName() === "") {
         Router.go("/login");
         return;
       }

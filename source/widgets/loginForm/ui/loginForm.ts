@@ -4,8 +4,8 @@ import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
-import { RouterObj as Router } from "@/shared/Router/Router";
-import { User } from "@/entities/User/lib/UserStroage";
+import { Router } from "@/shared/Router/Router";
+import { UserStroage } from "@/entities/User/lib/UserStroage";
 
 /**
  * Class provides Login form
@@ -87,7 +87,7 @@ export class LoginForm extends View {
       const responseAuth = await API.get<AuthResponse>("/auth");
       const nickname = responseAuth?.user?.name || "";
 
-      User.setUserName(nickname);
+      UserStroage.setUserName(nickname);
 
       Router.go("/");
     };

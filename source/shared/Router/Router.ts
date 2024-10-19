@@ -1,8 +1,8 @@
 import { Page404 } from "@/pages/Page404";
 import { Routes } from "./RouterTypes";
-import { User } from "@/entities/User/lib/UserStroage";
+import { UserStroage } from "@/entities/User/lib/UserStroage";
 
-class Router {
+class Route {
   #routes: Routes;
   #strictRoutes: string[];
   #defaultAuthRoutes: string[];
@@ -15,7 +15,7 @@ class Router {
       const index = this.#strictRoutes.findIndex(
         (element) => element === event.state.url,
       );
-      if (User.getUserName() === "" && index === -1) {
+      if (UserStroage.getUserName() === "" && index === -1) {
         this.go("/login", false);
         return;
       }
@@ -35,7 +35,7 @@ class Router {
 
   async go(url: string, addToHistory = true) {
     const index = this.#strictRoutes.findIndex((elem) => url === elem);
-    if (index !== -1 && User.getUserName() !== "") {
+    if (index !== -1 && UserStroage.getUserName() !== "") {
       this.go("/");
       return;
     }
@@ -82,4 +82,4 @@ class Router {
   }
 }
 
-export const RouterObj = new Router();
+export const Router = new Route();

@@ -1,7 +1,7 @@
 import { API } from "@/shared/api/api";
 import { AuthResponse } from "@/shared/api/types";
 
-class UserStorage {
+class UserStore {
   #userNickname: string = "";
 
   async init() {
@@ -20,5 +20,5 @@ class UserStorage {
   }
 }
 
-export const User = new UserStorage();
-User.init();
+export const UserStroage = new UserStore();
+UserStroage.init();

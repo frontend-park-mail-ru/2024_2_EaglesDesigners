@@ -7,8 +7,8 @@ import { EmptyResponse, SignUpRequest } from "@/shared/api/types";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
 import { View } from "@/app/View";
-import { RouterObj as Router } from "@/shared/Router/Router";
-import { User } from "@/entities/User/lib/UserStroage";
+import { Router } from "@/shared/Router/Router";
+import { UserStroage } from "@/entities/User/lib/UserStroage";
 
 /**
  * Class provides signup form
@@ -159,7 +159,7 @@ export class SignupForm extends View {
         return;
       }
 
-      User.setUserName(nickname);
+      UserStroage.setUserName(nickname);
 
       Router.go("/");
     };

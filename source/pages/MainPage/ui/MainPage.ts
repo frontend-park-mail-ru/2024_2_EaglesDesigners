@@ -4,8 +4,8 @@ import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
-import { RouterObj as Router } from "@/shared/Router/Router";
-import { User } from "@/entities/User/lib/UserStroage";
+import { Router } from "@/shared/Router/Router";
+import { UserStroage } from "@/entities/User/lib/UserStroage";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -40,7 +40,7 @@ export class MainPage extends View {
       );
 
       if (!response.error) {
-        User.setUserName("");
+        UserStroage.setUserName("");
         Router.go("/login");
       }
     };
