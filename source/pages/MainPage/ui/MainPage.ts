@@ -20,7 +20,7 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-    const user = localStorage.getItem("user");
+    const user = UserStorage.getUserName();
 
     const parent = document.getElementById("root")!;
 
