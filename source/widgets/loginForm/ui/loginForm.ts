@@ -85,7 +85,7 @@ export class LoginForm extends View {
       }
 
       const responseAuth = await API.get<AuthResponse>("/auth");
-      const nickname = responseAuth?.user?.name || "user";
+      const nickname = responseAuth?.user?.name || "";
 
       User.setUserName(nickname);
 
