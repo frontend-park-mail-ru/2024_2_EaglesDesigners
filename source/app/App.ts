@@ -2,6 +2,8 @@ import "./ui/index.scss";
 import { Router } from "@/shared/Router/Router.ts";
 import { UserStorage } from "@/entities/User";
 import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
+import { AuthResponse } from "@/shared/api/types.ts";
+import { API } from "@/shared/api/api.ts";
 
 /**
  * Class provides class App, the initial class
@@ -13,6 +15,11 @@ export class App {
    * @returns {bool}
    */
   async start() {
+    const response = await API.get<AuthResponse>('/auth');
+    if (!response.error) {
+      UserStorage.setUserName(response.user.name);
+    }
+
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 
     const currentURL = window.location.pathname;
