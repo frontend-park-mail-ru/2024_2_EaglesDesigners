@@ -12,7 +12,8 @@ class Router {
     this.#defaultAuthRoutes = [];
 
     window.onpopstate = async (event) => {
-      if (User.getUserName() === "" && event.state.url !== "/signup") {
+      const index = this.#strictRoutes.findIndex((element) => element === event.state.url);
+      if (User.getUserName() === "" &&  index === -1){
         this.go("/login", false);
         return;
       }
