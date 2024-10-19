@@ -1,6 +1,6 @@
 import { Page404 } from "@/pages/Page404";
 import { Routes } from "./RouterTypes";
-import { UserStroage } from "@/entities/User/lib/UserStroage";
+import { UserStroage } from "@/entities/User";
 
 class Route {
   #routes: Routes;

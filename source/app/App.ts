@@ -1,6 +1,6 @@
 import "./ui/index.scss";
 import { Router } from "@/shared/Router/Router.ts";
-import { UserStroage } from "@/entities/User/lib/UserStroage.ts";
+import { UserStroage } from "@/entities/User";
 import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
 
 /**
