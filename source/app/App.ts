@@ -1,9 +1,9 @@
-import { LoginPage } from "@/pages/LoginPage";
-import { MainPage } from "@/pages/MainPage";
 import "./ui/index.scss";
 import { RouterObj as Router } from "@/shared/Router/Router.ts";
-import { SignupPage } from "@/pages/SignupPage";
 import { user as User } from "./User";
+import { routes } from "@/config";
+import { strictRoutes } from "@/config";
+import { defaultAuthRoutes } from "@/config";
 
 /**
  * Class provides class App, the initial class
@@ -15,25 +15,9 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    const routes = {
-      paths: [
-        {
-          path: /^\/login$/,
-          view: new LoginPage(),
-        },
-        {
-          path: /^\/signup$/,
-          view: new SignupPage(),
-        },
-        {
-          path: /^\/$/,
-          view: new MainPage(),
-        },
-      ],
-    };
+    
 
-    const strictRoutes = ["/login", "/signup"];
-    const defaultAuthRoutes: string[] = [];
+    
 
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 

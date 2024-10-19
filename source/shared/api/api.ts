@@ -1,4 +1,5 @@
 import { ResponseError } from "./types";
+import { serverHost } from "@/config";
 
 /**
  * API class provides API-functions.
@@ -62,4 +63,4 @@ class Api {
   }
 }
 
-export const API = new Api("http://212.233.98.59:8080");
+export const API = new Api(serverHost);
