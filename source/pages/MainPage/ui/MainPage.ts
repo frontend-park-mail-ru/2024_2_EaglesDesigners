@@ -5,7 +5,7 @@ import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
-import { UserStroage } from "@/entities/User";
+import { UserStorage } from "@/entities/User";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -40,7 +40,7 @@ export class MainPage extends View {
       );
 
       if (!response.error) {
-        UserStroage.setUserName("");
+        UserStorage.setUserName("");
         Router.go("/login");
       }
     };

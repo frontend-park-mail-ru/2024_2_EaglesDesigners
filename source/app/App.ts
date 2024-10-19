@@ -1,6 +1,6 @@
 import "./ui/index.scss";
 import { Router } from "@/shared/Router/Router.ts";
-import { UserStroage } from "@/entities/User";
+import { UserStorage } from "@/entities/User";
 import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
 
 /**
@@ -24,7 +24,7 @@ export class App {
       if (currentURL == "/signup") {
         Router.go(currentURL);
         return;
-      } else if (UserStroage.getUserName() === "") {
+      } else if (UserStorage.getUserName() === "") {
         Router.go("/login");
         return;
       }

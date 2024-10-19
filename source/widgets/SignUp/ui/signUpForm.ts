@@ -8,7 +8,7 @@ import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
-import { UserStroage } from "@/entities/User";
+import { UserStorage } from "@/entities/User";
 
 /**
  * Class provides signup form
@@ -159,7 +159,7 @@ export class SignupForm extends View {
         return;
       }
 
-      UserStroage.setUserName(nickname);
+      UserStorage.setUserName(nickname);
 
       Router.go("/");
     };
