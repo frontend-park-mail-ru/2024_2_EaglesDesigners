@@ -7,12 +7,12 @@ class UserStore {
     this.#user = { id: 0, name: "", username: "" };
   }
 
-  setUserName(nick: string) {
-    this.#user.name = nick;
+  setUser(user: TUser) {
+    this.#user = user;
   }
 
-  getUserName() {
-    return this.#user.name;
+  getUser() {
+    return this.#user;
   }
 }
 

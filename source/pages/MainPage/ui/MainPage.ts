@@ -5,7 +5,7 @@ import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
-import { UserStorage } from "@/entities/User";
+import { TUser, UserStorage } from "@/entities/User";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -20,7 +20,7 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-    const user = UserStorage.getUserName();
+    const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
 
@@ -40,7 +40,7 @@ export class MainPage extends View {
       );
 
       if (!response.error) {
-        UserStorage.setUserName("");
+        UserStorage.setUser({ id: 0, name: "", username: "" });
         Router.go("/login");
       }
     };

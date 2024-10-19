@@ -159,7 +159,7 @@ export class SignupForm extends View {
         return;
       }
 
-      UserStorage.setUserName(nickname);
+      UserStorage.setUser({ id: 0, name: nickname, username: login });
 
       Router.go("/");
     };

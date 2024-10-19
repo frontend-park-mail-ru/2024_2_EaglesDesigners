@@ -15,7 +15,7 @@ class Route {
       const index = this.#strictRoutes.findIndex(
         (element) => element === event.state.url,
       );
-      if (UserStorage.getUserName() === "" && index === -1) {
+      if (UserStorage.getUser().name === "" && index === -1) {
         this.go("/login", false);
         return;
       }
@@ -35,7 +35,7 @@ class Route {
 
   async go(url: string, addToHistory = true) {
     const index = this.#strictRoutes.findIndex((elem) => url === elem);
-    if (index !== -1 && UserStorage.getUserName() !== "") {
+    if (index !== -1 && UserStorage.getUser().name !== "") {
       this.go("/");
       return;
     }

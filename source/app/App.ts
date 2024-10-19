@@ -17,7 +17,7 @@ export class App {
   async start() {
     const response = await API.get<AuthResponse>("/auth");
     if (!response.error) {
-      UserStorage.setUserName(response.user.name);
+      UserStorage.setUser(response.user);
     }
 
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
@@ -31,7 +31,7 @@ export class App {
       if (currentURL == "/signup") {
         Router.go(currentURL);
         return;
-      } else if (UserStorage.getUserName() === "") {
+      } else if (UserStorage.getUser().name === "") {
         Router.go("/login");
         return;
       }

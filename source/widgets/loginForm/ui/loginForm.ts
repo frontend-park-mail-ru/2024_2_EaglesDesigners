@@ -85,9 +85,15 @@ export class LoginForm extends View {
       }
 
       const responseAuth = await API.get<AuthResponse>("/auth");
-      const nickname = responseAuth?.user?.name || "";
-
-      UserStorage.setUserName(nickname);
+      if (!responseAuth.error) {
+        UserStorage.setUser({
+          id: responseAuth.user.id,
+          name: responseAuth.user.name,
+          username: responseAuth.user.username,
+        });
+      } else {
+        UserStorage.setUser({ id: 0, name: "", username: "" });
+      }
 
       Router.go("/");
     };
