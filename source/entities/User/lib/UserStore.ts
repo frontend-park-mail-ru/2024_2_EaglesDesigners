@@ -1,10 +1,10 @@
 import { TUser } from "../model/type";
 
 class UserStore {
-  #user : TUser;
+  #user: TUser;
 
   constructor() {
-    this.#user = {id: 0, name: '', username: ''};
+    this.#user = { id: 0, name: "", username: "" };
   }
 
   setUserName(nick: string) {

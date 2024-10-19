@@ -15,7 +15,7 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    const response = await API.get<AuthResponse>('/auth');
+    const response = await API.get<AuthResponse>("/auth");
     if (!response.error) {
       UserStorage.setUserName(response.user.name);
     }
