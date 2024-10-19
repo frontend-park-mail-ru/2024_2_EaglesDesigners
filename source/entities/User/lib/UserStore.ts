@@ -1,4 +1,4 @@
-import { TUser } from "../model/type";
+import { TUser } from "../index";
 
 class UserStore {
   #user: TUser;
