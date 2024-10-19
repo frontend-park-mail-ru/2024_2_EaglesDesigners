@@ -1,5 +1,5 @@
 import { ResponseError } from "./types";
-import { localHost } from "@/app/BackUrl";
+import { serverHost } from "@/app/BackUrl";
 
 /**
  * API class provides API-functions.
@@ -63,4 +63,4 @@ class Api {
   }
 }
 
-export const API = new Api(localHost);
+export const API = new Api(serverHost);
