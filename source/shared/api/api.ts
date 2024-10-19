@@ -1,5 +1,5 @@
 import { ResponseError } from "./types";
-import { serverHost } from "@/app/BackUrl";
+import { serverHost } from "@/app/config";
 
 /**
  * API class provides API-functions.
