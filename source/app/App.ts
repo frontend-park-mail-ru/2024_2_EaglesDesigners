@@ -15,10 +15,6 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    
-
-    
-
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 
     const currentURL = window.location.pathname;

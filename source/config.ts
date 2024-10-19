@@ -3,20 +3,20 @@ import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
 
 export const routes = {
-    paths: [
-      {
-        path: /^\/login$/,
-        view: new LoginPage(),
-      },
-      {
-        path: /^\/signup$/,
-        view: new SignupPage(),
-      },
-      {
-        path: /^\/$/,
-        view: new MainPage(),
-      },
-    ],
+  paths: [
+    {
+      path: /^\/login$/,
+      view: new LoginPage(),
+    },
+    {
+      path: /^\/signup$/,
+      view: new SignupPage(),
+    },
+    {
+      path: /^\/$/,
+      view: new MainPage(),
+    },
+  ],
 };
 
 export const strictRoutes = ["/login", "/signup"];
