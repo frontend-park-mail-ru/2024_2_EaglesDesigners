@@ -13,9 +13,9 @@ import { user as User } from "@/app/User";
 /**
  * Class provides signup form
  */
-export class SignupForm extends View{
+export class SignupForm extends View {
   #parent;
-  constructor(parent:Element) {
+  constructor(parent: Element) {
     super();
     this.#parent = parent;
   }
@@ -30,22 +30,24 @@ export class SignupForm extends View{
 
     const aElement = document.querySelector("#login_href")!;
 
-    const handleLoginClick = (e:Event) => {
+    const handleLoginClick = (e: Event) => {
       e.preventDefault();
-      Router.go('/login');
+      Router.go("/login");
     };
 
     aElement.addEventListener("click", handleLoginClick);
 
-    const password:HTMLInputElement = this.#parent.querySelector("#password")!;
+    const password: HTMLInputElement = this.#parent.querySelector("#password")!;
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
-    this.#parent.querySelector("#password-visibility-toggle")!.addEventListener("click", handleTogglePasswordVisibility);
+    this.#parent
+      .querySelector("#password-visibility-toggle")!
+      .addEventListener("click", handleTogglePasswordVisibility);
 
     const btnElement = document.querySelector("button")!;
 
-    const handleButtonClick = async (e:Event) => {
+    const handleButtonClick = async (e: Event) => {
       e.preventDefault();
 
       const nick: HTMLInputElement = this.#parent.querySelector("#nickname")!;
@@ -58,10 +60,14 @@ export class SignupForm extends View{
       pass.classList.remove("error");
       pass2.classList.remove("error");
 
-      const nickText: HTMLSpanElement = this.#parent.querySelector("#errorNickname")!;
-      const loginText: HTMLSpanElement = this.#parent.querySelector("#errorLogin")!;
-      const passText: HTMLSpanElement = this.#parent.querySelector("#errorPassword")!;
-      const pass2Text: HTMLSpanElement = this.#parent.querySelector("#errorPassword2")!;
+      const nickText: HTMLSpanElement =
+        this.#parent.querySelector("#errorNickname")!;
+      const loginText: HTMLSpanElement =
+        this.#parent.querySelector("#errorLogin")!;
+      const passText: HTMLSpanElement =
+        this.#parent.querySelector("#errorPassword")!;
+      const pass2Text: HTMLSpanElement =
+        this.#parent.querySelector("#errorPassword2")!;
 
       nickText.textContent = "";
       loginText.textContent = "";
@@ -131,7 +137,11 @@ export class SignupForm extends View{
       }
       const username = login;
       const name = nickname;
-      const response = await API.post<EmptyResponse,SignUpRequest>("/signup", { name, username, password });
+      const response = await API.post<EmptyResponse, SignUpRequest>("/signup", {
+        name,
+        username,
+        password,
+      });
 
       if (response.error === "A user with that username already exists") {
         log.classList.add("error");
@@ -151,7 +161,7 @@ export class SignupForm extends View{
 
       User.setUserName(nickname);
 
-      Router.go('/');
+      Router.go("/");
     };
 
     btnElement.addEventListener("click", handleButtonClick);

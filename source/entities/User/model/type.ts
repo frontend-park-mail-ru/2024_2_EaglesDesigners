@@ -1,5 +1,5 @@
-export interface TUser{
-    id: number;
-    username: string;
-    name: string;
+export interface TUser {
+  id: number;
+  username: string;
+  name: string;
 }

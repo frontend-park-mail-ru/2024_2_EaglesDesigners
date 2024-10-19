@@ -20,12 +20,11 @@ export class MainPage extends View {
    * @async
    */
   async render() {
-
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
 
     const parent = document.getElementById("root")!;
 
-    parent.innerHTML = MainPageTemplate({user});
+    parent.innerHTML = MainPageTemplate({ user });
 
     const chatListParent = parent.querySelector("#chat-list-import")!;
 
@@ -35,11 +34,14 @@ export class MainPage extends View {
     const exitButton = parent.querySelector(".exit-btn")!;
 
     const handleExitClick = async () => {
-      const response = await API.post<EmptyResponse, EmptyRequest>("/logout",{});
-      
+      const response = await API.post<EmptyResponse, EmptyRequest>(
+        "/logout",
+        {},
+      );
+
       if (!response.error) {
-        User.setUserName('');
-        Router.go('/login');
+        User.setUserName("");
+        Router.go("/login");
       }
     };
 

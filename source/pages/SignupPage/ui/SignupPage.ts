@@ -4,7 +4,7 @@ import { SignupForm } from "@/widgets/SignUp";
 /**
  * Class provides render signup form
  */
-export class SignupPage extends View{
+export class SignupPage extends View {
   #root = document.getElementById("root")!;
   constructor() {
     super();
@@ -16,7 +16,6 @@ export class SignupPage extends View{
    * @returns {}
    */
   async render() {
-
     const form = new SignupForm(this.#root);
     form.render();
   }

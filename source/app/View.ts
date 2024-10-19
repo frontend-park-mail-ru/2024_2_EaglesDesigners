@@ -1,10 +1,5 @@
 export class View {
+  constructor() {}
 
-    constructor() {
-
-    }
-
-    render() {
-        
-    }
+  render() {}
 }

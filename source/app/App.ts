@@ -9,14 +9,12 @@ import { user as User } from "./User";
  * Class provides class App, the initial class
  */
 export class App {
-  
   /**
    * start our application
    * @param {}
    * @returns {bool}
    */
   async start() {
-
     const routes = {
       paths: [
         {
@@ -35,25 +33,26 @@ export class App {
     };
 
     const strictRoutes = ["/login", "/signup"];
-    const defaultAuthRoutes : string[] = [];
+    const defaultAuthRoutes: string[] = [];
 
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 
     const currentURL = window.location.pathname;
 
-    const index = routes.paths.find((element) => element.path.exec(currentURL) !== null);
+    const index = routes.paths.find(
+      (element) => element.path.exec(currentURL) !== null,
+    );
     if (index !== undefined) {
-      if (currentURL == '/signup') {
+      if (currentURL == "/signup") {
         Router.go(currentURL);
         return;
-      } else if (User.getUserName() === ''){
-        Router.go('/login');
+      } else if (User.getUserName() === "") {
+        Router.go("/login");
         return;
-      } 
+      }
       Router.go(currentURL);
     } else {
-      Router.go('/404');
+      Router.go("/404");
     }
-    
   }
 }

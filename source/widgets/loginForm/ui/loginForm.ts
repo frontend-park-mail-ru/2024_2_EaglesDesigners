@@ -12,7 +12,7 @@ import { user as User } from "@/app/User";
  */
 export class LoginForm extends View {
   #parent;
-  constructor(parent:Element) {
+  constructor(parent: Element) {
     super();
     this.#parent = parent;
   }
@@ -25,21 +25,25 @@ export class LoginForm extends View {
   render() {
     this.#parent.innerHTML = LoginFormTemplate();
 
-    const handleCreateClick = (e:Event) => {
+    const handleCreateClick = (e: Event) => {
       e.preventDefault();
-      Router.go('/signup');
+      Router.go("/signup");
     };
-    this.#parent.querySelector("#Create")!.addEventListener("click", handleCreateClick);
+    this.#parent
+      .querySelector("#Create")!
+      .addEventListener("click", handleCreateClick);
 
-    const password:HTMLInputElement = this.#parent.querySelector("#password")!;
+    const password: HTMLInputElement = this.#parent.querySelector("#password")!;
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
-    this.#parent.querySelector("#password-visibility-toggle")!.addEventListener("click", handleTogglePasswordVisibility);
-  
+    this.#parent
+      .querySelector("#password-visibility-toggle")!
+      .addEventListener("click", handleTogglePasswordVisibility);
+
     const documentForm = this.#parent.querySelector("form")!;
 
-    const handleFormSubmit = async (e:Event) => {
+    const handleFormSubmit = async (e: Event) => {
       e.preventDefault();
       const textPass = this.#parent.querySelector("#errorPassword")!;
       const textLogin = this.#parent.querySelector("#errorLogin")!;
@@ -47,10 +51,12 @@ export class LoginForm extends View {
       textLogin.textContent = "";
       textPass.textContent = "";
 
-      const loginInput:HTMLInputElement = this.#parent.querySelector("#login")!;
+      const loginInput: HTMLInputElement =
+        this.#parent.querySelector("#login")!;
       loginInput.classList.remove("error");
 
-      const passwordInput:HTMLInputElement = this.#parent.querySelector("#password")!;
+      const passwordInput: HTMLInputElement =
+        this.#parent.querySelector("#password")!;
       passwordInput.classList.remove("error");
 
       const username = loginInput.value.trim();
@@ -67,7 +73,10 @@ export class LoginForm extends View {
         return;
       }
 
-      const response = await API.post<AuthResponse, LoginRequest>("/login", { username, password });
+      const response = await API.post<AuthResponse, LoginRequest>("/login", {
+        username,
+        password,
+      });
       if (response.error) {
         loginInput.classList.add("error");
         passwordInput.classList.add("error");
@@ -80,7 +89,7 @@ export class LoginForm extends View {
 
       User.setUserName(nickname);
 
-      Router.go('/');
+      Router.go("/");
     };
     documentForm.addEventListener("submit", handleFormSubmit);
   }

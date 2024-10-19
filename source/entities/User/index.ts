@@ -1,1 +1,1 @@
-export { TUser } from './model/type.ts';
+export { TUser } from "./model/type.ts";

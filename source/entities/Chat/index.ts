@@ -1,1 +1,1 @@
-export { TChat } from './model/type.ts';
+export { TChat } from "./model/type.ts";
