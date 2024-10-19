@@ -5,6 +5,7 @@ import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
 import { RouterObj as Router } from "@/shared/Router/Router";
+import { user as User } from "@/app/User";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -35,9 +36,10 @@ export class MainPage extends View {
 
     const handleExitClick = async () => {
       const response = await API.post<EmptyResponse, EmptyRequest>("/logout",{});
-    
+      
       if (!response.error) {
-        Router.go('/login')
+        User.setUserName('');
+        Router.go('/login');
       }
     };
 

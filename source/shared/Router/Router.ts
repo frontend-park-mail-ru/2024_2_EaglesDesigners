@@ -1,7 +1,6 @@
 import { Page404 } from "@/pages/Page404";
-import { EmptyResponse} from "@/shared/api/types";
-import { API } from "../api/api";
 import { Routes } from "./RouterTypes";
+import { user as User } from "@/app/User";
 
 class Router{
     #routes : Routes; 
@@ -12,9 +11,8 @@ class Router{
         this.#strictRoutes = [];
         this.#defaultAuthRoutes = [];
 
-        window.onpopstate = (async (event) => {
-            const isAuth = await this.isAuth();
-            if (!isAuth && event.state.url !== '/signup'){
+        window.onpopstate = (async (event) => {;
+            if (User.getUserName() === '' && event.state.url !== '/signup'){
                 this.go('/login', false);
                 return;
             }
@@ -27,21 +25,11 @@ class Router{
         this.#strictRoutes = strictRoutes;
         this.#defaultAuthRoutes = defaultAuthRoutes;
     }
-    
-    async isAuth() {
-        const response = await API.get<EmptyResponse>('/auth');
-        if (!response.error){
-            return true;
-        } 
-        return false;
-    }
 
 
     async go(url : string, addToHistory = true) {
-
         const index = this.#strictRoutes.findIndex((elem) => url === elem);
-        const authResult = await this.isAuth();
-        if (index !== -1 && authResult ) {
+        if (index !== -1 && User.getUserName() !== '' ) {
             this.go('/');
             return;
         } 
