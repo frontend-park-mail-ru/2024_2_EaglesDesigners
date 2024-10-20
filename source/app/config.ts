@@ -1,5 +1,6 @@
 import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage";
+import { ProfilePage } from "@/pages/ProfilePage/ui/ProfilePage";
 import { SignupPage } from "@/pages/SignupPage";
 
 export const routes = {
@@ -16,6 +17,10 @@ export const routes = {
       path: /^\/$/,
       view: new MainPage(),
     },
+    {
+      path: /^\/profile$/,
+      view: new ProfilePage(),
+    }
   ],
 };
 
