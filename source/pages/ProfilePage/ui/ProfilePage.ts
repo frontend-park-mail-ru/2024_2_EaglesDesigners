@@ -1,5 +1,6 @@
 import { View } from "@/app/View";
-import ProfilePageTemplate from './ProfilePage.handlebars'
+import ProfilePageTemplate from './ProfilePage.handlebars';
+import "./ProfilePage.scss";
 
 export class ProfilePage extends View{
     

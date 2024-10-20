@@ -2,6 +2,8 @@ import "./ui/index.scss";
 import { Router } from "@/shared/Router/Router.ts";
 import { UserStorage } from "@/entities/User";
 import { routes, strictRoutes, defaultAuthRoutes } from "./config.ts";
+import { AuthResponse } from "@/shared/api/types.ts";
+import { API } from "@/shared/api/api.ts";
 /**
  * Class provides class App, the initial class
  */
@@ -12,7 +14,10 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    UserStorage.init();
+    const response = await API.get<AuthResponse>('/auth');
+    if (!response.error) {
+      UserStorage.setUser(response.user);
+    }
 
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 
