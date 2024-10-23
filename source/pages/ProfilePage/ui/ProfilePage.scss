@@ -22,6 +22,7 @@
 .main-page__div-box__div-header__div-img__img{
     height: 50px;
     width: 70px;
+    
 }
 
 .main-page__div-box__div{
@@ -63,6 +64,7 @@
 
 .main-page__div-box__div-header__div-img__img {
     cursor: pointer;
+    
 }
 
 .main-page__div-box__div-user-info__form__input:focus {
@@ -80,10 +82,16 @@
     height: 200px;
     margin: auto;
     border-radius: 100%;
+    opacity: 50%;
 }
 
 .main-page__div-box__div-user-info__form__div-default-avatar__img:hover {
     cursor: pointer;
+    opacity: 1;
+}
+
+.ava {
+    display: none;
 }
 
 .main-page__div-box__button-confirm {
