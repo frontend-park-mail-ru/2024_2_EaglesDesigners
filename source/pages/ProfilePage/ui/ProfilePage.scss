@@ -28,7 +28,7 @@
 .main-page__div-box__div{
     display: flex;
     align-items: center;
-    margin-left: 34%;
+    margin-left: 38%;
 }
 
 .main-page__div-box__div__span{
@@ -52,7 +52,7 @@
     border: none;
     border-bottom: 2px solid var(--text-over-primary);
     padding-left: 10px;
-    width: var(--input-width);
+    width: 500px;
     height: var(--input-height);
     font-size: var(--form-font-size);
     font-family: var(--main-font-family);
@@ -104,10 +104,21 @@
 
 .main-page__div-box__div-user-info__form__p {
     display: flex;
-    width: 356px;
+    width: 500px;
     font-size: 14px;
     color: var(--text-over-primary);
     opacity: 50%;
     margin-bottom: 15px;
 }
 
+
+.date {
+    display: none;
+    
+}
+
+.box {
+    width: 500px;
+    height: 50px;
+    border: 1px solid #fff;
+}

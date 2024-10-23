@@ -30,10 +30,11 @@ export class App {
       if (currentURL == "/signup") {
         Router.go(currentURL);
         return;
-      } else if (UserStorage.getUser().name === "") {
-        Router.go("/login");
-        return;
-      }
+      } 
+      // else if (UserStorage.getUser().name === "") {
+      //   Router.go("/login");
+      //   return;
+      // }
       Router.go(currentURL);
     } else {
       Router.go("/404");
