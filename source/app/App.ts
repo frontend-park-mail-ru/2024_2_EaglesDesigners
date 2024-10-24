@@ -15,6 +15,7 @@ export class App {
    */
   async start() {
     const response = await API.get<AuthResponse>('/auth');
+    console.log(response);
     if (!response.error) {
       UserStorage.setUser(response.user);
     }
@@ -31,10 +32,10 @@ export class App {
         Router.go(currentURL);
         return;
       } 
-      // else if (UserStorage.getUser().name === "") {
-      //   Router.go("/login");
-      //   return;
-      // }
+      else if (UserStorage.getUser().name === "") {
+        Router.go("/login");
+        return;
+      }
       Router.go(currentURL);
     } else {
       Router.go("/404");
