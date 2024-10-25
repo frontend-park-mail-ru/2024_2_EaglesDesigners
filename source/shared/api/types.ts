@@ -12,6 +12,13 @@ export interface AuthResponse {
   message: string;
   user: TUser;
 }
+
+export interface ProfileResponse {
+  user: TUser;
+  bio: string;
+  birthdate: Date;
+}
+
 export interface ChatsResponse {
   message: string;
   chats: TChat[];

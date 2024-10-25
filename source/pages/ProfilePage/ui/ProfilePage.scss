@@ -28,7 +28,7 @@
 .main-page__div-box__div{
     display: flex;
     align-items: center;
-    margin-left: 38%;
+    margin-left: 36%;
 }
 
 .main-page__div-box__div__span{
@@ -108,17 +108,26 @@
     font-size: 14px;
     color: var(--text-over-primary);
     opacity: 50%;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 
 .date {
-    //display: none;
+    
+    width: 150px;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #4e5e83;
+    color: #fff;
     
 }
-
 .box {
     width: 500px;
     height: 50px;
+    border-radius: 15px;
     border: 1px solid #fff;
+    display: flex;
+    padding: 5px;
+    margin-bottom: 30px;
 }

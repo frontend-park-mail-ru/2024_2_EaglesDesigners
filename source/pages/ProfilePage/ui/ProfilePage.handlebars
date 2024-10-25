@@ -7,10 +7,11 @@
     <div class="main-page__div-sidebar__buttons-div">
       <span
         class="main-page__div-sidebar__buttons-div__span"
-      >{{user.user.name}}</span>
+      >{{user.name}}</span>
       <button
         type="button"
         class="main-page__div-sidebar__buttons-div__button exit-btn"
+        id="logout"
       >
         <div class="main-page__div-sidebar__buttons-div__button__div-container">
           <img
@@ -39,15 +40,17 @@
               <input type="file" id="ava" name="ava" class="ava" accept="image/webp, image/gif, image/jpeg, image/webp, image/webp"/><br />
             </label>
 
-            <input id="user-name" class="main-page__div-box__div-user-info__form__input" type="text" placeholder="Имя" name="text"/>
+            <input id="user-name" class="main-page__div-box__div-user-info__form__input" type="text" placeholder="Имя" value="{{user.name}}" name="text"/>
             <p class="main-page__div-box__div-user-info__form__p">Добавьте свое имя пожалуйста</p>
             <span id="nickname"></span>
             <label for="date">
+              <div class="box">
                 <p class="main-page__div-box__div-user-info__form__p">Добавьте свою дату рождения</p>
-                <input type="date" class="date" id="date"  name="date" min="1920-01-01" max="2020-01-01" required placeholder="Дата рождения (Опционально)">
+                <input type="date" class="date" id="date"  name="date" min="1920-01-01" max="2020-01-01" value="{{response.birthdate}}" required placeholder="Дата рождения (Опционально)">
+               </div>
             </label>
             
-            <input class="main-page__div-box__div-user-info__form__input" type="text" name="text" placeholder="Описание"/>
+            <input class="main-page__div-box__div-user-info__form__input" type="text" name="text" placeholder="Описание" value="{{response.bio}}"/>
             <p class="main-page__div-box__div-user-info__form__p">Любые подробности о себе, например: возраст, род занятий или город. Пример: 20 лет, фронтендер из Москвы</p>
         </form>
         

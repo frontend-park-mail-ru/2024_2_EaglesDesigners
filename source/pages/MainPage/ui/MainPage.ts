@@ -23,13 +23,18 @@ export class MainPage extends View {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
-
     parent.innerHTML = MainPageTemplate({ user });
 
     const chatListParent = parent.querySelector("#chat-list-import")!;
 
     const chatList = new ChatList(chatListParent);
     chatList.render();
+
+    // const Contacts = parent.querySelector("#contact-button")!;
+    // const handleContact = () => {
+      
+    // }
+
 
     const exitButton = parent.querySelector(".exit-btn")!;
 
