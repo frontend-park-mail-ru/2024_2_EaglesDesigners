@@ -26,37 +26,78 @@
   </div>
   <div class="main-page__div-box">
     <div class="main-page__div-box__div-header">
-        <div class="main-page__div-box__div-header__div-img">
-            <img id="back-button" class="main-page__div-box__div-header__div-img__img" src="/assets/image/strelka.svg" alt="">
-        </div>
-        <div class="main-page__div-box__div">
-            <span class="main-page__div-box__div__span">Профиль</span>
-        </div>
+      <div class="main-page__div-box__div-header__div-img">
+        <img
+          id="back-button"
+          class="main-page__div-box__div-header__div-img__img"
+          src="/assets/image/strelka.svg"
+          alt=""
+        />
+      </div>
+      <div class="main-page__div-box__div">
+        <span class="main-page__div-box__div__span">Профиль</span>
+      </div>
     </div>
     <div class="main-page__div-box__div-user-info">
-        <form class="main-page__div-box__div-user-info__form" method="post">
-            <label for="ava">
-              <img class="main-page__div-box__div-user-info__form__div-default-avatar__img" src="/assets/image/default-avatar.svg" />
-              <input type="file" id="ava" name="ava" class="ava" accept="image/webp, image/gif, image/jpeg, image/webp, image/webp"/><br />
-            </label>
+      <form class="main-page__div-box__div-user-info__form" method="post">
+        <label for="ava">
+          <img
+            class="main-page__div-box__div-user-info__form__div-default-avatar__img"
+            src="/assets/image/default-avatar.svg"
+          />
+          <input
+            type="file"
+            id="ava"
+            name="ava"
+            class="ava"
+            accept="image/webp, image/gif, image/jpeg, image/webp, image/webp"
+          /><br />
+        </label>
 
-            <input id="user-name" class="main-page__div-box__div-user-info__form__input" type="text" placeholder="Имя" value="{{user.name}}" name="text"/>
-            <p class="main-page__div-box__div-user-info__form__p">Добавьте свое имя пожалуйста</p>
-            <span id="nickname"></span>
-            <label for="date">
-              <div class="box">
-                <p class="main-page__div-box__div-user-info__form__p">Добавьте свою дату рождения</p>
-                <input type="date" class="date" id="date"  name="date" min="1920-01-01" max="2020-01-01" value="{{response.birthdate}}" required placeholder="Дата рождения (Опционально)">
-               </div>
-            </label>
-            
-            <input class="main-page__div-box__div-user-info__form__input" type="text" name="text" placeholder="Описание" value="{{response.bio}}"/>
-            <p class="main-page__div-box__div-user-info__form__p">Любые подробности о себе, например: возраст, род занятий или город. Пример: 20 лет, фронтендер из Москвы</p>
-        </form>
-        
+        <input
+          id="user-name"
+          class="main-page__div-box__div-user-info__form__input"
+          type="text"
+          placeholder="Имя"
+          value="{{user.name}}"
+          name="text"
+        />
+        <p class="main-page__div-box__div-user-info__form__p">Добавьте свое имя
+          пожалуйста</p>
+        <span id="nickname"></span>
+        <label for="date">
+          <div class="box">
+            <p class="main-page__div-box__div-user-info__form__p">Добавьте свою
+              дату рождения</p>
+            <input
+              type="date"
+              class="date"
+              id="date"
+              name="date"
+              min="1920-01-01"
+              max="2020-01-01"
+              value="{{response.birthdate}}"
+              required
+              placeholder="Дата рождения (Опционально)"
+            />
+          </div>
+        </label>
+
+        <input
+          class="main-page__div-box__div-user-info__form__input"
+          type="text"
+          name="text"
+          placeholder="Описание"
+          value="{{response.bio}}"
+        />
+        <p class="main-page__div-box__div-user-info__form__p">Любые подробности
+          о себе, например: возраст, род занятий или город. Пример: 20 лет,
+          фронтендер из Москвы</p>
+      </form>
+
     </div>
     <div id="confirm-button" class="main-page__div-box__button-confirm">
-        <img src="/assets/image/confirm.svg" alt=""/>
+      <img src="/assets/image/confirm.svg" alt="" />
     </div>
   </div>
 </div>

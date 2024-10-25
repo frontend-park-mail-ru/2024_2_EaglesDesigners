@@ -34,11 +34,10 @@ class Route {
   }
 
   async go(url: string, addToHistory = true) {
-    
     const index = this.#strictRoutes.findIndex((elem) => url === elem);
     if (index !== -1 && UserStorage.getUser().name !== "") {
       this.go("/");
-      
+
       return;
     }
 

@@ -32,9 +32,8 @@ export class MainPage extends View {
 
     // const Contacts = parent.querySelector("#contact-button")!;
     // const handleContact = () => {
-      
-    // }
 
+    // }
 
     const exitButton = parent.querySelector(".exit-btn")!;
 

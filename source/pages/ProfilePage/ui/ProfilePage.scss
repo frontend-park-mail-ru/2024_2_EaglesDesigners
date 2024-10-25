@@ -1,133 +1,128 @@
 .main-page__div-box {
-    display: flex;
-    flex-direction: column;
-    background: var(--primary);
-    flex: 1350 0 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--primary);
+  flex: 1350 0 0;
 }
 
 .main-page__div-box__div-header {
-    background: var(--header);
-    display: flex;
-    flex-direction: row;
-    height: 100px;
+  background: var(--header);
+  display: flex;
+  flex-direction: row;
+  height: 100px;
 }
 
 .main-page__div-box__div-header__div-img {
-    width: 100px;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding-left: 20px;
-}
-
-.main-page__div-box__div-header__div-img__img{
-    height: 50px;
-    width: 70px;
-    
-}
-
-.main-page__div-box__div{
-    display: flex;
-    align-items: center;
-    margin-left: 36%;
-}
-
-.main-page__div-box__div__span{
-    font-size: 30px;
-    font-family: var(--main-font-family);
-    color: #fff;
-}
-
-.main-page__div-box__div-user-info{
-    display: flex;
-    justify-content: center;
-    height: 78%;
-}
-
-.main-page__div-box__div-user-info__form {
-    margin: 3% auto auto auto;
-}
-
-.main-page__div-box__div-user-info__form__input{
-    display: block;
-    border: none;
-    border-bottom: 2px solid var(--text-over-primary);
-    padding-left: 10px;
-    width: 500px;
-    height: var(--input-height);
-    font-size: var(--form-font-size);
-    font-family: var(--main-font-family);
-    color: var(--text-over-primary);
-    background-color: var(--primary);
-    outline: none;
-    transition: 1s;
+  width: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 20px;
 }
 
 .main-page__div-box__div-header__div-img__img {
-    cursor: pointer;
-    
+  height: 50px;
+  width: 70px;
+}
+
+.main-page__div-box__div {
+  display: flex;
+  align-items: center;
+  margin-left: 36%;
+}
+
+.main-page__div-box__div__span {
+  font-size: 30px;
+  font-family: var(--main-font-family);
+  color: #fff;
+}
+
+.main-page__div-box__div-user-info {
+  display: flex;
+  justify-content: center;
+  height: 78%;
+}
+
+.main-page__div-box__div-user-info__form {
+  margin: 3% auto auto auto;
+}
+
+.main-page__div-box__div-user-info__form__input {
+  display: block;
+  border: none;
+  border-bottom: 2px solid var(--text-over-primary);
+  padding-left: 10px;
+  width: 500px;
+  height: var(--input-height);
+  font-size: var(--form-font-size);
+  font-family: var(--main-font-family);
+  color: var(--text-over-primary);
+  background-color: var(--primary);
+  outline: none;
+  transition: 1s;
+}
+
+.main-page__div-box__div-header__div-img__img {
+  cursor: pointer;
 }
 
 .main-page__div-box__div-user-info__form__input:focus {
-    border-bottom: 2px solid #4F82BF;
-    transition: 1s;
+  border-bottom: 2px solid #4f82bf;
+  transition: 1s;
 }
 
 .main-page__div-box__div-user-info__form__div-default-avatar {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .main-page__div-box__div-user-info__form__div-default-avatar__img {
-    display: flex;
-    width: 200px;
-    height: 200px;
-    margin: auto;
-    border-radius: 100%;
-    opacity: 50%;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border-radius: 100%;
+  opacity: 50%;
 }
 
 .main-page__div-box__div-user-info__form__div-default-avatar__img:hover {
-    cursor: pointer;
-    opacity: 1;
+  cursor: pointer;
+  opacity: 1;
 }
 
 .ava {
-    display: none;
+  display: none;
 }
 
 .main-page__div-box__button-confirm {
-    display: flex;
-    justify-content: end;
-    margin-right: 2%;
-    margin-bottom: 2%;
-    cursor: pointer;
+  display: flex;
+  justify-content: end;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  cursor: pointer;
 }
 
 .main-page__div-box__div-user-info__form__p {
-    display: flex;
-    width: 500px;
-    font-size: 14px;
-    color: var(--text-over-primary);
-    opacity: 50%;
-    margin-bottom: 30px;
+  display: flex;
+  width: 500px;
+  font-size: 14px;
+  color: var(--text-over-primary);
+  opacity: 50%;
+  margin-bottom: 30px;
 }
-
 
 .date {
-    
-    width: 150px;
-    height: 100%;
-    border-radius: 10px;
-    border: none;
-    background-color: #4e5e83;
-    color: #fff;
-    
+  width: 150px;
+  height: 100%;
+  border-radius: 10px;
+  border: none;
+  background-color: #4e5e83;
+  color: #fff;
 }
 .box {
-    width: 500px;
-    height: 50px;
-    border-radius: 15px;
-    border: 1px solid #fff;
-    display: flex;
-    padding: 5px;
-    margin-bottom: 30px;
+  width: 500px;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid #fff;
+  display: flex;
+  padding: 5px;
+  margin-bottom: 30px;
 }

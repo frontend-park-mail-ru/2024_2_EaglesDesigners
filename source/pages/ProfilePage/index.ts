@@ -1,1 +1,1 @@
-export {ProfilePage} from "./ui/ProfilePage.ts";
+export { ProfilePage } from "./ui/ProfilePage.ts";
