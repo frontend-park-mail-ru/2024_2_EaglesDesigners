@@ -1,0 +1,112 @@
+.main-page__div-box {
+    display: flex;
+    flex-direction: column;
+    background: var(--primary);
+    flex: 1350 0 0;
+    width: 402px;
+  }
+  
+  .main-page__div-box__div-header {
+    background: var(--header);
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: 59px;
+  }
+  
+  .main-page__div-box__div-header__div-img {
+    padding-left: 10px;
+    height: 24px;
+  }
+  
+  .main-page__div-box__div-header__div-img__img {
+    width: 24px;
+  }
+  
+  .main-page__div-box__div {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .main-page__div-box__div__span {
+    font-size: 24px;
+    font-family: var(--main-font-family);
+    color: #fff;
+  }
+  
+  .main-page__div-box__div-user-info {
+    display: flex;
+    justify-content: center;
+    height: 78%;
+  }
+  
+  .main-page__div-box__div-user-info__form {
+    margin: 3% auto auto auto;
+  }
+  
+  .main-page__div-box__div-user-info__form__input {
+    display: block;
+    border: none;
+    border-bottom: 2px solid var(--text-over-primary);
+    padding-left: 10px;
+    width: 320px;
+    height: var(--input-height);
+    font-size: var(--base-font-size);
+    font-family: var(--main-font-family);
+    color: var(--text-over-primary);
+    background-color: var(--primary);
+    outline: none;
+    transition: 1s;
+  }
+  
+  .main-page__div-box__div-header__div-img__img {
+    cursor: pointer;
+  }
+  
+  .main-page__div-box__div-user-info__form__input:focus {
+    border-bottom: 2px solid #4f82bf;
+    transition: 1s;
+  }
+  
+  .main-page__div-box__div-user-info__form__div-default-avatar {
+    margin-bottom: 10px;
+  }
+  
+  .main-page__div-box__div-user-info__form__div-default-avatar__img {
+    display: flex;
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    border-radius: 100%;
+    opacity: 50%;
+  }
+  
+  .main-page__div-box__div-user-info__form__div-default-avatar__img:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+  
+  .ava {
+    display: none;
+  }
+  
+  .main-page__div-box__button-confirm {
+    display: flex;
+    justify-content: end;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    cursor: pointer;
+  }
+  
+  .main-page__div-box__div-user-info__form__p {
+    display: flex;
+    width: 320px;
+    font-size: 14px;
+    color: var(--text-over-primary);
+    opacity: 50%;
+    margin-bottom: 30px;
+    font-family: var(--main-font-family);
+  }
+  

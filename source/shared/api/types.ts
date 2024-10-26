@@ -17,6 +17,7 @@ export interface ProfileResponse {
   user: TUser;
   bio: string;
   birthdate: Date;
+  avatarBase64: string;
 }
 
 export interface ChatsResponse {
@@ -35,4 +36,10 @@ export interface SignUpRequest {
   name: string;
   username: string;
   password: string;
+}
+
+export interface ProfileRequesr {
+  avatar: string;
+  name: string;
+
 }

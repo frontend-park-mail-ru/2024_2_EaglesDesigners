@@ -1,29 +1,3 @@
-<div class="main-page">
-  <div class="main-page__div-sidebar">
-    <div class="main-page__div-sidebar__logo-div">
-      <img src="/assets/image/Patefon.svg" />
-
-    </div>
-    <div class="main-page__div-sidebar__buttons-div">
-      <span
-        class="main-page__div-sidebar__buttons-div__span"
-      >{{user.name}}</span>
-      <button
-        type="button"
-        class="main-page__div-sidebar__buttons-div__button exit-btn"
-        id="logout"
-      >
-        <div class="main-page__div-sidebar__buttons-div__button__div-container">
-          <img
-            class="main-page__div-sidebar__buttons-div__button__div-container__img"
-            src="/assets/image/IconLogout.svg"
-          />
-
-        </div>
-      </button>
-    </div>
-
-  </div>
   <div class="main-page__div-box">
     <div class="main-page__div-box__div-header">
       <div class="main-page__div-box__div-header__div-img">
@@ -42,6 +16,7 @@
       <form class="main-page__div-box__div-user-info__form" method="post">
         <label for="ava">
           <img
+            id="avatar"
             class="main-page__div-box__div-user-info__form__div-default-avatar__img"
             src="/assets/image/default-avatar.svg"
           />
@@ -50,7 +25,7 @@
             id="ava"
             name="ava"
             class="ava"
-            accept="image/webp, image/gif, image/jpeg, image/webp, image/webp"
+            accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
           /><br />
         </label>
 
@@ -67,23 +42,23 @@
         <span id="nickname"></span>
         <label for="date">
           <div class="box">
-            <p class="main-page__div-box__div-user-info__form__p">Добавьте свою
-              дату рождения</p>
             <input
               type="date"
-              class="date"
+              class="main-page__div-box__div-user-info__form__input"
               id="date"
               name="date"
               min="1920-01-01"
               max="2020-01-01"
-              value="{{response.birthdate}}"
               required
               placeholder="Дата рождения (Опционально)"
             />
+            <p class="main-page__div-box__div-user-info__form__p">Добавьте свою
+              дату рождения</p>
           </div>
         </label>
 
         <input
+          id="bio"
           class="main-page__div-box__div-user-info__form__input"
           type="text"
           name="text"
@@ -100,4 +75,3 @@
       <img src="/assets/image/confirm.svg" alt="" />
     </div>
   </div>
-</div>

@@ -6,6 +6,7 @@ import "./MainPage.scss";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
+import { ProfileForm } from "@/widgets/ProfileForm";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -50,5 +51,15 @@ export class MainPage extends View {
     };
 
     exitButton.addEventListener("click", handleExitClick);
+
+    const settingsButton = parent.querySelector('#settings-button')!;
+    const handleSettings = () => {
+      const profileForm = new ProfileForm(chatListParent);
+      profileForm.render();
+    };
+    settingsButton.addEventListener('click', handleSettings);
+    
+
+
   }
 }
