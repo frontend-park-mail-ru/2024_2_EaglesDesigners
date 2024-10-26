@@ -69,11 +69,15 @@ export class ProfileForm{
 
 
     const confirmButton = this.#parent.querySelector("#confirm-button");
-    const updateProfileInfo = () => {
+    const updateProfileInfo = async () => {
       const nameInput: HTMLInputElement = this.#parent.querySelector("#user-name")!;
       const bioInput : HTMLInputElement = this.#parent.querySelector('#bio')!;
       const nickname: string = nameInput.value;
       const birthdayValue = birthdayInput.value;
+
+      const birthdate = new Date(birthdayValue);
+      const bio = bioInput.value;
+      const username = user.username;
       console.log(nickname);
       console.log(birthdayValue);
       console.log(avatar64);
@@ -81,17 +85,22 @@ export class ProfileForm{
 
 
       const nicknameSpan: HTMLSpanElement = this.#parent.querySelector("#nickname")!;
-      if (validateNickname(nickname) && nickname.length > 20) {
+      if (validateNickname(nickname) && nickname.length < 20) {
         console.log(nameInput.value);
       } else {
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
         return;
       }
-      // const response = await API.post<EmptyResponse, SignUpRequest>("/profile", {
-      //   name,
-      //   username,
-      //   password,
-      // });
+
+      const response = await API.put("/profile", {
+        avatar64,
+        bio,
+        birthdate,
+        nickname,
+        username,
+      });
+
+      console.log(response);
 
     };
     confirmButton?.addEventListener("click", updateProfileInfo);

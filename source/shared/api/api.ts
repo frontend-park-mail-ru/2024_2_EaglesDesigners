@@ -61,6 +61,27 @@ class Api {
       return { error: "could not fetch" } as Response;
     }
   }
+
+  async put<TResponse, TRequest>(path: string, body: TRequest) {
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+      const response = await fetch(url, {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(body),
+        credentials: "include",
+      });
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
 }
 
 export const API = new Api(localHost);

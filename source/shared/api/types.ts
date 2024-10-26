@@ -39,7 +39,8 @@ export interface SignUpRequest {
 }
 
 export interface ProfileRequesr {
-  avatar: string;
+  avatarBase64: string;
   name: string;
-
+  birthdate: Date;
+  bio: string
 }
