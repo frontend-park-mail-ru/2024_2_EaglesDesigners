@@ -13,28 +13,27 @@ export class ContactsList {
   async render() {
     this.#parent.innerHTML = ContactsListTemplate();
 
-    const response = await API.get<ContactRequest>('/contacts');
+    const response = await API.get<ContactRequest>("/contacts");
     console.log(this.#parent);
-    const contactList = this.#parent.querySelector('#contacts-list')!;
+    const contactList = this.#parent.querySelector("#contacts-list")!;
     console.log(contactList);
     const contactCard = new ContactCard(contactList);
 
     if (!response.error) {
       const contacts = response.contacts;
-      
+
       contacts.map((element) => {
-        element.avatarBase64 = 'data:image/png;base64,' + element.avatarBase64; 
+        element.avatarBase64 = "data:image/png;base64," + element.avatarBase64;
         contactCard.render(element);
       });
     }
-    
-    const backButton = this.#parent.querySelector('#back-button')!;
+
+    const backButton = this.#parent.querySelector("#back-button")!;
 
     const handleBack = () => {
-      Router.go('/');
+      Router.go("/");
     };
 
-    backButton.addEventListener('click', handleBack);
-    
+    backButton.addEventListener("click", handleBack);
   }
 }

@@ -1,6 +1,6 @@
 export interface TContact {
-    avatarBase64: string,
-    id: string,
-    name: string,
-    username: string,
+  avatarBase64: string;
+  id: string;
+  name: string;
+  username: string;
 }

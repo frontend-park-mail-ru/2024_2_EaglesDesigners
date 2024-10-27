@@ -43,7 +43,7 @@ export interface ProfileRequest {
   avatarBase64: string;
   name: string;
   birthdate: Date;
-  bio: string
+  bio: string;
 }
 
 export interface ContactRequest {

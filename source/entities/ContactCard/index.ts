@@ -1,1 +1,1 @@
-export type {TContact} from "./api/ContactType";
+export type { TContact } from "./api/ContactType";

@@ -53,22 +53,27 @@ export class MainPage extends View {
 
     exitButton.addEventListener("click", handleExitClick);
 
-    const settingsButton = parent.querySelector('#settings-button')!;
+    const settingsButton = parent.querySelector("#settings-button")!;
     const handleSettings = () => {
       const profileForm = new ProfileForm(chatListParent);
       profileForm.render();
     };
-    settingsButton.addEventListener('click', handleSettings);
-    
+    settingsButton.addEventListener("click", handleSettings);
 
-    const contactButton = parent.querySelector('#contact-button');
+    const contactButton = parent.querySelector("#contact-button");
 
     const handleContacts = () => {
       const contactForm = new ContactsList(chatListParent);
       contactForm.render();
     };
-    contactButton?.addEventListener('click', handleContacts);
+    contactButton?.addEventListener("click", handleContacts);
 
+    const homeButton = parent.querySelector("#home-button")!;
 
+    const handleHome = () => {
+      chatList.render();
+    };
+
+    homeButton.addEventListener("click", handleHome);
   }
 }
