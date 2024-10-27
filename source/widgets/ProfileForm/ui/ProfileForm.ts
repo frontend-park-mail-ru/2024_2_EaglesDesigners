@@ -31,7 +31,7 @@ export class ProfileForm{
     console.log(avatar.src);
 
     const avatarInput : HTMLInputElement = this.#parent.querySelector('#ava')!;
-    let avatar64 : string | ArrayBuffer | undefined;
+    let avatarBase64 : string | ArrayBuffer | undefined;
     const handleAvatar = () => {
         if (avatarInput.files) {
             const file = avatarInput.files[0];
@@ -47,8 +47,8 @@ export class ProfileForm{
                     if (typeof base64String === 'string') {
                       index = base64String?.indexOf('base64,');
                     }
-                    avatar64 = base64String?.slice(index + 'base64,'.length);
-                    avatar.src = 'data:image/png;base64,' + avatar64;
+                    avatarBase64 = base64String?.slice(index + 'base64,'.length);
+                    avatar.src = 'data:image/png;base64,' + avatarBase64;
                 };
                 
                 reader.readAsDataURL(file); // Читаем файл как data URL (base64)
@@ -77,10 +77,10 @@ export class ProfileForm{
 
       const birthdate = new Date(birthdayValue);
       const bio = bioInput.value;
-      const username = user.username;
+      const name = nickname;
       console.log(nickname);
       console.log(birthdayValue);
-      console.log(avatar64);
+      console.log(avatarBase64);
       console.log(bioInput.value); 
 
 
@@ -91,19 +91,25 @@ export class ProfileForm{
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
         return;
       }
-
+      console.log(avatarBase64, name);
       const response = await API.put("/profile", {
-        avatar64,
+        avatarBase64,
         bio,
         birthdate,
-        nickname,
-        username,
+        name,
       });
 
-      console.log(response);
+      if (!response.error) {
+        UserStorage.setUserName(name);
+      }
+
+      Router.go('/');
+
 
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
 
+
+    
   }
 }
