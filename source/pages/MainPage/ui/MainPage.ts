@@ -7,6 +7,7 @@ import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
 import { ProfileForm } from "@/widgets/ProfileForm";
+import { ContactsList } from "@/widgets/ContactsList/ui/ContactsList";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -59,6 +60,14 @@ export class MainPage extends View {
     };
     settingsButton.addEventListener('click', handleSettings);
     
+
+    const contactButton = parent.querySelector('#contact-button');
+
+    const handleContacts = () => {
+      const contactForm = new ContactsList(chatListParent);
+      contactForm.render();
+    };
+    contactButton?.addEventListener('click', handleContacts);
 
 
   }

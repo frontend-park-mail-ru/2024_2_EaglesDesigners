@@ -21,14 +21,12 @@ export class ProfileForm{
     const response = await API.get<ProfileResponse>("/profile");
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response });
-    console.log(typeof response.birthdate);
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
     const birthdayInput: HTMLInputElement = this.#parent.querySelector("#date")!;
     birthdayInput.value = birthday;
 
     const avatar : HTMLImageElement = this.#parent.querySelector('#avatar')!;
     avatar.src = 'data:image/png;base64,' + response.avatarBase64;
-    console.log(avatar.src);
 
     const avatarInput : HTMLInputElement = this.#parent.querySelector('#ava')!;
     let avatarBase64 : string | ArrayBuffer | undefined;
@@ -78,20 +76,13 @@ export class ProfileForm{
       const birthdate = new Date(birthdayValue);
       const bio = bioInput.value;
       const name = nickname;
-      console.log(nickname);
-      console.log(birthdayValue);
-      console.log(avatarBase64);
-      console.log(bioInput.value); 
 
 
       const nicknameSpan: HTMLSpanElement = this.#parent.querySelector("#nickname")!;
-      if (validateNickname(nickname) && nickname.length < 20) {
-        console.log(nameInput.value);
-      } else {
+      if (!validateNickname(nickname) || nickname.length > 20) {
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
         return;
       }
-      console.log(avatarBase64, name);
       const response = await API.put("/profile", {
         avatarBase64,
         bio,
