@@ -14,6 +14,10 @@ export interface AuthResponse {
   user: TUser;
 }
 
+export interface ContactResponse {
+  contactUsername: string;
+}
+
 export interface ProfileResponse {
   user: TUser;
   bio: string;

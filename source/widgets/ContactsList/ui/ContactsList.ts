@@ -23,11 +23,14 @@ export class ContactsList {
 
     if (!response.error) {
       const contacts = response.contacts;
-
-      contacts.map((element) => {
-        element.avatarBase64 = "data:image/png;base64," + element.avatarBase64;
-        contactCard.render(element);
-      });
+      
+      if (contacts) {
+        contacts.map((element) => {
+          element.avatarBase64 = "data:image/png;base64," + element.avatarBase64;
+          contactCard.render(element);
+        });
+      }
+      
     }
 
     const backButton = this.#parent.querySelector("#back-button")!;
@@ -43,7 +46,7 @@ export class ContactsList {
     const addContactButton = this.#parent.querySelector('#add-contact-button')!;
 
     const handleAddContact = () => {
-      const ContactForm = new ContactAddForm(contactAdd);
+      const ContactForm = new ContactAddForm(contactAdd, contactList);
       ContactForm.render();
     };
 
