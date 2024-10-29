@@ -4,6 +4,7 @@ import { ContactRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import "./ContactsList.scss";
+import { ContactAddForm } from "@/widgets/ContactAddForm/index.ts";
 
 export class ContactsList {
   #parent;
@@ -36,5 +37,16 @@ export class ContactsList {
     };
 
     backButton.addEventListener("click", handleBack);
+
+    const contactAdd = this.#parent.querySelector('#contact-add')!;
+
+    const addContactButton = this.#parent.querySelector('#add-contact-button')!;
+
+    const handleAddContact = () => {
+      const ContactForm = new ContactAddForm(contactAdd);
+      ContactForm.render();
+    };
+
+    addContactButton.addEventListener('click', handleAddContact);
   }
 }

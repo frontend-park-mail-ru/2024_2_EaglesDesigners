@@ -1,16 +1,23 @@
 .contact-page__div-box {
-    width: 402px;
     display: flex;
     flex-direction: column;
+    background: var(--primary);
+    flex: 1350 0 0;
+    width: 402px;
 }
 
 .contact-page__div-box__div-header {
+    background: var(--header);
     display: flex;
     flex-direction: row;
-    padding: 10px;
-    background: var(--header);
-    margin-bottom: 10px;
+    justify-content: left;
     align-items: center;
+    height: 59px;
+    margin-bottom: 20px;
+}
+
+.contact-page__div-box__div-header__div-img__img {
+    cursor: pointer;
 }
 
 .contact-page__div-box__div{
@@ -30,16 +37,12 @@
 }
 
 .contact-page__div-box__button-div__img {
-    width: 54px;
-    height: 54px;
+    cursor: pointer;
 }
 
 
-
 .contact-page__div-box__div-header__div-img {
-    display: flex;
-    justify-content: center;
-    width: 24px;
+    padding-left: 10px;
     height: 24px;
 }
 

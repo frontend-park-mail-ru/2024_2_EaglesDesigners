@@ -1,0 +1,88 @@
+.contact-add {
+    width: 351px;
+    height: 232px;
+    z-index: 99;
+    border-radius: 25px;
+    background-color: #4F82BF;
+}
+
+.contact-add__header-div {
+    display: flex;
+    flex-direction: row;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.contact-add__header-div__div-text__span {
+    color: #fff;
+    font-size: 22px;
+    font-family: var(--main-font-family);
+}
+
+.contact-add__header-div__close-btn__img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+
+.contact-add__header-div__close-btn {
+    margin-left: 39%;
+}
+
+.contact-add__form__div__info-div__span {
+    color: #fff;
+    font-size: 16px;
+
+}
+
+.contact-add__form__div__info-div {
+    margin-top: 20px;
+    padding-left: 15px;
+}
+
+.contact-add__form__div__input-div__input {
+    display: block;
+    width: 316px;
+    height: 25px;
+    margin-left: 15px;
+    display: block;
+    border: none;
+    border-bottom: 2px solid var(--text-over-primary);
+    color: var(--text-over-primary);
+    background-color: #4F82BF;
+    outline: none;
+    transition: 1s;
+
+    &::placeholder {
+        color: var(--text-over-primary);
+    }
+
+    &:focus {
+        border-bottom: 2px solid var(--background);
+        transition: 1s;
+    }
+}
+
+.contact-add__form__div-confirm {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: end;
+    margin-top: 8%;
+}
+
+.contact-add__form__div__username-div {
+    margin-top: 7px;
+    padding-left: 15px;
+}
+
+.contact-add__form__div__username-div__span {
+    color: #fff;
+    font-size: 12px;
+    opacity: 50%;
+}
+
+.contact-add__form__div-confirm__div-img__img {
+    cursor: pointer;
+}
