@@ -29,7 +29,7 @@ $background: var(--background);
 
 .main-page__div-sidebar__buttons-div {
   display: flex;
-  height: 25%;
+  height: 50%;
   flex-direction: column;
   justify-content: flex-end;
 }
@@ -57,7 +57,8 @@ $background: var(--background);
 }
 
 .main-page__div-chat-list {
-  flex: 382 0 0;
+  display: flex;
+  //flex: 382 0 0;
 }
 
 .main-page__chat-content-div {
@@ -147,7 +148,7 @@ $background: var(--background);
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 75%;
+  height: 50%;
   margin-top: 100%;
 }
 

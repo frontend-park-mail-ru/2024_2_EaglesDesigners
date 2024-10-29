@@ -3,6 +3,7 @@ import ContactsListTemplate from "./ContactsList.handlebars";
 import { ContactRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { Router } from "@/shared/Router/Router";
+import "./ContactsList.scss";
 
 export class ContactsList {
   #parent;
