@@ -68,6 +68,7 @@
     background-color: #4F82BF;
     outline: none;
     transition: 1s;
+    font-size: 16px;
 
     &::placeholder {
         color: var(--text-over-primary);
@@ -84,7 +85,7 @@
     padding: 10px;
     display: flex;
     justify-content: end;
-    margin-top: 8%;
+    margin-top: 3%;
 }
 
 .contact-add__form__div__username-div {
@@ -100,4 +101,14 @@
 
 .contact-add__form__div-confirm__div-img__img {
     cursor: pointer;
+}
+
+.contact-add__form__div__error-div {
+    padding-left: 15px;
+    min-height: 18px;
+}
+
+.contact-add__form__div__error-div__span {
+    color: red;
+    font-size: 14px;
 }

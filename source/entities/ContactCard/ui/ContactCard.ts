@@ -9,6 +9,7 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
+    contact.avatarBase64 = "data:image/png;base64," + contact.avatarBase64;
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ contact }),

@@ -26,7 +26,6 @@ export class ContactsList {
       
       if (contacts) {
         contacts.map((element) => {
-          element.avatarBase64 = "data:image/png;base64," + element.avatarBase64;
           contactCard.render(element);
         });
       }
@@ -51,5 +50,12 @@ export class ContactsList {
     };
 
     addContactButton.addEventListener('click', handleAddContact);
+
+    const contactCardElement = document.querySelectorAll(".contact-card");
+    contactCardElement.forEach((elem) => {
+      elem.addEventListener("click", (e) => {
+        e.preventDefault();
+      });
+    });
   }
 }

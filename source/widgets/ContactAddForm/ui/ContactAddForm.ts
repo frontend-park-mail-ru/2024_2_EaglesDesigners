@@ -30,11 +30,20 @@ export class ContactAddForm {
                 contactUsername,
             });
             
+            const spanError = this.#parent.querySelector('#error-span')!;
+
             if (!response.error) {
-                console.log(response);
-                response.avatarBase64 = "data:image/png;base64," + response.avatarBase64;
+                spanError.textContent = '';
                 const contactCard = new ContactCard(this.#contactList);
                 contactCard.render(response);
+                const contactCardElements = document.querySelectorAll(".contact-card")!;
+                contactCardElements[contactCardElements.length - 1].addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            }
+
+            if (response.error) {
+                spanError.textContent = "Такой пользователь не найден";
             }
         };
 
@@ -47,5 +56,7 @@ export class ContactAddForm {
         };
 
         cancelButton.addEventListener('click', handleCancel);
+
+        //document.addEventListener('click', handleCancel);
     }
 }
