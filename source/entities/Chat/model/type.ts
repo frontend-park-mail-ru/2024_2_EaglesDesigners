@@ -1,10 +1,8 @@
 export interface TChat {
-  avatarURL?: string;
-  chatId?: number;
-  chatName?: string;
-  chatType?: "personalMessages" | "group" | "channel";
-  lastMessage?: string;
-  usersId?: number[];
+  avatarURL: string;
+  chatId: string;
+  chatName: string;
+  chatType: "personalMessages" | "group" | "channel";
+  lastMessage: string;
+  usersId: number[];
 }
-
-export type ChatListModel = TChat[];
