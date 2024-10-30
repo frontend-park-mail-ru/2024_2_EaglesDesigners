@@ -1,81 +1,79 @@
-<div class="main-page__div-box">
-  <div class="main-page__div-box__div-header">
-    <div class="main-page__div-box__div-header__div-img">
+<div class="profile-form">
+  <div class="profile-form-header">
+    <div class="profile-form-header-img">
       <img
         id="back-button"
-        class="main-page__div-box__div-header__div-img__img"
+        class="profile-form-header-img__img"
         src="/assets/image/strelka.svg"
         alt=""
       />
     </div>
-    <div class="main-page__div-box__div">
-      <span class="main-page__div-box__div__span">Профиль</span>
+    <div class="profile-form-header-name">
+      <span class="profile-form-header-name__span">Профиль</span>
     </div>
   </div>
-  <div class="main-page__div-box__div-user-info">
-    <form class="main-page__div-box__div-user-info__form" method="post">
+  <div class="profile-form-user-info">
+    <form class="profile-form-user" method="post">
       <label for="ava">
         <img
           id="avatar"
-          class="main-page__div-box__div-user-info__form__div-default-avatar__img"
+          class="profile-form-user__img"
           src="/assets/image/default-avatar.svg"
         />
         <input
           type="file"
           id="ava"
           name="ava"
-          class="ava"
+          class="profile-form-user__input-avatar"
           accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
         /><br />
       </label>
-        <div class="errorDiv">
-            <span id="nickname" class="error-span"></span>
+        <div class="profile-error">
+            <span id="nickname" class="profile-error__span"></span>
         </div>
       <input
         id="user-name"
-        class="main-page__div-box__div-user-info__form__input"
+        class="profile-form-user__input-name profile-form-user__input"
         type="text"
         placeholder="Имя"
         value="{{user.name}}"
         name="text"
       />
-      <p class="main-page__div-box__div-user-info__form__p">Добавьте свое имя
+      <p class="profile-form-user__p">Добавьте свое имя
         пожалуйста</p>
       <label for="date">
-        <div class="errorDiv">
-            <span id="date-error" class="date-span-error"></span>
+        <div class="profile-error">
+            <span id="date-error" class="profile-error__span"></span>
         </div>
-        <div class="box">
-          <input
-            type="date"
-            class="main-page__div-box__div-user-info__form__input"
-            id="date"
-            name="date"
-            min="1920-01-01"
-            max="2020-01-01"
-            required
-            placeholder="Дата рождения (Опционально)"
-          />
-          <p class="main-page__div-box__div-user-info__form__p">Добавьте свою
-            дату рождения</p>
-        </div>
+        <input
+        type="date"
+        class="profile-form-user__input-date profile-form-user__input"
+        id="date"
+        name="date"
+        min="1920-01-01"
+        max="2020-01-01"
+        required
+        placeholder="Дата рождения (Опционально)"
+        />
+        <p class="profile-form-user__p">Добавьте свою
+        дату рождения</p>
       </label>
 
       <input
         id="bio"
-        class="main-page__div-box__div-user-info__form__input"
+        class="profile-form-user__input-bio profile-form-user__input"
         type="text"
         name="text"
         placeholder="Описание"
         value="{{response.bio}}"
       />
-      <p class="main-page__div-box__div-user-info__form__p">Любые подробности о
+      <p class="profile-form-user__p">Любые подробности о
         себе, например: возраст, род занятий или город. Пример: 20 лет,
         фронтендер из Москвы</p>
     </form>
 
   </div>
-  <div id="confirm-button" class="main-page__div-box__button-confirm">
-    <img src="/assets/image/confirm.svg" alt="" />
+  <div id="confirm-button" class="profile-form-confirm">
+    <img class="profile-form-confirm__img" src="/assets/image/confirm.svg" alt="" />
   </div>
 </div>

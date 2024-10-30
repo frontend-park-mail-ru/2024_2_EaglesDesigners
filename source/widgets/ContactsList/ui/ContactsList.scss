@@ -1,4 +1,4 @@
-.contact-page__div-box {
+.contacts-list {
     display: flex;
     flex-direction: column;
     background: var(--primary);
@@ -6,7 +6,7 @@
     width: 402px;
 }
 
-.contact-page__div-box__div-header {
+.contacts-list-header {
     background: var(--header);
     display: flex;
     flex-direction: row;
@@ -16,38 +16,37 @@
     margin-bottom: 20px;
 }
 
-.contact-page__div-box__div-header__div-img__img {
-    cursor: pointer;
-}
-
-.contact-page__div-box__div{
+.contacts-list-header-name{
     margin-left: 10px;
     padding: 7px;
+
+    &__span {
+        color: #fff;
+        font-family: var(--main-font-family);
+        font-size: var(--form-font-size);
+    }
 }
 
-.contact-page__div-box__div__span {
-    color: #fff;
-    font-family: var(--main-font-family);
-    font-size: var(--form-font-size);
-}
-
-.contact-page__div-box__button-div {
+.button-add-img {
     display: flex;
     justify-content: flex-end;
     margin-top: 15px;
+
+    &__img {
+        cursor: pointer;
+    }
 }
 
-.contact-page__div-box__button-div__img {
-    cursor: pointer;
-}
-
-
-.contact-page__div-box__div-header__div-img {
+.contacts-list-header-img {
     padding-left: 10px;
     height: 24px;
+
+    &__img{
+        cursor: pointer;
+    }
 }
 
-.contact-page__div-box__div__contact-div {
+.contacts-user-list {
     min-height: 625px;
     max-height: 625px;
     overflow: scroll;

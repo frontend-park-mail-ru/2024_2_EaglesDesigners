@@ -7,7 +7,7 @@ import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
 import { ProfileForm } from "@/widgets/ProfileForm";
-import { ContactsList } from "@/widgets/ContactsList/ui/ContactsList";
+import { ContactsList } from "@/widgets/ContactsList";
 
 /**
  * Mainpage class provides functions for rendering main page
