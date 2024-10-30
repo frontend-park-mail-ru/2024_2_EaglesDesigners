@@ -1,12 +1,25 @@
 import { API } from "@/shared/api/api";
 import { TUser } from "../index";
 import { AuthResponse } from "@/shared/api/types";
+import { TChat } from "@/entities/Chat";
+import { ChatMessage } from "@/entities/ChatMessage";
 
 class UserStore {
   #user: TUser;
+  #chat: TChat;
+  #chatMessageEntity: ChatMessage;
 
   constructor() {
-    this.#user = { id: 0, name: "", username: "" };
+    this.#user = { id: "", name: "", username: "" };
+    this.#chat = {
+      avatarURL: "",
+      chatId: "",
+      chatName: "",
+      chatType: "personalMessages",
+      lastMessage: "",
+      usersId: []
+    };
+    this.#chatMessageEntity = new ChatMessage(null);
   }
 
   async init() {
@@ -22,6 +35,22 @@ class UserStore {
 
   getUser() {
     return this.#user;
+  }
+
+  setChat(chat: TChat) {
+    this.#chat = chat;
+  }
+
+  getChat() {
+    return this.#chat;
+  }
+
+  setChatMessageEntity(chatMessage: ChatMessage) {
+    this.#chatMessageEntity = chatMessage;
+  }
+
+  getChatMessageEntity() {
+    return this.#chatMessageEntity;
   }
 }
 
