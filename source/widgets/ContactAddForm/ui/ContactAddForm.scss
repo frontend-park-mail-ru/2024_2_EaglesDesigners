@@ -109,6 +109,14 @@
 }
 
 .contact-add__form__div__error-div__span {
-    color: red;
+    
     font-size: 14px;
+}
+
+.error-span {
+    color: red;
+}
+
+.not-error-span {
+    color: #fff;
 }

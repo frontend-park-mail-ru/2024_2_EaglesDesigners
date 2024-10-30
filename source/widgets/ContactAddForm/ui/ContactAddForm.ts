@@ -40,10 +40,15 @@ export class ContactAddForm {
                 contactCardElements[contactCardElements.length - 1].addEventListener('click', (e) => {
                     e.preventDefault();
                 });
+                spanError.textContent = 'Контакт успешно добавлен';
+                spanError.classList.add('not-error-span');
+                spanError.classList.remove('error-span');
             }
 
             if (response.error) {
+                spanError.classList.add('error-span');
                 spanError.textContent = "Такой пользователь не найден";
+                spanError.classList.remove('not-error-span');
             }
         };
 
