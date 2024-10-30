@@ -1,0 +1,35 @@
+<div class="chat">
+    <div class="header">
+        <img class="avatar" src="{{chat.avatarURL}}" />
+        {{!-- src="https://sun9-12.userapi.com/s/v1/ig2/dKtUInEfg42miM3goLhUDTWAJLTU46Htx_oGs2Rvpi0PQ2qEi1SOhZ1qQJthLsCBr6t3zVZCKI58jWh_vCkfgRSo.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&u=QVSsEuJmDgfDy54cbw-XOBn6v-VIUOtvznSCt2SqOoI&cs=640x640" /> --}}
+        <div class="info">
+            <span class="info__chat-name">
+                {{!-- VK × МГТУ (ex. Технопарк) --}}
+                {{ chat.chatName }}
+            </span>
+            <span class="info__chat-status">
+                1 585 участника, 903 онлайн
+            </span>
+        </div>
+        <span class="buttons">
+
+        </span>
+    </div>
+    <div class="messages">
+       
+    </div>
+    <div class="input">
+        <div class="input__bubble">
+            <div class="attach-btn">
+                <img class="input__send__icon" src="/assets/image/Attach.svg" />
+            </div>
+            <textarea class="text-area" placeholder="Введите сообщение"></textarea>
+            <div class="emoji-btn">
+                <img class="input__send__icon" src="/assets/image/Emoji.svg" />
+            </div>
+        </div>
+        <div class="input__send-btn">
+            <img class="send-btn__icon" src="/assets/image/Send.svg" />
+        </div>
+    </div>
+</div>
