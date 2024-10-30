@@ -62,6 +62,15 @@
   transition: 1s;
 }
 
+.errorDiv {
+    min-height: 18px;
+}
+
+.date-span-error {
+    color: red;
+    font-size: 14px;
+}
+
 .main-page__div-box__div-header__div-img__img {
   cursor: pointer;
 }

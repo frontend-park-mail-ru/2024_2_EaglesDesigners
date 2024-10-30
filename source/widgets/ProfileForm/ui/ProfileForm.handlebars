@@ -28,7 +28,9 @@
           accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
         /><br />
       </label>
-
+        <div class="errorDiv">
+            <span id="nickname" class="error-span"></span>
+        </div>
       <input
         id="user-name"
         class="main-page__div-box__div-user-info__form__input"
@@ -39,8 +41,10 @@
       />
       <p class="main-page__div-box__div-user-info__form__p">Добавьте свое имя
         пожалуйста</p>
-      <span id="nickname"></span>
       <label for="date">
+        <div class="errorDiv">
+            <span id="date-error" class="date-span-error"></span>
+        </div>
         <div class="box">
           <input
             type="date"

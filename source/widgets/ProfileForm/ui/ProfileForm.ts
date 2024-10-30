@@ -7,6 +7,7 @@ import { validateForm } from "@/shared/validation/formValidation";
 import { ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
+import { validateYear } from "@/shared/validation/yearValidation";
 
 export class ProfileForm {
   #parent;
@@ -63,7 +64,7 @@ export class ProfileForm {
     const confirmButton = this.#parent.querySelector("#confirm-button");
     const updateProfileInfo = async () => {
       const nameInput: HTMLInputElement =
-        this.#parent.querySelector("#user-name")!;
+      this.#parent.querySelector("#user-name")!;
       const bioInput: HTMLInputElement = this.#parent.querySelector("#bio")!;
       const nickname: string = nameInput.value;
       const birthdayValue = birthdayInput.value;
@@ -72,12 +73,30 @@ export class ProfileForm {
       const bio = bioInput.value;
       const name = nickname;
 
-      const nicknameSpan: HTMLSpanElement =
-        this.#parent.querySelector("#nickname")!;
+      let flag = true;
+      const nicknameSpan: HTMLSpanElement = this.#parent.querySelector("#nickname")!;
       if (!validateNickname(nickname) || nickname.length > 20) {
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
+        flag = false;
+      } else {
+        nicknameSpan.textContent = '';
+      }
+      const dateInput : HTMLInputElement = this.#parent.querySelector('#date')!;
+      const getYear = new Date(dateInput.value).getFullYear();
+      console.log(validateYear(getYear), getYear);
+      const spanDateError : HTMLSpanElement = this.#parent.querySelector('#date-error')!;
+      if (!validateYear(getYear)) {
+        validateForm(dateInput, "Год рождения должен быть от 1920 до 2020", spanDateError);
+        flag = false;
+      } else {
+        spanDateError.textContent = '';
+      }
+
+      if (!flag) {
         return;
       }
+
+      
       const response = await API.put("/profile", {
         avatarBase64,
         bio,
