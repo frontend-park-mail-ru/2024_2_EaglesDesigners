@@ -62,6 +62,16 @@ export class ContactAddForm {
 
         cancelButton.addEventListener('click', handleCancel);
 
-        //document.addEventListener('click', handleCancel);
+        const handlerClickOutsideModal = ( (e : Event) => {
+            if (e.target instanceof Element) {
+                if (e.target.className === 'contact-add') {
+                    this.#parent.innerHTML = '';
+                }
+            }
+            
+            
+        });
+
+        document.addEventListener('click', handlerClickOutsideModal);
     }
 }
