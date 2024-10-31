@@ -6,6 +6,7 @@ import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { UserStorage } from "@/entities/User";
+import "./loginForm.scss";
 
 /**
  * Class provides Login form

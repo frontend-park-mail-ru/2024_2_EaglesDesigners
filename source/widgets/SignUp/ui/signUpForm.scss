@@ -1,15 +1,27 @@
-.auth-form__form__a {
-  color: var(--a-element);
-  font-size: var(--base-font-size);
-  font-family: var(--main-font-family);
-  text-decoration: underline;
-  margin-left: 30px;
-}
+.auth-form-user {
+  &__a-login-redirect {
+    color: var(--a-element);
+    font-size: var(--base-font-size);
+    font-family: var(--main-font-family);
+    text-decoration: underline;
+    margin-left: 30px;
+  }
 
-.auth-form__form__button-create {
-  margin-top: 20px;
-  background-color: var(--form-button-access);
-  color: var(--primary);
+  &__button-create {
+    margin-top: 30px;
+    background-color: var(--form-button-access);
+    color: var(--primary);
+    margin-left: 28px;
+  }
+
+  &__p {
+    text-align: center;
+    font-size: 30px;
+    color: var(--text-over-primary);
+    font-family: var(--main-font-family);
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
 }
 
 .signup-password-eye {
@@ -20,24 +32,21 @@
   margin-left: 20px;
 }
 
-.auth-form__form__error {
-  min-height: 32px;
+.auth-form-error {
+  min-height: 34px;
   max-width: var(--input-width);
   margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
 
-.signup-btn {
-  margin-left: 25px;
-}
-
-.auth-form__form__p-signup {
-  text-align: center;
-  font-size: 30px;
-  color: var(--text-over-primary);
-  font-family: var(--main-font-family);
-  margin-top: 100px;
-  margin-bottom: 50px;
+  &__span {
+    font-size: var(--error-font-size);
+    font-family: var(--main-font-family);
+    color: var(--text-error-message);
+    min-height: 16px;
+    height: fit-content;
+    display: inline-block;
+    align-self: flex-start;
+  }
 }
