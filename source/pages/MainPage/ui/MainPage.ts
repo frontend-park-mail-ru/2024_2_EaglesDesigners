@@ -57,6 +57,10 @@ export class MainPage extends View {
         return;
       } 
 
+      if(message.authorID === UserStorage.getUser().id){ // TODO: добавить иконку отправки сообщения и при успешном response, убирать ее
+        return;
+      }
+
         UserStorage.getChatMessageEntity().renderNewMessage(message);
 
     }

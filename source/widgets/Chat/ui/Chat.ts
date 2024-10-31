@@ -38,13 +38,27 @@ export class Chat {
             textArea.value = '';
 
             if (messageText) {
-                const responseSend = await API.post<EmptyResponse, SendMessageRequest>("/chat/"+chat.chatId+"/messages", {
-                  text: messageText,
-                });
 
-                if (responseSend.error) {
-                  console.log("Сообщение не отправилось ", responseSend.error)
-                }              
+                const user = UserStorage.getUser();
+
+                const currentdate = new Date();
+                const datetime = currentdate.getHours() + ":" + currentdate.getMinutes();
+
+                const message: TChatMessage = {
+                  authorID: user.id,
+                  authorName: user.name,
+                  chatId: UserStorage.getChat().chatId,
+                  datetime: datetime,
+                  isRedacted: false,
+                  messageId: "",
+                  text: messageText,
+                };
+
+                chatMessage.renderNewMessage(message);  
+                
+                API.post<EmptyResponse, SendMessageRequest>("/chat/"+chat.chatId+"/messages", {
+                  text: messageText,
+                }); // TODO: добавить иконку отправки сообщения и при успешном await response, убирать ее
             }
 
             textArea.style.height = "";
