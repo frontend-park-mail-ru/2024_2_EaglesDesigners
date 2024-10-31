@@ -12,7 +12,7 @@ export class App {
    * @returns {bool}
    */
   async start() {
-    UserStorage.init();
+    await UserStorage.init();
 
     Router.setRoutes(routes, strictRoutes, defaultAuthRoutes);
 
