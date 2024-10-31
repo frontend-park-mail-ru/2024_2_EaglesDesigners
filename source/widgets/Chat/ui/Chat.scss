@@ -218,7 +218,7 @@ textarea {
 }
 
 .input__bubble{
-    width: 100%;    
+    flex-grow: 1;   
     background: $primary-shadow-25;
     border-radius: 25px;
 
