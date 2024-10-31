@@ -45,9 +45,11 @@ $messages-container-width: 700px;
           display: none;
       }
       &__text{
-          display: inline;
           @include font-settings("Inter", 400, 16px, $text-over-secondary);
+
+          display: inline;
           padding-bottom: 6px;
+          word-wrap: break-word;
       }
       &__meta{
           height: 20px;
