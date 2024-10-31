@@ -26,7 +26,7 @@ export class Chat {
       const textArea = this.#parent.querySelector('textarea')!;
 
       textArea.addEventListener('input', function () {
-        this.style.height = "5px";
+        this.style.height = "";
         this.style.height = (this.scrollHeight) + "px";
       });
 
@@ -46,6 +46,9 @@ export class Chat {
                   console.log("Сообщение не отправилось ", responseSend.error)
                 }              
             }
+
+            textArea.style.height = "";
+
         }
     };
 
