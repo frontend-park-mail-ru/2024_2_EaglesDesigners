@@ -1,52 +1,52 @@
 <div class="main-page">
-  <div class="main-page__div-sidebar">
-    <div class="main-page__div-sidebar__logo-div">
-      <img src="/assets/image/Patefon.svg" />
+  <div class="main-page-content">
+    <div class="main-page-logo">
+      <img class="main-page-logo__img" src="/assets/image/Patefon.svg" />
 
     </div>
-    <div class="main-page__div-sidebar__div-navigators">
+    <div class="main-page-navigators">
       <button
         type="button"
         id="home-button"
-        class="main-page__div-sidebar__div-navigators__button"
+        class="main-page-navigators-button"
       >
         <img
-          class="main-page__div-sidebar__div-navigators__button__img-contacts"
+          class="main-page-navigators-button__img-home"
           src="/assets/image/home.svg"
         />
       </button>
       <button
         type="button"
         id="contact-button"
-        class="main-page__div-sidebar__div-navigators__button"
+        class="main-page-navigators-button"
       >
         <img
-          class="main-page__div-sidebar__div-navigators__button__img-contacts"
+          class="main-page-navigators-button__img-contacts"
           src="/assets/image/Contacts.svg"
         />
       </button>
       <button
         type="button"
         id="settings-button"
-        class="main-page__div-sidebar__div-navigators__button"
+        class="main-page-navigators-button"
       >
         <img
-          class="main-page__div-sidebar__div-navigators__button__img-contacts"
+          class="main-page-navigators-button-profile"
           src="/assets/image/settings.svg"
         />
       </button>
     </div>
-    <div class="main-page__div-sidebar__buttons-div">
+    <div class="main-page-sidebar">
       <span
-        class="main-page__div-sidebar__buttons-div__span"
+        class="main-page-sidebar__span"
       >{{user.name}}</span>
       <button
         type="button"
-        class="main-page__div-sidebar__buttons-div__button exit-btn"
+        class="main-page-logout exit-btn"
       >
-        <div class="main-page__div-sidebar__buttons-div__button__div-container">
+        <div class="main-page-logout-img">
           <img
-            class="main-page__div-sidebar__buttons-div__button__div-container__img"
+            class="main-page-logout-img__img"
             src="/assets/image/IconLogout.svg"
           />
 
@@ -56,33 +56,33 @@
 
   </div>
 
-  <div class="main-page__div-chat-list" id="chat-list-import">
+  <div class="main-page-widget" id="chat-list-import">
 
   </div>
 
-  <div class="main-page__chat-content-div">
-    <div class="main-page__chat-content-div__container-chat-div">
+  <div class="chat-content">
+    <div class="chat-content-block">
       <div
-        class="main-page__chat-content-div__container-chat-div__div-chat-box"
+        class="chat-content-dialog"
       >
         <div
-          class="main-page__chat-content-div__container-chat-div__div-chat-box__feed-div"
+          class="dialog-content"
         >
           <p
-            class="main-page__chat-content-div__container-chat-div__div-chat-box__feed-div__p"
+            class="dialog-content__p"
           >
             Пока здесь ничего нет
           </p>
         </div>
         <div
-          class="main-page__chat-content-div__container-chat-div__div-chat-box__div-input"
+          class="dialog-content-input"
         >
 
         </div>
       </div>
     </div>
   </div>
-  <div class="main-page__info-container-div">
+  <div class="chat-user-info">
 
   </div>
 </div>
