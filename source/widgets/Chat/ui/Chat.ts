@@ -5,7 +5,6 @@ import "./Chat.scss"
 import { ChatMessagesResponse, EmptyResponse, SendMessageRequest } from '@/shared/api/types';
 import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
-import { wsConn } from '@/shared/api/ws';
 import { TChat } from '@/entities/Chat';
 
 export class Chat {
@@ -63,7 +62,5 @@ export class Chat {
       UserStorage.setChatMessageEntity(chatMessage);
 
       chatMessage.renderMessages(messages);
-
-      wsConn.start();
     }
   }

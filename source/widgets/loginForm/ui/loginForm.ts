@@ -6,6 +6,7 @@ import LoginFormTemplate from "./loginForm.hbs";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { UserStorage } from "@/entities/User";
+import { wsConn } from "@/shared/api/ws";
 /**
  * Class provides Login form
  */
@@ -91,6 +92,7 @@ export class LoginForm extends View {
           name: responseAuth.user.name,
           username: responseAuth.user.username,
         });
+        wsConn.start();
       } else {
         UserStorage.setUser({ id: "", name: "", username: "" });
       }

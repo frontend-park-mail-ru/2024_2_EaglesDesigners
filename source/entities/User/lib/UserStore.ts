@@ -3,6 +3,7 @@ import { TUser } from "../index";
 import { AuthResponse } from "@/shared/api/types";
 import { TChat } from "@/entities/Chat";
 import { ChatMessage } from "@/entities/ChatMessage";
+import { wsConn } from "@/shared/api/ws";
 
 class UserStore {
   #user: TUser;
@@ -26,6 +27,7 @@ class UserStore {
     const response = await API.get<AuthResponse>("/auth");
     if (!response.error) {
       this.#user = response.user;
+      wsConn.start();
     }
   }
 
