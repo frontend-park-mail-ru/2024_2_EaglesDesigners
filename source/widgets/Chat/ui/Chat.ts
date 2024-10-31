@@ -30,43 +30,47 @@ export class Chat {
         this.style.height = (this.scrollHeight) + "px";
       });
 
-      const KeyPressHandler = async (event:KeyboardEvent) => {
+      const sendInputMessage = () => {
+        const messageText = textArea.value.trim();
+        textArea.value = '';
+
+        if (messageText) {
+
+            const user = UserStorage.getUser();
+
+            const currentdate = new Date();
+            const datetime = currentdate.getHours() + ":" + currentdate.getMinutes();
+
+            const message: TChatMessage = {
+              authorID: user.id,
+              authorName: user.name,
+              chatId: UserStorage.getChat().chatId,
+              datetime: datetime,
+              isRedacted: false,
+              messageId: "",
+              text: messageText,
+            };
+
+            chatMessage.renderNewMessage(message);  
+            
+            API.post<EmptyResponse, SendMessageRequest>("/chat/"+chat.chatId+"/messages", {
+              text: messageText,
+            }); // TODO: добавить иконку отправки сообщения и при успешном await response, убирать ее
+        }
+
+        textArea.style.height = "";
+      }
+
+      const KeyPressHandler = (event:KeyboardEvent) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault(); 
-
-            const messageText = textArea.value.trim();
-            textArea.value = '';
-
-            if (messageText) {
-
-                const user = UserStorage.getUser();
-
-                const currentdate = new Date();
-                const datetime = currentdate.getHours() + ":" + currentdate.getMinutes();
-
-                const message: TChatMessage = {
-                  authorID: user.id,
-                  authorName: user.name,
-                  chatId: UserStorage.getChat().chatId,
-                  datetime: datetime,
-                  isRedacted: false,
-                  messageId: "",
-                  text: messageText,
-                };
-
-                chatMessage.renderNewMessage(message);  
-                
-                API.post<EmptyResponse, SendMessageRequest>("/chat/"+chat.chatId+"/messages", {
-                  text: messageText,
-                }); // TODO: добавить иконку отправки сообщения и при успешном await response, убирать ее
-            }
-
-            textArea.style.height = "";
-
+            sendInputMessage();
         }
     };
 
       textArea.addEventListener('keypress', KeyPressHandler)
+
+      document.querySelector('.input__send-btn')!.addEventListener('click',sendInputMessage);
 
       let messages: TChatMessage[] = [];
       const response = await API.get<ChatMessagesResponse>("/chat/"+ chat.chatId +"/messages");

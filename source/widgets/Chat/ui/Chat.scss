@@ -238,8 +238,9 @@ textarea {
 
 .text-area{
     width: 100%;
-    height: 23px;
-    max-height: 100px;
+    height: 19px;
+    max-height: calc(10*19px);
+    line-height: 19px;
 }
 
 .emoji-btn{
@@ -254,6 +255,7 @@ textarea {
     
     border-radius: 100%;
     box-sizing: border-box;
+    cursor: pointer;
 
     display: flex;
     align-items: center;
