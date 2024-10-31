@@ -18,6 +18,7 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
+    console.log(response);
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
