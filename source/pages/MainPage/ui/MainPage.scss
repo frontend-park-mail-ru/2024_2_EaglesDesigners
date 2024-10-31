@@ -110,7 +110,7 @@ $background: var(--background);
   align-items: center;
   justify-content: center;
 
-  &__p{
+  &__p {
     color: var(--text-over-primary);
     font-family: "Inter";
     line-height: 21px;
@@ -140,7 +140,7 @@ $background: var(--background);
 
   transition-duration: 0.2s;
 
-  &:hover{
+  &:hover {
     background-color: #272727;
     border-radius: 100%;
   }

@@ -28,9 +28,9 @@
           accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
         /><br />
       </label>
-        <div class="profile-error">
-            <span id="nickname" class="profile-error__span"></span>
-        </div>
+      <div class="profile-error">
+        <span id="nickname" class="profile-error__span"></span>
+      </div>
       <input
         id="user-name"
         class="profile-form-user__input-name profile-form-user__input"
@@ -39,24 +39,22 @@
         value="{{user.name}}"
         name="text"
       />
-      <p class="profile-form-user__p">Добавьте свое имя
-        пожалуйста</p>
+      <p class="profile-form-user__p">Добавьте свое имя пожалуйста</p>
       <label for="date">
         <div class="profile-error">
-            <span id="date-error" class="profile-error__span"></span>
+          <span id="date-error" class="profile-error__span"></span>
         </div>
         <input
-        type="date"
-        class="profile-form-user__input-date profile-form-user__input"
-        id="date"
-        name="date"
-        min="1920-01-01"
-        max="2020-01-01"
-        required
-        placeholder="Дата рождения (Опционально)"
+          type="date"
+          class="profile-form-user__input-date profile-form-user__input"
+          id="date"
+          name="date"
+          min="1920-01-01"
+          max="2020-01-01"
+          required
+          placeholder="Дата рождения (Опционально)"
         />
-        <p class="profile-form-user__p">Добавьте свою
-        дату рождения</p>
+        <p class="profile-form-user__p">Добавьте свою дату рождения</p>
       </label>
 
       <input
@@ -67,13 +65,16 @@
         placeholder="Описание"
         value="{{response.bio}}"
       />
-      <p class="profile-form-user__p">Любые подробности о
-        себе, например: возраст, род занятий или город. Пример: 20 лет,
-        фронтендер из Москвы</p>
+      <p class="profile-form-user__p">Любые подробности о себе, например:
+        возраст, род занятий или город. Пример: 20 лет, фронтендер из Москвы</p>
     </form>
 
   </div>
   <div id="confirm-button" class="profile-form-confirm">
-    <img class="profile-form-confirm__img" src="/assets/image/confirm.svg" alt="" />
+    <img
+      class="profile-form-confirm__img"
+      src="/assets/image/confirm.svg"
+      alt=""
+    />
   </div>
 </div>

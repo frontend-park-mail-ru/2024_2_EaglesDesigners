@@ -16,20 +16,17 @@ export class ContactsList {
     this.#parent.innerHTML = ContactsListTemplate();
 
     const response = await API.get<ContactRequest>("/contacts");
-    console.log(this.#parent);
     const contactList = this.#parent.querySelector("#contacts-list")!;
-    console.log(contactList);
     const contactCard = new ContactCard(contactList);
 
     if (!response.error) {
       const contacts = response.contacts;
-      
+
       if (contacts) {
         contacts.map((element) => {
           contactCard.render(element);
         });
       }
-      
     }
 
     const backButton = this.#parent.querySelector("#back-button")!;
@@ -40,16 +37,16 @@ export class ContactsList {
 
     backButton.addEventListener("click", handleBack);
 
-    const contactAdd = this.#parent.querySelector('#contact-add')!;
+    const contactAdd = this.#parent.querySelector("#contact-add")!;
 
-    const addContactButton = this.#parent.querySelector('#add-contact-button')!;
+    const addContactButton = this.#parent.querySelector("#add-contact-button")!;
 
     const handleAddContact = () => {
       const ContactForm = new ContactAddForm(contactAdd, contactList);
       ContactForm.render();
     };
 
-    addContactButton.addEventListener('click', handleAddContact);
+    addContactButton.addEventListener("click", handleAddContact);
 
     const contactCardElement = document.querySelectorAll(".contact-card");
     contactCardElement.forEach((elem) => {

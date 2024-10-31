@@ -6,72 +6,69 @@ import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 
 export class ContactAddForm {
-    #parent;
-    #contactList;
-    constructor(parent : Element, contactList : Element) {
-        this.#parent = parent;
-        this.#contactList = contactList;
-    }
+  #parent;
+  #contactList;
+  constructor(parent: Element, contactList: Element) {
+    this.#parent = parent;
+    this.#contactList = contactList;
+  }
 
-    render() {
-        this.#parent.innerHTML = ContactAddFromTemplate();
+  render() {
+    this.#parent.innerHTML = ContactAddFromTemplate();
 
+    const confirmButton = this.#parent.querySelector("#confirm-btn")!;
+    const usernameInput: HTMLInputElement =
+      this.#parent.querySelector("#username-input")!;
 
-        const confirmButton = this.#parent.querySelector('#confirm-btn')!;
-        const usernameInput : HTMLInputElement = this.#parent.querySelector('#username-input')!;
-        console.log(usernameInput);
-        
-        
+    const handleAddContact = async () => {
+      const contactUsername = usernameInput.value;
+      const response = await API.post<TContact, ContactResponse>("/contacts", {
+        contactUsername,
+      });
 
-        const handleAddContact = async () => {
-            const contactUsername = usernameInput.value;
-            console.log(contactUsername);
-            const response = await API.post<TContact, ContactResponse>('/contacts', {
-                contactUsername,
-            });
-            
-            const spanError = this.#parent.querySelector('#error-span')!;
+      const spanError = this.#parent.querySelector("#error-span")!;
 
-            if (!response.error) {
-                spanError.textContent = '';
-                const contactCard = new ContactCard(this.#contactList);
-                contactCard.render(response);
-                const contactCardElements = document.querySelectorAll(".contact-card")!;
-                contactCardElements[contactCardElements.length - 1].addEventListener('click', (e) => {
-                    e.preventDefault();
-                });
-                spanError.textContent = 'Контакт успешно добавлен';
-                spanError.classList.add('not-error-span');
-                spanError.classList.remove('error-span');
-            }
+      if (!response.error) {
+        spanError.textContent = "";
+        const contactCard = new ContactCard(this.#contactList);
+        contactCard.render(response);
+        const contactCardElements = document.querySelectorAll(".contact-card")!;
+        contactCardElements[contactCardElements.length - 1].addEventListener(
+          "click",
+          (e) => {
+            e.preventDefault();
+          },
+        );
+        spanError.textContent = "Контакт успешно добавлен";
+        spanError.classList.add("not-error-span");
+        spanError.classList.remove("error-span");
+      }
 
-            if (response.error) {
-                spanError.classList.add('error-span');
-                spanError.textContent = "Такой пользователь не найден";
-                spanError.classList.remove('not-error-span');
-            }
-        };
+      if (response.error) {
+        spanError.classList.add("error-span");
+        spanError.textContent = "Такой пользователь не найден";
+        spanError.classList.remove("not-error-span");
+      }
+    };
 
-        confirmButton.addEventListener('click', handleAddContact);
+    confirmButton.addEventListener("click", handleAddContact);
 
-        const cancelButton = this.#parent.querySelector('#cancel-btn')!;
+    const cancelButton = this.#parent.querySelector("#cancel-btn")!;
 
-        const handleCancel = () => {
-            this.#parent.innerHTML = '';
-        };
+    const handleCancel = () => {
+      this.#parent.innerHTML = "";
+    };
 
-        cancelButton.addEventListener('click', handleCancel);
+    cancelButton.addEventListener("click", handleCancel);
 
-        const handlerClickOutsideModal = ( (e : Event) => {
-            if (e.target instanceof Element) {
-                if (e.target.className === 'contact-add') {
-                    this.#parent.innerHTML = '';
-                }
-            }
-            
-            
-        });
+    const handlerClickOutsideModal = (e: Event) => {
+      if (e.target instanceof Element) {
+        if (e.target.className === "contact-add") {
+          this.#parent.innerHTML = "";
+        }
+      }
+    };
 
-        document.addEventListener('click', handlerClickOutsideModal);
-    }
+    document.addEventListener("click", handlerClickOutsideModal);
+  }
 }

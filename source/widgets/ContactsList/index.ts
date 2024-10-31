@@ -1,1 +1,1 @@
-export {ContactsList} from "./ui/ContactsList.ts";
+export { ContactsList } from "./ui/ContactsList.ts";

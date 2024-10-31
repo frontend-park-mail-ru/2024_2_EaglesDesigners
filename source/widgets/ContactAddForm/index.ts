@@ -1,1 +1,1 @@
-export {ContactAddForm} from "./ui/ContactAddForm.ts";
+export { ContactAddForm } from "./ui/ContactAddForm.ts";

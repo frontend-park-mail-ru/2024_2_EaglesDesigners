@@ -27,15 +27,10 @@ export class MainPage extends View {
     const parent = document.getElementById("root")!;
     parent.innerHTML = MainPageTemplate({ user });
 
-    const chatListParent = parent.querySelector("#chat-list-import")!;
+    const chatListParent = parent.querySelector("#widget-import")!;
 
     const chatList = new ChatList(chatListParent);
     chatList.render();
-
-    // const Contacts = parent.querySelector("#contact-button")!;
-    // const handleContact = () => {
-
-    // }
 
     const exitButton = parent.querySelector(".exit-btn")!;
 

@@ -18,7 +18,6 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    console.log(response);
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
@@ -65,7 +64,7 @@ export class ProfileForm {
     const confirmButton = this.#parent.querySelector("#confirm-button");
     const updateProfileInfo = async () => {
       const nameInput: HTMLInputElement =
-      this.#parent.querySelector("#user-name")!;
+        this.#parent.querySelector("#user-name")!;
       const bioInput: HTMLInputElement = this.#parent.querySelector("#bio")!;
       const nickname: string = nameInput.value;
       const birthdayValue = birthdayInput.value;
@@ -75,29 +74,34 @@ export class ProfileForm {
       const name = nickname;
 
       let flag = true;
-      const nicknameSpan: HTMLSpanElement = this.#parent.querySelector("#nickname")!;
+      const nicknameSpan: HTMLSpanElement =
+        this.#parent.querySelector("#nickname")!;
       if (!validateNickname(nickname) || nickname.length > 20) {
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
         flag = false;
       } else {
-        nicknameSpan.textContent = '';
+        nicknameSpan.textContent = "";
       }
-      const dateInput : HTMLInputElement = this.#parent.querySelector('#date')!;
+      const dateInput: HTMLInputElement = this.#parent.querySelector("#date")!;
       const getYear = new Date(dateInput.value).getFullYear();
-      console.log(validateYear(getYear), getYear);
-      const spanDateError : HTMLSpanElement = this.#parent.querySelector('#date-error')!;
+
+      const spanDateError: HTMLSpanElement =
+        this.#parent.querySelector("#date-error")!;
       if (!validateYear(getYear)) {
-        validateForm(dateInput, "Год рождения должен быть от 1920 до 2020", spanDateError);
+        validateForm(
+          dateInput,
+          "Год рождения должен быть от 1920 до 2020",
+          spanDateError,
+        );
         flag = false;
       } else {
-        spanDateError.textContent = '';
+        spanDateError.textContent = "";
       }
 
       if (!flag) {
         return;
       }
 
-      
       const response = await API.put("/profile", {
         avatarBase64,
         bio,
