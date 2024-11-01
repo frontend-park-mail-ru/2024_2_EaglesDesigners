@@ -37,15 +37,12 @@ export class Chat {
         if (messageText) {
 
             const user = UserStorage.getUser();
-
-            const currentdate = new Date();
-            const datetime = currentdate.getHours() + ":" + currentdate.getMinutes();
-
+            
             const message: TChatMessage = {
               authorID: user.id,
               authorName: user.name,
               chatId: UserStorage.getChat().chatId,
-              datetime: datetime,
+              datetime: new Date().toISOString(),
               isRedacted: false,
               messageId: "",
               text: messageText,
