@@ -1,43 +1,76 @@
-<div id="right" class="auth-form">
-  <form class="auth-form-user" method="post">
-    <p class="auth-form__p-login">Войдите в Patefon</p>
-    <div class="auth-form-login-error">
-      <span class="auth-form-login-error__span" id="errorLogin"></span>
+<div class="root">
+  <div class="news-content">
+    <div class="news-content-header">
+      <img class="news-content-header__img" src="/assets/image/news-header.png" alt="">
+      <span class="news-content-header__span">Что нового?</span>
     </div>
-    <input
-      id="login"
-      class="auth-form-user__input login not_error"
-      type="text"
-      placeholder="Логин"
-      name="text"
-    />
-    <div class="auth-form-login-error">
-      <span
-        class="auth-form-login-error__span errorPassword"
-        id="errorPassword"
-      ></span>
+    <div class="update-content">
+      <span class="update-content__span-header update-content__span">
+        <span style="color: #AFCBEE;">ОБНОВЛЕНИЕ</span> ср, 6 ноября 2024 г.
+      </span>
+      <span class="update-content__span-post-header update-content__span">
+        Добавлены анимированные стикеры
+      </span>
+      <span class="update-content__span-main-info update-content__span">
+        Анимированные стикеры появились на всех платформах! Используйте их в общении так же, 
+        как и обычные стикеры, но с приятной анимацией.
+      </span>      
+      <img class="update-content__img" src="/assets/image/update-news-img.png" alt="">
     </div>
-    <div class="auth-form-user-password" style="position: relative;">
+    <div class="patefon-news">
+      <span class="patefon-news__span-header update-content__span">
+        <span style="color: #AFCBEE;">ОБНОВЛЕНИЕ</span> ср, 6 ноября 2024 г.
+      </span>
+      <span class="patefon-news__span-post-header update-content__span">
+        Скоро появится интерфейс основной страницы
+      </span>
+      <span class="patefon-news__span-main-info update-content__span">
+        Обновленный дизайн с кастомизацией цветовой палитры скоро на ваших экранах - в декабре 2024 года! Ждите релиза обновления интерфейса.
+      </span>
+      <img class="patefon-news__img" src="/assets/image/news-img.png" alt=""> 
+    </div>
+  </div>
+  <div id="right" class="auth-form">
+    <form class="auth-form-user" method="post">
+      <p class="auth-form__p-login">Войдите в Patefon</p>
+      <div class="auth-form-login-error">
+        <span class="auth-form-login-error__span" id="errorLogin"></span>
+      </div>
       <input
-        id="password"
-        class="auth-form-user-password__input auth-form-user__input password not_error"
-        type="password"
-        placeholder="Пароль"
-        name="password"
+        id="login"
+        class="auth-form-user__input login not_error"
+        type="text"
+        placeholder="Логин"
+        name="text"
       />
-      <img
-        id="password-visibility-toggle"
-        class="auth-form-user-password__img-pass_show password-visibility-toggle"
-        src="/assets/image/eye.svg"
-      />
-    </div>
-    <button
-      class="auth-form-user__button-enter btn Enter"
-      type="submit"
-      id="Enter"
-    >Войти</button>
+      <div class="auth-form-login-error">
+        <span
+          class="auth-form-login-error__span errorPassword"
+          id="errorPassword"
+        ></span>
+      </div>
+      <div class="auth-form-user-password" style="position: relative;">
+        <input
+          id="password"
+          class="auth-form-user-password__input auth-form-user__input password not_error"
+          type="password"
+          placeholder="Пароль"
+          name="password"
+        />
+        <img
+          id="password-visibility-toggle"
+          class="auth-form-user-password__img-pass_show password-visibility-toggle"
+          src="/assets/image/eye.svg"
+        />
+      </div>
+      <button
+        class="auth-form-user__button-enter btn Enter"
+        type="submit"
+        id="Enter"
+      >Войти</button>
 
-  </form>
-  <button class="auth-form__button btn Create" type="submit" id="Create">Создать
-    аккаунт</button>
+    </form>
+    <button class="auth-form__button btn Create" type="submit" id="Create">Создать
+      аккаунт</button>
+  </div>
 </div>
