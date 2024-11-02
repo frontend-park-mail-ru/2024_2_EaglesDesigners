@@ -15,7 +15,10 @@ body {
   max-height: 1080px;
   display: block;
   background-color: var(--primary);
-  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    background-color: inherit;
+  }
 }
 
 .news-content-header {
