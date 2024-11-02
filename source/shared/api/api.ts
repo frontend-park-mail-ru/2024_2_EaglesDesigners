@@ -1,5 +1,5 @@
 import { ProfileRequest, ResponseError } from "./types";
-import { localHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 /**
  * API class provides API-functions.
@@ -62,25 +62,27 @@ class Api {
     }
   }
 
-  async putProfile<TResponse, TRequest>(path: string, body: ProfileRequest) {
+  async putProfile<TResponse>(path: string, body: ProfileRequest) {
     type Response = TResponse & ResponseError;
     try {
       const formData = new FormData();
-      const formattedDate = body.birthdate.toISOString(); // Преобразование в строку
-      const blob = new Blob([formattedDate], { type: 'text/plain' });
-      console.log(blob);
 
-      formData.append("bio", body.bio);
-      formData.append("birthdate", blob);
-      formData.append("name", body.name);
+      const profileData = {
+        name: body.name,
+        bio: body.bio,
+        birthdate: body.birthdate,
+      };
+      const profileUserDate = JSON.stringify(profileData);
+
       formData.append("avatar", body.avatar);
+      formData.append("profile_data", profileUserDate);
 
       const url = this.#baseURl + path;
       const response = await fetch(url, {
         method: "PUT",
         headers: {
           "Access-Control-Allow-Credentials": "true",
-          "enctype": "multipart/form-data",
+          enctype: "multipart/form-data",
         },
         mode: "cors",
         body: formData,
@@ -94,4 +96,4 @@ class Api {
   }
 }
 
-export const API = new Api(localHost);
+export const API = new Api(serverHost);

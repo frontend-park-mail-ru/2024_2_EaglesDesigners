@@ -49,5 +49,9 @@
 .contacts-user-list {
   min-height: 625px;
   max-height: 625px;
-  overflow: scroll;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    background: inherit;
+  }
 }

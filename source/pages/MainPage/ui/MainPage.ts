@@ -51,7 +51,6 @@ export class MainPage extends View {
     const settingsButton = parent.querySelector("#settings-button")!;
     const handleSettings = () => {
       const profileForm = new ProfileForm(chatListParent);
-      console.log('asdasd');
       profileForm.render();
     };
     settingsButton.addEventListener("click", handleSettings);

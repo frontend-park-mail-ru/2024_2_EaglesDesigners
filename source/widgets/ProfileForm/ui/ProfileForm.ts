@@ -8,7 +8,7 @@ import { ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
-import { localHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 export class ProfileForm {
   #parent;
@@ -19,8 +19,7 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
-    console.log(response);
+    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
@@ -31,7 +30,7 @@ export class ProfileForm {
     const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
 
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
-    let avatar : File; 
+    let avatar: File;
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
@@ -40,10 +39,8 @@ export class ProfileForm {
           avatar = file;
         }
       }
-      console.log(avatar);
     };
     avatarInput.addEventListener("change", handleAvatar);
-    
 
     const backButton = this.#parent.querySelector("#back-button");
     const handleBack = () => {
@@ -92,16 +89,12 @@ export class ProfileForm {
         return;
       }
 
-      
-
       const response = await API.putProfile("/profile", {
         bio,
         birthdate,
         name,
         avatar,
       });
-
-      console.log(response);
 
       if (!response.error) {
         UserStorage.setUserName(name);
