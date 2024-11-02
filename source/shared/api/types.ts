@@ -19,10 +19,10 @@ export interface ContactResponse {
 }
 
 export interface ProfileResponse {
-  user: TUser;
+  avatarURL: string;
   bio: string;
   birthdate: Date;
-  avatarBase64: string;
+  name: string;
 }
 
 export interface ChatsResponse {
@@ -44,10 +44,10 @@ export interface SignUpRequest {
 }
 
 export interface ProfileRequest {
-  avatarBase64: string;
   name: string;
   birthdate: Date;
   bio: string;
+  avatar: File;
 }
 
 export interface ContactRequest {

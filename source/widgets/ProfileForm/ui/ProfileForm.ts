@@ -8,6 +8,7 @@ import { ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
+import { localHost } from "@/app/config";
 
 export class ProfileForm {
   #parent;
@@ -18,6 +19,8 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
+    response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
+    console.log(response);
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
@@ -25,35 +28,22 @@ export class ProfileForm {
       this.#parent.querySelector("#date")!;
     birthdayInput.value = birthday;
 
-    const avatar: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-    avatar.src = "data:image/png;base64," + response.avatarBase64;
+    const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
 
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
-    let avatarBase64: string | ArrayBuffer | undefined;
+    let avatar : File; 
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
         if (file) {
-          const reader = new FileReader();
-
-          reader.onload = function (e) {
-            let base64String;
-            if (e.target) {
-              base64String = e.target.result;
-            }
-            let index: number = 0;
-            if (typeof base64String === "string") {
-              index = base64String?.indexOf("base64,");
-            }
-            avatarBase64 = base64String?.slice(index + "base64,".length);
-            avatar.src = "data:image/png;base64," + avatarBase64;
-          };
-
-          reader.readAsDataURL(file); // Читаем файл как data URL (base64)
+          avatarUser.src = URL.createObjectURL(file);
+          avatar = file;
         }
       }
+      console.log(avatar);
     };
     avatarInput.addEventListener("change", handleAvatar);
+    
 
     const backButton = this.#parent.querySelector("#back-button");
     const handleBack = () => {
@@ -102,12 +92,16 @@ export class ProfileForm {
         return;
       }
 
-      const response = await API.put("/profile", {
-        avatarBase64,
+      
+
+      const response = await API.putProfile("/profile", {
         bio,
         birthdate,
         name,
+        avatar,
       });
+
+      console.log(response);
 
       if (!response.error) {
         UserStorage.setUserName(name);
