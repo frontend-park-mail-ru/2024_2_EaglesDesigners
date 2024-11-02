@@ -1,0 +1,204 @@
+body {
+  background-color: var(--background);
+}
+
+.root {
+  margin: auto auto;
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+.news-content {
+  width: 50%;
+  height: 100%;
+  max-height: 1080px;
+  display: block;
+  background-color: var(--primary);
+
+  &::-webkit-scrollbar {
+    background-color: inherit;
+  }
+}
+
+.news-content-header {
+  margin-top: 42px;
+  display: block;
+  position: relative;
+
+  &__img {
+    position: relative;
+  }
+
+  &__span {
+    color: #fff;
+    font-family: var(--main-font-family);
+    font-size: 45px;
+    position: absolute;
+    left: 0;
+    margin-top: 30px;
+    margin-left: 5%;
+  }
+}
+
+.update-content {
+  margin-top: 32px;
+  margin-left: 52px;
+  max-height: 462px;
+  margin-right: 15px;
+
+  &__span {
+    color: #fff;
+    font-family: var(--main-font-family);
+    font-size: 16px;
+  }
+
+  &__span-header {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &__span-post-header {
+    display: block;
+    margin-bottom: 15px;
+    
+  }
+
+  &__span-main-info {
+    opacity: 0.8;
+    display: block;
+  }
+
+  &__img {
+    height: 316px;
+    margin-top: 10px;
+    margin-left: 15%;
+  }
+}
+
+.patefon-news {
+  margin-left: 52px;
+  margin-top: 20px;
+
+  &__span-header {
+    display: block;
+  }
+
+  &__span-post-header {
+    display: block;
+    margin-top: 5px;
+  }
+
+  &__span-main-info {
+    display: block;
+    margin-top: 15px;
+    opacity: 0.8;
+  }
+
+  &__img {
+    width: 550px;
+    height: 100px;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+
+  &__button {
+    background-color: var(--render-signup-button);
+    color: var(--text-over-primary);
+  }
+
+  &__p-login {
+    text-align: center;
+    font-size: 30px;
+    color: var(--text-over-primary);
+    font-family: var(--main-font-family);
+    margin-top: 175px;
+    margin-bottom: 80px;
+  }
+}
+
+.auth-form-user {
+  &__input {
+    display: block;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    width: var(--input-width);
+    height: var(--input-height);
+    border-radius: 15px 15px 15px 15px;
+    font-size: var(--form-font-size);
+    font-family: var(--main-font-family);
+    color: var(--text-over-primary);
+    background-color: var(--primary);
+  }
+
+  &__button-enter {
+    margin-top: 50px;
+    background-color: var(--form-button-access);
+    color: var(--primary);
+    margin-left: 8px;
+  }
+}
+
+.btn {
+  align-items: center;
+  margin-bottom: 20px;
+  display: block;
+  border-top: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-right: 0px;
+  width: var(--input-width);
+  height: var(--input-height);
+  border-radius: 60px 60px 60px 60px;
+  font-size: var(--form-font-size);
+  font-family: var(--main-font-family);
+  cursor: pointer;
+}
+
+.auth_btn {
+  margin-left: 7px;
+}
+
+.not_error {
+  border: 2px solid #4f82bf;
+}
+
+.error {
+  border: 2px solid red;
+}
+
+.auth-form-login-error {
+  min-height: 16px;
+  max-width: var(--input-width);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  &__span {
+    font-size: var(--error-font-size);
+    font-family: var(--main-font-family);
+    color: var(--text-error-message);
+    min-height: 17px;
+    height: fit-content;
+    display: inline-block;
+    align-self: flex-start;
+  }
+}
+
+.auth-form-user-password {
+  &__img-pass_show {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
