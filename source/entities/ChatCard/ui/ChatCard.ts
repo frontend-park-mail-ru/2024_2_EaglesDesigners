@@ -19,6 +19,8 @@ export class ChatCard {
       e.preventDefault();
 
       if(UserStorage.getChat() !== chat){
+        const newUrl = `/chat/${chat.chatId}`; 
+        history.pushState({ url: newUrl }, "", newUrl);
         this.#chat.render(chat);
       }
     });

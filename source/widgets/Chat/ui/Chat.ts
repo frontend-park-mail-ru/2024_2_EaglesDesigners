@@ -37,7 +37,7 @@ export class Chat {
         if (messageText) {
 
             const user = UserStorage.getUser();
-            
+
             const message: TChatMessage = {
               authorID: user.id,
               authorName: user.name,
