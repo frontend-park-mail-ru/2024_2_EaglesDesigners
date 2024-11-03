@@ -1,8 +1,9 @@
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { UserStorage } from "@/entities/User";
 
 export const renderMessage = (message:TChatMessage) =>{
-    if(message.chatId !== UserStorage.getChat().chatId){
+    if(message.chatId !== ChatStorage.getChat().chatId){
         return;
     } 
 
@@ -10,5 +11,5 @@ export const renderMessage = (message:TChatMessage) =>{
         return;
     }
 
-    UserStorage.getChatMessageEntity().renderNewMessage(message);
+    ChatStorage.getChatMessageInstance().renderNewMessage(message);
 }

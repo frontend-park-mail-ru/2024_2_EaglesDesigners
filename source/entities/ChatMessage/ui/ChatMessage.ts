@@ -40,7 +40,7 @@ export class ChatMessage {
     });
   }
   renderNewMessage(message: TChatMessage) {
-    
+
     if(this.#newestMessage?.last && this.#newestMessage.authorID === message.authorID){
       this.#parent.firstElementChild!.classList.remove("last-message");
     }

@@ -6,6 +6,7 @@ import { ChatMessagesResponse, EmptyResponse, SendMessageRequest } from '@/share
 import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
+import { ChatStorage } from '@/entities/Chat/lib/ChatStore';
 
 export class Chat {
     #parent;
@@ -19,7 +20,7 @@ export class Chat {
      * @async
      */
     async render(chat: TChat) {  
-      UserStorage.setChat(chat);
+      ChatStorage.setChat(chat);
 
       this.#parent.innerHTML = ChatTemplate({chat});
 
@@ -41,7 +42,7 @@ export class Chat {
             const message: TChatMessage = {
               authorID: user.id,
               authorName: user.name,
-              chatId: UserStorage.getChat().chatId,
+              chatId: ChatStorage.getChat().chatId,
               datetime: new Date().toISOString(),
               isRedacted: false,
               messageId: "",
@@ -65,7 +66,7 @@ export class Chat {
         }
     };
 
-      textArea.addEventListener('keypress', KeyPressHandler)
+      textArea.addEventListener('keypress', KeyPressHandler);
 
       document.querySelector('.input__send-btn')!.addEventListener('click',sendInputMessage);
 
@@ -74,7 +75,7 @@ export class Chat {
 
       const messagesImport = this.#parent.querySelector(".messages")!;
       const chatMessage = new ChatMessage(messagesImport);
-      UserStorage.setChatMessageEntity(chatMessage);
+      ChatStorage.setChatMessageInstance(chatMessage);
 
       chatMessage.renderMessages(messages);
     }
