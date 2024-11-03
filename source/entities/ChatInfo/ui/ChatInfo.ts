@@ -15,6 +15,5 @@ export class ChatInfo {
         response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
         response.birthdate = response.birthdate.slice(0, 10);
         this.#parent.innerHTML = ChatInfoTemplate({response});
-        console.log(this.#parent);
     }
 }

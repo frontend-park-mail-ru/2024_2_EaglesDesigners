@@ -28,6 +28,10 @@ export class ChatList {
     if (response.chats) {
       chats = response.chats;
     }
+    if (chats) {
+      chats[0].chatType = 'group';
+    }
+    
 
     this.#parent.innerHTML = ChatListTemplate({});
 

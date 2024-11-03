@@ -6,7 +6,8 @@ import { ChatMessagesResponse, EmptyResponse, SendMessageRequest } from '@/share
 import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
-import { ChatInfo } from '@/entities/ChatInfo/ui/ChatInfo';
+import { ChatInfo } from '@/entities/ChatInfo';
+import { GroupChatInfo } from '@/entities/GroupChatInfo/ui/GroupChatInfo';
 
 export class Chat {
     #parent;
@@ -24,6 +25,7 @@ export class Chat {
       UserStorage.setChat(chat);
 
       this.#parent.innerHTML = ChatTemplate({chat});
+      this.#chatInfo.innerHTML = '';
 
       const textArea = this.#parent.querySelector('textarea')!;
 
@@ -93,6 +95,10 @@ export class Chat {
         else if (chat.chatType === "personal") {
           const chatInfo = new ChatInfo(this.#chatInfo);
           chatInfo.render();
+        }
+        else if (chat.chatType === "group") {
+          const chatInfo = new GroupChatInfo(this.#chatInfo);
+          chatInfo.render(); 
         }
         
       };
