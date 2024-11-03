@@ -86,6 +86,7 @@ export class LoginForm extends View {
       }
 
       const responseAuth = await API.get<AuthResponse>("/auth");
+
       if (!responseAuth.error) {
         UserStorage.setUser({
           id: responseAuth.user.id,
@@ -96,7 +97,6 @@ export class LoginForm extends View {
       } else {
         UserStorage.setUser({ id: "", name: "", username: "" });
       }
-
       Router.go("/");
     };
     documentForm.addEventListener("submit", handleFormSubmit);

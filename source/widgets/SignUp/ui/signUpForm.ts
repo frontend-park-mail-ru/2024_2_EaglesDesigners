@@ -38,12 +38,21 @@ export class SignupForm extends View {
     aElement.addEventListener("click", handleLoginClick);
 
     const password: HTMLInputElement = this.#parent.querySelector("#password")!;
+    const password2: HTMLInputElement =
+      this.#parent.querySelector("#password2")!;
     const handleTogglePasswordVisibility = () => {
       password.type = password.type === "password" ? "text" : "password";
     };
     this.#parent
       .querySelector("#password-visibility-toggle")!
       .addEventListener("click", handleTogglePasswordVisibility);
+
+    const handleTogglePasswordVisibility2 = () => {
+      password2.type = password2.type === "password" ? "text" : "password";
+    };
+    this.#parent
+      .querySelector("#password-visibility-toggle2")!
+      .addEventListener("click", handleTogglePasswordVisibility2);
 
     const btnElement = document.querySelector("button")!;
 

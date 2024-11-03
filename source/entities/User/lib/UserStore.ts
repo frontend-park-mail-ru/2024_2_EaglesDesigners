@@ -39,6 +39,10 @@ class UserStore {
     return this.#user;
   }
 
+
+  setUserName(name: string) {
+    this.#user.name = name;
+  }    
   setChat(chat: TChat) {
     this.#chat = chat;
   }

@@ -1,3 +1,5 @@
+import { ProfileRequest, ResponseError } from "./types";
+import { serverHost } from "@/app/config";
 import { ResponseError } from "./types";
 import { localHost } from "@/app/config";
 
@@ -61,6 +63,31 @@ class Api {
       return { error: "could not fetch" } as Response;
     }
   }
+
+  async putProfile<TResponse>(path: string, body: ProfileRequest) {
+    type Response = TResponse & ResponseError;
+    try {
+      const formData = new FormData();
+
+      const profileData = {
+        name: body.name,
+        bio: body.bio,
+        birthdate: body.birthdate,
+      };
+      const profileUserDate = JSON.stringify(profileData);
+
+      formData.append("avatar", body.avatar);
+      formData.append("profile_data", profileUserDate);
+
+      const url = this.#baseURl + path;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          enctype: "multipart/form-data",
+        },
+        mode: "cors",
+        body: formData,
 
   async delete<TResponse>(path : string, body : string){
     type Response = TResponse & ResponseError;
