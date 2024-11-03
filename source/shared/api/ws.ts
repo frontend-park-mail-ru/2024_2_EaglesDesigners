@@ -1,3 +1,5 @@
+import { localHost, serverHost } from "@/app/config";
+
 class wsConnection {
     handlers: ((payload: any) => Promise<void>)[];
     status;
@@ -16,7 +18,7 @@ class wsConnection {
             return; 
         }
 
-        this.ws = new WebSocket(this.url); 
+        this.ws = new WebSocket(this.url + "/chat/startwebsocket"); 
 
         this.ws.onmessage = (event: MessageEvent) => {
             try{
@@ -59,4 +61,4 @@ class wsConnection {
     }
 }
 
-export const wsConn = new wsConnection("http://localhost:8080/chat/startwebsocket");
+export const wsConn = new wsConnection(serverHost);
