@@ -6,8 +6,8 @@ import { ChatMessagesResponse, EmptyResponse, SendMessageRequest } from '@/share
 import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
-import { ChatInfo } from '@/entities/ChatInfo';
-import { GroupChatInfo } from '@/entities/GroupChatInfo/ui/GroupChatInfo';
+import { ChatInfo } from '@/widgets/ChatInfo';
+import { GroupChatInfo } from '@/widgets/GroupChatInfo/ui/GroupChatInfo';
 
 export class Chat {
     #parent;
@@ -97,7 +97,7 @@ export class Chat {
           chatInfo.render();
         }
         else if (chat.chatType === "group") {
-          const chatInfo = new GroupChatInfo(this.#chatInfo);
+          const chatInfo = new GroupChatInfo(this.#chatInfo, chat);
           chatInfo.render(); 
         }
         

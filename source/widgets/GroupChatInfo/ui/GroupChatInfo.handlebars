@@ -1,15 +1,23 @@
 <div class="group-info">
     <div class="group-info-header">
-        <img class="group-info-header__img" src="" alt="">
+        <div class="group-header-images">
+            <div class="group-avatar">
+                <img class="group-info-header__img" src="" alt="">
+            </div>
+            <div class="group-update-image">
+                <img class="group-update-image__img" src="/assets/image/update-group.svg" alt="">
+            </div>
+        </div>
         <span class="group-info-header__span-group-name">Технопарк</span>
         <span class="group-info-header__span">Группа</span>
     </div>
     <div class="group-content">
         <div class="group-content-header">
             <span class="group-content-header__span">Участники <span class="users-count">4</span></span>
-            <button class="group-content-header__button">+ Пригласить</button>
+            <button id="add-user" class="group-content-header__button">+ Пригласить</button>
         </div>
-        <div class="users-list">
+        <hr class="horizontal-line">
+        <div id="users-list" class="users-list">
 
         </div>
     </div>
