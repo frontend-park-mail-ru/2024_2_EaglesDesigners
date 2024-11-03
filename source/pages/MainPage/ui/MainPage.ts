@@ -28,13 +28,16 @@ export class MainPage extends View {
 
     parent.innerHTML = MainPageTemplate({ user });
 
+    const chatUserInfo = parent.querySelector("#chat-info-container")!;
     const chatParent = parent.querySelector(".main-page__chat-content-div__container-chat-div")!;
-    const chat = new Chat(chatParent);
+    const chat = new Chat(chatParent, chatUserInfo);
 
     const chatListParent = parent.querySelector("#chat-list-import")!;
 
     const chatList = new ChatList(chatListParent, chat);
     chatList.render();
+
+    
 
     const exitButton = parent.querySelector(".exit-btn")!;
 

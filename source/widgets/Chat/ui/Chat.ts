@@ -6,12 +6,14 @@ import { ChatMessagesResponse, EmptyResponse, SendMessageRequest } from '@/share
 import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
+import { ChatInfo } from '@/entities/ChatInfo/ui/ChatInfo';
 
 export class Chat {
     #parent;
-
-    constructor(parent: Element) {
+    #chatInfo;
+    constructor(parent: Element, chatInfo : Element) {
       this.#parent = parent;
+      this.#chatInfo = chatInfo;
     }
     /**
      * Render ChatList widget
@@ -63,7 +65,7 @@ export class Chat {
             event.preventDefault(); 
             sendInputMessage();
         }
-    };
+      };
 
       textArea.addEventListener('keypress', KeyPressHandler)
 
@@ -80,5 +82,20 @@ export class Chat {
       UserStorage.setChatMessageEntity(chatMessage);
 
       chatMessage.renderMessages(messages);
+
+      const chatHeader = this.#parent.querySelector("#header-chat")!;
+
+      const handleChatHeader = () => {
+        console.log(this.#chatInfo.innerHTML)
+        if (this.#chatInfo.innerHTML !== ""){
+          this.#chatInfo.innerHTML = "";
+        }
+        else if (chat.chatType === "personal") {
+          const chatInfo = new ChatInfo(this.#chatInfo);
+          chatInfo.render();
+        }
+        
+      };
+      chatHeader.addEventListener('click', handleChatHeader);
     }
   }
