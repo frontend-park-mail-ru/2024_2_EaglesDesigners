@@ -7,9 +7,9 @@ import "./MainPage.scss";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
-import { TChatMessage } from "@/entities/ChatMessage";
 import { wsConn } from "@/shared/api/ws";
 import { TChat } from "@/entities/Chat";
+import { renderMessage } from "./handlers";
 /**
  * Mainpage class provides functions for rendering main page
  */
@@ -68,19 +68,7 @@ export class MainPage extends View {
     };
 
     exitButton.addEventListener("click", handleExitClick);
-
-    const renderMessage = (message:TChatMessage) =>{
-      if(message.chatId !== UserStorage.getChat().chatId){
-        return;
-      } 
-
-      if(message.authorID === UserStorage.getUser().id){ // TODO: добавить иконку отправки сообщения и при успешном response, убирать ее
-        return;
-      }
-
-        UserStorage.getChatMessageEntity().renderNewMessage(message);
-
-    }
+    
     wsConn.subscribe(renderMessage);
   }
 }
