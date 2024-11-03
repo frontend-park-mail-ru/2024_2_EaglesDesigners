@@ -13,7 +13,7 @@
     </div>
     <div class="group-content">
         <div class="group-content-header">
-            <span class="group-content-header__span">Участники <span class="users-count">4</span></span>
+            <span class="group-content-header__span">Участники <span class="users-count">{{chat.countOfUsers}}</span></span>
             <button id="add-user" class="group-content-header__button">+ Пригласить</button>
         </div>
         <hr class="horizontal-line">
@@ -22,6 +22,9 @@
         </div>
     </div>
     <div class="delete-group">
-        <button class="delete-group__button">Удалить группу</button>
+        <button id="delete-group" class="delete-group__button">Удалить группу</button>
+    </div>
+    <div id="modal-container">
+
     </div>
 </div>

@@ -28,15 +28,15 @@ export class ChatList {
     if (response.chats) {
       chats = response.chats;
     }
-    if (chats) {
-      chats[0].chatType = 'group';
+    if (chats.length) {
+      chats[0].chatType = "group";
     }
     
 
     this.#parent.innerHTML = ChatListTemplate({});
 
     const chatList = this.#parent.querySelector("#chat-list")!;
-    const chatCard = new ChatCard(chatList,this.#chat);
+    const chatCard = new ChatCard(chatList, this.#chat);
 
     chats.forEach((chat) => {
       chatCard.render(chat);

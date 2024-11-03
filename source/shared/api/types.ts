@@ -22,6 +22,11 @@ export interface ChatMessagesResponse {
   messages: TChatMessage[];
 }
 
+export interface AddUserResponse {
+  message: string;
+  error: string;
+}
+
 export type EmptyRequest = {
   [K in string]: never;
 };
@@ -39,4 +44,8 @@ export interface ChatRequest {
 }
 export interface SendMessageRequest {
   text: string;
+}
+
+export interface UsersIdRequest {
+  usersId : string;
 }

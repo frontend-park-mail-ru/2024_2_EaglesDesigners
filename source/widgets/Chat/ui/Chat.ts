@@ -7,7 +7,7 @@ import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
 import { ChatInfo } from '@/widgets/ChatInfo';
-import { GroupChatInfo } from '@/widgets/GroupChatInfo/ui/GroupChatInfo';
+import { GroupChatInfo } from '@/widgets/GroupChatInfo';
 
 export class Chat {
     #parent;
@@ -93,7 +93,7 @@ export class Chat {
           this.#chatInfo.innerHTML = "";
         }
         else if (chat.chatType === "personal") {
-          const chatInfo = new ChatInfo(this.#chatInfo);
+          const chatInfo = new ChatInfo(this.#chatInfo, chat);
           chatInfo.render();
         }
         else if (chat.chatType === "group") {

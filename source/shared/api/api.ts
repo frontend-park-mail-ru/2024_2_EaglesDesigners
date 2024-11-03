@@ -61,6 +61,22 @@ class Api {
       return { error: "could not fetch" } as Response;
     }
   }
+
+  async delete<TResponse>(path : string, body : string){
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+      const response = await fetch(url, {
+        method: "DELETE",
+        body: body,
+        credentials: "include",
+      });
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
 }
 
 export const API = new Api(localHost);
