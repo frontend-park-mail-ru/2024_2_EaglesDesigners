@@ -1,6 +1,4 @@
 import { ProfileRequest, ResponseError } from "./types";
-import { serverHost } from "@/app/config";
-import { ResponseError } from "./types";
 import { localHost } from "@/app/config";
 
 /**
@@ -88,6 +86,14 @@ class Api {
         },
         mode: "cors",
         body: formData,
+        credentials: "include",
+      });
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
 
   async delete<TResponse>(path : string, body : string){
     type Response = TResponse & ResponseError;

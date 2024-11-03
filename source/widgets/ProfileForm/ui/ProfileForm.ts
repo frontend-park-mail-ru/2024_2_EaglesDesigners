@@ -8,7 +8,7 @@ import { ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
-import { serverHost } from "@/app/config";
+import { localHost, serverHost } from "@/app/config";
 
 export class ProfileForm {
   #parent;
@@ -19,7 +19,7 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
+    response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
