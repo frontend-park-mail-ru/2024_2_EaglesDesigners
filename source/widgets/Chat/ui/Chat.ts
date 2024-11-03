@@ -69,11 +69,8 @@ export class Chat {
 
       document.querySelector('.input__send-btn')!.addEventListener('click',sendInputMessage);
 
-      let messages: TChatMessage[] = [];
       const response = await API.get<ChatMessagesResponse>("/chat/"+ chat.chatId +"/messages");
-      if (response.messages) {
-        messages = response.messages;
-      }
+      const messages: TChatMessage[] = response.messages ?? [];
 
       const messagesImport = this.#parent.querySelector(".messages")!;
       const chatMessage = new ChatMessage(messagesImport);

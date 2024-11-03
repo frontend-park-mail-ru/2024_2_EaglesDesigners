@@ -23,11 +23,8 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats: TChat[] = [];
     const response = await API.get<ChatsResponse>("/chats");
-    if (response.chats) {
-      chats = response.chats;
-    }
+    const chats: TChat[] = response.chats ?? [];
 
     this.#parent.innerHTML = ChatListTemplate({});
 
