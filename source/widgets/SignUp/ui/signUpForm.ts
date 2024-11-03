@@ -168,7 +168,7 @@ export class SignupForm extends View {
         return;
       }
 
-      UserStorage.setUser({ id: 0, name: nickname, username: login });
+      UserStorage.setUser({ id: "", name: nickname, username: login });
 
       Router.go("/");
     };

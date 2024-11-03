@@ -4,15 +4,18 @@ import { TChat } from "@/entities/Chat";
 import { ChatCard } from "@/entities/ChatCard";
 import ChatListTemplate from "./ChatList.handlebars";
 import "./ChatList.scss";
+import { Chat } from "@/widgets/Chat/ui/Chat";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
  */
 export class ChatList {
   #parent;
+  #chat;
 
-  constructor(parent: Element) {
+  constructor(parent: Element, chat:Chat) {
     this.#parent = parent;
+    this.#chat = chat;
   }
   /**
    * Render ChatList widget
@@ -25,21 +28,18 @@ export class ChatList {
     if (response.chats) {
       chats = response.chats;
     }
+    if (chats.length) {
+      chats[0].chatType = "group";
+    }
+    
 
     this.#parent.innerHTML = ChatListTemplate({});
 
     const chatList = this.#parent.querySelector("#chat-list")!;
-    const chatCard = new ChatCard(chatList);
+    const chatCard = new ChatCard(chatList, this.#chat);
 
-    chats.map((chat) => {
+    chats.forEach((chat) => {
       chatCard.render(chat);
-    });
-
-    const chatCardElements = document.querySelectorAll(".chat-card");
-    chatCardElements.forEach((elem) => {
-      elem.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
     });
   }
 }

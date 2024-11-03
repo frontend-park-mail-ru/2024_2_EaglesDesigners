@@ -1,0 +1,97 @@
+.chat-info {
+    background-color: #4F82BF;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 25px;
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.chat-info-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__img {
+        width: 90px;
+        height: 90px;
+        border-radius: 100px;
+        margin-top: 20px;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    &__span-user-name {
+        display: block;
+        color: #fff;
+        font-family: var(--main-font-family);
+        font-size: 20px;
+    }
+
+    &__span-online-status{
+        color: #fff;
+        font-family: var(--main-font-family);
+        font-size: 14px;
+        opacity: 0.4;
+    }
+}
+
+.chat-user-info {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.chat-user-birthday {
+    margin-top: 10px;
+
+    &__span {
+        font-size: var(--base-font-size);
+        font-family: var(--main-font-family);
+        color: #fff;
+    }
+}
+
+.chat-user-bio {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    &__span {
+        font-size: var(--base-font-size);
+        font-family: var(--main-font-family);
+        color: #fff;
+    }
+}
+
+.span-description {
+    color: #fff;
+    font-size: 14px;
+    opacity: 0.4;
+    font-family: var(--main-font-family);
+    display: block;
+}
+
+.delete-chat {
+    display: flex;
+    height: 52%;
+    justify-content: center;
+}
+
+.delete-chat-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.delete-chat-btn__button {
+    width: 95%;
+    height: 39px;
+    color: red;
+    font-size: 16px;
+    font-family: var(--main-font-family);
+    background-color: #AFCBEE;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}

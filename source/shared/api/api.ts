@@ -1,5 +1,7 @@
 import { ProfileRequest, ResponseError } from "./types";
 import { serverHost } from "@/app/config";
+import { ResponseError } from "./types";
+import { localHost } from "@/app/config";
 
 /**
  * API class provides API-functions.
@@ -86,6 +88,14 @@ class Api {
         },
         mode: "cors",
         body: formData,
+
+  async delete<TResponse>(path : string, body : string){
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+      const response = await fetch(url, {
+        method: "DELETE",
+        body: body,
         credentials: "include",
       });
       const responseBody: Response = await response.json();
@@ -96,4 +106,4 @@ class Api {
   }
 }
 
-export const API = new Api(serverHost);
+export const API = new Api(localHost);

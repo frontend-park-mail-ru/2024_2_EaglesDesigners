@@ -11,14 +11,14 @@
       </div>
       <div class="chat-card__div__chat-info__date">
         <span class="chat-card__div__chat-info__date__span">
-          Окт 10
+          {{ extractTime chat.lastMessage.datetime }}
         </span>
       </div>
     </div>
     <div class="chat-card__div__div-message">
       <div class="chat-card__div__div-message__div">
         <span class="chat-card__div__div-message__div__span">
-          {{chat.lastMessage}}
+          {{chat.lastMessage.text}}
         </span>
       </div>
 
