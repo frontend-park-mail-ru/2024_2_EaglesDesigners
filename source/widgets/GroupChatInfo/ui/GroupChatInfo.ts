@@ -5,6 +5,10 @@ import { TChat } from "@/entities/Chat";
 import { UserAddChat } from "@/widgets/UserAddChat/ui/UserAddChat";
 import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
 import { localHost } from "@/app/config";
+import { ProfileResponse, UsersIdRequest } from "@/shared/api/types";
+import { ChatUserCard } from "@/entities/ChatUserCard/ui/ChatUserCard";
+import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
+import { TContact } from "@/entities/ContactCard";
 
 export class GroupChatInfo{
     #parent;
@@ -14,7 +18,7 @@ export class GroupChatInfo{
         this.#chat = chat;
     }
 
-    render() {
+    async render() {
         const chat = this.#chat;
         let avatar : string;
         if (chat.avatarPath) {
@@ -26,6 +30,21 @@ export class GroupChatInfo{
         
         this.#parent.innerHTML = GroupChatInfoTemplate({chat, avatar});
         
+        const chatUsersList = this.#parent.querySelector('#users-list')!;
+        const userCard = new ContactCard(chatUsersList);
+
+        const ChatUsersId = await API.get<UsersIdRequest>('/chat/' + chat.chatId + "/users");
+        if (ChatUsersId.usersId) {
+            ChatUsersId.usersId.forEach(async (element) => {
+                const userProfile = await API.get<ProfileResponse>("/profile/" + element);
+                const user : TContact = {id: element, name: userProfile.name, avatarURL: userProfile.avatarURL, username: ""};
+                userCard.render(user);
+                //console.log(userProfile);
+            });
+        }
+        
+
+
         const addUser = this.#parent.querySelector("#add-user")!;
         const groupUsers = this.#parent.querySelector('#users-list'); 
         const handleAddUser = async () => {

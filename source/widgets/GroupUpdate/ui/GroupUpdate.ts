@@ -61,7 +61,7 @@ export class GroupUpdate {
 
             const response = await API.putFormData<GroupUpdateResponse, GroupUpdateRequest>("/chat/" + chat.chatId, groupAvatar.avatar, groupUpdateData);
             if (!response.error) {
-                console.log("asdasd");
+                console.log(response, "asdasd");
             }
         };
 

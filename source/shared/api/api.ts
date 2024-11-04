@@ -103,7 +103,7 @@ class Api {
       const profileUserDate = JSON.stringify(jsonBody);
 
       formData.append("avatar", formDataBody);
-      formData.append("chatName", profileUserDate);
+      formData.append("chat_data", profileUserDate);
 
       const url = this.#baseURl + path;
       const response = await fetch(url, {
