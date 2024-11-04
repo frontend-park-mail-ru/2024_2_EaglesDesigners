@@ -37,15 +37,25 @@ export class ChatList {
 
     const addChat = document.querySelector('.add-chat')!;
     const addChatButton = addChat.querySelector('#addChatButton')!;
+    const addIcon = addChat.querySelector('.add-icon')!;
+    const cancelIcon = addChat.querySelector('.cancel-icon')!;
     const addChatPopup = addChat.querySelector('#addChatPopUp')!;
 
     addChatButton.addEventListener('click', (event) => {
-        event.stopPropagation(); // Остановить всплытие события
+        event.stopPropagation();
         addChatPopup.style.display = addChatPopup.style.display === 'none' ? 'flex' : 'none';
-    });
+        
+        cancelIcon.style.display = cancelIcon.style.display === 'none' ? 'inline' : 'none';
+        addIcon.style.display = addIcon.style.display === 'none' ? 'inline' : 'none';
+      });
 
     document.addEventListener('click', () => {
         addChatPopup.style.display = 'none';
+
+        if(addIcon.style.display === 'none'){
+          cancelIcon.style.display = 'none';
+          addIcon.style.display = 'inline';
+        }
     });
 
     addChat.querySelector('.create-personal-chat')!.addEventListener('click', () => {
