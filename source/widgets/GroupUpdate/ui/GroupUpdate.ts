@@ -60,7 +60,9 @@ export class GroupUpdate {
             const groupAvatar : GroupAvatarData = {avatar : groupAvatarFile};
 
             const response = await API.putFormData<GroupUpdateResponse, GroupUpdateRequest>("/chat/" + chat.chatId, groupAvatar.avatar, groupUpdateData);
-            console.log(response);
+            if (!response.error) {
+                console.log("asdasd");
+            }
         };
 
         updateConfirmButton.addEventListener('click', handleConfirmChanges);
