@@ -3,6 +3,7 @@ import GroupChatInfoTemplate from "./GroupChatInfo.handlebars";
 import "./GroupChatInfo.scss";
 import { TChat } from "@/entities/Chat";
 import { UserAddChat } from "@/widgets/UserAddChat/ui/UserAddChat";
+import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
 
 export class GroupChatInfo{
     #parent;
@@ -36,6 +37,13 @@ export class GroupChatInfo{
 
         deleteGroupButton.addEventListener('click', handleDeleteGroup);
 
-        const updateGroupButton = this.#parent.querySelector("#update-group");
+        const updateGroupButton = this.#parent.querySelector("#update-group")!;
+
+        const handleGroupUpdate = () => {
+            this.#parent.innerHTML = '';
+            const groupUpdate = new GroupUpdate(this.#parent);
+            groupUpdate.render(this.#chat);
+        };
+        updateGroupButton.addEventListener('click', handleGroupUpdate);
     }
 }
