@@ -1,7 +1,7 @@
 import { API } from "@/shared/api/api";
 import ContactAddFromTemplate from "./ContactAddForm.handlebars";
 import "./ContactAddForm.scss";
-import { ContactResponse } from "@/shared/api/types";
+import { ContactRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 
@@ -22,7 +22,7 @@ export class ContactAddForm {
 
     const handleAddContact = async () => {
       const contactUsername = usernameInput.value;
-      const response = await API.post<TContact, ContactResponse>("/contacts", {
+      const response = await API.post<TContact, ContactRequest>("/contacts", {
         contactUsername,
       });
 

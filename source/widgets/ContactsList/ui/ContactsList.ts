@@ -1,6 +1,6 @@
 import { API } from "@/shared/api/api";
 import ContactsListTemplate from "./ContactsList.handlebars";
-import { ContactRequest } from "@/shared/api/types";
+import { ContactResponse } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import "./ContactsList.scss";
@@ -15,7 +15,7 @@ export class ContactsList {
   async render() {
     this.#parent.innerHTML = ContactsListTemplate();
 
-    const response = await API.get<ContactRequest>("/contacts");
+    const response = await API.get<ContactResponse>("/contacts");
     const contactList = this.#parent.querySelector("#contacts-list")!;
     const contactCard = new ContactCard(contactList);
 

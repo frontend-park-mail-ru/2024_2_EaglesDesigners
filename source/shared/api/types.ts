@@ -15,7 +15,7 @@ export interface AuthResponse {
   user: TUser;
 }
 
-export interface ContactResponse {
+export interface ContactRequest {
   contactUsername: string;
 }
 
@@ -59,7 +59,7 @@ export interface ProfileRequest {
   avatar: File;
 }
 
-export interface ContactRequest {
+export interface ContactResponse {
   contacts: TContact[];
 }
 export interface ChatRequest {
@@ -70,5 +70,5 @@ export interface SendMessageRequest {
 }
 
 export interface UsersIdRequest {
-  usersId : string;
+  usersId : string[];
 }
