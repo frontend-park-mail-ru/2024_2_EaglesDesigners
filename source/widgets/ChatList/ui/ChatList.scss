@@ -54,8 +54,29 @@ $text-over-primary: #ffffff;
   margin-right: 20px;
   margin-bottom: 20px;
   justify-content: flex-end;
-}
 
-.add-chat__button {
-  cursor: pointer;
+  &__button {
+    cursor: pointer;
+  }
+
+  &__popup {
+    position: absolute; 
+    background: $primary-shadow-25;
+    border-radius: 20px;
+    padding: 10px 10px 10px 10px;
+    
+    bottom: 90px;
+  
+    display: none;
+    flex-direction: column;
+    gap: 5px  ;
+
+    .create-personal-chat, .create-group-chat{
+      @include font-settings("Inter", 400, 16px, $text-over-primary);
+      
+      display: flex;
+      gap: 5px;
+      justify-items: flex-end; 
+    }
+  }
 }

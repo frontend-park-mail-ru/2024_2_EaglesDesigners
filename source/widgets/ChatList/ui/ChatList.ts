@@ -34,5 +34,26 @@ export class ChatList {
     chats.forEach((chat) => {
       chatCard.render(chat);
     });
+
+    const addChat = document.querySelector('.add-chat')!;
+    const addChatButton = addChat.querySelector('#addChatButton')!;
+    const addChatPopup = addChat.querySelector('#addChatPopUp')!;
+
+    addChatButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Остановить всплытие события
+        addChatPopup.style.display = addChatPopup.style.display === 'none' ? 'flex' : 'none';
+    });
+
+    document.addEventListener('click', () => {
+        addChatPopup.style.display = 'none';
+    });
+
+    addChat.querySelector('.create-personal-chat')!.addEventListener('click', () => {
+        console.log('Создать личный чат');
+    });
+
+    addChat.querySelector('.create-group-chat')!.addEventListener('click', () => {
+        console.log('Создать группу');
+    });
   }
 }
