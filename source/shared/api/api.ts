@@ -1,5 +1,5 @@
 import { ProfileRequest, ResponseError } from "./types";
-import { serverHost } from "@/app/config";
+import { localHost, serverHost } from "@/app/config";
 
 /**
  * API class provides API-functions.
@@ -96,4 +96,4 @@ class Api {
   }
 }
 
-export const API = new Api(serverHost);
+export const API = new Api(localHost);
