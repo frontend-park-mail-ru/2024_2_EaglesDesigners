@@ -13,10 +13,13 @@ export const genProfileData = async (profileData: ProfileRequest, avatar: File) 
     "/profile",
     formData,
   );
-
+  let errorMessage : string;
   if (!response.error) {
     UserStorage.setUserName(profileData.name);
     Router.go("/");
+    return '';
   }
-  
+  errorMessage = response.error;
+  return errorMessage;
+
 };
