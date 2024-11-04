@@ -12,7 +12,7 @@ class ChatStore {
       chatName: "",
       chatType: "personalMessages",
       lastMessage: "",
-      usersId: []
+      usersId: [],
     };
     this.#chatMessageInstance = new ChatMessage(null);
   }

@@ -26,6 +26,9 @@ class UserStore {
     return this.#user;
   }
 
+  setUserName(name: string) {
+    this.#user.name = name;
+  }
 }
 
 export const UserStorage = new UserStore();

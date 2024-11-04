@@ -9,26 +9,29 @@ export class ChatCard {
   #parent;
   #chat;
 
-  constructor(parent: Element, chat:Chat) {
+  constructor(parent: Element, chat: Chat) {
     this.#parent = parent;
     this.#chat = chat;
   }
 
   render(chat: TChat) {
-    this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ 
-      chat: {
-        ...chat,
-        lastMessage: {
-          ...chat.lastMessage,
-          datetime: getTimeString(chat.lastMessage.datetime)
-        }
-      }
-  }));
+    this.#parent.insertAdjacentHTML(
+      "beforeend",
+      ChatCardTemplate({
+        chat: {
+          ...chat,
+          lastMessage: {
+            ...chat.lastMessage,
+            datetime: getTimeString(chat.lastMessage.datetime),
+          },
+        },
+      }),
+    );
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
 
-      if(ChatStorage.getChat() !== chat){
-        const newUrl = `/chat/${chat.chatId}`; 
+      if (ChatStorage.getChat() !== chat) {
+        const newUrl = `/chat/${chat.chatId}`;
         history.pushState({ url: newUrl }, "", newUrl);
         this.#chat.render(chat);
       }

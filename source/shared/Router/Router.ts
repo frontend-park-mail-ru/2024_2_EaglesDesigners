@@ -37,6 +37,7 @@ class Route {
     const index = this.#strictRoutes.findIndex((elem) => url === elem);
     if (index !== -1 && UserStorage.getUser().name !== "") {
       this.go("/");
+
       return;
     }
 
@@ -69,15 +70,14 @@ class Route {
       }
 
       if (currentURL?.view) {
-        const urlMatch = url.match( currentURL.path!);
+        const urlMatch = url.match(currentURL.path!);
         urlMatch?.shift();
-        if(urlMatch?.length){
-          currentURL.view.render(...urlMatch as [string, string]);
-        }else {
-          currentURL.view.render(); 
+        if (urlMatch?.length) {
+          currentURL.view.render(...(urlMatch as [string, string]));
+        } else {
+          currentURL.view.render();
         }
       }
-
     }
   }
 

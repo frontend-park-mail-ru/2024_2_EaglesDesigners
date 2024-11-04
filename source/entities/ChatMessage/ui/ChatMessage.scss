@@ -1,11 +1,11 @@
-$background-shadow-50: #0C0F15;
+$background-shadow-50: #0c0f15;
 $primary: var(--primary);
-$primary-shadow-25: #0A0E16;
+$primary-shadow-25: #0a0e16;
 $secondary: var(--secondary);
-$accent: #AFCBEE;
+$accent: #afcbee;
 
 $text-over-primary: #ffffff;
-$text-over-primary-shadow-50: #85878A;
+$text-over-primary-shadow-50: #85878a;
 $text-over-secondary: #ffffff;
 
 $avatar-size: 50px;
@@ -18,121 +18,120 @@ $messages-container-width: 700px;
   color: $color;
 }
 
-.message{
+.message {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  &__body{
-      max-width: 500px;
-      background: $secondary;
+  &__body {
+    max-width: 500px;
+    background: $secondary;
 
-      border-radius: 10px;
+    border-radius: 10px;
 
-      box-sizing: border-box;
-      position: relative;
-      padding: 6px 6px 3px 6px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 6px 6px 3px 6px;
 
-      &__username{
-          @include font-settings("Inter", 400, 14px, $secondary);
+    &__username {
+      @include font-settings("Inter", 400, 14px, $secondary);
 
-          display: block;
-          max-width: auto;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+      display: block;
+      max-width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
-          display: none;
-      }
-      &__text{
-          @include font-settings("Inter", 400, 16px, $text-over-secondary);
+      display: none;
+    }
+    &__text {
+      @include font-settings("Inter", 400, 16px, $text-over-secondary);
 
-          display: inline;
-          padding-bottom: 6px;
-          word-wrap: break-word;
-      }
-      &__meta{
-          height: 20px;
-          display: flex;
-          align-items: flex-end;
-          float: right;
-          column-gap: 1px;
-          box-sizing: border-box;
-          padding-left: 2px;
-          .timedate{
-              @include font-settings("Inter", 400, 10px, $text-over-secondary);
-              opacity: 0.6;
-          }
-      }        
-  }
-  &__avatar{
-      width: 40px;
-      height: 40px;
-      border-radius: 100%;
-
+      display: inline;
+      padding-bottom: 6px;
+      word-wrap: break-word;
+    }
+    &__meta {
+      height: 20px;
       display: flex;
       align-items: flex-end;
-
-      padding-left: 5px;
-      padding-right: 5px;
-
-      &__img{
-          width: 40px;
-          height: 40px;
-
-          display: none;
+      float: right;
+      column-gap: 1px;
+      box-sizing: border-box;
+      padding-left: 2px;
+      .timedate {
+        @include font-settings("Inter", 400, 10px, $text-over-secondary);
+        opacity: 0.6;
       }
+    }
+  }
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    &__img {
+      width: 40px;
+      height: 40px;
+
+      display: none;
+    }
   }
 
   &:not(.left-side).last-message {
+    .message__body {
+      position: relative;
+      border-bottom-right-radius: 0px;
 
-      .message__body {
-          position: relative;
-          border-bottom-right-radius: 0px;
-
-          &::after {
-              content: ''; 
-              position: absolute;
-              right: -12px; 
-              bottom: 0px;
-              border: 7px solid transparent; 
-              border-bottom: 7px solid $secondary; 
-              border-left: 7px solid $secondary;
-          }
+      &::after {
+        content: "";
+        position: absolute;
+        right: -12px;
+        bottom: 0px;
+        border: 7px solid transparent;
+        border-bottom: 7px solid $secondary;
+        border-left: 7px solid $secondary;
       }
+    }
   }
 
-  &.left-side{
-      flex-direction: row-reverse;
+  &.left-side {
+    flex-direction: row-reverse;
 
-      .message__body{
-          background: $primary-shadow-25;
+    .message__body {
+      background: $primary-shadow-25;
+    }
+
+    &.first-message {
+      .message__body__username {
+        display: block;
       }
+    }
 
-      &.first-message{
-        .message__body__username{
-            display: block;
+    &.last-message {
+      .message__body {
+        position: relative;
+        border-bottom-left-radius: 0px;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: -12px;
+          bottom: 0px;
+          border: 7px solid transparent;
+          border-bottom: 7px solid $primary-shadow-25;
+          border-right: 7px solid $primary-shadow-25;
         }
       }
-
-      &.last-message{
-        .message__body {
-            position: relative;
-            border-bottom-left-radius: 0px;
-            
-            &::before {
-                content: ''; 
-                position: absolute;
-                left: -12px; 
-                bottom: 0px;
-                border: 7px solid transparent; 
-                border-bottom: 7px solid $primary-shadow-25; 
-                border-right: 7px solid $primary-shadow-25;
-            }
-        }
-        .message__avatar__img{
-            display: block;
-        }
+      .message__avatar__img {
+        display: block;
       }
-  }    
+    }
+  }
 }

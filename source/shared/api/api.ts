@@ -61,6 +61,27 @@ class Api {
       return { error: "could not fetch" } as Response;
     }
   }
+
+  async putFormData<TResponse>(path: string, formData: FormData) {
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          enctype: "multipart/form-data",
+        },
+        mode: "cors",
+        body: formData,
+        credentials: "include",
+      });
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
 }
 
 export const API = new Api(serverHost);

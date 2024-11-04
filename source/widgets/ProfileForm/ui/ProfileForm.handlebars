@@ -1,0 +1,80 @@
+<div class="profile-form">
+  <div class="profile-form-header">
+    <div class="profile-form-header-img">
+      <img
+        id="back-button"
+        class="profile-form-header-img__img"
+        src="/assets/image/back-btn-img.svg"
+        alt=""
+      />
+    </div>
+    <div class="profile-form-header-name">
+      <span class="profile-form-header-name__span">Профиль</span>
+    </div>
+  </div>
+  <div class="profile-form-user-info">
+    <form class="profile-form-user" method="post">
+      <label for="ava">
+        <img
+          id="avatar"
+          class="profile-form-user__img"
+          src={{response.avatarURL}}
+        />
+        <input
+          type="file"
+          id="ava"
+          name="ava"
+          class="profile-form-user__input-avatar"
+          accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
+        /><br />
+      </label>
+      <div class="profile-error">
+        <span id="nickname" class="profile-error__span"></span>
+      </div>
+      <input
+        id="user-name"
+        class="profile-form-user__input-name profile-form-user__input"
+        type="text"
+        placeholder="Имя"
+        value="{{user.name}}"
+        name="text"
+      />
+      <p class="profile-form-user__p">Добавьте свое имя пожалуйста</p>
+      <label for="date">
+        <div class="profile-error">
+          <span id="date-error" class="profile-error__span"></span>
+        </div>
+        <input
+          type="date"
+          class="profile-form-user__input-date profile-form-user__input"
+          id="date"
+          name="date"
+          min="1920-01-01"
+          max="{{currentDate}}"
+          required
+          placeholder="Дата рождения (Опционально)"
+        />
+        <p class="profile-form-user__p">Добавьте свою дату рождения</p>
+      </label>
+
+      <input
+        id="bio"
+        class="profile-form-user__input-bio profile-form-user__input"
+        type="text"
+        name="text"
+        placeholder="Описание"
+        value="{{response.bio}}"
+      />
+      <p class="profile-form-user__p">Любые подробности о себе, например:
+        возраст, род занятий или город. Пример: 20 лет, фронтендер из Москвы</p>
+    </form>
+
+  </div>
+  <div id="confirm-button" class="profile-form-confirm">
+    <img
+      class="profile-form-confirm__img"
+      src="/assets/image/confirm.svg"
+      alt=""
+    />
+  </div>
+</div>
