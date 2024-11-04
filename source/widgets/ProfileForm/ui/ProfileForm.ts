@@ -59,6 +59,7 @@ export class ProfileForm {
       const birthdate = new Date(birthdayValue);
       const bio = bioInput.value;
       const name = nickname;
+      
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =

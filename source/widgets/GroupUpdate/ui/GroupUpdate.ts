@@ -3,6 +3,8 @@ import GroupUpdateTempalte from "./GroupUpdate.handlebars";
 import "./GroupUpdate.scss";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { localHost } from "@/app/config";
+import { GroupAvatarData, GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
+import { API } from "@/shared/api/api";
 
 export class GroupUpdate {
     #parent;
@@ -31,13 +33,11 @@ export class GroupUpdate {
 
         backButton.addEventListener('click', handleBack);
 
-        const updateConfirmButton = this.#parent.querySelector('#confirm-update-group');
+        
 
         const avatarInput : HTMLInputElement = this.#parent.querySelector('#group-ava')!;
         const avatarGroup : HTMLImageElement = this.#parent.querySelector('#avatar-group')!;
-        let groupAvatar : File;
-
-        console.log('zsda');
+        let groupAvatarFile : File;
 
         const handleAvatar = () => {
             console.log('я туту');
@@ -45,18 +45,24 @@ export class GroupUpdate {
                 const file = avatarInput.files[0];
                 if (file) {
                 avatarGroup.src = URL.createObjectURL(file);
-                groupAvatar = file;
+                groupAvatarFile = file;
                 }
             }
         };
         avatarInput.addEventListener("change", handleAvatar);
 
-        const handleConfirmChanges = () => {
+        const updateConfirmButton = this.#parent.querySelector('#confirm-update-group')!;
+        const handleConfirmChanges = async () => {
             const groupNameInput : HTMLInputElement = this.#parent.querySelector('#group-name')!;
             const groupName = groupNameInput.value;
 
-            
-            
+            const groupUpdateData : GroupUpdateRequest = {chatName : groupName};
+            const groupAvatar : GroupAvatarData = {avatar : groupAvatarFile};
+
+            const response = await API.putFormData<GroupUpdateResponse, GroupUpdateRequest>("/chat/" + chat.chatId, groupAvatar.avatar, groupUpdateData);
+            console.log(response);
         };
+
+        updateConfirmButton.addEventListener('click', handleConfirmChanges);
     }
 }

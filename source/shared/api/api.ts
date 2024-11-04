@@ -95,6 +95,34 @@ class Api {
     }
   }
 
+  async putFormData<TResponse, TRequest>(path: string,  formDataBody : File, jsonBody: TRequest) {
+    type Response = TResponse & ResponseError;
+    try {
+      const formData = new FormData();
+
+      const profileUserDate = JSON.stringify(jsonBody);
+
+      formData.append("avatar", formDataBody);
+      formData.append("chatName", profileUserDate);
+
+      const url = this.#baseURl + path;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          enctype: "multipart/form-data",
+        },
+        mode: "cors",
+        body: formData,
+        credentials: "include",
+      });
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
+
   async delete<TResponse>(path : string, body : string){
     type Response = TResponse & ResponseError;
     try {

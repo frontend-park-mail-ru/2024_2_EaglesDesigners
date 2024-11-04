@@ -72,3 +72,16 @@ export interface SendMessageRequest {
 export interface UsersIdRequest {
   usersId : string[];
 }
+
+export interface GroupUpdateRequest {
+  chatName : string; 
+}
+
+export interface GroupAvatarData {
+  avatar : File;
+}
+
+export interface GroupUpdateResponse {
+  chatName: string;
+  wasAvatarUpdated : boolean;
+}
