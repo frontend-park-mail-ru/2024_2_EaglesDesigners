@@ -27,6 +27,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js'
   },
