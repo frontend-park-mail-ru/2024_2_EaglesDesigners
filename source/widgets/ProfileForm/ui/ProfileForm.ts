@@ -4,11 +4,11 @@ import { API } from "@/shared/api/api";
 import { Router } from "@/shared/Router/Router.ts";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
-import { ProfileResponse } from "@/shared/api/types";
+import { profileFormRequest, ProfileRequest, ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 export class ProfileForm {
   #parent;
@@ -19,9 +19,8 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
+    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
     const currentDate = new Date();
-    console.log(currentDate);
 
     this.#parent.innerHTML = ProfileFormTemplate({ user, response, currentDate });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
@@ -32,13 +31,13 @@ export class ProfileForm {
     const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
 
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
-    let avatar: File;
+    let avatarFile: File;
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
         if (file) {
           avatarUser.src = URL.createObjectURL(file);
-          avatar = file;
+          avatarFile = file;
         }
       }
     };
@@ -55,12 +54,13 @@ export class ProfileForm {
       const nameInput: HTMLInputElement =
         this.#parent.querySelector("#user-name")!;
       const bioInput: HTMLInputElement = this.#parent.querySelector("#bio")!;
+
+      
       const nickname: string = nameInput.value;
       const birthdayValue = birthdayInput.value;
 
-      const birthdate = new Date(birthdayValue);
-      const bio = bioInput.value;
-      const name = nickname;
+      const profileData : ProfileRequest = {bio: bioInput.value, birthdate: new Date(birthdayValue), name: nickname};
+
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
@@ -75,7 +75,7 @@ export class ProfileForm {
 
       const spanDateError: HTMLSpanElement =
         this.#parent.querySelector("#date-error")!;
-      if (!validateYear(birthdate)) {
+      if (!validateYear(profileData.birthdate)) {
         validateForm(
           dateInput,
           "Введите реальную дату и год рождения от 1920 до " + (new Date()).getFullYear(),
@@ -90,15 +90,12 @@ export class ProfileForm {
         return;
       }
 
-      const response = await API.putProfile("/profile", {
-        bio,
-        birthdate,
-        name,
-        avatar,
-      });
+      const avatar : profileFormRequest = {avatar: avatarFile};
+
+      const response = await API.putFormData<ProfileResponse, ProfileRequest>("/profile", avatar.avatar, profileData);
 
       if (!response.error) {
-        UserStorage.setUserName(name);
+        UserStorage.setUserName(profileData.name);
       }
 
       Router.go("/");

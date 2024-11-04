@@ -52,7 +52,6 @@ export interface ProfileRequest {
   name: string;
   birthdate: Date;
   bio: string;
-  avatar: File;
 }
 
 export interface ContactRequest {
@@ -63,4 +62,8 @@ export interface ChatRequest {
 }
 export interface SendMessageRequest {
   text: string;
+}
+
+export interface profileFormRequest {
+  avatar: File;
 }
