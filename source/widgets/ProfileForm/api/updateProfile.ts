@@ -16,7 +16,7 @@ export const genProfileData = async (profileData: ProfileRequest, avatar: File) 
 
   if (!response.error) {
     UserStorage.setUserName(profileData.name);
+    Router.go("/");
   }
-
-  Router.go("/");
+  
 };
