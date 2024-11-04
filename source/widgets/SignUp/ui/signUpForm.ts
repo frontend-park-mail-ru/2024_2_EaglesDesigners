@@ -3,7 +3,7 @@ import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
 import { validateForm } from "@/shared/validation/formValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { API } from "@/shared/api/api.ts";
-import { EmptyResponse, SignUpRequest } from "@/shared/api/types";
+import { AuthResponse, EmptyResponse, SignUpRequest } from "@/shared/api/types";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
 import { View } from "@/app/View";
@@ -137,7 +137,7 @@ export class SignupForm extends View {
       }
       const username = login;
       const name = nickname;
-      const response = await API.post<EmptyResponse, SignUpRequest>("/signup", {
+      const response = await API.post<AuthResponse, SignUpRequest>("/signup", {
         name,
         username,
         password,
@@ -159,7 +159,8 @@ export class SignupForm extends View {
         return;
       }
 
-      UserStorage.setUser({ id: "", name: nickname, username: login });
+      const user = response.user;
+      UserStorage.setUser({ id: user.id, name: user.name, username: user.username });
 
       Router.go("/");
     };
