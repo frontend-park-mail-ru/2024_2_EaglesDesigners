@@ -65,7 +65,7 @@ export class ChatMessage {
     this.#parent.insertAdjacentHTML("afterbegin", ChatMessageTemplate({
       message: {
         ...messageWithFlags,
-        datetime: extractTime(messageWithFlags.datetime),
+        datetime: getTimeString(messageWithFlags.datetime),
       }
     }));
   }
