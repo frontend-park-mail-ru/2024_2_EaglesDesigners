@@ -1,5 +1,5 @@
-export const validateYear = (year: number) => {
-  if (year <= 2020 && 1920 <= year) {
+export const validateYear = (birthdate: Date) => {
+  if (1920 <= birthdate.getFullYear() && birthdate < new Date()) {
     return true;
   }
   return false;

@@ -20,8 +20,10 @@ export class ProfileForm {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
     response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
+    const currentDate = new Date();
+    console.log(currentDate);
 
-    this.#parent.innerHTML = ProfileFormTemplate({ user, response });
+    this.#parent.innerHTML = ProfileFormTemplate({ user, response, currentDate });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
     const birthdayInput: HTMLInputElement =
       this.#parent.querySelector("#date")!;
@@ -70,14 +72,13 @@ export class ProfileForm {
         nicknameSpan.textContent = "";
       }
       const dateInput: HTMLInputElement = this.#parent.querySelector("#date")!;
-      const getYear = new Date(dateInput.value).getFullYear();
 
       const spanDateError: HTMLSpanElement =
         this.#parent.querySelector("#date-error")!;
-      if (!validateYear(getYear)) {
+      if (!validateYear(birthdate)) {
         validateForm(
           dateInput,
-          "Год рождения должен быть от 1920 до 2020",
+          "Введите реальную дату и год рождения от 1920 до " + (new Date()).getFullYear(),
           spanDateError,
         );
         flag = false;
