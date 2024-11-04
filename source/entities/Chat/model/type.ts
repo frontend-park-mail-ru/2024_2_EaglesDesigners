@@ -1,10 +1,12 @@
-export interface TChat {
-  avatarURL?: string;
-  chatId?: number;
-  chatName?: string;
-  chatType?: "personalMessages" | "group" | "channel";
-  lastMessage?: string;
-  usersId?: number[];
-}
+import { TChatMessage } from "@/entities/ChatMessage";
 
-export type ChatListModel = TChat[];
+export type ChatType = "personal" | "group" | "channel";
+
+export interface TChat {
+  avatarURL: string;
+  chatId: string;
+  chatName: string;
+  chatType: ChatType;
+  lastMessage: TChatMessage;
+  usersId: number[];
+}

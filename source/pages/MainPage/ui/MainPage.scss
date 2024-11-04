@@ -75,13 +75,15 @@ $background: var(--background);
   grid-template-areas:
     "cw-margin"
     "cw-box";
-  grid-template-rows: 1fr 16fr;
+  grid-template-rows: 1fr calc(16*(100vh)/17);
 }
 .chat-content-block {
   background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
     $primary;
   width: 100%;
   height: 100%;
+
+  max-height: 100%;
 
   grid-area: cw-box;
 
@@ -93,7 +95,18 @@ $background: var(--background);
   align-items: center;
   justify-content: flex-end;
 }
+
 .chat-content-dialog {
+  width: 38vw;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.main-page__chat-content-div__container-chat-div__div-chat-box {
   width: 38vw;
   height: 100%;
 
@@ -125,6 +138,12 @@ $background: var(--background);
 }
 
 .chat-user-info {
+  background: transparent;
+  flex: 312 0 0;
+  height: auto;
+}
+
+.main-page__info-container-div {
   background: transparent;
   flex: 312 0 0;
   height: auto;

@@ -16,7 +16,10 @@ module.exports = {
       }]
       },
       { test: /\.(scss|css)$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
-      { test: /\.(handlebars|hbs)$/, use: 'handlebars-loader' },
+      { 
+        test: /\.(handlebars|hbs)$/, 
+        loader: 'handlebars-loader',
+      },
     ]
   },
   resolve: {
@@ -24,6 +27,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js'
   },

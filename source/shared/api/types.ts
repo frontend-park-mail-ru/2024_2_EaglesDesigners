@@ -1,5 +1,6 @@
 import { TChat } from "@/entities/Chat";
 import { TContact } from "@/entities/ContactCard/index.ts";
+import { TChatMessage } from "@/entities/ChatMessage";
 import { TUser } from "@/entities/User";
 
 export interface ResponseError {
@@ -29,6 +30,10 @@ export interface ChatsResponse {
   message: string;
   chats: TChat[];
 }
+export interface ChatMessagesResponse {
+  message: string;
+  messages: TChatMessage[];
+}
 
 export type EmptyRequest = {
   [K in string]: never;
@@ -52,4 +57,10 @@ export interface ProfileRequest {
 
 export interface ContactRequest {
   contacts: TContact[];
+}
+export interface ChatRequest {
+  chatId: string;
+}
+export interface SendMessageRequest {
+  text: string;
 }

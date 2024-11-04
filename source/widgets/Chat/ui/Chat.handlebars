@@ -1,0 +1,34 @@
+<div class="chat">
+    <div class="header">
+        <img class="avatar" src="{{chat.avatarURL}}" />
+        <div class="info">
+            <span class="info__chat-name">
+                {{ chat.chatName }}
+            </span>
+            <span class="info__chat-status">
+                {{ chat.chatType }}
+                {{!-- {{replaceChatType chat.chatType}} --}}
+            </span>
+        </div>
+        <span class="buttons">
+
+        </span>
+    </div>
+    <div class="messages">
+       
+    </div>
+    <div class="input">
+        <div class="input__bubble">
+            <div class="attach-btn">
+                <img class="input__send__icon" src="/assets/image/Attach.svg" />
+            </div>
+            <textarea class="text-area" placeholder="Введите сообщение"></textarea>
+            <div class="emoji-btn">
+                <img class="input__send__icon" src="/assets/image/Emoji.svg" />
+            </div>
+        </div>
+        <div class="input__send-btn">
+            <img class="send-btn__icon" src="/assets/image/Send.svg" />
+        </div>
+    </div>
+</div>

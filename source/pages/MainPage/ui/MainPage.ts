@@ -1,6 +1,7 @@
 import { ChatList } from "@/widgets/ChatList";
+import { Chat } from "@/widgets/Chat";
 import { API } from "@/shared/api/api.ts";
-import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
+import { ChatsResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
@@ -8,6 +9,9 @@ import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
 import { ProfileForm } from "@/widgets/ProfileForm";
 import { ContactsList } from "@/widgets/ContactsList";
+import { wsConn } from "@/shared/api/ws";
+import { TChat } from "@/entities/Chat";
+import { renderMessage } from "./handlers";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -21,7 +25,7 @@ export class MainPage extends View {
    * @function render
    * @async
    */
-  async render() {
+  async render(chatid = null) {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
@@ -29,8 +33,29 @@ export class MainPage extends View {
 
     const chatListParent = parent.querySelector("#widget-import")!;
 
-    const chatList = new ChatList(chatListParent);
+    const chatParent = parent.querySelector(".main-page__chat-content-div__container-chat-div")!;
+    const chat = new Chat(chatParent);
+
+    //const chatListParent = parent.querySelector("#chat-list-import")!;
+
+    const chatList = new ChatList(chatListParent, chat);
     chatList.render();
+
+    if(chatid){
+      let chats: TChat[] = [];
+      const response = await API.get<ChatsResponse>("/chats");
+      if (response.chats) {
+        chats = response.chats;
+        const index = chats.findIndex((elem) => chatid === elem.chatId);
+        
+        if(index !== -1){
+          chat.render(chats[index]);
+        }else{
+          history.pushState({ url: "/" }, "", "/");
+        }
+      }
+
+    }
 
     const exitButton = parent.querySelector(".exit-btn")!;
 
@@ -41,7 +66,8 @@ export class MainPage extends View {
       );
 
       if (!response.error) {
-        UserStorage.setUser({ id: 0, name: "", username: "" });
+        UserStorage.setUser({ id: "", name: "", username: "" });
+        wsConn.close();
         Router.go("/login");
       }
     };
@@ -70,5 +96,7 @@ export class MainPage extends View {
     };
 
     homeButton.addEventListener("click", handleHome);
+
+    wsConn.subscribe(renderMessage);
   }
 }
