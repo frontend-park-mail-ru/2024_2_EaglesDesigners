@@ -14,7 +14,7 @@ export const routes:Routes = {
       view: new SignupPage(),
     },
     {
-      path: /^\/chat\/([a-f0-9\-]{1,36})$/,
+      path: /^\/chat\/(.+)$/,
       view: new MainPage(), 
     },
     {
