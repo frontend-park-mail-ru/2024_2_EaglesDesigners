@@ -13,7 +13,7 @@ export class ChatList {
   #parent;
   #chat;
 
-  constructor(parent: Element, chat:Chat) {
+  constructor(parent: Element, chat: Chat) {
     this.#parent = parent;
     this.#chat = chat;
   }
@@ -29,7 +29,7 @@ export class ChatList {
     this.#parent.innerHTML = ChatListTemplate({});
 
     const chatList = this.#parent.querySelector("#chat-list")!;
-    const chatCard = new ChatCard(chatList,this.#chat);
+    const chatCard = new ChatCard(chatList, this.#chat);
 
     chats.forEach((chat) => {
       chatCard.render(chat);

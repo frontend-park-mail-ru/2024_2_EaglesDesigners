@@ -23,7 +23,11 @@ export class ProfileForm {
     response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
     const currentDate = new Date();
 
-    this.#parent.innerHTML = ProfileFormTemplate({ user, response, currentDate });
+    this.#parent.innerHTML = ProfileFormTemplate({
+      user,
+      response,
+      currentDate,
+    });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
     const birthdayInput: HTMLInputElement =
       this.#parent.querySelector("#date")!;
@@ -56,11 +60,14 @@ export class ProfileForm {
         this.#parent.querySelector("#user-name")!;
       const bioInput: HTMLInputElement = this.#parent.querySelector("#bio")!;
 
-      
       const nickname: string = nameInput.value;
       const birthdayValue = birthdayInput.value;
 
-      const profileData : ProfileRequest = {bio: bioInput.value, birthdate: new Date(birthdayValue), name: nickname};
+      const profileData: ProfileRequest = {
+        bio: bioInput.value,
+        birthdate: new Date(birthdayValue),
+        name: nickname,
+      };
       const formData = genProfileData(profileData, avatarFile);
 
       let flag = true;
@@ -79,7 +86,8 @@ export class ProfileForm {
       if (!validateYear(profileData.birthdate)) {
         validateForm(
           dateInput,
-          "Введите реальную дату и год рождения от 1920 до " + (new Date()).getFullYear(),
+          "Введите реальную дату и год рождения от 1920 до " +
+            new Date().getFullYear(),
           spanDateError,
         );
         flag = false;
@@ -91,7 +99,10 @@ export class ProfileForm {
         return;
       }
 
-      const response = await API.putFormData<ProfileResponse>("/profile", formData);
+      const response = await API.putFormData<ProfileResponse>(
+        "/profile",
+        formData,
+      );
 
       if (!response.error) {
         UserStorage.setUserName(profileData.name);

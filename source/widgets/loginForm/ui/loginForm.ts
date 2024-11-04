@@ -45,7 +45,7 @@ export class LoginForm extends View {
 
     const handleFormSubmit = async (e: Event) => {
       e.preventDefault();
-      
+
       const textPass = this.#parent.querySelector("#errorPassword")!;
       const textLogin = this.#parent.querySelector("#errorLogin")!;
 

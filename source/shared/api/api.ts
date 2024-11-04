@@ -62,7 +62,7 @@ class Api {
     }
   }
 
-  async putFormData<TResponse>(path: string,  formData : FormData) {
+  async putFormData<TResponse>(path: string, formData: FormData) {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;

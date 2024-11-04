@@ -41,20 +41,19 @@ export class MainPage extends View {
     const chatList = new ChatList(chatListParent, chat);
     chatList.render();
 
-    if(chatid){
+    if (chatid) {
       let chats: TChat[] = [];
       const response = await API.get<ChatsResponse>("/chats");
       if (response.chats) {
         chats = response.chats;
         const index = chats.findIndex((elem) => chatid === elem.chatId);
-        
-        if(index !== -1){
+
+        if (index !== -1) {
           chat.render(chats[index]);
-        }else{
+        } else {
           history.pushState({ url: "/" }, "", "/");
         }
       }
-
     }
 
     const exitButton = parent.querySelector(".exit-btn")!;

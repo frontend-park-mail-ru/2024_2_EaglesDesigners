@@ -75,7 +75,7 @@ $background: var(--background);
   grid-template-areas:
     "cw-margin"
     "cw-box";
-  grid-template-rows: 1fr calc(16*(100vh)/17);
+  grid-template-rows: 1fr calc(16 * (100vh) / 17);
 }
 .chat-content-block {
   background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),

@@ -170,7 +170,11 @@ export class SignupForm extends View {
       }
 
       const user = response.user;
-      UserStorage.setUser({ id: user.id, name: user.name, username: user.username });
+      UserStorage.setUser({
+        id: user.id,
+        name: user.name,
+        username: user.username,
+      });
 
       wsConn.start();
       Router.go("/");

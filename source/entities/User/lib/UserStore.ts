@@ -26,7 +26,7 @@ class UserStore {
     return this.#user;
   }
 
-setUserName(name: string) {
+  setUserName(name: string) {
     this.#user.name = name;
   }
 }

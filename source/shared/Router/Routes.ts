@@ -3,7 +3,7 @@ import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
 import { Routes } from "@/shared/Router/RouterTypes";
 
-export const routes:Routes = {
+export const routes: Routes = {
   paths: [
     {
       path: /^\/login$/,
@@ -15,7 +15,7 @@ export const routes:Routes = {
     },
     {
       path: /^\/chat\/(.+)$/,
-      view: new MainPage(), 
+      view: new MainPage(),
     },
     {
       path: /^\/$/,

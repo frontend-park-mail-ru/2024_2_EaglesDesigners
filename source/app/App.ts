@@ -1,7 +1,11 @@
 import "./ui/index.scss";
 import { Router } from "@/shared/Router/Router.ts";
 import { UserStorage } from "@/entities/User";
-import { defaultAuthRoutes, routes, strictRoutes } from "@/shared/Router/Routes.ts";
+import {
+  defaultAuthRoutes,
+  routes,
+  strictRoutes,
+} from "@/shared/Router/Routes.ts";
 /**
  * Class provides class App, the initial class
  */
