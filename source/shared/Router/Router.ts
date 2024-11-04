@@ -67,9 +67,17 @@ class Route {
       } else {
         history.pushState(state, "", url);
       }
+
       if (currentURL?.view) {
-        currentURL.view.render();
+        const urlMatch = url.match( currentURL.path!);
+        urlMatch?.shift();
+        if(urlMatch?.length){
+          currentURL.view.render(...urlMatch as [string, string]);
+        }else {
+          currentURL.view.render(); 
+        }
       }
+
     }
   }
 

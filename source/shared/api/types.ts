@@ -1,4 +1,5 @@
 import { TChat } from "@/entities/Chat";
+import { TChatMessage } from "@/entities/ChatMessage";
 import { TUser } from "@/entities/User";
 
 export interface ResponseError {
@@ -16,6 +17,10 @@ export interface ChatsResponse {
   message: string;
   chats: TChat[];
 }
+export interface ChatMessagesResponse {
+  message: string;
+  messages: TChatMessage[];
+}
 
 export type EmptyRequest = {
   [K in string]: never;
@@ -28,4 +33,10 @@ export interface SignUpRequest {
   name: string;
   username: string;
   password: string;
+}
+export interface ChatRequest {
+  chatId: string;
+}
+export interface SendMessageRequest {
+  text: string;
 }

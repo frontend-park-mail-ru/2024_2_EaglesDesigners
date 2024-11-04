@@ -1,0 +1,18 @@
+<div class="message{{#if message.first}} first-message{{/if}}{{#if message.last}} last-message{{/if}}{{#if message.isFromOtherUser}} left-side{{/if}}">
+  <div class="message__body">
+    <span class="message__body__username">
+      {{message.authorName}}
+    </span>
+    <span class="message__body__text">
+      {{message.text}}
+    </span>
+    <span class="message__body__meta">
+      <span class="timedate">
+        {{ message.datetime }}
+      </span>
+    </span>
+  </div>
+  <div class="message__avatar">
+    <img class="message__avatar__img" src="https://photofile.ru/wp-content/uploads/2024/07/1_nq3yogkddadxi5glogjg_g.png" />
+  </div>
+</div>
