@@ -1,10 +1,22 @@
-import { ProfileRequest } from "@/shared/api/types";
+import { UserStorage } from "@/entities/User";
+import { API } from "@/shared/api/api";
+import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
+import { Router } from "@/shared/Router/Router";
 
-export const genProfileData = (profileData: ProfileRequest, avatar: File) => {
+export const genProfileData = async (profileData: ProfileRequest, avatar: File) => {
   const formData: FormData = new FormData();
   const jsonProfileData = JSON.stringify(profileData);
   formData.append("profile_data", jsonProfileData);
   formData.append("avatar", avatar);
 
-  return formData;
+  const response = await API.putFormData<ProfileResponse>(
+    "/profile",
+    formData,
+  );
+
+  if (!response.error) {
+    UserStorage.setUserName(profileData.name);
+  }
+
+  Router.go("/");
 };

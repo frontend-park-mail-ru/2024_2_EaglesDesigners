@@ -68,7 +68,7 @@ export class ProfileForm {
         birthdate: new Date(birthdayValue),
         name: nickname,
       };
-      const formData = genProfileData(profileData, avatarFile);
+      
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
@@ -99,16 +99,8 @@ export class ProfileForm {
         return;
       }
 
-      const response = await API.putFormData<ProfileResponse>(
-        "/profile",
-        formData,
-      );
-
-      if (!response.error) {
-        UserStorage.setUserName(profileData.name);
-      }
-
-      Router.go("/");
+      genProfileData(profileData, avatarFile);
+      
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
   }
