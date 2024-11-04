@@ -1,3 +1,15 @@
+$primary: var(--primary);
+$primary-shadow-25: #0a0e16;
+
+$text-over-primary: #ffffff;
+
+@mixin font-settings($font-family, $font-weight, $font-size, $color) {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $color;
+}
+
 .chat-list-container {
   background: transparent;
 
@@ -35,4 +47,15 @@
 .chat-list-container__div__chatlist-div {
   --avatar-size: 60px;
   height: 100%;
+}
+
+.add-chat{
+  display: flex;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+}
+
+.add-chat__button {
+  cursor: pointer;
 }
