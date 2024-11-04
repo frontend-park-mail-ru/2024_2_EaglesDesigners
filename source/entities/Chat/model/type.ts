@@ -1,5 +1,5 @@
 export interface TChat {
-  avatarURL: string;
+  avatarPath: string;
   chatId: string;
   chatName: string;
   chatType: "personal" | "group" | "channel";

@@ -13,10 +13,10 @@ class UserStore {
   constructor() {
     this.#user = { id: "", name: "", username: "" };
     this.#chat = {
-      avatarURL: "",
+      avatarPath: "",
       chatId: "",
       chatName: "",
-      chatType: "personalMessages",
+      chatType: "personal",
       lastMessage: "",
       usersId: []
     };

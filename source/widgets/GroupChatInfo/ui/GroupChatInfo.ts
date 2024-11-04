@@ -4,6 +4,7 @@ import "./GroupChatInfo.scss";
 import { TChat } from "@/entities/Chat";
 import { UserAddChat } from "@/widgets/UserAddChat/ui/UserAddChat";
 import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
+import { localHost } from "@/app/config";
 
 export class GroupChatInfo{
     #parent;
@@ -15,7 +16,15 @@ export class GroupChatInfo{
 
     render() {
         const chat = this.#chat;
-        this.#parent.innerHTML = GroupChatInfoTemplate({chat});
+        let avatar : string;
+        if (chat.avatarPath) {
+            avatar = localHost + chat.avatarPath;
+        }
+        else {
+            avatar = "/assets/image/default-avatar.svg";
+        }
+        
+        this.#parent.innerHTML = GroupChatInfoTemplate({chat, avatar});
         
         const addUser = this.#parent.querySelector("#add-user")!;
         const groupUsers = this.#parent.querySelector('#users-list'); 

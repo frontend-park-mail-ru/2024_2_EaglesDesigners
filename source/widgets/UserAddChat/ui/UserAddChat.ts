@@ -44,15 +44,17 @@ export class UserAddChat {
                 const index = elem.href.lastIndexOf('/');
                 const href = elem.href.slice(index+1);
                 usersId.push(href);
-                console.log(usersId)
+                console.log(usersId);
             }
             
             
             e.preventDefault();
             console.log(chat.chatId);
             const response = await API.post<AddUserResponse, UsersIdRequest>('/chat/' + chat.chatId + "/addusers", {usersId});
-            console.log(response);
-            this.#parent.innerHTML = '';
+            if (!response.error) {
+                this.#parent.innerHTML = '';
+            }
+            
         });
         });
 

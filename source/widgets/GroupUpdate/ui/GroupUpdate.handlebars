@@ -5,14 +5,25 @@
     </div>
     <div class="group-update-content">
         <div class="group-avatar">
-            <img class="group-avatar__img" src="/assets/image/default-avatar.svg" alt="">
+            <label style="height: 90px;" for="group-ava">
+                <img id="avatar-group" class="group-avatar__img" src="{{avatar}}" alt="">
+                    <input
+                    style="width: 0px; heigth: 0px"
+                    type="file"
+                    id="group-ava"
+                    name="ava"
+                    class="group-avatar__input-avatar"
+                    accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
+                    /><br />
+            </label>
+            
         </div>
         <div class="group-name">
             <span class="group-name__span">Название</span>
-            <input class="group-name__input" type="text" name="text" value="">
+            <input id="group-name" class="group-name__input" type="text" name="text" value="{{chat.chatName}}">
         </div>
     </div>
     <div class="confirm-group-update">
-        <img class="confirm-group-update__img" src="/assets/image/confirm.svg" alt="">
+        <img id="confirm-update-group" class="confirm-group-update__img" src="/assets/image/confirm.svg" alt="">
     </div>
 </div>
