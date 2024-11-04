@@ -62,16 +62,9 @@ class Api {
     }
   }
 
-  async putFormData<TResponse, TRequest>(path: string,  formDataBody : File, jsonBody: TRequest) {
+  async putFormData<TResponse>(path: string,  formData : FormData) {
     type Response = TResponse & ResponseError;
     try {
-      const formData = new FormData();
-
-      const profileUserDate = JSON.stringify(jsonBody);
-
-      formData.append("avatar", formDataBody);
-      formData.append("profile_data", profileUserDate);
-
       const url = this.#baseURl + path;
       const response = await fetch(url, {
         method: "PUT",

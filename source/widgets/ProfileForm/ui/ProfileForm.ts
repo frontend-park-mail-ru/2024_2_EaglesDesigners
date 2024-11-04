@@ -4,11 +4,12 @@ import { API } from "@/shared/api/api";
 import { Router } from "@/shared/Router/Router.ts";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
-import { profileFormRequest, ProfileRequest, ProfileResponse } from "@/shared/api/types";
+import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
 import { serverHost } from "@/app/config";
+import { genProfileData } from "../api/updateProfile";
 
 export class ProfileForm {
   #parent;
@@ -60,12 +61,12 @@ export class ProfileForm {
       const birthdayValue = birthdayInput.value;
 
       const profileData : ProfileRequest = {bio: bioInput.value, birthdate: new Date(birthdayValue), name: nickname};
-
+      const formData = genProfileData(profileData, avatarFile);
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
         this.#parent.querySelector("#nickname")!;
-      if (!validateNickname(nickname) || nickname.length > 20) {
+      if (!validateNickname(profileData.name) || profileData.name.length > 20) {
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
         flag = false;
       } else {
@@ -90,9 +91,7 @@ export class ProfileForm {
         return;
       }
 
-      const avatar : profileFormRequest = {avatar: avatarFile};
-
-      const response = await API.putFormData<ProfileResponse, ProfileRequest>("/profile", avatar.avatar, profileData);
+      const response = await API.putFormData<ProfileResponse>("/profile", formData);
 
       if (!response.error) {
         UserStorage.setUserName(profileData.name);
