@@ -3,10 +3,11 @@ import ChatCardTemplate from "./ChatCard.handlebars";
 import "./ChatCard.scss";
 import { Chat } from "@/widgets/Chat";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { extractTime } from "@/shared/helpers/extractTime";
 
 export class ChatCard {
   #parent;
-  #chat
+  #chat;
 
   constructor(parent: Element, chat:Chat) {
     this.#parent = parent;
@@ -14,7 +15,15 @@ export class ChatCard {
   }
 
   render(chat: TChat) {
-    this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ chat }));
+    this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ 
+      chat: {
+        ...chat,
+        lastMessage: {
+          ...chat.lastMessage,
+          datetime: extractTime(chat.lastMessage.datetime)
+        }
+      }
+  }));
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
 

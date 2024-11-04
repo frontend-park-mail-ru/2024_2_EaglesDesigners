@@ -2,7 +2,6 @@
 
   <div class="chat-card__div">
     <img class="chat-card__div__img" src="{{chat.avatarURL}}" />
-
     <div class="chat-card__div__chat-info">
       <div class="chat-card__div__chat-info__div-chat-name">
         <span class="chat-card__div__chat-info__div-chat-name__span">
@@ -11,7 +10,7 @@
       </div>
       <div class="chat-card__div__chat-info__date">
         <span class="chat-card__div__chat-info__date__span">
-          {{ extractTime chat.lastMessage.datetime }}
+          {{ chat.lastMessage.datetime }}
         </span>
       </div>
     </div>

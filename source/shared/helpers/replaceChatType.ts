@@ -1,4 +1,4 @@
-module.exports = function(chatType) {
+export const formatChatType = (chatType: string) => {
     if (chatType === 'personal') {
         return 'Личный чат';
     } else if (chatType === 'group') {
@@ -6,5 +6,5 @@ module.exports = function(chatType) {
     } else if (chatType === 'channel') {
         return 'Канал';
     }
-    return chatType; // Возвращаем оригинальное значение, если не совпадает
+    return chatType;
 }

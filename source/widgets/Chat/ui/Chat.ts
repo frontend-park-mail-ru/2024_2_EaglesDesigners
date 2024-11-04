@@ -7,6 +7,7 @@ import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
 import { ChatStorage } from '@/entities/Chat/lib/ChatStore';
+import { formatChatType } from '@/shared/helpers/replaceChatType';
 
 export class Chat {
     #parent;
@@ -22,7 +23,12 @@ export class Chat {
     async render(chat: TChat) {  
       ChatStorage.setChat(chat);
 
-      this.#parent.innerHTML = ChatTemplate({chat});
+      this.#parent.innerHTML = ChatTemplate({
+        chat: {
+          ...chat,
+          chatType: formatChatType(chat.chatType)
+        }
+      });
 
       const textArea = this.#parent.querySelector('textarea')!;
 

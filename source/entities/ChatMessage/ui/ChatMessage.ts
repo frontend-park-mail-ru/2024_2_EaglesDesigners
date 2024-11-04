@@ -2,6 +2,7 @@ import { TChatMessage, TChatMessageWithFlags } from "@/entities/ChatMessage/mode
 import ChatMessageTemplate from "./ChatMessage.handlebars";
 import "./ChatMessage.scss";
 import { UserStorage } from "@/entities/User";
+import { extractTime } from "@/shared/helpers/extractTime";
 
 export class ChatMessage {
   #parent;
@@ -36,7 +37,12 @@ export class ChatMessage {
         this.#newestMessage = messageWithFlags;
       }
 
-      this.#parent.insertAdjacentHTML("beforeend", ChatMessageTemplate({message: messageWithFlags}));
+      this.#parent.insertAdjacentHTML("beforeend", ChatMessageTemplate({
+        message: {
+          ...messageWithFlags,
+          datetime: extractTime(messageWithFlags.datetime)
+        }
+      }));    
     });
   }
   renderNewMessage(message: TChatMessage) {
@@ -56,6 +62,11 @@ export class ChatMessage {
 
     this.#newestMessage = messageWithFlags;
 
-    this.#parent.insertAdjacentHTML("afterbegin", ChatMessageTemplate({message: messageWithFlags}));
+    this.#parent.insertAdjacentHTML("afterbegin", ChatMessageTemplate({
+      message: {
+        ...messageWithFlags,
+        datetime: extractTime(messageWithFlags.datetime),
+      }
+    }));
   }
 }

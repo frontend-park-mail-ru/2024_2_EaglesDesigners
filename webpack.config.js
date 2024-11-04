@@ -18,15 +18,7 @@ module.exports = {
       { test: /\.(scss|css)$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
       { 
         test: /\.(handlebars|hbs)$/, 
-        use: {
-          loader: 'handlebars-loader',
-          options: {
-            helperDirs: path.join(__dirname, "helpers"),
-            precompileOptions: {
-              knownHelpersOnly: false,
-            },
-          },
-        },
+        loader: 'handlebars-loader',
       },
     ]
   },
