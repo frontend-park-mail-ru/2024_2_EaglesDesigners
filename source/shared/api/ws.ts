@@ -1,4 +1,4 @@
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 class wsConnection {
     handlers: ((payload: any) => Promise<void>)[];
@@ -50,6 +50,18 @@ class wsConnection {
         this.ws.onerror = (error: Event) => {
             console.error('WebSocket ошибка:', error);
         };
+    }
+
+    close(){
+        if (!this.ws) {
+            return;
+        }
+        this.ws.close();
+        this.status = false;
+        this.handlers = [];
+        this.ws = null;
+
+        console.log('WebSocket начал процесс отключения');
     }
 
     subscribe(handler: (payload: any) => Promise<void>) {

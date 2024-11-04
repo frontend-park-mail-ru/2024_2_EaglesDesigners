@@ -63,6 +63,7 @@ export class MainPage extends View {
 
       if (!response.error) {
         UserStorage.setUser({ id: "", name: "", username: "" });
+        wsConn.close();
         Router.go("/login");
       }
     };
