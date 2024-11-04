@@ -3,12 +3,13 @@ import { validateNickname } from "@/shared/validation/nicknameValidation.ts";
 import { validateForm } from "@/shared/validation/formValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import { API } from "@/shared/api/api.ts";
-import { AuthResponse, EmptyResponse, SignUpRequest } from "@/shared/api/types";
+import { AuthResponse, SignUpRequest } from "@/shared/api/types";
 import SignUpFormTemplate from "./signUpForm.hbs";
 import "./signUpForm.scss";
 import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { UserStorage } from "@/entities/User";
+import { wsConn } from "@/shared/api/ws";
 
 /**
  * Class provides signup form
@@ -162,6 +163,7 @@ export class SignupForm extends View {
       const user = response.user;
       UserStorage.setUser({ id: user.id, name: user.name, username: user.username });
 
+      wsConn.start();
       Router.go("/");
     };
 
