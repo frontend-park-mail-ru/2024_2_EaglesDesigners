@@ -1,4 +1,4 @@
-export const extractTime = (datetime: string) => {
+export const getTimeString = (datetime: string) => {
     const date = new Date(datetime);
 
     const hours = String(date.getHours()).padStart(2, '0'); // Часы

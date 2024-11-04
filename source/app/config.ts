@@ -1,7 +1,7 @@
 export const ChatLabel = {
-    'personal': 'Личный чат',
-    'group': 'Группа',
-    'channel': 'Канал'
+    personal: 'Личный чат',
+    group: 'Группа',
+    channel: 'Канал'
 };
 
 export const localHost = "http://localhost:8080";

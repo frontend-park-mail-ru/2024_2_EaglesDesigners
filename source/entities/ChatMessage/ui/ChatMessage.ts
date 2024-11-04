@@ -2,7 +2,7 @@ import { TChatMessage, TChatMessageWithFlags } from "@/entities/ChatMessage/mode
 import ChatMessageTemplate from "./ChatMessage.handlebars";
 import "./ChatMessage.scss";
 import { UserStorage } from "@/entities/User";
-import { extractTime } from "@/shared/helpers/extractTime";
+import { getTimeString } from "@/shared/helpers/getTimeString";
 
 export class ChatMessage {
   #parent;
@@ -40,7 +40,7 @@ export class ChatMessage {
       this.#parent.insertAdjacentHTML("beforeend", ChatMessageTemplate({
         message: {
           ...messageWithFlags,
-          datetime: extractTime(messageWithFlags.datetime)
+          datetime: getTimeString(messageWithFlags.datetime)
         }
       }));    
     });

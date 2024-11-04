@@ -7,7 +7,7 @@ import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
 import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
 import { ChatStorage } from '@/entities/Chat/lib/ChatStore';
-import { formatChatType } from '@/shared/helpers/replaceChatType';
+import { getChatLabel } from '@/shared/helpers/getChatLabel';
 
 export class Chat {
     #parent;
@@ -26,7 +26,7 @@ export class Chat {
       this.#parent.innerHTML = ChatTemplate({
         chat: {
           ...chat,
-          chatType: formatChatType(chat.chatType)
+          chatType: getChatLabel(chat.chatType)
         }
       });
 
@@ -59,7 +59,7 @@ export class Chat {
             
             API.post<EmptyResponse, SendMessageRequest>("/chat/"+chat.chatId+"/messages", {
               text: messageText,
-            }); // TODO: добавить иконку отправки сообщения и при успешном await response, убирать ее
+            });
         }
 
         textArea.style.height = "";

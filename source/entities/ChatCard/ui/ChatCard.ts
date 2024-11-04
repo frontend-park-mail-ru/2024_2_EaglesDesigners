@@ -3,7 +3,7 @@ import ChatCardTemplate from "./ChatCard.handlebars";
 import "./ChatCard.scss";
 import { Chat } from "@/widgets/Chat";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
-import { extractTime } from "@/shared/helpers/extractTime";
+import { getTimeString } from "@/shared/helpers/getTimeString";
 
 export class ChatCard {
   #parent;
@@ -20,7 +20,7 @@ export class ChatCard {
         ...chat,
         lastMessage: {
           ...chat.lastMessage,
-          datetime: extractTime(chat.lastMessage.datetime)
+          datetime: getTimeString(chat.lastMessage.datetime)
         }
       }
   }));
