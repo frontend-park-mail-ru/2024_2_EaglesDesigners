@@ -83,7 +83,7 @@ export class MainPage extends View {
     const contactButton = parent.querySelector("#contact-button");
 
     const handleContacts = () => {
-      const contactForm = new ContactsList(chatListParent);
+      const contactForm = new ContactsList(chatListParent, chat);
       contactForm.render();
     };
     contactButton?.addEventListener("click", handleContacts);

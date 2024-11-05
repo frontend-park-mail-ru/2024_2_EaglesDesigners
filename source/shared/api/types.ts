@@ -2,6 +2,7 @@ import { TChat } from "@/entities/Chat";
 import { TContact } from "@/entities/ContactCard/index.ts";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { TUser } from "@/entities/User";
+import { TNewChat } from "@/entities/Chat/model/type";
 
 export interface ResponseError {
   error: string;
@@ -26,6 +27,11 @@ export interface ProfileResponse {
   name: string;
 }
 
+export interface ChatResponse{
+  message: string;
+  chat: TChat;
+}
+
 export interface ChatsResponse {
   message: string;
   chats: TChat[];
@@ -33,6 +39,11 @@ export interface ChatsResponse {
 export interface ChatMessagesResponse {
   message: string;
   messages: TChatMessage[];
+}
+
+export interface ChatUsersResponse {
+  message: string;
+  usersId: string[];
 }
 
 export type EmptyRequest = {
@@ -60,6 +71,9 @@ export interface ContactRequest {
 export interface ChatRequest {
   chatId: string;
 }
+
+export type NewChatRequest = TNewChat;
+
 export interface SendMessageRequest {
   text: string;
 }

@@ -8,5 +8,11 @@ export interface TChat {
   chatName: string;
   chatType: ChatType;
   lastMessage: TChatMessage;
-  usersId: number[];
+  usersId: string[];
+}
+
+export interface TNewChat {
+  chatName: string;
+  chatType: ChatType;
+  usersToAdd: string[];
 }

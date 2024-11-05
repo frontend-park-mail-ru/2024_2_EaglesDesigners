@@ -5,6 +5,7 @@ import { ChatCard } from "@/entities/ChatCard";
 import ChatListTemplate from "./ChatList.handlebars";
 import "./ChatList.scss";
 import { Chat } from "@/widgets/Chat/ui/Chat";
+import { ContactsList } from "@/widgets/ContactsList";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -60,6 +61,8 @@ export class ChatList {
 
     addChat.querySelector('.create-personal-chat')!.addEventListener('click', () => {
         console.log('Создать личный чат');
+        const contactForm = new ContactsList(this.#parent, this.#chat);
+        contactForm.render();
     });
 
     addChat.querySelector('.create-group-chat')!.addEventListener('click', () => {
