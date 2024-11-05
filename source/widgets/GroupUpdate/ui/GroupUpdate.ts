@@ -16,15 +16,15 @@ export class GroupUpdate {
 
     render(chat : TChat) {
         let avatar : string;
-        if (chat.avatarPath) {
-            avatar = localHost + chat.avatarPath;
+        if (chat.avatarPath !== "") {
+            avatar = localHost + chat.avatarPath  + "?" + Date.now();
         }
         else {
             avatar = "/assets/image/default-avatar.svg";
         }
+        console.log(avatar);
         
         this.#parent.innerHTML = GroupUpdateTempalte({chat, avatar});
-        console.log(chat);
         const backButton = this.#parent.querySelector('#back-button')!;
 
         const handleBack = () => {
@@ -64,15 +64,22 @@ export class GroupUpdate {
             const formData = new FormData();
             formData.append("chat_data", groupName);
             formData.append("avatar", groupAvatarFile);
-            console.log(formData);
 
             const response = await API.putFormData<GroupUpdateResponse>("/chat/" + chat.chatId, formData);
             if (!response.error) {
-                console.log(response);
+                console.log(groupAvatarFile);
+                console.log(response, "Stas");
+                console.log(chat);
                 this.#parent.innerHTML = '';
                 chat.chatName = groupName;
-                const avatarChat = await API.get("/uploads/chat/" + chat.chatId);
-                console.log(avatarChat);
+                if (response.updatedAvatarPath !== "") {
+                    console.log('я туту');
+                    chat.avatarPath = response.updatedAvatarPath;
+                }
+                //chat.avatarPath = 
+                // const avatarChat = await API.get("/uploads/chat/" + chat.chatId);
+                // console.log(avatarChat);
+
 
                 ChatStorage.setChat(chat);
                  

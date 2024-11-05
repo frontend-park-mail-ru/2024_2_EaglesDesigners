@@ -16,10 +16,11 @@ export class ChatCard {
   }
 
   render(chat: TChat) {
+    let avatar;
     if (chat.avatarPath !== "") {
-      chat.avatarPath = localHost + chat.avatarPath;
+      avatar = localHost + chat.avatarPath  + "?" + Date.now();
     } else {
-      chat.avatarPath = "/assets/image/default-avatar.svg";
+      avatar = "/assets/image/default-avatar.svg";
     }
     
     this.#parent.insertAdjacentHTML(
@@ -32,6 +33,7 @@ export class ChatCard {
             datetime: getTimeString(chat.lastMessage.datetime),
           },
         },
+        avatar
       }),
     );
     this.#parent.lastElementChild!.addEventListener("click", (e) => {

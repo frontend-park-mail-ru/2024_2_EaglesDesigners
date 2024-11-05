@@ -13,6 +13,7 @@ import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getChatLabel } from "@/shared/helpers/getChatLabel";
 import { ChatInfo } from "@/widgets/ChatInfo";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
+import { localHost } from "@/app/config";
 
 export class Chat {
   #parent;
@@ -29,13 +30,14 @@ export class Chat {
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = '';
     ChatStorage.setChat(chat);
-    console.log(chat);
+    const avatar = localHost + chat.avatarPath + "?" + Date.now();
 
     this.#parent.innerHTML = ChatTemplate({
       chat: {
         ...chat,
         chatType: getChatLabel(chat.chatType),
       },
+      avatar
     });
 
     const textArea = this.#parent.querySelector("textarea")!;

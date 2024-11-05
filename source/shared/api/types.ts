@@ -87,7 +87,7 @@ export interface GroupAvatarData {
 
 export interface GroupUpdateResponse {
   chatName: string;
-  wasAvatarUpdated : boolean;
+  updatedAvatarPath : string;
 }
 
 export interface ContactRequest {
