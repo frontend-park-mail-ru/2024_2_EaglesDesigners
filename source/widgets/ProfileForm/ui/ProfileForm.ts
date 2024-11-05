@@ -68,7 +68,6 @@ export class ProfileForm {
         birthdate: new Date(birthdayValue),
         name: nickname,
       };
-      
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
@@ -102,9 +101,12 @@ export class ProfileForm {
       const errorMessage = await genProfileData(profileData, avatarFile);
       if (errorMessage != "" && errorMessage === "error message") {
         validateForm(nameInput, "Вы не авторизованы", nicknameSpan);
-      }
-      else if (errorMessage != "") {
-        validateForm(nameInput, "Произошла какая-то ошибка, попробуйте еще раз", nicknameSpan);
+      } else if (errorMessage != "") {
+        validateForm(
+          nameInput,
+          "Произошла какая-то ошибка, попробуйте еще раз",
+          nicknameSpan,
+        );
       }
     };
     confirmButton?.addEventListener("click", updateProfileInfo);

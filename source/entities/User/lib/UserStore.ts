@@ -8,7 +8,6 @@ class UserStore {
 
   constructor() {
     this.#user = { id: "", name: "", username: "" };
-
   }
 
   async init() {
@@ -29,8 +28,7 @@ class UserStore {
 
   setUserName(name: string) {
     this.#user.name = name;
-  }    
-
+  }
 }
 
 export const UserStorage = new UserStore();

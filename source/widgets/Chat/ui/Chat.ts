@@ -28,7 +28,7 @@ export class Chat {
    * @async
    */
   async render(chat: TChat) {
-    this.#chatInfo.innerHTML = '';
+    this.#chatInfo.innerHTML = "";
     ChatStorage.setChat(chat);
     const avatar = serverHost + chat.avatarPath + "?" + Date.now();
 
@@ -37,7 +37,7 @@ export class Chat {
         ...chat,
         chatType: getChatLabel(chat.chatType),
       },
-      avatar
+      avatar,
     });
 
     const textArea = this.#parent.querySelector("textarea")!;
@@ -86,8 +86,6 @@ export class Chat {
 
     textArea.addEventListener("keypress", KeyPressHandler);
 
-
-    
     document
       .querySelector(".input__send-btn")!
       .addEventListener("click", sendInputMessage);
@@ -104,21 +102,18 @@ export class Chat {
     chatMessage.renderMessages(messages);
     const chatHeader = this.#parent.querySelector("#header-chat")!;
 
-      const handleChatHeader = () => {
-        console.log(this.#chatInfo.innerHTML)
-        if (this.#chatInfo.innerHTML !== ""){
-          this.#chatInfo.innerHTML = "";
-        }
-        else if (chat.chatType === "personal") {
-          const chatInfo = new ChatInfo(this.#chatInfo, chat);
-          chatInfo.render();
-        }
-        else if (chat.chatType === "group") {
-          const chatInfo = new GroupChatInfo(this.#chatInfo, chat);
-          chatInfo.render(); 
-        }
-        
-      };
-      chatHeader.addEventListener('click', handleChatHeader);
+    const handleChatHeader = () => {
+      console.log(this.#chatInfo.innerHTML);
+      if (this.#chatInfo.innerHTML !== "") {
+        this.#chatInfo.innerHTML = "";
+      } else if (chat.chatType === "personal") {
+        const chatInfo = new ChatInfo(this.#chatInfo, chat);
+        chatInfo.render();
+      } else if (chat.chatType === "group") {
+        const chatInfo = new GroupChatInfo(this.#chatInfo, chat);
+        chatInfo.render();
+      }
+    };
+    chatHeader.addEventListener("click", handleChatHeader);
   }
 }

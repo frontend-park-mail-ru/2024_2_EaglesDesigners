@@ -1,92 +1,91 @@
 .group-update {
-    width: 95%;
-    margin-left: 3%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 56px;
-    height: 91%;
+  width: 95%;
+  margin-left: 3%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 56px;
+  height: 91%;
 }
 
 .group-update-header {
-    
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    &__span {
-        color: #fff;
-        font-size: 18px;
-        font-family: var(--main-font-family);
-        padding: auto;
-        margin-left: 10px;
-    }
+  &__span {
+    color: #fff;
+    font-size: 18px;
+    font-family: var(--main-font-family);
+    padding: auto;
+    margin-left: 10px;
+  }
 
-    &__img {
-        cursor: pointer;
-    }
+  &__img {
+    cursor: pointer;
+  }
 }
 
 .group-update-content {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .group-avatar {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
-    &__img {
-        width: 90px;
-        height: 90px;
-        opacity: 0.5;
-        border-radius: 100px;
-        cursor: pointer;
+  &__img {
+    width: 90px;
+    height: 90px;
+    opacity: 0.5;
+    border-radius: 100px;
+    cursor: pointer;
 
-        &:hover {
-            opacity: 1;
-        }
+    &:hover {
+      opacity: 1;
     }
+  }
 }
 
 .group-name {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    &__span {
-        color: #fff;
-        font-size: 14px;
-        opacity: 0.4;
-        font-family: var(--main-font-family);
-        margin-top: 20px;
+  &__span {
+    color: #fff;
+    font-size: 14px;
+    opacity: 0.4;
+    font-family: var(--main-font-family);
+    margin-top: 20px;
+  }
+
+  &__input {
+    border: none;
+    background-color: inherit;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    color: #fff;
+    font-size: 18px;
+    width: 90%;
+
+    &:focus {
+      border-bottom: 2px solid #4f82bf;
+      transition: 1s;
     }
-
-    &__input {
-        border: none;
-        background-color: inherit;
-        border-bottom: 2px solid #fff;
-        outline: none;
-        color: #fff;
-        font-size: 18px;
-        width: 90%;
-
-        &:focus {
-            border-bottom: 2px solid #4f82bf;
-            transition: 1s;
-        }
-    }
+  }
 }
 
 .confirm-group-update {
-    display: flex;
-    height: 100%;
-    justify-content: end;
-    align-items: end;
+  display: flex;
+  height: 100%;
+  justify-content: end;
+  align-items: end;
 
-    &__img {
-        width: 54px;
-        height: 54px;
-        cursor: pointer;
-        margin-right: 15px;
-    }
+  &__img {
+    width: 54px;
+    height: 54px;
+    cursor: pointer;
+    margin-right: 15px;
+  }
 }

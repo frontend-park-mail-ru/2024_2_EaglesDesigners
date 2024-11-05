@@ -1,1 +1,1 @@
-export {GroupUpdate} from "./ui/GroupUpdate.ts";
+export { GroupUpdate } from "./ui/GroupUpdate.ts";

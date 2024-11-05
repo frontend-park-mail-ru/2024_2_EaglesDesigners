@@ -31,10 +31,8 @@ export class MainPage extends View {
     const parent = document.getElementById("root")!;
     parent.innerHTML = MainPageTemplate({ user });
 
-
     const chatUserInfo = parent.querySelector("#chat-info-container")!;
     //const chatParent = parent.querySelector(".main-page__chat-content-div__container-chat-div")!;
-    
 
     const chatListParent = parent.querySelector("#widget-import")!;
 

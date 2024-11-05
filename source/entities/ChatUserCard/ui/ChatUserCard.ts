@@ -4,13 +4,16 @@ import "./ChatUserCard.scss";
 import { serverHost } from "@/app/config";
 
 export class ChatUserCard {
-    #parent;
-    constructor(parent : Element) {
-        this.#parent = parent;
-    }
+  #parent;
+  constructor(parent: Element) {
+    this.#parent = parent;
+  }
 
-    render(userProfile : ProfileResponse) {
-        userProfile.avatarURL = serverHost + userProfile.avatarURL;
-        this.#parent.insertAdjacentHTML('beforeend', ChatUserCardTemplate({userProfile}));
-    }
+  render(userProfile: ProfileResponse) {
+    userProfile.avatarURL = serverHost + userProfile.avatarURL;
+    this.#parent.insertAdjacentHTML(
+      "beforeend",
+      ChatUserCardTemplate({ userProfile }),
+    );
+  }
 }

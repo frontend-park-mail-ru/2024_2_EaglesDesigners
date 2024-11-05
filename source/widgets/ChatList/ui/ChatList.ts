@@ -23,8 +23,8 @@ export class ChatList {
    * @async
    */
   async render() {
-    const response = await API.get<ChatsResponse>("/chats");    
-    
+    const response = await API.get<ChatsResponse>("/chats");
+
     const chats: TChat[] = response.chats ?? [];
     if (chats.length) {
       chats[0].chatType = "group";

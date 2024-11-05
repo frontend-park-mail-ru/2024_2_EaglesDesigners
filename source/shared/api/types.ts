@@ -70,24 +70,24 @@ export interface SendMessageRequest {
 }
 
 export interface UsersIdRequest {
-  usersId : string[];
+  usersId: string[];
 }
 
 export interface UsersIdResponse {
-  usersId : string[];
+  usersId: string[];
 }
 
 export interface GroupUpdateRequest {
-  chatName : string; 
+  chatName: string;
 }
 
 export interface GroupAvatarData {
-  avatar : File;
+  avatar: File;
 }
 
 export interface GroupUpdateResponse {
   chatName: string;
-  updatedAvatarPath : string;
+  updatedAvatarPath: string;
 }
 
 export interface ContactRequest {

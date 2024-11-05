@@ -1,7 +1,6 @@
 import { serverHost } from "@/app/config";
 import { ResponseError } from "./types";
 
-
 /**
  * API class provides API-functions.
  */
@@ -84,7 +83,7 @@ class Api {
     }
   }
 
-  async delete<TResponse>(path : string, body : string){
+  async delete<TResponse>(path: string, body: string) {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
