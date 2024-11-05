@@ -1,0 +1,128 @@
+.group-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.group-header-images {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.group-update-image {
+  width: 20%;
+  margin-top: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: end;
+
+  &__img {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    position: relative;
+  }
+}
+
+.group-avatar {
+  width: 80%;
+}
+
+.group-info-header {
+  margin-top: 56px;
+  width: 90%;
+  border-radius: 25px;
+  margin-left: 5%;
+  background-color: #4f82bf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__img {
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 100px;
+    margin-left: 32%;
+    margin-bottom: 10px;
+  }
+
+  &__span-group-name {
+    display: block;
+    font-size: 20px;
+    font-family: var(--main-font-family);
+    color: #fff;
+  }
+
+  &__span {
+    color: #fff;
+    font-size: 14px;
+    font-family: var(--main-font-family);
+    opacity: 0.4;
+    display: block;
+    margin-bottom: 15px;
+  }
+}
+
+.group-content {
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+.group-content-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-right: 10px;
+
+  &__span {
+    color: #fff;
+    font-family: var(--main-font-family);
+    font-size: 14px;
+    text-align: center;
+    padding-top: 7px;
+  }
+
+  &__button {
+    margin-left: 20%;
+    width: 121px;
+    background-color: #afcbee;
+    border-radius: 5px;
+    border: none;
+    height: 29px;
+    cursor: pointer;
+  }
+}
+
+.users-count {
+  color: #fff;
+  font-family: var(--main-font-family);
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.delete-group {
+  height: 59%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+
+  &__button {
+    width: 90%;
+    height: 29px;
+    border-radius: 5px;
+    background-color: #afcbee;
+    color: red;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.horizontal-line {
+  width: 95%;
+  opacity: 0.5;
+  margin-right: 15px;
+}

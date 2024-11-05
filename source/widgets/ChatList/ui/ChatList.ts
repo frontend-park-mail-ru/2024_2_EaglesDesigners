@@ -26,6 +26,7 @@ export class ChatList {
    */
   async render() {
     const response = await API.get<ChatsResponse>("/chats");
+
     const chats: TChat[] = response.chats ?? [];
 
     this.#parent.innerHTML = ChatListTemplate({});

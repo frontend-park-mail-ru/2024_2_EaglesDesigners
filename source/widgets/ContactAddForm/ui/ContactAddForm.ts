@@ -1,7 +1,7 @@
 import { API } from "@/shared/api/api";
 import ContactAddFromTemplate from "./ContactAddForm.handlebars";
 import "./ContactAddForm.scss";
-import { ContactResponse } from "@/shared/api/types";
+import { ContactRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Chat } from "@/widgets/Chat";
@@ -24,10 +24,13 @@ export class ContactAddForm {
       this.#parent.querySelector("#username-input")!;
 
     const handleAddContact = async () => {
-      const contactUsername = usernameInput.value;
-      const response = await API.post<TContact, ContactResponse>("/contacts", {
+      const contactUsername: ContactRequest = {
+        contactUsername: usernameInput.value,
+      };
+      const response = await API.post<TContact, ContactRequest>(
+        "/contacts",
         contactUsername,
-      });
+      );
 
       const spanError = this.#parent.querySelector("#error-span")!;
 
@@ -55,6 +58,15 @@ export class ContactAddForm {
     };
 
     confirmButton.addEventListener("click", handleAddContact);
+
+    const handleEnterClick = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleAddContact();
+      }
+      return;
+    };
+
+    document.addEventListener("keyup", handleEnterClick);
 
     const cancelButton = this.#parent.querySelector("#cancel-btn")!;
 

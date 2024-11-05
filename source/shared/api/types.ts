@@ -16,7 +16,7 @@ export interface AuthResponse {
   user: TUser;
 }
 
-export interface ContactResponse {
+export interface ContactRequest {
   contactUsername: string;
 }
 
@@ -39,6 +39,11 @@ export interface ChatsResponse {
 export interface ChatMessagesResponse {
   message: string;
   messages: TChatMessage[];
+}
+
+export interface AddUserResponse {
+  message: string;
+  error: string;
 }
 
 export interface ChatUsersResponse {
@@ -65,9 +70,65 @@ export interface ProfileRequest {
   bio: string;
 }
 
-export interface ContactRequest {
+export interface ContactResponse {
   contacts: TContact[];
 }
+export interface ChatRequest {
+  chatId: string;
+}
+export interface SendMessageRequest {
+  text: string;
+}
+
+export interface UsersIdRequest {
+  usersId: string[];
+}
+
+export interface UsersIdResponse {
+  usersId: string[];
+}
+
+export interface GroupUpdateRequest {
+  chatName: string;
+}
+
+export interface GroupAvatarData {
+  avatar: File;
+}
+
+export interface GroupUpdateResponse {
+  chatName: string;
+  updatedAvatarPath: string;
+}
+
+export interface ChatRequest {
+  chatId: string;
+}
+export interface SendMessageRequest {
+  text: string;
+}
+
+export interface UsersIdRequest {
+  usersId: string[];
+}
+
+export interface UsersIdResponse {
+  usersId: string[];
+}
+
+export interface GroupUpdateRequest {
+  chatName: string;
+}
+
+export interface GroupAvatarData {
+  avatar: File;
+}
+
+export interface GroupUpdateResponse {
+  chatName: string;
+  updatedAvatarPath: string;
+}
+
 export interface ChatRequest {
   chatId: string;
 }

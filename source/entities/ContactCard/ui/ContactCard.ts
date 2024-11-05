@@ -1,7 +1,7 @@
 import ContactCardTemplate from "./ContactCard.handlebars";
 import { TContact } from "../api/ContactType";
 import "./ContactCard.scss";
-import { serverHost } from "@/app/config";
+import { localHost, serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
 import { ChatResponse, ChatsResponse, ChatUsersResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
@@ -18,8 +18,12 @@ export class ContactCard {
     this.#chat = chat;
   }
 
-  async render(contact: TContact) {
-    contact.avatarURL = serverHost + contact.avatarURL;
+  render(contact: TContact) {
+    if (contact.avatarURL) {
+      contact.avatarURL = localHost + contact.avatarURL;
+    } else {
+      contact.avatarURL = "/assets/image/default-avatar.svg";
+    }
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ contact }),
@@ -65,7 +69,7 @@ export class ContactCard {
   }
 
   renderForm(contact: TContact, selectedContacts: SelectedContacts) {
-    contact.avatarURL = serverHost + contact.avatarURL;
+    contact.avatarURL = localHost + contact.avatarURL;
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ 
