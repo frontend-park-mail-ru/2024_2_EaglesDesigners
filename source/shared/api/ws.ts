@@ -1,4 +1,4 @@
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 class wsConnection {
   handlers: ((payload: any) => Promise<void>)[];
@@ -73,4 +73,4 @@ class wsConnection {
   }
 }
 
-export const wsConn = new wsConnection(localHost);
+export const wsConn = new wsConnection(serverHost);

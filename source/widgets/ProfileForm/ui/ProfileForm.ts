@@ -7,7 +7,7 @@ import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 import { genProfileData } from "../api/updateProfile";
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
@@ -23,7 +23,7 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
+    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
     const currentDate = new Date();
 
     this.#parent.innerHTML = ProfileFormTemplate({

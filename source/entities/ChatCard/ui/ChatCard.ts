@@ -2,7 +2,7 @@ import { TChat } from "@/entities/Chat/model/type";
 import ChatCardTemplate from "./ChatCard.handlebars";
 import "./ChatCard.scss";
 import { Chat } from "@/widgets/Chat";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getTimeString } from "@/shared/helpers/getTimeString";
 
@@ -18,7 +18,7 @@ export class ChatCard {
   render(chat: TChat) {
     let avatar;
     if (chat.avatarPath !== "") {
-      avatar = localHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }

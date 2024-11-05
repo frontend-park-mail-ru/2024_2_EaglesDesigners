@@ -13,7 +13,7 @@ import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getChatLabel } from "@/shared/helpers/getChatLabel";
 import { ChatInfo } from "@/widgets/ChatInfo";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 export class Chat {
   #parent;
@@ -32,7 +32,7 @@ export class Chat {
     ChatStorage.setChat(chat);
     let avatar;
     if (chat.avatarPath != "") {
-      avatar = localHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }

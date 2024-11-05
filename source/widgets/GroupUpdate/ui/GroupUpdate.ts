@@ -2,7 +2,7 @@ import { TChat } from "@/entities/Chat";
 import GroupUpdateTempalte from "./GroupUpdate.handlebars";
 import "./GroupUpdate.scss";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 import { GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { Router } from "@/shared/Router/Router";
@@ -17,7 +17,7 @@ export class GroupUpdate {
   render(chat: TChat) {
     let avatar: string;
     if (chat.avatarPath !== "") {
-      avatar = localHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }

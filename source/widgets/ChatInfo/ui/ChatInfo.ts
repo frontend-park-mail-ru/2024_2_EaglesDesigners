@@ -2,7 +2,7 @@ import { API } from "@/shared/api/api";
 import ChatInfoTemplate from "./ChatInfo.handlebars";
 import "./ChatInfo.scss";
 import { UserStorage } from "@/entities/User";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
 import { ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
@@ -30,7 +30,7 @@ export class ChatInfo {
     const birthdate = moment(profileUser.birthdate).utc().format("YYYY-MM-DD");
     if (profileUser.avatarURL) {
       profileUser.avatarURL =
-        localHost + profileUser.avatarURL + "?" + Date.now();
+        serverHost + profileUser.avatarURL + "?" + Date.now();
     } else {
       profileUser.avatarURL = "/assets/image/default-avatar.svg";
     }

@@ -8,7 +8,7 @@ import { ProfileResponse, UsersIdRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 export class GroupChatInfo {
   #parent;
@@ -22,7 +22,7 @@ export class GroupChatInfo {
     const chat = this.#chat;
     let avatar: string;
     if (chat.avatarPath !== "") {
-      avatar = localHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }
