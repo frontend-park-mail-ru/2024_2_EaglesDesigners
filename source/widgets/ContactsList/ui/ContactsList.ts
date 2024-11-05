@@ -23,7 +23,7 @@ export class ContactsList {
       const contacts = response.contacts;
 
       if (contacts) {
-        contacts.map((element) => {
+        contacts.forEach((element) => {
           contactCard.render(element);
         });
       }

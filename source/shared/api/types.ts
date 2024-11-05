@@ -52,11 +52,11 @@ export interface SignUpRequest {
   username: string;
   password: string;
 }
+
 export interface ProfileRequest {
   name: string;
   birthdate: Date;
   bio: string;
-  avatar: File;
 }
 
 export interface ContactResponse {
@@ -88,4 +88,18 @@ export interface GroupAvatarData {
 export interface GroupUpdateResponse {
   chatName: string;
   wasAvatarUpdated : boolean;
+}
+
+export interface ContactRequest {
+  contacts: TContact[];
+}
+export interface ChatRequest {
+  chatId: string;
+}
+export interface SendMessageRequest {
+  text: string;
+}
+
+export interface profileFormRequest {
+  avatar: File;
 }

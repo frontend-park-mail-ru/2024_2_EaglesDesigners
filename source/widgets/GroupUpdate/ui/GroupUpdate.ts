@@ -5,8 +5,8 @@ import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { localHost } from "@/app/config";
 import { GroupAvatarData, GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
-import { UserStorage } from "@/entities/User";
 import { Router } from "@/shared/Router/Router";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 
 export class GroupUpdate {
     #parent;
@@ -56,19 +56,25 @@ export class GroupUpdate {
         const updateConfirmButton = this.#parent.querySelector('#confirm-update-group')!;
         const handleConfirmChanges = async () => {
             const groupNameInput : HTMLInputElement = this.#parent.querySelector('#group-name')!;
-            const groupName = groupNameInput.value;
+            const name : GroupUpdateRequest = {chatName: groupNameInput.value};
 
-            const groupUpdateData : GroupUpdateRequest = {chatName : groupName};
-            const groupAvatar : GroupAvatarData = {avatar : groupAvatarFile};
+            const groupName = JSON.stringify(name);
+            //const groupAvatar : GroupAvatarData = {avatar: groupAvatarFile};
 
-            const response = await API.putFormData<GroupUpdateResponse, GroupUpdateRequest>("/chat/" + chat.chatId, groupAvatar.avatar, groupUpdateData);
+            const formData = new FormData();
+            formData.append("chat_data", groupName);
+            formData.append("avatar", groupAvatarFile);
+            console.log(formData);
+
+            const response = await API.putFormData<GroupUpdateResponse>("/chat/" + chat.chatId, formData);
             if (!response.error) {
+                console.log(response);
                 this.#parent.innerHTML = '';
                 chat.chatName = groupName;
                 const avatarChat = await API.get("/uploads/chat/" + chat.chatId);
                 console.log(avatarChat);
 
-                UserStorage.setChat(chat);
+                ChatStorage.setChat(chat);
                  
                 console.log(response, "asdasd");
                 Router.go('/chat/'+chat.chatId);

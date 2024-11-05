@@ -1,5 +1,9 @@
-import { ProfileRequest, ResponseError } from "./types";
+import { ProfileRequest} from "./types";
 import { localHost } from "@/app/config";
+
+import { ResponseError } from "./types";
+import { serverHost } from "@/app/config";
+
 
 /**
  * API class provides API-functions.
@@ -62,49 +66,9 @@ class Api {
     }
   }
 
-  async putProfile<TResponse>(path: string, body: ProfileRequest) {
+  async putFormData<TResponse>(path: string, formData: FormData) {
     type Response = TResponse & ResponseError;
     try {
-      const formData = new FormData();
-
-      const profileData = {
-        name: body.name,
-        bio: body.bio,
-        birthdate: body.birthdate,
-      };
-      const profileUserDate = JSON.stringify(profileData);
-
-      formData.append("avatar", body.avatar);
-      formData.append("profile_data", profileUserDate);
-
-      const url = this.#baseURl + path;
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Access-Control-Allow-Credentials": "true",
-          enctype: "multipart/form-data",
-        },
-        mode: "cors",
-        body: formData,
-        credentials: "include",
-      });
-      const responseBody: Response = await response.json();
-      return responseBody;
-    } catch {
-      return { error: "could not fetch" } as Response;
-    }
-  }
-
-  async putFormData<TResponse, TRequest>(path: string,  formDataBody : File, jsonBody: TRequest) {
-    type Response = TResponse & ResponseError;
-    try {
-      const formData = new FormData();
-
-      const profileUserDate = JSON.stringify(jsonBody);
-
-      formData.append("avatar", formDataBody);
-      formData.append("chat_data", profileUserDate);
-
       const url = this.#baseURl + path;
       const response = await fetch(url, {
         method: "PUT",

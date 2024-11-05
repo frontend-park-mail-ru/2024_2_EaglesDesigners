@@ -1,62 +1,76 @@
+import { serverHost } from "@/app/config";
+
 class wsConnection {
-    handlers: ((payload: any) => Promise<void>)[];
-    status;
-    ws: WebSocket | null;
-    url;
-    constructor(url:string) {
-        this.handlers = [];
-        this.status = false;
-        this.ws = null;
-        this.url = url;
+  handlers: ((payload: any) => Promise<void>)[];
+  status;
+  ws: WebSocket | null;
+  url;
+  constructor(url: string) {
+    this.handlers = [];
+    this.status = false;
+    this.ws = null;
+    this.url = url;
+  }
+
+  start() {
+    if (this.status) {
+      console.log("WebSocket уже открыт");
+      return;
     }
 
-    start() {
-        if (this.status) {
-            console.log('WebSocket уже открыт');
-            return; 
+    this.ws = new WebSocket(this.url + "/chat/startwebsocket");
+
+    this.ws.onmessage = (event: MessageEvent) => {
+      try {
+        const res = JSON.parse(event.data);
+
+        if (res.messageType === "error") {
+          console.log("Ошибка на стороне сервера:", res.payload);
+          return;
         }
 
-        this.ws = new WebSocket(this.url); 
+        for (const handler of this.handlers) {
+          handler(res.payload);
+        }
+      } catch (error) {
+        console.log("Ошибка парсинга JSON:", error);
+      }
+    };
 
-        this.ws.onmessage = (event: MessageEvent) => {
-            try{
-                const res = JSON.parse(event.data); 
+    this.ws.onopen = () => {
+      this.status = true;
+      console.log("WebSocket подключен");
+    };
 
-                if (res.messageType === "error") {
-                    console.log('Ошибка на стороне сервера:', res.payload);
-                    return; 
-                }
+    this.ws.onclose = () => {
+      this.status = false;
+      console.log("WebSocket отключен");
+    };
 
-                for (const handler of this.handlers) {
-                    handler(res.payload);
-                }
-            } catch (error) {
-                console.log('Ошибка парсинга JSON:', error);
-            }
-        };
+    this.ws.onerror = (error: Event) => {
+      console.error("WebSocket ошибка:", error);
+    };
+  }
 
-        this.ws.onopen = () => {
-            this.status = true; 
-            console.log('WebSocket подключен');
-        };
-
-        this.ws.onclose = () => {
-            this.status = false;
-            console.log('WebSocket отключен');
-        };
-
-        this.ws.onerror = (error: Event) => {
-            console.error('WebSocket ошибка:', error);
-        };
+  close() {
+    if (!this.ws) {
+      return;
     }
+    this.ws.close();
+    this.status = false;
+    this.handlers = [];
+    this.ws = null;
 
-    subscribe(handler: (payload: any) => Promise<void>) {
-        this.handlers.push(handler); 
-    }
+    console.log("WebSocket начал процесс отключения");
+  }
 
-    unsubscribe(handler: (payload: any) => Promise<void>) {
-        this.handlers = this.handlers.filter(h => h !== handler);
-    }
+  subscribe(handler: (payload: any) => Promise<void>) {
+    this.handlers.push(handler);
+  }
+
+  unsubscribe(handler: (payload: any) => Promise<void>) {
+    this.handlers = this.handlers.filter((h) => h !== handler);
+  }
 }
 
-export const wsConn = new wsConnection("http://localhost:8080/chat/startwebsocket");
+export const wsConn = new wsConnection(serverHost);

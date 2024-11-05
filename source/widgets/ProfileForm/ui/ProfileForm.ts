@@ -4,11 +4,12 @@ import { API } from "@/shared/api/api";
 import { Router } from "@/shared/Router/Router.ts";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
-import { ProfileResponse } from "@/shared/api/types";
+import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
+import { genProfileData } from "../api/updateProfile";
 
 export class ProfileForm {
   #parent;
@@ -19,9 +20,14 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = localHost + response.avatarURL + "?" + Date.now();
+    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
+    const currentDate = new Date();
 
-    this.#parent.innerHTML = ProfileFormTemplate({ user, response });
+    this.#parent.innerHTML = ProfileFormTemplate({
+      user,
+      response,
+      currentDate,
+    });
     const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
     const birthdayInput: HTMLInputElement =
       this.#parent.querySelector("#date")!;
@@ -30,13 +36,13 @@ export class ProfileForm {
     const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
 
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
-    let avatar: File;
+    let avatarFile: File;
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
         if (file) {
           avatarUser.src = URL.createObjectURL(file);
-          avatar = file;
+          avatarFile = file;
         }
       }
     };
@@ -53,32 +59,35 @@ export class ProfileForm {
       const nameInput: HTMLInputElement =
         this.#parent.querySelector("#user-name")!;
       const bioInput: HTMLInputElement = this.#parent.querySelector("#bio")!;
+
       const nickname: string = nameInput.value;
       const birthdayValue = birthdayInput.value;
 
-      const birthdate = new Date(birthdayValue);
-      const bio = bioInput.value;
-      const name = nickname;
+      const profileData: ProfileRequest = {
+        bio: bioInput.value,
+        birthdate: new Date(birthdayValue),
+        name: nickname,
+      };
       
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
         this.#parent.querySelector("#nickname")!;
-      if (!validateNickname(nickname) || nickname.length > 20) {
+      if (!validateNickname(profileData.name) || profileData.name.length > 20) {
         validateForm(nameInput, "Не валидное имя", nicknameSpan);
         flag = false;
       } else {
         nicknameSpan.textContent = "";
       }
       const dateInput: HTMLInputElement = this.#parent.querySelector("#date")!;
-      const getYear = new Date(dateInput.value).getFullYear();
 
       const spanDateError: HTMLSpanElement =
         this.#parent.querySelector("#date-error")!;
-      if (!validateYear(getYear)) {
+      if (!validateYear(profileData.birthdate)) {
         validateForm(
           dateInput,
-          "Год рождения должен быть от 1920 до 2020",
+          "Введите реальную дату и год рождения от 1920 до " +
+            new Date().getFullYear(),
           spanDateError,
         );
         flag = false;
@@ -90,18 +99,13 @@ export class ProfileForm {
         return;
       }
 
-      const response = await API.putProfile("/profile", {
-        bio,
-        birthdate,
-        name,
-        avatar,
-      });
-
-      if (!response.error) {
-        UserStorage.setUserName(name);
+      const errorMessage = await genProfileData(profileData, avatarFile);
+      if (errorMessage != "" && errorMessage === "error message") {
+        validateForm(nameInput, "Вы не авторизованы", nicknameSpan);
       }
-
-      Router.go("/");
+      else if (errorMessage != "") {
+        validateForm(nameInput, "Произошла какая-то ошибка, попробуйте еще раз", nicknameSpan);
+      }
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
   }

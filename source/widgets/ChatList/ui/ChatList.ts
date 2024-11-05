@@ -13,7 +13,7 @@ export class ChatList {
   #parent;
   #chat;
 
-  constructor(parent: Element, chat:Chat) {
+  constructor(parent: Element, chat: Chat) {
     this.#parent = parent;
     this.#chat = chat;
   }
@@ -23,15 +23,12 @@ export class ChatList {
    * @async
    */
   async render() {
-    let chats: TChat[] = [];
-    const response = await API.get<ChatsResponse>("/chats");
-    if (response.chats) {
-      chats = response.chats;
-    }
+    const response = await API.get<ChatsResponse>("/chats");    
+    
+    const chats: TChat[] = response.chats ?? [];
     if (chats.length) {
       chats[0].chatType = "group";
     }
-    
 
     this.#parent.innerHTML = ChatListTemplate({});
 

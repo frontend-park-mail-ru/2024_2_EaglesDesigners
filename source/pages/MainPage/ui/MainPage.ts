@@ -1,7 +1,7 @@
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
 import { API } from "@/shared/api/api.ts";
-import { EmptyRequest, EmptyResponse } from "@/shared/api/types";
+import { ChatsResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
@@ -11,6 +11,9 @@ import { ProfileForm } from "@/widgets/ProfileForm";
 import { ContactsList } from "@/widgets/ContactsList";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { wsConn } from "@/shared/api/ws";
+import { TChat } from "@/entities/Chat";
+import { renderMessage } from "./handlers";
+
 /**
  * Mainpage class provides functions for rendering main page
  */
@@ -23,24 +26,41 @@ export class MainPage extends View {
    * @function render
    * @async
    */
-  async render() {
+  async render(chatid = null) {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
     parent.innerHTML = MainPageTemplate({ user });
 
 
-    const chatListParent = parent.querySelector("#widget-import")!;
     const chatUserInfo = parent.querySelector("#chat-info-container")!;
-    const chatParent = parent.querySelector(".main-page__chat-content-div__container-chat-div")!;
-    const chat = new Chat(chatParent, chatUserInfo);
+    //const chatParent = parent.querySelector(".main-page__chat-content-div__container-chat-div")!;
+    
 
+    const chatListParent = parent.querySelector("#widget-import")!;
+
+    const chatParent = parent.querySelector("#chat-content-block")!;
+    const chat = new Chat(chatParent, chatUserInfo);
+    //const chat = new Chat(chatParent);
     //const chatListParent = parent.querySelector("#chat-list-import")!;
 
     const chatList = new ChatList(chatListParent, chat);
     chatList.render();
 
-    
+    if (chatid) {
+      let chats: TChat[] = [];
+      const response = await API.get<ChatsResponse>("/chats");
+      if (response.chats) {
+        chats = response.chats;
+        const index = chats.findIndex((elem) => chatid === elem.chatId);
+
+        if (index !== -1) {
+          chat.render(chats[index]);
+        } else {
+          history.pushState({ url: "/" }, "", "/");
+        }
+      }
+    }
 
     const exitButton = parent.querySelector(".exit-btn")!;
 
@@ -52,6 +72,7 @@ export class MainPage extends View {
 
       if (!response.error) {
         UserStorage.setUser({ id: "", name: "", username: "" });
+        wsConn.close();
         Router.go("/login");
       }
     };
@@ -80,18 +101,7 @@ export class MainPage extends View {
     };
 
     homeButton.addEventListener("click", handleHome);
-    const renderMessage = (message:TChatMessage) =>{
-      if(message.chatId !== UserStorage.getChat().chatId){
-        return;
-      } 
 
-      if(message.authorID === UserStorage.getUser().id){ // TODO: добавить иконку отправки сообщения и при успешном response, убирать ее
-        return;
-      }
-
-        UserStorage.getChatMessageEntity().renderNewMessage(message);
-
-    }
     wsConn.subscribe(renderMessage);
   }
 }

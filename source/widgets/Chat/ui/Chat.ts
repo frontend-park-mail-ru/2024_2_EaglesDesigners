@@ -1,91 +1,105 @@
-
-import { API } from '@/shared/api/api';
-import ChatTemplate from './Chat.handlebars';
-import "./Chat.scss"
-import { ChatMessagesResponse, EmptyResponse, SendMessageRequest } from '@/shared/api/types';
-import { ChatMessage, TChatMessage } from '@/entities/ChatMessage';
-import { UserStorage } from '@/entities/User';
-import { TChat } from '@/entities/Chat';
-import { ChatInfo } from '@/widgets/ChatInfo';
-import { GroupChatInfo } from '@/widgets/GroupChatInfo';
-import { localHost } from '@/app/config';
+import { API } from "@/shared/api/api";
+import ChatTemplate from "./Chat.handlebars";
+import "./Chat.scss";
+import {
+  ChatMessagesResponse,
+  EmptyResponse,
+  SendMessageRequest,
+} from "@/shared/api/types";
+import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
+import { UserStorage } from "@/entities/User";
+import { TChat } from "@/entities/Chat";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { getChatLabel } from "@/shared/helpers/getChatLabel";
+import { ChatInfo } from "@/widgets/ChatInfo";
+import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 
 export class Chat {
-    #parent;
-    #chatInfo;
-    constructor(parent: Element, chatInfo : Element) {
-      this.#parent = parent;
-      this.#chatInfo = chatInfo;
-    }
-    /**
-     * Render ChatList widget
-     * @function render
-     * @async
-     */
-    async render(chat: TChat) {  
-      UserStorage.setChat(chat);
-      this.#parent.innerHTML = ChatTemplate({chat});
-      this.#chatInfo.innerHTML = '';
+  #parent;
+  #chatInfo;
+  constructor(parent: Element, chatInfo: Element) {
+    this.#parent = parent;
+    this.#chatInfo = chatInfo;
+  }
+  /**
+   * Render ChatList widget
+   * @function render
+   * @async
+   */
+  async render(chat: TChat) {
+    this.#chatInfo.innerHTML = '';
+    ChatStorage.setChat(chat);
 
-      const textArea = this.#parent.querySelector('textarea')!;
+    this.#parent.innerHTML = ChatTemplate({
+      chat: {
+        ...chat,
+        chatType: getChatLabel(chat.chatType),
+      },
+    });
 
-      textArea.addEventListener('input', function () {
-        this.style.height = "";
-        this.style.height = (this.scrollHeight) + "px";
-      });
+    const textArea = this.#parent.querySelector("textarea")!;
 
-      const sendInputMessage = () => {
-        const messageText = textArea.value.trim();
-        textArea.value = '';
+    textArea.addEventListener("input", function () {
+      this.style.height = "";
+      this.style.height = this.scrollHeight + "px";
+    });
 
-        if (messageText) {
+    const sendInputMessage = () => {
+      const messageText = textArea.value.trim();
+      textArea.value = "";
 
-            const user = UserStorage.getUser();
-            
-            const message: TChatMessage = {
-              authorID: user.id,
-              authorName: user.name,
-              chatId: UserStorage.getChat().chatId,
-              datetime: new Date().toISOString(),
-              isRedacted: false,
-              messageId: "",
-              text: messageText,
-            };
+      if (messageText) {
+        const user = UserStorage.getUser();
 
-            chatMessage.renderNewMessage(message);  
-            
-            API.post<EmptyResponse, SendMessageRequest>("/chat/"+chat.chatId+"/messages", {
-              text: messageText,
-            }); // TODO: добавить иконку отправки сообщения и при успешном await response, убирать ее
-        }
+        const message: TChatMessage = {
+          authorID: user.id,
+          authorName: user.name,
+          chatId: ChatStorage.getChat().chatId,
+          datetime: new Date().toISOString(),
+          isRedacted: false,
+          messageId: "",
+          text: messageText,
+        };
 
-        textArea.style.height = "";
+        chatMessage.renderNewMessage(message);
+
+        API.post<EmptyResponse, SendMessageRequest>(
+          "/chat/" + chat.chatId + "/messages",
+          {
+            text: messageText,
+          },
+        );
       }
 
-      const KeyPressHandler = (event:KeyboardEvent) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault(); 
-            sendInputMessage();
-        }
-      };
+      textArea.style.height = "";
+    };
 
-      textArea.addEventListener('keypress', KeyPressHandler)
-
-      document.querySelector('.input__send-btn')!.addEventListener('click',sendInputMessage);
-
-      let messages: TChatMessage[] = [];
-      const response = await API.get<ChatMessagesResponse>("/chat/"+ chat.chatId +"/messages");
-      if (response.messages) {
-        messages = response.messages;
+    const KeyPressHandler = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendInputMessage();
       }
+    };
 
-      const messagesImport = this.#parent.querySelector(".messages")!;
-      const chatMessage = new ChatMessage(messagesImport);
-      UserStorage.setChatMessageEntity(chatMessage);
+    textArea.addEventListener("keypress", KeyPressHandler);
 
-      chatMessage.renderMessages(messages);
 
-      const chatHeader = this.#parent.querySelector("#header-chat")!;
+    
+    document
+      .querySelector(".input__send-btn")!
+      .addEventListener("click", sendInputMessage);
+
+    const response = await API.get<ChatMessagesResponse>(
+      "/chat/" + chat.chatId + "/messages",
+    );
+    const messages: TChatMessage[] = response.messages ?? [];
+
+    const messagesImport = this.#parent.querySelector(".messages")!;
+    const chatMessage = new ChatMessage(messagesImport);
+    ChatStorage.setChatMessageInstance(chatMessage);
+
+    chatMessage.renderMessages(messages);
+    const chatHeader = this.#parent.querySelector("#header-chat")!;
 
       const handleChatHeader = () => {
         console.log(this.#chatInfo.innerHTML)
@@ -103,5 +117,5 @@ export class Chat {
         
       };
       chatHeader.addEventListener('click', handleChatHeader);
-    }
   }
+}
