@@ -1,7 +1,7 @@
 import ContactCardTemplate from "./ContactCard.handlebars";
 import { TContact } from "../api/ContactType";
 import "./ContactCard.scss";
-import { localHost, serverHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 export class ContactCard {
   #parent: Element;
@@ -10,7 +10,7 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
-    contact.avatarURL = localHost + contact.avatarURL;
+    contact.avatarURL = serverHost + contact.avatarURL;
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ contact }),

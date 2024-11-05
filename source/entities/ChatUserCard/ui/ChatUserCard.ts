@@ -1,7 +1,7 @@
 import { ProfileResponse } from "@/shared/api/types";
 import ChatUserCardTemplate from "./ChatUserCard.handlebars";
 import "./ChatUserCard.scss";
-import { localHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 
 export class ChatUserCard {
     #parent;
@@ -10,7 +10,7 @@ export class ChatUserCard {
     }
 
     render(userProfile : ProfileResponse) {
-        userProfile.avatarURL = localHost + userProfile.avatarURL;
+        userProfile.avatarURL = serverHost + userProfile.avatarURL;
         this.#parent.insertAdjacentHTML('beforeend', ChatUserCardTemplate({userProfile}));
     }
 }

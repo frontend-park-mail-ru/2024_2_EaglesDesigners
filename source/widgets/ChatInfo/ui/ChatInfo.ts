@@ -2,7 +2,7 @@ import { API } from "@/shared/api/api";
 import ChatInfoTemplate from "./ChatInfo.handlebars";
 import "./ChatInfo.scss";
 import { UserStorage } from "@/entities/User";
-import { localHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
 import { ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
@@ -28,13 +28,11 @@ export class ChatInfo {
             userId = usersId.usersId[1];
         }
         const profileUser = await API.get<ProfileResponse>('/profile/' + userId);
+        const birthdate = moment(profileUser.birthdate).utc().format("YYYY-MM-DD");
         if (profileUser.avatarURL) {
-            profileUser.avatarURL = localHost + profileUser.avatarURL + "?" + Date.now();
+            profileUser.avatarURL = serverHost + profileUser.avatarURL + "?" + Date.now();
         }
-        if (profileUser.birthdate) {
-            profileUser.birthdate = moment(profileUser.birthdate).utc().format("YYYY-MM-DD");
-        }
-        this.#parent.innerHTML = ChatInfoTemplate({profileUser});
+        this.#parent.innerHTML = ChatInfoTemplate({profileUser, birthdate});
 
         const deleteChatButton = this.#parent.querySelector('#delete-chat')!;
 

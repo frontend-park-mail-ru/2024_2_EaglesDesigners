@@ -1,4 +1,4 @@
-import { localHost } from "@/app/config";
+import { serverHost } from "@/app/config";
 import { ResponseError } from "./types";
 
 
@@ -101,4 +101,4 @@ class Api {
   }
 }
 
-export const API = new Api(localHost);
+export const API = new Api(serverHost);
