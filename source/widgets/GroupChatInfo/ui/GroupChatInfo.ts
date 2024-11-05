@@ -22,7 +22,6 @@ export class GroupChatInfo {
     const chat = this.#chat;
     let avatar: string;
     if (chat.avatarPath !== "") {
-      console.log(chat.avatarPath);
       avatar = serverHost + chat.avatarPath + "?" + Date.now();
     } else {
       avatar = "/assets/image/default-avatar.svg";
@@ -48,6 +47,7 @@ export class GroupChatInfo {
           username: "",
         };
         userCard.render(user);
+        console.log(element);
       });
     }
 
@@ -71,7 +71,6 @@ export class GroupChatInfo {
       if (!response.error) {
         Router.go("/");
       }
-      console.log(response);
     };
 
     deleteGroupButton.addEventListener("click", handleDeleteGroup);

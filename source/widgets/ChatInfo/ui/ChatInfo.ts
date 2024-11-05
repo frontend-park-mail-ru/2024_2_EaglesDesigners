@@ -17,11 +17,9 @@ export class ChatInfo {
   }
 
   async render() {
-    console.log(this.#chat);
     const usersId = await API.get<UsersIdResponse>(
       "/chat/" + this.#chat.chatId + "/users",
     );
-    console.log(usersId, UserStorage.getUser().id);
     let userId;
     if (usersId.usersId[0] !== UserStorage.getUser().id) {
       userId = usersId.usersId[0];
@@ -33,6 +31,8 @@ export class ChatInfo {
     if (profileUser.avatarURL) {
       profileUser.avatarURL =
         serverHost + profileUser.avatarURL + "?" + Date.now();
+    } else {
+      profileUser.avatarURL = "/assets/image/default-avatar.svg";
     }
     this.#parent.innerHTML = ChatInfoTemplate({ profileUser, birthdate });
 
@@ -46,7 +46,6 @@ export class ChatInfo {
       if (!response.error) {
         Router.go("/");
       }
-      console.log(response);
     };
 
     deleteChatButton.addEventListener("click", handleDeleteGroup);

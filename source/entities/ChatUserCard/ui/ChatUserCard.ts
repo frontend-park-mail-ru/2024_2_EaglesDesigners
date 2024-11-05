@@ -10,7 +10,11 @@ export class ChatUserCard {
   }
 
   render(userProfile: ProfileResponse) {
-    userProfile.avatarURL = serverHost + userProfile.avatarURL;
+    if (userProfile.avatarURL) {
+      userProfile.avatarURL = serverHost + userProfile.avatarURL;
+    } else {
+      userProfile.avatarURL = "/assets/image/default-avatar.svg";
+    }
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ChatUserCardTemplate({ userProfile }),

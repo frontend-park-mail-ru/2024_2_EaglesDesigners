@@ -30,7 +30,12 @@ export class Chat {
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
     ChatStorage.setChat(chat);
-    const avatar = serverHost + chat.avatarPath + "?" + Date.now();
+    let avatar;
+    if (chat.avatarPath != "") {
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+    } else {
+      avatar = "/assets/image/default-avatar.svg";
+    }
 
     this.#parent.innerHTML = ChatTemplate({
       chat: {
@@ -103,7 +108,6 @@ export class Chat {
     const chatHeader = this.#parent.querySelector("#header-chat")!;
 
     const handleChatHeader = () => {
-      console.log(this.#chatInfo.innerHTML);
       if (this.#chatInfo.innerHTML !== "") {
         this.#chatInfo.innerHTML = "";
       } else if (chat.chatType === "personal") {

@@ -90,9 +90,6 @@ export interface GroupUpdateResponse {
   updatedAvatarPath: string;
 }
 
-export interface ContactRequest {
-  contacts: TContact[];
-}
 export interface ChatRequest {
   chatId: string;
 }

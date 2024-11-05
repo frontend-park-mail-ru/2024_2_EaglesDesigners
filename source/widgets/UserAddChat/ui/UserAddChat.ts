@@ -10,7 +10,6 @@ import {
 } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
-import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 
 export class UserAddChat {
   #parent;
@@ -47,15 +46,12 @@ export class UserAddChat {
       elem.addEventListener("click", async (e) => {
         const usersId: string[] = [];
         if (elem instanceof HTMLAnchorElement) {
-          console.log(elem.href);
           const index = elem.href.lastIndexOf("/");
           const href = elem.href.slice(index + 1);
           usersId.push(href);
-          console.log(usersId);
         }
 
         e.preventDefault();
-        console.log(chat.chatId);
         const response = await API.post<AddUserResponse, UsersIdRequest>(
           "/chat/" + chat.chatId + "/addusers",
           { usersId },
@@ -80,12 +76,21 @@ export class UserAddChat {
               };
               userCard.render(user);
             });
-            usersCount.innerHTML = (
-              Number(usersCount.innerHTML) + 1
-            ).toString();
+            usersCount.innerHTML = ChatUsersId.usersId.length.toString();
           }
         }
       });
     });
+
+    const handlerClickOutsideModal = (e: Event) => {
+      if (e.target instanceof Element) {
+        console.log(e.target.className);
+        if (e.target.className === "add-user-to-chat") {
+          this.#parent.innerHTML = "";
+        }
+      }
+    };
+
+    document.addEventListener("click", handlerClickOutsideModal);
   }
 }

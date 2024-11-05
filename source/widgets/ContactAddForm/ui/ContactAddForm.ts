@@ -21,10 +21,13 @@ export class ContactAddForm {
       this.#parent.querySelector("#username-input")!;
 
     const handleAddContact = async () => {
-      const contactUsername = usernameInput.value;
-      const response = await API.post<TContact, ContactRequest>("/contacts", {
+      const contactUsername: ContactRequest = {
+        contactUsername: usernameInput.value,
+      };
+      const response = await API.post<TContact, ContactRequest>(
+        "/contacts",
         contactUsername,
-      });
+      );
 
       const spanError = this.#parent.querySelector("#error-span")!;
 
@@ -52,6 +55,15 @@ export class ContactAddForm {
     };
 
     confirmButton.addEventListener("click", handleAddContact);
+
+    const handleEnterClick = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleAddContact();
+      }
+      return;
+    };
+
+    document.addEventListener("keyup", handleEnterClick);
 
     const cancelButton = this.#parent.querySelector("#cancel-btn")!;
 

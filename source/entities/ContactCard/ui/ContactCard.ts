@@ -10,7 +10,11 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
-    contact.avatarURL = serverHost + contact.avatarURL;
+    if (contact.avatarURL) {
+      contact.avatarURL = serverHost + contact.avatarURL;
+    } else {
+      contact.avatarURL = "/assets/image/default-avatar.svg";
+    }
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ contact }),

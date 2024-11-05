@@ -13,7 +13,10 @@
         />
       </div>
     </div>
-    <form class="contact-add-form">
+    <form
+      class="contact-add-form"
+      onkeypress="if(event.keyCode == 13) return false;"
+    >
       <div class="contact-add-input">
         <div class="contact-add-input-information">
           <span class="contact-add-input-information__span">Введите

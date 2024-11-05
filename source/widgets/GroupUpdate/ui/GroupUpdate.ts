@@ -21,7 +21,6 @@ export class GroupUpdate {
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }
-    console.log(avatar);
 
     this.#parent.innerHTML = GroupUpdateTempalte({ chat, avatar });
     const backButton = this.#parent.querySelector("#back-button")!;
@@ -41,7 +40,6 @@ export class GroupUpdate {
     let groupAvatarFile: File;
 
     const handleAvatar = () => {
-      console.log("я туту");
       if (avatarInput.files) {
         const file = avatarInput.files[0];
         if (file) {
@@ -61,7 +59,6 @@ export class GroupUpdate {
       const name: GroupUpdateRequest = { chatName: groupNameInput.value };
 
       const groupName = JSON.stringify(name);
-      //const groupAvatar : GroupAvatarData = {avatar: groupAvatarFile};
 
       const formData = new FormData();
       formData.append("chat_data", groupName);
@@ -72,23 +69,14 @@ export class GroupUpdate {
         formData,
       );
       if (!response.error) {
-        console.log(groupAvatarFile);
-        console.log(response, "Stas");
-        console.log(chat);
-        this.#parent.innerHTML = "";
         chat.chatName = groupName;
         if (response.updatedAvatarPath !== "") {
-          console.log("я туту");
           chat.avatarPath = response.updatedAvatarPath;
         }
-        //chat.avatarPath =
-        // const avatarChat = await API.get("/uploads/chat/" + chat.chatId);
-        // console.log(avatarChat);
 
         ChatStorage.setChat(chat);
 
-        console.log(response, "asdasd");
-        Router.go("/chat/" + chat.chatId);
+        Router.go("/chat/" + chat.chatId, false);
       }
     };
 
