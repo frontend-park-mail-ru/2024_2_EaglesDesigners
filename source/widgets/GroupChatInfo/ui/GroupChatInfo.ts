@@ -4,11 +4,10 @@ import "./GroupChatInfo.scss";
 import { TChat } from "@/entities/Chat";
 import { UserAddChat } from "@/widgets/UserAddChat/ui/UserAddChat";
 import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
-import { localHost } from "@/app/config";
 import { ProfileResponse, UsersIdRequest } from "@/shared/api/types";
-import { ChatUserCard } from "@/entities/ChatUserCard/ui/ChatUserCard";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
+import { Router } from "@/shared/Router/Router";
 
 export class GroupChatInfo{
     #parent;
@@ -61,6 +60,9 @@ export class GroupChatInfo{
         
         const handleDeleteGroup = async () => {
             const response = await API.delete('/chat/' + chat.chatId + "/delete", chat.chatId);
+            if (!response.error) {
+                Router.go('/');
+            }
             console.log(response);
         };
 

@@ -5,6 +5,7 @@ import { UserStorage } from "@/entities/User";
 import { localHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
 import { ProfileResponse, UsersIdRequest, UsersIdResponse } from "@/shared/api/types";
+import { Router } from "@/shared/Router/Router";
 
 export class ChatInfo {
     #parent;
@@ -39,6 +40,9 @@ export class ChatInfo {
 
         const handleDeleteGroup = async () => {
             const response = await API.delete('/chat/' + this.#chat.chatId + "/delete", this.#chat.chatId);
+            if (!response.error) {
+                Router.go('/');
+            }
             console.log(response);
         };
 

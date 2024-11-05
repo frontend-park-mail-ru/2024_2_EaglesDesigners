@@ -7,7 +7,7 @@ import { localHost } from "@/app/config";
 
 export class ChatCard {
   #parent;
-  #chat
+  #chat;
 
   constructor(parent: Element, chat:Chat) {
     this.#parent = parent;
@@ -17,13 +17,17 @@ export class ChatCard {
   render(chat: TChat) {
     if (chat.avatarPath !== "") {
       chat.avatarPath = localHost + chat.avatarPath;
+    } else {
+      chat.avatarPath = "/assets/image/default-avatar.svg";
     }
     
     this.#parent.insertAdjacentHTML("beforeend", ChatCardTemplate({ chat }));
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
 
-      if(UserStorage.getChat() !== chat){
+      if (ChatStorage.getChat() !== chat) {
+        const newUrl = `/chat/${chat.chatId}`;
+        history.pushState({ url: newUrl }, "", newUrl);
         this.#chat.render(chat);
       }
     });

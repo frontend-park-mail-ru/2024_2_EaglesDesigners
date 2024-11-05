@@ -5,6 +5,8 @@ import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { localHost } from "@/app/config";
 import { GroupAvatarData, GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
+import { UserStorage } from "@/entities/User";
+import { Router } from "@/shared/Router/Router";
 
 export class GroupUpdate {
     #parent;
@@ -62,8 +64,14 @@ export class GroupUpdate {
             const response = await API.putFormData<GroupUpdateResponse, GroupUpdateRequest>("/chat/" + chat.chatId, groupAvatar.avatar, groupUpdateData);
             if (!response.error) {
                 this.#parent.innerHTML = '';
-                //const avatarHeader  
+                chat.chatName = groupName;
+                const avatarChat = await API.get("/uploads/chat/" + chat.chatId);
+                console.log(avatarChat);
+
+                UserStorage.setChat(chat);
+                 
                 console.log(response, "asdasd");
+                Router.go('/chat/'+chat.chatId);
             }
         };
 
