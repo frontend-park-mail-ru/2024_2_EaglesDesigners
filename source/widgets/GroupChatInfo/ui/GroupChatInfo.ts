@@ -47,7 +47,6 @@ export class GroupChatInfo {
           username: "",
         };
         userCard.render(user);
-        console.log(element);
       });
     }
 
@@ -62,12 +61,12 @@ export class GroupChatInfo {
     addUser.addEventListener("click", handleAddUser);
 
     const deleteGroupButton = this.#parent.querySelector("#delete-group")!;
-
     const handleDeleteGroup = async () => {
       const response = await API.delete(
         "/chat/" + chat.chatId + "/delete",
         chat.chatId,
       );
+
       if (!response.error) {
         Router.go("/");
       }

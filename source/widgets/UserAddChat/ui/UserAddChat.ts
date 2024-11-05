@@ -84,7 +84,6 @@ export class UserAddChat {
 
     const handlerClickOutsideModal = (e: Event) => {
       if (e.target instanceof Element) {
-        console.log(e.target.className);
         if (e.target.className === "add-user-to-chat") {
           this.#parent.innerHTML = "";
         }

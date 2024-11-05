@@ -26,6 +26,9 @@ export class ChatList {
     const response = await API.get<ChatsResponse>("/chats");
 
     const chats: TChat[] = response.chats ?? [];
+    if (chats.length) {
+      chats[0].chatType = "group";
+    }
 
     this.#parent.innerHTML = ChatListTemplate({});
 

@@ -78,6 +78,7 @@ export class LoginForm extends View {
         username,
         password,
       });
+      
       if (response.error) {
         loginInput.classList.add("error");
         passwordInput.classList.add("error");
@@ -86,7 +87,6 @@ export class LoginForm extends View {
       }
 
       const responseAuth = await API.get<AuthResponse>("/auth");
-
       if (!responseAuth.error) {
         UserStorage.setUser({
           id: responseAuth.user.id,
