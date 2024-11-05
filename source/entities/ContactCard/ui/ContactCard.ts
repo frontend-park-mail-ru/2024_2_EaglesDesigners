@@ -7,6 +7,7 @@ import { ChatResponse, ChatsResponse, ChatUsersResponse } from "@/shared/api/typ
 import { API } from "@/shared/api/api";
 import { Chat } from "@/widgets/Chat";
 import { TNewChat } from "@/entities/Chat/model/type";
+import { SelectedContacts } from "@/widgets/AddGroupForm/lib/SelectedContacts";
 
 export class ContactCard {
   #parent;
@@ -60,6 +61,32 @@ export class ContactCard {
       );
 
       this.#chat.render(newChatRes);    
+    });
+  }
+
+  renderForm(contact: TContact, selectedContacts: SelectedContacts) {
+    contact.avatarURL = serverHost + contact.avatarURL;
+    this.#parent.insertAdjacentHTML(
+      "beforeend",
+      ContactCardTemplate({ 
+        contact: {
+          ...contact,
+          form: true, 
+        }}),
+    );
+
+    const checkbox = this.#parent.lastElementChild!.querySelector('.contact-card-checkbox')!;
+    const checkedIcon = checkbox.querySelector('.contact-card-unchecked')!;
+    const uncheckedIcon = checkbox.querySelector('.contact-card-checked')!;
+
+    this.#parent.lastElementChild!.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      selectedContacts.toggleCheckbox(contact.id);
+
+      checkedIcon.style.display = checkedIcon.style.display === 'none' ? 'inline' : 'none';
+      uncheckedIcon.style.display = uncheckedIcon.style.display === 'none' ? 'inline' : 'none';
     });
   }
 }

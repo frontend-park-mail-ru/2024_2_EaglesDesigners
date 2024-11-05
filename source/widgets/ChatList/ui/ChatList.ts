@@ -6,6 +6,7 @@ import ChatListTemplate from "./ChatList.handlebars";
 import "./ChatList.scss";
 import { Chat } from "@/widgets/Chat/ui/Chat";
 import { ContactsList } from "@/widgets/ContactsList";
+import { AddGroupForm } from "@/widgets/AddGroupForm";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -60,13 +61,13 @@ export class ChatList {
     });
 
     addChat.querySelector('.create-personal-chat')!.addEventListener('click', () => {
-        console.log('Создать личный чат');
         const contactForm = new ContactsList(this.#parent, this.#chat);
         contactForm.render();
     });
 
     addChat.querySelector('.create-group-chat')!.addEventListener('click', () => {
-        console.log('Создать группу');
+        const addGroupForm = new AddGroupForm(this.#parent, this.#chat);
+        addGroupForm.render(); 
     });
   }
 }
