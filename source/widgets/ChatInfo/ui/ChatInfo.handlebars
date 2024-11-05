@@ -1,17 +1,17 @@
 <div class="chat-info">
     <div class="chat-info-header">
-        <img class="chat-info-header__img" src="{{response.avatarURL}}" alt="">
-        <span class="chat-info-header__span-user-name">{{response.name}}</span>
+        <img class="chat-info-header__img" src="{{profileUser.avatarURL}}" alt="">
+        <span class="chat-info-header__span-user-name">{{profileUser.name}}</span>
         <span class="chat-info-header__span-online-status">online</span>
     </div>
     <div class="chat-user-info">
         <div class="chat-user-birthday">
             <span class="chat-user-birthday__span-description span-description">Дата рождения</span>
-            <span class="chat-user-birthday__span">{{response.birthdate}}</span>
+            <span class="chat-user-birthday__span">{{profileUser.birthdate}}</span>
         </div>
         <div class="chat-user-bio">
             <span class="chat-user-bio__span-description span-description">Описание</span>
-            <span class="chat-user-bio__span">{{response.bio}}</span>
+            <span class="chat-user-bio__span">{{profileUser.bio}}</span>
         </div>
     </div>
 </div>

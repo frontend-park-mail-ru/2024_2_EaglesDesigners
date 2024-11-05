@@ -61,6 +61,8 @@ export class GroupUpdate {
 
             const response = await API.putFormData<GroupUpdateResponse, GroupUpdateRequest>("/chat/" + chat.chatId, groupAvatar.avatar, groupUpdateData);
             if (!response.error) {
+                this.#parent.innerHTML = '';
+                //const avatarHeader  
                 console.log(response, "asdasd");
             }
         };

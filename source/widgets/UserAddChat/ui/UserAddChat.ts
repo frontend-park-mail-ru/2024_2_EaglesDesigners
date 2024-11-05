@@ -2,8 +2,10 @@ import { TChat } from "@/entities/Chat";
 import UserAddChatTemplate from "./UserAddChat.handlebars";
 import "./UserAddChat.scss";
 import { API } from "@/shared/api/api";
-import { AddUserResponse, ContactResponse, UsersIdRequest } from "@/shared/api/types";
+import { AddUserResponse, ContactResponse, ProfileResponse, UsersIdRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
+import { TContact } from "@/entities/ContactCard";
+import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 
 
 export class UserAddChat {
@@ -12,7 +14,7 @@ export class UserAddChat {
         this.#parent = parent;
     }
 
-    async render(chat : TChat) {
+    async render(chat : TChat, chatUsersList : Element, usersCount : Element) {
         this.#parent.innerHTML = UserAddChatTemplate();
 
         const cancelBtn = this.#parent.querySelector('#cancel-btn')!;
@@ -53,8 +55,19 @@ export class UserAddChat {
             const response = await API.post<AddUserResponse, UsersIdRequest>('/chat/' + chat.chatId + "/addusers", {usersId});
             if (!response.error) {
                 this.#parent.innerHTML = '';
+                const ChatUsersId = await API.get<UsersIdRequest>('/chat/' + chat.chatId + "/users");
+                if (ChatUsersId.usersId) {
+                    chatUsersList.innerHTML = '';
+                    const userCard = new ContactCard(chatUsersList);
+                    ChatUsersId.usersId.forEach(async (element) => {
+                        const userProfile = await API.get<ProfileResponse>("/profile/" + element);
+                        const user : TContact = {id: element, name: userProfile.name, avatarURL: userProfile.avatarURL, username: ""};
+                        userCard.render(user);
+                    });
+                    usersCount.innerHTML = (Number(usersCount.innerHTML) + 1).toString();
+                }
             }
-            
+
         });
         });
 

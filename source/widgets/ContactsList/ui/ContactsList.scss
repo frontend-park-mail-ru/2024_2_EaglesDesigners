@@ -34,6 +34,7 @@
 
   &__img {
     cursor: pointer;
+    margin-bottom: 25px;
   }
 }
 
@@ -47,8 +48,8 @@
 }
 
 .contacts-user-list {
-  min-height: 604px;
-  max-height: 604px;
+  min-height: 625px;
+  flex: 1;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {

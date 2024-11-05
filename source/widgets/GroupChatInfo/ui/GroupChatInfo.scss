@@ -40,12 +40,13 @@
     align-items: center;
 
     &__img {
-        width: 90px;
-        height: 90px;
+        width: 70px;
+        height: 70px;
         display: block;
         margin-top: 10px;
         border-radius: 100px;
         margin-left: 35%;
+        margin-bottom: 10px;
     }
 
     &__span-group-name {

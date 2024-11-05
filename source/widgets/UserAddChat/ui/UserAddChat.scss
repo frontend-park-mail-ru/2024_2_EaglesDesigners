@@ -21,9 +21,24 @@
 }
 
 .user-add-modal-header {
-    padding-top: 15px;
+    padding-top: 10px;
     padding-left: 15px;
     height: 50px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &__img {
+        width: 25px;
+        height: 25px;
+    }
+
+    &__span{
+        color: #fff;
+        font-size: 18px;
+        font-family: var(--main-font-family);
+        margin-left: 10px;
+    }
 }
 
 .user-add-modal-header__img {

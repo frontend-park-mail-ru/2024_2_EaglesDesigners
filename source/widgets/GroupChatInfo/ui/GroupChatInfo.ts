@@ -19,10 +19,12 @@ export class GroupChatInfo{
     }
 
     async render() {
+
         const chat = this.#chat;
         let avatar : string;
-        if (chat.avatarPath) {
-            avatar = localHost + chat.avatarPath;
+        if (chat.avatarPath !== "") {
+            console.log(chat.avatarPath);
+            avatar = chat.avatarPath;
         }
         else {
             avatar = "/assets/image/default-avatar.svg";
@@ -39,18 +41,17 @@ export class GroupChatInfo{
                 const userProfile = await API.get<ProfileResponse>("/profile/" + element);
                 const user : TContact = {id: element, name: userProfile.name, avatarURL: userProfile.avatarURL, username: ""};
                 userCard.render(user);
-                //console.log(userProfile);
             });
         }
         
 
 
         const addUser = this.#parent.querySelector("#add-user")!;
-        const groupUsers = this.#parent.querySelector('#users-list'); 
         const handleAddUser = async () => {
             const modalWindow = this.#parent.querySelector('#modal-container')!;
             const userAddChat = new UserAddChat(modalWindow);
-            userAddChat.render(this.#chat); 
+            const usersCount = this.#parent.querySelector('#users-count')!;
+            userAddChat.render(this.#chat, chatUsersList, usersCount); 
 
         };
         

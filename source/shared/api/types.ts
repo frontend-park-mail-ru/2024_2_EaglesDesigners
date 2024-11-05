@@ -73,6 +73,10 @@ export interface UsersIdRequest {
   usersId : string[];
 }
 
+export interface UsersIdResponse {
+  usersId : string[];
+}
+
 export interface GroupUpdateRequest {
   chatName : string; 
 }

@@ -8,6 +8,7 @@ import { UserStorage } from '@/entities/User';
 import { TChat } from '@/entities/Chat';
 import { ChatInfo } from '@/widgets/ChatInfo';
 import { GroupChatInfo } from '@/widgets/GroupChatInfo';
+import { localHost } from '@/app/config';
 
 export class Chat {
     #parent;
@@ -23,7 +24,6 @@ export class Chat {
      */
     async render(chat: TChat) {  
       UserStorage.setChat(chat);
-
       this.#parent.innerHTML = ChatTemplate({chat});
       this.#chatInfo.innerHTML = '';
 
