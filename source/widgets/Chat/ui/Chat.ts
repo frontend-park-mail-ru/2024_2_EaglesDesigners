@@ -29,6 +29,7 @@ export class Chat {
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = '';
     ChatStorage.setChat(chat);
+    console.log(chat);
 
     this.#parent.innerHTML = ChatTemplate({
       chat: {

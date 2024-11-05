@@ -1,8 +1,5 @@
-import { ProfileRequest} from "./types";
 import { localHost } from "@/app/config";
-
 import { ResponseError } from "./types";
-import { serverHost } from "@/app/config";
 
 
 /**

@@ -9,7 +9,6 @@ import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
 import { ProfileForm } from "@/widgets/ProfileForm";
 import { ContactsList } from "@/widgets/ContactsList";
-import { TChatMessage } from "@/entities/ChatMessage";
 import { wsConn } from "@/shared/api/ws";
 import { TChat } from "@/entities/Chat";
 import { renderMessage } from "./handlers";

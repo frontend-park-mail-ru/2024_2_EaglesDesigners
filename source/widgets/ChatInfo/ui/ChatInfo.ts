@@ -4,8 +4,9 @@ import "./ChatInfo.scss";
 import { UserStorage } from "@/entities/User";
 import { localHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
-import { ProfileResponse, UsersIdRequest, UsersIdResponse } from "@/shared/api/types";
+import { ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
+import * as moment from "moment";
 
 export class ChatInfo {
     #parent;
@@ -18,7 +19,7 @@ export class ChatInfo {
     async render() {
         console.log(this.#chat);
         const usersId = await API.get<UsersIdResponse>('/chat/' + this.#chat.chatId + "/users");
-        console.log(usersId, UserStorage.getUser().id)
+        console.log(usersId, UserStorage.getUser().id);
         let userId;
         if ( usersId.usersId[0] !== UserStorage.getUser().id) {
             userId = usersId.usersId[0];
@@ -31,8 +32,7 @@ export class ChatInfo {
             profileUser.avatarURL = localHost + profileUser.avatarURL + "?" + Date.now();
         }
         if (profileUser.birthdate) {
-            const birthdate = profileUser.birthdate.toString().slice(0, 10);
-            profileUser.birthdate = birthdate;
+            profileUser.birthdate = moment(profileUser.birthdate).utc().format("YYYY-MM-DD");
         }
         this.#parent.innerHTML = ChatInfoTemplate({profileUser});
 

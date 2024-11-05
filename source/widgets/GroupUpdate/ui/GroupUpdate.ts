@@ -3,7 +3,7 @@ import GroupUpdateTempalte from "./GroupUpdate.handlebars";
 import "./GroupUpdate.scss";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { localHost } from "@/app/config";
-import { GroupAvatarData, GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
+import { GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { Router } from "@/shared/Router/Router";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
