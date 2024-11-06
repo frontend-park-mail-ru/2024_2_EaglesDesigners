@@ -1,0 +1,45 @@
+.chat-user-card {
+  width: 100%;
+  height: 62px;
+  color: #fff;
+  font-family: var(--main-font-family);
+  text-decoration: none;
+}
+
+.chat-user-card-content {
+  margin-inline: 9px;
+  padding-inline: 10px;
+  display: grid;
+  grid-template-areas:
+    "avatar up"
+    "avatar low";
+  grid-template-columns: min-content auto;
+  grid-template-rows: 50% 50%;
+
+  &__img-avatar {
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    grid-area: "avatar";
+  }
+}
+
+.chat-user-card-name {
+  grid-area: up;
+  padding-top: 7px;
+
+  &__span {
+    padding: 10px;
+  }
+}
+
+.chat-user-card-user-status {
+  grid-area: low;
+
+  &__span {
+    padding: 10px;
+    font-size: 14px;
+    opacity: 50%;
+  }
+}

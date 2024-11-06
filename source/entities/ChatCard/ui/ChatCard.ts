@@ -2,6 +2,7 @@ import { TChat } from "@/entities/Chat/model/type";
 import ChatCardTemplate from "./ChatCard.handlebars";
 import "./ChatCard.scss";
 import { Chat } from "@/widgets/Chat";
+import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getTimeString } from "@/shared/helpers/getTimeString";
 
@@ -15,6 +16,13 @@ export class ChatCard {
   }
 
   render(chat: TChat) {
+    let avatar;
+    if (chat.avatarPath !== "") {
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+    } else {
+      avatar = "/assets/image/default-avatar.svg";
+    }
+
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ChatCardTemplate({
@@ -25,6 +33,7 @@ export class ChatCard {
             datetime: getTimeString(chat.lastMessage.datetime),
           },
         },
+        avatar,
       }),
     );
     this.#parent.lastElementChild!.addEventListener("click", (e) => {

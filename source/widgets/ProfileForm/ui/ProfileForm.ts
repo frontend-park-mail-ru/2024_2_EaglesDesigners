@@ -1,7 +1,6 @@
 import ProfileFormTemplate from "./ProfileForm.handlebars";
 import "./ProfileForm.scss";
 import { API } from "@/shared/api/api";
-import { Router } from "@/shared/Router/Router.ts";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
 import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
@@ -10,11 +9,15 @@ import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
 import { serverHost } from "@/app/config";
 import { genProfileData } from "../api/updateProfile";
+import { ChatList } from "@/widgets/ChatList";
+import { Chat } from "@/widgets/Chat";
 
 export class ProfileForm {
   #parent;
-  constructor(parent: Element) {
+  #chat;
+  constructor(parent: Element, chat: Chat) {
     this.#parent = parent;
+    this.#chat = chat;
   }
 
   async render() {
@@ -50,7 +53,8 @@ export class ProfileForm {
 
     const backButton = this.#parent.querySelector("#back-button");
     const handleBack = () => {
-      Router.go("/");
+      const chatList = new ChatList(this.#parent, this.#chat);
+      chatList.render();
     };
     backButton?.addEventListener("click", handleBack);
 
@@ -68,7 +72,6 @@ export class ProfileForm {
         birthdate: new Date(birthdayValue),
         name: nickname,
       };
-      
 
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
@@ -102,10 +105,16 @@ export class ProfileForm {
       const errorMessage = await genProfileData(profileData, avatarFile);
       if (errorMessage != "" && errorMessage === "error message") {
         validateForm(nameInput, "Вы не авторизованы", nicknameSpan);
+        return;
+      } else if (errorMessage != "") {
+        validateForm(
+          nameInput,
+          "Произошла какая-то ошибка, попробуйте еще раз",
+          nicknameSpan,
+        );
+        return;
       }
-      else if (errorMessage != "") {
-        validateForm(nameInput, "Произошла какая-то ошибка, попробуйте еще раз", nicknameSpan);
-      }
+      handleBack();
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
   }

@@ -11,12 +11,16 @@ import { UserStorage } from "@/entities/User";
 import { TChat } from "@/entities/Chat";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getChatLabel } from "@/shared/helpers/getChatLabel";
+import { ChatInfo } from "@/widgets/ChatInfo";
+import { GroupChatInfo } from "@/widgets/GroupChatInfo";
+import { serverHost } from "@/app/config";
 
 export class Chat {
   #parent;
-
-  constructor(parent: Element) {
+  #chatInfo;
+  constructor(parent: Element, chatInfo: Element) {
     this.#parent = parent;
+    this.#chatInfo = chatInfo;
   }
   /**
    * Render ChatList widget
@@ -24,13 +28,21 @@ export class Chat {
    * @async
    */
   async render(chat: TChat) {
+    this.#chatInfo.innerHTML = "";
     ChatStorage.setChat(chat);
+    let avatar;
+    if (chat.avatarPath != "") {
+      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+    } else {
+      avatar = "/assets/image/default-avatar.svg";
+    }
 
     this.#parent.innerHTML = ChatTemplate({
       chat: {
         ...chat,
         chatType: getChatLabel(chat.chatType),
       },
+      avatar,
     });
 
     const textArea = this.#parent.querySelector("textarea")!;
@@ -86,12 +98,29 @@ export class Chat {
     const response = await API.get<ChatMessagesResponse>(
       "/chat/" + chat.chatId + "/messages",
     );
+    
     const messages: TChatMessage[] = response.messages ?? [];
-
     const messagesImport = this.#parent.querySelector(".messages")!;
-    const chatMessage = new ChatMessage(messagesImport);
-    ChatStorage.setChatMessageInstance(chatMessage);
+      const chatMessage = new ChatMessage(messagesImport);
+    if (messages.length > 0) {
+      ChatStorage.setChatMessageInstance(chatMessage);
 
-    chatMessage.renderMessages(messages);
+      chatMessage.renderMessages(messages);
+    }
+    
+    const chatHeader = this.#parent.querySelector("#header-chat")!;
+
+    const handleChatHeader = () => {
+      if (this.#chatInfo.innerHTML !== "") {
+        this.#chatInfo.innerHTML = "";
+      } else if (chat.chatType === "personal") {
+        const chatInfo = new ChatInfo(this.#chatInfo, chat);
+        chatInfo.render();
+      } else if (chat.chatType === "group") {
+        const chatInfo = new GroupChatInfo(this.#chatInfo, chat);
+        chatInfo.render();
+      }
+    };
+    chatHeader.addEventListener("click", handleChatHeader);
   }
 }

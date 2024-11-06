@@ -1,5 +1,6 @@
-import { ResponseError } from "./types";
 import { serverHost } from "@/app/config";
+import { ResponseError } from "./types";
+import { Csrf } from "../Csrf/Csrf";
 
 /**
  * API class provides API-functions.
@@ -28,6 +29,11 @@ class Api {
         },
         credentials: "include",
       });
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+      }
+      
       const body: Response = await response.json();
       return body;
     } catch {
@@ -45,16 +51,53 @@ class Api {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
-      const response = await fetch(url, {
+      const state : RequestInit = {
         method: "POST",
         mode: "cors",
         headers: {
           "Access-Control-Allow-Credentials": "true",
+          "not_csrf" : Csrf.get(),
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(body),
         credentials: "include",
-      });
+      };
+
+      const response = await fetch(url, state);
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
+      }
+
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
+
+  async postFormData<TResponse>(path: string, formData: FormData) {
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+      const state : RequestInit = {
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          enctype: "multipart/form-data",
+        },
+        mode: "cors",
+        body: formData,
+        credentials: "include",
+      };
+      const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        state.headers["not_csrf"] = CSRFToken;
+      }
+
+      const response = await fetch(url, state);
       const responseBody: Response = await response.json();
       return responseBody;
     } catch {
@@ -66,16 +109,51 @@ class Api {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
-      const response = await fetch(url, {
+
+      const state : RequestInit = {
         method: "PUT",
         headers: {
           "Access-Control-Allow-Credentials": "true",
           enctype: "multipart/form-data",
+          "not_csrf" : Csrf.get(),
         },
         mode: "cors",
         body: formData,
         credentials: "include",
-      });
+      };
+      const response = await fetch(url, state);
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
+      }
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
+
+  async delete<TResponse>(path: string, body: string) {
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+      const state : RequestInit = {
+        method: "DELETE",
+        body: body,
+        headers: {
+          "not_csrf": Csrf.get(),
+        },
+        mode: "cors",
+        credentials: "include",
+      };
+      
+      const response = await fetch(url, state);
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
+      }
       const responseBody: Response = await response.json();
       return responseBody;
     } catch {

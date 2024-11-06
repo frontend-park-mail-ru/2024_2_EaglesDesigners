@@ -31,12 +31,11 @@ export class MainPage extends View {
     const parent = document.getElementById("root")!;
     parent.innerHTML = MainPageTemplate({ user });
 
+    const chatUserInfo = parent.querySelector("#chat-info-container")!;
     const chatListParent = parent.querySelector("#widget-import")!;
 
     const chatParent = parent.querySelector("#chat-content-block")!;
-    const chat = new Chat(chatParent);
-
-    //const chatListParent = parent.querySelector("#chat-list-import")!;
+    const chat = new Chat(chatParent, chatUserInfo);
 
     const chatList = new ChatList(chatListParent, chat);
     chatList.render();
@@ -75,7 +74,7 @@ export class MainPage extends View {
 
     const settingsButton = parent.querySelector("#settings-button")!;
     const handleSettings = () => {
-      const profileForm = new ProfileForm(chatListParent);
+      const profileForm = new ProfileForm(chatListParent, chat);
       profileForm.render();
     };
     settingsButton.addEventListener("click", handleSettings);
@@ -83,7 +82,7 @@ export class MainPage extends View {
     const contactButton = parent.querySelector("#contact-button");
 
     const handleContacts = () => {
-      const contactForm = new ContactsList(chatListParent);
+      const contactForm = new ContactsList(chatListParent, chat);
       contactForm.render();
     };
     contactButton?.addEventListener("click", handleContacts);

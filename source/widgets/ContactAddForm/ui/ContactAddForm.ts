@@ -1,15 +1,18 @@
 import { API } from "@/shared/api/api";
 import ContactAddFromTemplate from "./ContactAddForm.handlebars";
 import "./ContactAddForm.scss";
-import { ContactResponse } from "@/shared/api/types";
+import { ContactRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
+import { Chat } from "@/widgets/Chat";
 
 export class ContactAddForm {
   #parent;
+  #chat;
   #contactList;
-  constructor(parent: Element, contactList: Element) {
+  constructor(parent: Element, chat: Chat,contactList: Element) {
     this.#parent = parent;
+    this.#chat = chat;
     this.#contactList = contactList;
   }
 
@@ -21,17 +24,20 @@ export class ContactAddForm {
       this.#parent.querySelector("#username-input")!;
 
     const handleAddContact = async () => {
-      const contactUsername = usernameInput.value;
-      const response = await API.post<TContact, ContactResponse>("/contacts", {
+      const contactUsername: ContactRequest = {
+        contactUsername: usernameInput.value,
+      };
+      const response = await API.post<TContact, ContactRequest>(
+        "/contacts",
         contactUsername,
-      });
+      );
 
       const spanError = this.#parent.querySelector("#error-span")!;
 
       if (!response.error) {
         spanError.textContent = "";
-        const contactCard = new ContactCard(this.#contactList);
-        contactCard.render(response);
+        const contactCard = new ContactCard(this.#contactList, this.#chat);
+        contactCard.renderChat(response);
         const contactCardElements = document.querySelectorAll(".contact-card")!;
         contactCardElements[contactCardElements.length - 1].addEventListener(
           "click",
@@ -52,6 +58,15 @@ export class ContactAddForm {
     };
 
     confirmButton.addEventListener("click", handleAddContact);
+
+    const handleEnterClick = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleAddContact();
+      }
+      return;
+    };
+
+    this.#parent.addEventListener("keyup", handleEnterClick);
 
     const cancelButton = this.#parent.querySelector("#cancel-btn")!;
 
