@@ -45,6 +45,10 @@ export class Chat {
       avatar,
     });
 
+    const messagesImport = this.#parent.querySelector(".messages")!;
+    const chatMessage = new ChatMessage(messagesImport);
+    ChatStorage.setChatMessageInstance(chatMessage);
+
     const textArea = this.#parent.querySelector("textarea")!;
 
     textArea.addEventListener("input", function () {
@@ -100,11 +104,8 @@ export class Chat {
     );
     
     const messages: TChatMessage[] = response.messages ?? [];
-    const messagesImport = this.#parent.querySelector(".messages")!;
-      const chatMessage = new ChatMessage(messagesImport);
-    if (messages.length > 0) {
-      ChatStorage.setChatMessageInstance(chatMessage);
 
+    if (messages.length > 0) {
       chatMessage.renderMessages(messages);
     }
     
