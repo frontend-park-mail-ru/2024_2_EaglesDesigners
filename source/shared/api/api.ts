@@ -29,7 +29,7 @@ class Api {
         },
         credentials: "include",
       });
-      const CSRFToken = response.headers.get('x-csrf-token');
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
       if (CSRFToken) {
         Csrf.set(CSRFToken);
       }
@@ -64,9 +64,10 @@ class Api {
       };
 
       const response = await fetch(url, state);
-      const CSRFToken = response.headers.get('x-csrf-token');
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
       if (CSRFToken) {
         Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
       }
 
       const responseBody: Response = await response.json();
@@ -92,9 +93,12 @@ class Api {
         body: formData,
         credentials: "include",
       };
-
-
       const response = await fetch(url, state);
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
+      }
       const responseBody: Response = await response.json();
       return responseBody;
     } catch {
@@ -115,6 +119,7 @@ class Api {
         mode: "cors",
         credentials: "include",
       };
+      
 
       const response = await fetch(url, state);
       const responseBody: Response = await response.json();
