@@ -19,6 +19,20 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
+    contact.avatarURL = serverHost + contact.avatarURL;
+    this.#parent.insertAdjacentHTML(
+      "beforeend",
+      ContactCardTemplate({ 
+        contact }),
+    );
+
+    this.#parent.lastElementChild!.style.pointerEvents = 'none';
+    this.#parent.lastElementChild!.addEventListener('click', (event) => {
+      event.preventDefault();    
+    });
+  }
+
+  renderChat(contact: TContact) {
     if (contact.avatarURL) {
       contact.avatarURL = serverHost + contact.avatarURL;
     } else {

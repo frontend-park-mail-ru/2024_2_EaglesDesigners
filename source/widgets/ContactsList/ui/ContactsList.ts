@@ -27,7 +27,7 @@ export class ContactsList {
 
       if (contacts) {
         contacts.forEach((element) => {
-          contactCard.render(element);
+          contactCard.renderChat(element);
         });
       }
     }
