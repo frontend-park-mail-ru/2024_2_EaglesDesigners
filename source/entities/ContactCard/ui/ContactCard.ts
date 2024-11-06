@@ -19,6 +19,7 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
+    console.log(contact.avatarURL);
     contact.avatarURL = serverHost + contact.avatarURL;
     this.#parent.insertAdjacentHTML(
       "beforeend",
@@ -26,18 +27,19 @@ export class ContactCard {
         contact }),
     );
 
-    this.#parent.lastElementChild!.style.pointerEvents = 'none';
+    //this.#parent.lastElementChild!.style.pointerEvents = 'none';
     this.#parent.lastElementChild!.addEventListener('click', (event) => {
       event.preventDefault();    
     });
   }
 
   renderChat(contact: TContact) {
-    if (contact.avatarURL) {
+    if (contact.avatarURL !== null) {
       contact.avatarURL = serverHost + contact.avatarURL;
     } else {
       contact.avatarURL = "/assets/image/default-avatar.svg";
     }
+
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ contact }),

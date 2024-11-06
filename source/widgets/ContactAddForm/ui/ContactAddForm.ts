@@ -8,7 +8,7 @@ import { Chat } from "@/widgets/Chat";
 
 export class ContactAddForm {
   #parent;
-  #chat
+  #chat;
   #contactList;
   constructor(parent: Element, chat: Chat,contactList: Element) {
     this.#parent = parent;
@@ -66,7 +66,7 @@ export class ContactAddForm {
       return;
     };
 
-    document.addEventListener("keyup", handleEnterClick);
+    this.#parent.addEventListener("keyup", handleEnterClick);
 
     const cancelButton = this.#parent.querySelector("#cancel-btn")!;
 

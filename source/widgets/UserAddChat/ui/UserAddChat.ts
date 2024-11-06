@@ -34,7 +34,7 @@ export class UserAddChat {
     if (!response.error) {
       const contacts = response.contacts;
       if (contacts.length) {
-        contacts.map((elem) => {
+        contacts.forEach((elem) => {
           const contact = new ContactCard(contactListContainer);
           contact.render(elem);
         });

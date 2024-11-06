@@ -98,13 +98,16 @@ export class Chat {
     const response = await API.get<ChatMessagesResponse>(
       "/chat/" + chat.chatId + "/messages",
     );
+    
     const messages: TChatMessage[] = response.messages ?? [];
-
     const messagesImport = this.#parent.querySelector(".messages")!;
-    const chatMessage = new ChatMessage(messagesImport);
-    ChatStorage.setChatMessageInstance(chatMessage);
+      const chatMessage = new ChatMessage(messagesImport);
+    if (messages.length > 0) {
+      ChatStorage.setChatMessageInstance(chatMessage);
 
-    chatMessage.renderMessages(messages);
+      chatMessage.renderMessages(messages);
+    }
+    
     const chatHeader = this.#parent.querySelector("#header-chat")!;
 
     const handleChatHeader = () => {

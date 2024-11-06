@@ -92,7 +92,7 @@ export class AddGroupForm {
           "/addchat",
           formData,
         );
-        console.log("groupSENT", newChatRes)
+        //console.log("groupSENT", newChatRes)
 
         if(!newChatRes.error){
           const chatList = new ChatList(this.#parent, this.#chat);

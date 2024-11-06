@@ -81,7 +81,7 @@ class Api {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
-      const response = await fetch(url, {
+      const state : RequestInit = {
         method: "POST",
         headers: {
           "Access-Control-Allow-Credentials": "true",
@@ -90,7 +90,14 @@ class Api {
         mode: "cors",
         body: formData,
         credentials: "include",
-      });
+      };
+      const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        state.headers["not_csrf"] = CSRFToken;
+      }
+
+      const response = await fetch(url, state);
       const responseBody: Response = await response.json();
       return responseBody;
     } catch {
@@ -141,8 +148,12 @@ class Api {
         credentials: "include",
       };
       
-
       const response = await fetch(url, state);
+      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
+      }
       const responseBody: Response = await response.json();
       return responseBody;
     } catch {
