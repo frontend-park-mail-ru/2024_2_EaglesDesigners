@@ -20,14 +20,14 @@ export class ContactsList {
 
     const response = await API.get<ContactResponse>("/contacts");
     const contactList = this.#parent.querySelector("#contacts-list")!;
-    const contactCard = new ContactCard(contactList);
+    const contactCard = new ContactCard(contactList, this.#chat);
 
     if (!response.error) {
       const contacts = response.contacts;
 
       if (contacts) {
         contacts.forEach((element) => {
-          contactCard.render(element);
+          contactCard.renderChat(element);
         });
       }
     }
@@ -46,17 +46,10 @@ export class ContactsList {
     const addContactButton = this.#parent.querySelector("#add-contact-button")!;
 
     const handleAddContact = () => {
-      const ContactForm = new ContactAddForm(contactAdd, contactList);
+      const ContactForm = new ContactAddForm(contactAdd, this.#chat,contactList);
       ContactForm.render();
     };
 
     addContactButton.addEventListener("click", handleAddContact);
-
-    const contactCardElement = document.querySelectorAll(".contact-card");
-    contactCardElement.forEach((elem) => {
-      elem.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
-    });
   }
 }

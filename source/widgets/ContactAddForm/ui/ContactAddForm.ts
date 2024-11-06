@@ -4,12 +4,15 @@ import "./ContactAddForm.scss";
 import { ContactRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
+import { Chat } from "@/widgets/Chat";
 
 export class ContactAddForm {
   #parent;
+  #chat
   #contactList;
-  constructor(parent: Element, contactList: Element) {
+  constructor(parent: Element, chat: Chat,contactList: Element) {
     this.#parent = parent;
+    this.#chat = chat;
     this.#contactList = contactList;
   }
 
@@ -33,8 +36,8 @@ export class ContactAddForm {
 
       if (!response.error) {
         spanError.textContent = "";
-        const contactCard = new ContactCard(this.#contactList);
-        contactCard.render(response);
+        const contactCard = new ContactCard(this.#contactList, this.#chat);
+        contactCard.renderChat(response);
         const contactCardElements = document.querySelectorAll(".contact-card")!;
         contactCardElements[contactCardElements.length - 1].addEventListener(
           "click",

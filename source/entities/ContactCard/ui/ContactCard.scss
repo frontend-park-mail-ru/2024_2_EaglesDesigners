@@ -4,6 +4,18 @@
   color: #fff;
   font-family: var(--main-font-family);
   text-decoration: none;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+.contact-card-checkbox{
+  margin-left: 10px;
+  box-sizing: content-box;
+  pointer-events:fill;
 }
 
 .contact-card-content {
