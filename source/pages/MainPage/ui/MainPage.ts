@@ -95,6 +95,6 @@ export class MainPage extends View {
 
     homeButton.addEventListener("click", handleHome);
 
-    wsConn.subscribe(renderMessage);
+    wsConn.subscribe("message",renderMessage);
   }
 }

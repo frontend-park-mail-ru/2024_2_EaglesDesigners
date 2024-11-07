@@ -1,12 +1,12 @@
 import { serverHost } from "@/app/config";
 
 class wsConnection {
-  handlers: ((payload: any) => Promise<void>)[];
+  handlers: { [key: string]: ((payload: any) => Promise<void>)[] };
   status;
   ws: WebSocket | null;
   url;
   constructor(url: string) {
-    this.handlers = [];
+    this.handlers = {};
     this.status = false;
     this.ws = null;
     this.url = url;
@@ -29,11 +29,12 @@ class wsConnection {
           return;
         }
 
-        for (const handler of this.handlers) {
+        const handlersForType = this.handlers[res.messageType] || [];
+        for (const handler of handlersForType) {
           handler(res.payload);
         }
       } catch (error) {
-        console.log("Ошибка парсинга JSON:", error);
+        console.log("Ошибка обработки сообщения Websocket:", error);
       }
     };
 
@@ -58,18 +59,22 @@ class wsConnection {
     }
     this.ws.close();
     this.status = false;
-    this.handlers = [];
+    this.handlers = {};
     this.ws = null;
 
     console.log("WebSocket начал процесс отключения");
   }
 
-  subscribe(handler: (payload: any) => Promise<void>) {
-    this.handlers.push(handler);
+  subscribe(messageType: string, handler: (payload: any) => Promise<void>) {
+    if (!this.handlers[messageType]) {
+      this.handlers[messageType] = [];
+    }
+    this.handlers[messageType].push(handler);
   }
 
-  unsubscribe(handler: (payload: any) => Promise<void>) {
-    this.handlers = this.handlers.filter((h) => h !== handler);
+  unsubscribe(messageType: string, handler: (payload: any) => Promise<void>) {
+    if (!this.handlers[messageType]) return;
+    this.handlers[messageType] = this.handlers[messageType].filter((h) => h !== handler);
   }
 }
 
