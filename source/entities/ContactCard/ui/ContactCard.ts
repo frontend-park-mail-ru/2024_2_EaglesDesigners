@@ -68,7 +68,7 @@ export class ContactCard {
       }
   
       const newChat: TNewChat = {
-        chatName: contact.name,
+        chatName: contact.username,
         chatType: 'personal',
         usersToAdd: [ contact.id ],
       }
