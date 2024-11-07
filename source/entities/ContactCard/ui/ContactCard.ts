@@ -19,8 +19,11 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
-    console.log(contact.avatarURL);
-    contact.avatarURL = serverHost + contact.avatarURL;
+    if (contact.avatarURL !== null) {
+      contact.avatarURL = serverHost + contact.avatarURL;
+    } else {
+      contact.avatarURL = "/assets/image/default-avatar.svg";
+    }
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ 
@@ -85,7 +88,11 @@ export class ContactCard {
   }
 
   renderForm(contact: TContact, selectedContacts: SelectedContacts) {
-    contact.avatarURL = serverHost + contact.avatarURL;
+    if (contact.avatarURL) {
+      contact.avatarURL = serverHost + contact.avatarURL;
+    } else {
+      contact.avatarURL = "/assets/image/default-avatar.svg";
+    }
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ContactCardTemplate({ 
