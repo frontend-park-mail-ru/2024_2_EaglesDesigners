@@ -22,7 +22,7 @@ export class AddGroupForm {
       this.#parent.innerHTML = AddGroupTemplate();
 
       const avatarRender: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-
+      avatarRender.src = "/assets/image/default-avatar.svg";
       const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
       let avatarFile: File;
       const handleAvatar = () => {
@@ -92,7 +92,6 @@ export class AddGroupForm {
           "/addchat",
           formData,
         );
-        //console.log("groupSENT", newChatRes)
 
         if(!newChatRes.error){
           const chatList = new ChatList(this.#parent, this.#chat);
