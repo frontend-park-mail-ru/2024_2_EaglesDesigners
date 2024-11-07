@@ -51,7 +51,15 @@ export class ProfileForm {
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
+        const maxFileSize = 10*1024*1024;
         if (file) {
+          const avatarSpanError : HTMLSpanElement = this.#parent.querySelector('#avatar-error')!;
+          if (file.size > maxFileSize) {
+            validateForm(avatarInput, "Размер файла не должен превышать 10МБ", avatarSpanError);
+            return;
+          } else{
+            avatarSpanError.innerText = '';
+          }
           avatarUser.src = URL.createObjectURL(file);
           avatarFile = file;
         }
@@ -84,10 +92,15 @@ export class ProfileForm {
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
         this.#parent.querySelector("#nickname")!;
-      if (!validateNickname(profileData.name) || profileData.name.length > 20) {
-        validateForm(nameInput, "Не валидное имя", nicknameSpan);
+      if (!validateNickname(profileData.name)) {
+        validateForm(nameInput, "Допустимы только латинские и русские буквы, пробелы, цифры и нижние подчеркивания.", nicknameSpan);
         flag = false;
-      } else {
+      }
+      else if (profileData.name.length > 20) {
+        validateForm(nameInput, "Имя не может быть длиннее 20 символов", nicknameSpan);
+        flag = false;
+      }
+      else {
         nicknameSpan.textContent = "";
       }
       const dateInput: HTMLInputElement = this.#parent.querySelector("#date")!;
