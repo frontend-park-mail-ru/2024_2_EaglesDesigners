@@ -30,7 +30,6 @@ export class ContactCard {
         contact }),
     );
 
-    this.#parent.lastElementChild!.style.pointerEvents = 'none';
     this.#parent.lastElementChild!.addEventListener('click', (event) => {
       event.preventDefault();    
     });
