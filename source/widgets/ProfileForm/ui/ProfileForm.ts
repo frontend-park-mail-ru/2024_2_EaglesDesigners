@@ -3,7 +3,7 @@ import "./ProfileForm.scss";
 import { API } from "@/shared/api/api";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
-import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
+import { EmptyRequest, EmptyResponse, ProfileRequest, ProfileResponse } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
@@ -11,6 +11,8 @@ import { serverHost } from "@/app/config";
 import { genProfileData } from "../api/updateProfile";
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
+import { Router } from "@/shared/Router/Router";
+import { wsConn } from "@/shared/api/ws";
 
 export class ProfileForm {
   #parent;
@@ -23,7 +25,13 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
+    if (response.avatarURL) {
+      response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
+    }
+    else {
+      response.avatarURL = "/assets/image/default-avatar.svg";
+    }
+    
     const currentDate = new Date();
 
     this.#parent.innerHTML = ProfileFormTemplate({
@@ -114,8 +122,35 @@ export class ProfileForm {
         );
         return;
       }
+      
+      if (avatarFile) {
+        const userAvatar : HTMLImageElement =  document.querySelector('#user-avatar')!;
+        userAvatar.src = URL.createObjectURL(avatarFile);
+        UserStorage.setAvatar(userAvatar.src);
+      }
+      UserStorage.setUserName(nickname);
+      console.log(UserStorage);
+
       handleBack();
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
+
+
+    const exitButton = this.#parent.querySelector(".exit-btn")!;
+
+    const handleExitClick = async () => {
+      const response = await API.post<EmptyResponse, EmptyRequest>(
+        "/logout",
+        {},
+      );
+
+      if (!response.error) {
+        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: ""});
+        wsConn.close();
+        Router.go("/login");
+      }
+    };
+
+    exitButton.addEventListener("click", handleExitClick);
   }
 }

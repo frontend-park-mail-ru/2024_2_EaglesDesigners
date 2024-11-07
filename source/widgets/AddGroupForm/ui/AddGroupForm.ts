@@ -1,13 +1,14 @@
 import { API } from "@/shared/api/api";
 import AddGroupTemplate from "./AddGroupForm.handlebars";
 import "./AddGroupForm.scss";
-import { ChatResponse, ContactRequest, NewChatRequest } from "@/shared/api/types";
+import { ContactResponse, NewChatRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
 import { Chat } from "@/widgets/Chat";
 import { ChatList } from "@/widgets/ChatList";
 import { SelectedContacts } from "../lib/SelectedContacts";
+import { TChat } from "@/entities/Chat";
 
 export class AddGroupForm {
     #parent;
@@ -38,7 +39,7 @@ export class AddGroupForm {
       
       const selectedContacts = new SelectedContacts();
 
-      const response = await API.get<ContactRequest>("/contacts");
+      const response = await API.get<ContactResponse>("/contacts");
       const contactList = this.#parent.querySelector("#contacts-list")!;
       const contactCard = new ContactCard(contactList, this.#chat);
 
@@ -88,7 +89,7 @@ export class AddGroupForm {
         formData.append("chat_data", jsonProfileData);
         formData.append("avatar", avatarFile);
       
-        const newChatRes = await API.postFormData<ChatResponse>(
+        const newChatRes = await API.postFormData<TChat>(
           "/addchat",
           formData,
         );
@@ -103,7 +104,7 @@ export class AddGroupForm {
         if (newChatRes.error) {
           validateForm(nameInput, "Произошла какая-то ошибка, попробуйте еще раз", chatNameRender);
         }
-      }
+      };
 
       const confirmButton = this.#parent.querySelector("#confirm-button");
       confirmButton?.addEventListener("click", updateProfileInfo);

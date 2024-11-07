@@ -81,20 +81,20 @@ class Api {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
+      const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
       const state : RequestInit = {
         method: "POST",
         headers: {
           "Access-Control-Allow-Credentials": "true",
           enctype: "multipart/form-data",
+          "not_csrf": CSRFToken,
         },
         mode: "cors",
         body: formData,
         credentials: "include",
       };
-      const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
       if (CSRFToken) {
         Csrf.set(CSRFToken);
-        state.headers["not_csrf"] = CSRFToken;
       }
 
       const response = await fetch(url, state);

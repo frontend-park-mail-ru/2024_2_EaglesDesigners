@@ -1,5 +1,5 @@
 import { API } from "@/shared/api/api.ts";
-import { AuthResponse, LoginRequest } from "@/shared/api/types";
+import { AuthResponse, LoginRequest} from "@/shared/api/types";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import LoginFormTemplate from "./loginForm.hbs";
@@ -92,10 +92,11 @@ export class LoginForm extends View {
           id: responseAuth.user.id,
           name: responseAuth.user.name,
           username: responseAuth.user.username,
+          avatarURL: responseAuth.user.avatarURL,
         });
         wsConn.start();
       } else {
-        UserStorage.setUser({ id: "", name: "", username: "" });
+        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: ""});
       }
       Router.go("/");
     };

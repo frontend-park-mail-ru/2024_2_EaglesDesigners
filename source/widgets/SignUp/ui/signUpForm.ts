@@ -174,7 +174,8 @@ export class SignupForm extends View {
         id: user.id,
         name: user.name,
         username: user.username,
-      });
+        avatarURL: user.avatarURL,
+      },);
 
       wsConn.start();
       Router.go("/");

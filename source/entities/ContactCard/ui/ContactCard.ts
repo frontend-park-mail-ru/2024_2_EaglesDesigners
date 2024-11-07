@@ -3,7 +3,7 @@ import { TContact } from "../api/ContactType";
 import "./ContactCard.scss";
 import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
-import { ChatResponse, ChatsResponse, ChatUsersResponse } from "@/shared/api/types";
+import { ChatsResponse, ChatUsersResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { Chat } from "@/widgets/Chat";
 import { TNewChat } from "@/entities/Chat/model/type";
@@ -48,7 +48,7 @@ export class ContactCard {
     this.#parent.lastElementChild!.addEventListener("click", async (e) => {
       e.preventDefault();
     
-      const response = await API.get<ChatUsersResponse>("/chats");
+      const response = await API.get<ChatsResponse>("/chats");
       if (!response.chats) {
         return;
       }
@@ -56,7 +56,7 @@ export class ContactCard {
     
       for (const elem of chats) {
         if (elem.chatType === 'personal') {
-          const usersRes = await API.get<ChatsResponse>("/chat/" + elem.chatId + "/users");
+          const usersRes = await API.get<ChatUsersResponse>("/chat/" + elem.chatId + "/users");
 
           if (usersRes.usersId && usersRes.usersId.includes(contact.id)) {
             this.#chat.render(elem);
@@ -69,16 +69,17 @@ export class ContactCard {
         chatName: contact.name,
         chatType: 'personal',
         usersToAdd: [ contact.id ],
-      }
+      };
 
       const formData: FormData = new FormData();
       const jsonProfileData = JSON.stringify(newChat);
       formData.append("chat_data", jsonProfileData);
 
-      const newChatRes = await API.postFormData<ChatResponse>(
+      const newChatRes = await API.postFormData<TChat>(
         "/addchat",
         formData,
       );
+      console.log(newChatRes);
 
       this.#chat.render(newChatRes);    
     });
