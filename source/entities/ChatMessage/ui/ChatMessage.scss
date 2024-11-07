@@ -68,7 +68,6 @@ $messages-container-width: 700px;
   &__avatar {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
 
     display: flex;
     align-items: flex-end;
@@ -79,6 +78,7 @@ $messages-container-width: 700px;
     &__img {
       width: 40px;
       height: 40px;
+      border-radius: 100%;
 
       display: none;
     }
