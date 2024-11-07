@@ -106,7 +106,14 @@ export class AddGroupForm {
 
       const confirmButton = this.#parent.querySelector("#confirm-button");
       confirmButton?.addEventListener("click", updateProfileInfo);
+      
+      const backButton = this.#parent.querySelector("#back-button")!;
 
-  
+      const handleBack = () => {
+        const chatList = new ChatList(this.#parent, this.#chat);
+        chatList.render();
+      };
+      
+      backButton.addEventListener("click", handleBack);
     }
 }
