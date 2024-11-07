@@ -15,9 +15,12 @@ export class ChatUserCard {
     } else {
       userProfile.avatarURL = "/assets/image/default-avatar.svg";
     }
+    
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ChatUserCardTemplate({ userProfile }),
     );
+
+    this.#parent.lastElementChild!.style.pointerEvents = 'none';
   }
 }
