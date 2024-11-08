@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 
 module.exports = {
   entry: './source/index.ts',
@@ -32,6 +33,9 @@ module.exports = {
     filename: 'index_bundle.js'
   },
   plugins: [
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, "./source/serviceWorker.ts"),
+    }),
     new HtmlWebpackPlugin({
         template: './public/index.html',
     })
