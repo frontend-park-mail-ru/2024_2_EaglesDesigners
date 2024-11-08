@@ -95,6 +95,12 @@
   }
 }
 
+.avatar-error {
+  color: red;
+  font-size: 14px;
+  font-family: var(--main-font-family);
+}
+
 .profile-error-nickname {
   min-height: 51px;
 }
