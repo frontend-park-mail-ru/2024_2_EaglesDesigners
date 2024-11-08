@@ -17,13 +17,32 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
-            .then(response => response || fetch(event.request))
-            .catch(() => {
-                if (event.request.mode === 'navigate') {
-                    return new Response(JSON.stringify({status: 408}));
-                }
-            })
+          .then(response => {
+            if (response) {
+              return response;
+            } else {
+              return fetch(event.request)
+                .then(res => {
+                  return caches.open('dynamic')
+                    .then(cache => {
+                      cache.put(event.request.url, res.clone());
+                      return res;
+                    });
+                });
+            }
+        })
     );
+
+    // event.respondWith(
+    //     caches.match(event.request)
+    //         .then(response => response || fetch(event.request))
+    //         .catch(() => {
+    //             if (event.request.mode === 'navigate') {
+    //                 return new Response(JSON.stringify({status: 408}));
+    //             }
+    //     })
+    // );
+
 });
 
 self.addEventListener('activate', event => {
