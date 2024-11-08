@@ -54,7 +54,7 @@
     padding-left: 10px;
     width: 320px;
     height: var(--input-height);
-    font-size: var(--base-font-size);
+    font-size: 18px;
     font-family: var(--main-font-family);
     color: var(--text-over-primary);
     background-color: var(--primary);
@@ -91,23 +91,46 @@
     font-size: 14px;
     color: var(--text-over-primary);
     opacity: 50%;
-    margin-bottom: 30px;
     font-family: var(--main-font-family);
   }
 }
 
-.profile-error {
-  min-height: 18px;
+.profile-error-nickname {
+  min-height: 51px;
+}
 
+.profile-error {
   &__span {
-    color: red;
+    display: flex;
+    width: 320px;
     font-size: 14px;
+    color: red;
+    font-family: var(--main-font-family);
+  }
+}
+
+.profile-buttons {
+  display: flex;
+}
+
+.exit-btn {
+  width: 50%;
+  padding-left: 20px;
+
+  &__img {
+    cursor: pointer;
   }
 }
 
 .profile-form-confirm {
   display: flex;
-  margin-top: 4%;
   justify-content: flex-end;
-  cursor: pointer;
+  padding-right: 20px;
+  width: 50%;
+
+  &__img {
+    width: 54px;
+    height: 54px;
+    cursor: pointer;
+  }
 }

@@ -8,98 +8,6 @@ body {
   flex-direction: row;
   overflow-y: hidden;
 }
-
-.news-content {
-  width: 50%;
-  height: 100%;
-  max-height: 1080px;
-  display: block;
-  background-color: var(--primary);
-
-  &::-webkit-scrollbar {
-    background-color: inherit;
-  }
-}
-
-.news-content-header {
-  margin-top: 42px;
-  display: block;
-  position: relative;
-
-  &__img {
-    position: relative;
-  }
-
-  &__span {
-    color: #fff;
-    font-family: var(--main-font-family);
-    font-size: 45px;
-    position: absolute;
-    left: 0;
-    margin-top: 30px;
-    margin-left: 5%;
-  }
-}
-
-.update-content {
-  margin-top: 32px;
-  margin-left: 52px;
-  max-height: 462px;
-  margin-right: 15px;
-
-  &__span {
-    color: #fff;
-    font-family: var(--main-font-family);
-    font-size: 16px;
-  }
-
-  &__span-header {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  &__span-post-header {
-    display: block;
-    margin-bottom: 15px;
-  }
-
-  &__span-main-info {
-    opacity: 0.8;
-    display: block;
-  }
-
-  &__img {
-    height: 316px;
-    margin-top: 10px;
-    margin-left: 15%;
-  }
-}
-
-.patefon-news {
-  margin-left: 52px;
-  margin-top: 20px;
-
-  &__span-header {
-    display: block;
-  }
-
-  &__span-post-header {
-    display: block;
-    margin-top: 5px;
-  }
-
-  &__span-main-info {
-    display: block;
-    margin-top: 15px;
-    opacity: 0.8;
-  }
-
-  &__img {
-    width: 550px;
-    height: 100px;
-  }
-}
-
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -119,6 +27,10 @@ body {
     margin-top: 175px;
     margin-bottom: 80px;
   }
+}
+
+.login {
+  width: 500px;
 }
 
 .auth-form-user {

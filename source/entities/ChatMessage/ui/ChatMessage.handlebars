@@ -1,8 +1,8 @@
 <div
-  class="message{{unless message.first ' first-message'}}{{unless
-      message.last
-      ' last-message'
-    }}{{unless message.isFromOtherUser ' left-side'}}"
+  class="message
+    {{#if message.first}}first-message{{/if}}
+    {{#if message.last}}last-message{{/if}}
+    {{#if message.isFromOtherUser}}left-side{{/if}}"
 >
   <div class="message__body">
     <span class="message__body__username">

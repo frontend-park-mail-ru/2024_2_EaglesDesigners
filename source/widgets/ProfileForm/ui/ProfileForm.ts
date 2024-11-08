@@ -3,7 +3,12 @@ import "./ProfileForm.scss";
 import { API } from "@/shared/api/api";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
-import { ProfileRequest, ProfileResponse } from "@/shared/api/types";
+import {
+  EmptyRequest,
+  EmptyResponse,
+  ProfileRequest,
+  ProfileResponse,
+} from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
@@ -11,6 +16,8 @@ import { serverHost } from "@/app/config";
 import { genProfileData } from "../api/updateProfile";
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
+import { Router } from "@/shared/Router/Router";
+import { wsConn } from "@/shared/api/ws";
 
 export class ProfileForm {
   #parent;
@@ -23,9 +30,16 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
-    const currentDate = new Date();
 
+    if (response.avatarURL) {
+      response.avatarURL = serverHost + response.avatarURL;
+    } else if (UserStorage.getUser().avatarURL) {
+      response.avatarURL = UserStorage.getUser().avatarURL;
+    } else {
+      response.avatarURL = "/assets/image/default-avatar.svg";
+    }
+
+    const currentDate = new Date();
     this.#parent.innerHTML = ProfileFormTemplate({
       user,
       response,
@@ -37,13 +51,25 @@ export class ProfileForm {
     birthdayInput.value = birthday;
 
     const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-    avatarUser.src = "/assets/image/default-avatar.svg";
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
     let avatarFile: File;
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
+        const maxFileSize = 10 * 1024 * 1024;
         if (file) {
+          const avatarSpanError: HTMLSpanElement =
+            this.#parent.querySelector("#avatar-error")!;
+          if (file.size > maxFileSize) {
+            validateForm(
+              avatarInput,
+              "Размер файла не должен превышать 10МБ",
+              avatarSpanError,
+            );
+            return;
+          } else {
+            avatarSpanError.innerText = "";
+          }
           avatarUser.src = URL.createObjectURL(file);
           avatarFile = file;
         }
@@ -76,8 +102,19 @@ export class ProfileForm {
       let flag = true;
       const nicknameSpan: HTMLSpanElement =
         this.#parent.querySelector("#nickname")!;
-      if (!validateNickname(profileData.name) || profileData.name.length > 20) {
-        validateForm(nameInput, "Не валидное имя", nicknameSpan);
+      if (!validateNickname(profileData.name)) {
+        validateForm(
+          nameInput,
+          "Допустимы только латинские и русские буквы, пробелы, цифры и нижние подчеркивания.",
+          nicknameSpan,
+        );
+        flag = false;
+      } else if (profileData.name.length > 20) {
+        validateForm(
+          nameInput,
+          "Имя не может быть длиннее 20 символов",
+          nicknameSpan,
+        );
         flag = false;
       } else {
         nicknameSpan.textContent = "";
@@ -114,8 +151,34 @@ export class ProfileForm {
         );
         return;
       }
+
+      if (avatarFile) {
+        const userAvatar: HTMLImageElement =
+          document.querySelector("#user-avatar")!;
+        userAvatar.src = URL.createObjectURL(avatarFile);
+        UserStorage.setAvatar(userAvatar.src);
+      }
+      UserStorage.setUserName(nickname);
+
       handleBack();
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
+
+    const exitButton = this.#parent.querySelector(".exit-btn")!;
+
+    const handleExitClick = async () => {
+      const response = await API.post<EmptyResponse, EmptyRequest>(
+        "/logout",
+        {},
+      );
+
+      if (!response.error) {
+        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: "" });
+        wsConn.close();
+        Router.go("/login");
+      }
+    };
+
+    exitButton.addEventListener("click", handleExitClick);
   }
 }

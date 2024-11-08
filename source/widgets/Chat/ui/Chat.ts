@@ -32,7 +32,7 @@ export class Chat {
     ChatStorage.setChat(chat);
     let avatar;
     if (chat.avatarPath != "") {
-      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath;
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }
@@ -96,7 +96,7 @@ export class Chat {
     textArea.addEventListener("keypress", KeyPressHandler);
 
     document
-      .querySelector(".input__send-btn")!
+      .querySelector(".input-send-btn__img")!
       .addEventListener("click", sendInputMessage);
 
     const response = await API.get<ChatMessagesResponse>(
@@ -104,7 +104,6 @@ export class Chat {
     );
 
     const messages: TChatMessage[] = response.messages ?? [];
-
     if (messages.length > 0) {
       chatMessage.renderMessages(messages);
     }

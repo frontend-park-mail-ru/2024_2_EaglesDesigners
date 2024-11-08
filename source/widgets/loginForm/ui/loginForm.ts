@@ -7,6 +7,8 @@ import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { UserStorage } from "@/entities/User";
 import { wsConn } from "@/shared/api/ws";
+import { NewsBlock } from "@/widgets/NewsBlock";
+import "./loginForm.scss";
 /**
  * Class provides Login form
  */
@@ -24,6 +26,9 @@ export class LoginForm extends View {
    */
   render() {
     this.#parent.innerHTML = LoginFormTemplate();
+    const authRoot = this.#parent.querySelector("#news-root")!;
+    const newsForm = new NewsBlock(authRoot);
+    newsForm.render();
 
     const handleCreateClick = (e: Event) => {
       e.preventDefault();
@@ -92,10 +97,11 @@ export class LoginForm extends View {
           id: responseAuth.user.id,
           name: responseAuth.user.name,
           username: responseAuth.user.username,
+          avatarURL: responseAuth.user.avatarURL,
         });
         wsConn.start();
       } else {
-        UserStorage.setUser({ id: "", name: "", username: "" });
+        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: "" });
       }
       Router.go("/");
     };

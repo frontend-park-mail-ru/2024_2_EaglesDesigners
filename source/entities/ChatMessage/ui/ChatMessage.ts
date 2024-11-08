@@ -68,42 +68,46 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage) {
-    if (
-      this.#newestMessage?.last &&
-      this.#newestMessage.authorID === message.authorID
-    ) {
-      this.#parent.firstElementChild!.classList.remove("last-message");
+    if (message.text) {
+      if (
+        this.#newestMessage?.last &&
+        this.#newestMessage.authorID === message.authorID
+      ) {
+        if (this.#parent.firstElementChild) {
+          this.#parent.firstElementChild!.classList.remove("last-message");
+        }
+      }
+
+      const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
+
+      const messageWithFlags: TChatMessageWithFlags = {
+        ...message,
+        first:
+          !this.#newestMessage ||
+          this.#newestMessage.authorID !== message.authorID,
+        last: true,
+        isFromOtherUser: isFromOtherUser,
+      };
+
+      this.#newestMessage = messageWithFlags;
+
+      const profile = await API.get<ProfileResponse>(
+        "/profile/" + message.authorID,
+      );
+      const avatarURL = profile.avatarURL
+        ? serverHost + profile.avatarURL
+        : "/assets/image/default-avatar.svg";
+
+      this.#parent.insertAdjacentHTML(
+        "afterbegin",
+        ChatMessageTemplate({
+          message: {
+            ...messageWithFlags,
+            datetime: getTimeString(messageWithFlags.datetime),
+            avatarURL,
+          },
+        }),
+      );
     }
-
-    const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
-
-    const messageWithFlags: TChatMessageWithFlags = {
-      ...message,
-      first:
-        !this.#newestMessage ||
-        this.#newestMessage.authorID !== message.authorID,
-      last: true,
-      isFromOtherUser: isFromOtherUser,
-    };
-
-    this.#newestMessage = messageWithFlags;
-
-    const profile = await API.get<ProfileResponse>(
-      "/profile/" + message.authorID,
-    );
-    const avatarURL = profile.avatarURL
-      ? serverHost + profile.avatarURL
-      : "/assets/image/default-avatar.svg";
-
-    this.#parent.insertAdjacentHTML(
-      "afterbegin",
-      ChatMessageTemplate({
-        message: {
-          ...messageWithFlags,
-          datetime: getTimeString(messageWithFlags.datetime),
-          avatarURL,
-        },
-      }),
-    );
   }
 }

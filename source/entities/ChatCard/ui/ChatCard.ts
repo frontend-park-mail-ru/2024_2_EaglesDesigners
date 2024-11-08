@@ -18,7 +18,7 @@ export class ChatCard {
   render(chat: TChat) {
     let avatar;
     if (chat.avatarPath !== "") {
-      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath;
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }

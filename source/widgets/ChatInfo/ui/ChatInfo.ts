@@ -32,8 +32,7 @@ export class ChatInfo {
         .utc()
         .format("YYYY-MM-DD");
       if (profileUser.avatarURL) {
-        profileUser.avatarURL =
-          serverHost + profileUser.avatarURL + "?" + Date.now();
+        profileUser.avatarURL = serverHost + profileUser.avatarURL;
       } else {
         profileUser.avatarURL = "/assets/image/default-avatar.svg";
       }

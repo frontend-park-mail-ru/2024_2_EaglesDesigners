@@ -10,7 +10,7 @@ $text-over-primary: #ffffff;
   color: $color;
 }
 
-.chat-list-container {
+.chat-list {
   background: transparent;
 
   height: 100%;
@@ -24,7 +24,7 @@ $text-over-primary: #ffffff;
   line-height: 22px;
 }
 
-.chat-list-container__div {
+.chat-list-container {
   width: 404px;
 
   grid-area: cl-box;
@@ -32,7 +32,7 @@ $text-over-primary: #ffffff;
   flex-direction: column;
 }
 
-.chat-list-container__div__search-div {
+.chat-list-container-search {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     var(--primary);
   height: 85px;
@@ -44,7 +44,7 @@ $text-over-primary: #ffffff;
   margin-bottom: 10px;
 }
 
-.chat-list-container__div__chatlist-div {
+.chat-list-container-chatlist {
   --avatar-size: 60px;
   height: 100%;
   overflow-y: scroll;
@@ -61,15 +61,15 @@ $text-over-primary: #ffffff;
   }
 }
 
+.add-chat-btn {
+  cursor: pointer;
+}
+
 .add-chat {
   display: flex;
   margin-right: 20px;
   margin-bottom: 20px;
   justify-content: flex-end;
-
-  &__button {
-    cursor: pointer;
-  }
 
   &__popup {
     position: absolute;

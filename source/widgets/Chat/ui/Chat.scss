@@ -61,13 +61,22 @@ textarea {
   flex-direction: row;
   align-items: center;
 
-  .avatar {
+  .avatar-container{
     width: 50px;
     height: 50px;
-    border-radius: 100%;
-
     margin-left: 20px;
     margin-right: 8px;
+
+    display: flex;
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+  
+      margin-left: 0px;
+      margin-right: 0px;
+    }
   }
 }
 
@@ -141,7 +150,7 @@ textarea {
   gap: 10px;
 }
 
-.input__bubble {
+.input-bubble {
   flex-grow: 1;
   background: $primary-shadow-25;
   border-radius: 25px;
@@ -172,7 +181,7 @@ textarea {
   width: 24px;
 }
 
-.input__send-btn {
+.input-send-btn {
   width: 54px;
   height: 54px;
   background: $accent;
@@ -184,9 +193,9 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.send-btn__icon {
-  width: 22px;
-  height: 22px;
+  &__img {
+    width: 22px;
+    height: 22px;
+  }
 }
