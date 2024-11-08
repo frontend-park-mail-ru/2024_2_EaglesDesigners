@@ -1,10 +1,10 @@
 import { View } from "@/app/View";
 
 interface configRoute {
-  path?: RegExp;
-  view?: View;
+  path: RegExp;
+  view: View;
 }
 
 export interface Routes {
-  paths?: configRoute[];
+  paths: configRoute[];
 }
