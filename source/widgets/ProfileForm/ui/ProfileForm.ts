@@ -25,8 +25,12 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
+    console.log(response, UserStorage.getUser);
+    
     if (response.avatarURL) {
+      
       response.avatarURL = serverHost + response.avatarURL;
+      console.log(response.avatarURL)
     }
     else if (UserStorage.getUser().avatarURL){
       response.avatarURL = UserStorage.getUser().avatarURL;
@@ -36,7 +40,6 @@ export class ProfileForm {
     }
     
     const currentDate = new Date();
-
     this.#parent.innerHTML = ProfileFormTemplate({
       user,
       response,
@@ -48,7 +51,6 @@ export class ProfileForm {
     birthdayInput.value = birthday;
 
     const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-    avatarUser.src = "/assets/image/default-avatar.svg";
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
     let avatarFile: File;
     const handleAvatar = () => {

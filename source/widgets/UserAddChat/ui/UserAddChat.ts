@@ -31,9 +31,11 @@ export class UserAddChat {
     const contactListContainer =
       this.#parent.querySelector("#chat-contact-list")!;
     const response = await API.get<ContactResponse>("/contacts");
+    console.log(response);
     if (!response.error) {
       const contacts = response.contacts;
-      if (contacts.length) {
+      console.log(contacts)
+      if (contacts && contacts.length) {
         contacts.forEach((elem) => {
           const contact = new ContactCard(contactListContainer);
           contact.render(elem);

@@ -21,18 +21,30 @@ self.addEventListener('fetch', event => {
               return response;
             } else {
               return fetch(event.request)
-                .then(res => {
-                  return caches.open('dynamic')
-                    .then(cache => {
-                      cache.put(event.request.url, res.clone());
-                      return res;
+                .then(response => {
+                    if (event.request.method !== "GET") {
+                        return response;
+                    }
+
+                    caches.open(CACHE).then((cache) => {
+                        try {
+                            cache.put(event.request, response.clone());
+                        }
+                        catch (e) {
+                            return new Response(JSON.stringify({status: 408}));
+                        }
                     });
+                    return response;
+                
                 });
             }
         })
+        
     );
 
+
 });
+
 
 self.addEventListener('activate', event => {
     event.waitUntil(
