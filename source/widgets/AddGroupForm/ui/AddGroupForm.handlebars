@@ -13,21 +13,19 @@
     </div>
     </div>
 
-    <form class="add-group-form-user" method="post">
-      <label for="ava">
-        <img
-          id="avatar"
-          class="add-group-form-user__img"
-          src={{response.avatarURL}}
-        />
-        <input
-          type="file"
-          id="ava"
-          name="ava"
-          class="profile-form-user__input-avatar"
-          accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
-        /><br />
-      </label>
+    <div class="add-group-form-user">
+      <img
+        id="avatar"
+        class="add-group-form-user__img"
+        src={{response.avatarURL}}
+      />
+      <input
+        type="file"
+        id="ava"
+        name="ava"
+        class="profile-form-user__input-avatar"
+        accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
+      />
       <div class="add-group-error">
         <span id="nickname" class="profile-error__span"></span>
       </div>
@@ -38,7 +36,7 @@
         placeholder="Название"
         name="text"
       />
-    </form>
+    </div>
 
     <p class="add-contacts-caption">Добавьте участников</p>
 
