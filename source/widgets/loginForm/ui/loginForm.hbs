@@ -1,49 +1,48 @@
-<div id="right" class="auth-form">
-  <form class="auth-form__form" method="post">
-    <p class="auth-form__form__p">Войдите в Patefon</p>
-    <div class="auth-form__form__login-error">
-      <span
-        class="auth-form__form__error__span errorLogin"
-        id="errorLogin"
-      ></span>
-    </div>
-    <input
-      id="login"
-      class="auth-form__form__input login not_error"
-      type="text"
-      placeholder="Логин"
-      name="text"
-    />
-    <div class="auth-form__form__login-error">
-      <span
-        class="auth-form__form__error__span errorPassword"
-        id="errorPassword"
-      ></span>
-    </div>
-    <div class="auth-form__form__password" style="position: relative;">
-      <input
-        id="password"
-        class="auth-form__form__password__input auth-form__form__input password not_error"
-        type="password"
-        placeholder="Пароль"
-        name="password"
-      />
-      <img
-        id="password-visibility-toggle"
-        class="auth-form__form__password__img password-visibility-toggle"
-        src="/assets/image/eye.svg"
-      />
-    </div>
-    <button
-      class="auth-form__form__button btn auth-btn Enter"
-      type="submit"
-      id="Enter"
-    >Войти</button>
+<div class="root">
+  <div id="news-root" class="news-content">
 
-  </form>
-  <button
-    class="auth-form__button btn auth-btn Create"
-    type="submit"
-    id="Create"
-  >Создать аккаунт</button>
+  </div>
+  <div id="right" class="auth-form">
+    <form class="auth-form-user" method="post">
+      <p class="auth-form__p-login">Войдите в Patefon</p>
+      <div class="auth-form-login-error">
+        <span class="auth-form-login-error__span" id="errorLogin"></span>
+      </div>
+      <input
+        id="login"
+        class="auth-form-user__input login not_error"
+        type="text"
+        placeholder="Логин"
+        name="text"
+      />
+      <div class="auth-form-login-error">
+        <span
+          class="auth-form-login-error__span errorPassword"
+          id="errorPassword"
+        ></span>
+      </div>
+      <div class="auth-form-user-password" style="position: relative;">
+        <input
+          id="password"
+          class="auth-form-user-password__input auth-form-user__input password not_error"
+          type="password"
+          placeholder="Пароль"
+          name="password"
+        />
+        <img
+          id="password-visibility-toggle"
+          class="auth-form-user-password__img-pass_show password-visibility-toggle"
+          src="/assets/image/eye.svg"
+        />
+      </div>
+      <button
+        class="auth-form-user__button-enter btn Enter"
+        type="submit"
+        id="Enter"
+      >Войти</button>
+
+    </form>
+    <button class="auth-form__button btn Create" type="submit" id="Create">Создать
+      аккаунт</button>
+  </div>
 </div>

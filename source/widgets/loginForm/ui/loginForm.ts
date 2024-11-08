@@ -7,6 +7,8 @@ import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { UserStorage } from "@/entities/User";
 import { wsConn } from "@/shared/api/ws";
+import { NewsForm } from "@/widgets/NewsForm/ui/NewsForm";
+import "./loginForm.scss";
 /**
  * Class provides Login form
  */
@@ -24,6 +26,9 @@ export class LoginForm extends View {
    */
   render() {
     this.#parent.innerHTML = LoginFormTemplate();
+    const authRoot = this.#parent.querySelector('#news-root')!;
+    const newsForm = new NewsForm(authRoot);
+    newsForm.render();
 
     const handleCreateClick = (e: Event) => {
       e.preventDefault();

@@ -10,6 +10,7 @@ import { View } from "@/app/View";
 import { Router } from "@/shared/Router/Router";
 import { UserStorage } from "@/entities/User";
 import { wsConn } from "@/shared/api/ws";
+import { NewsForm } from "@/widgets/NewsForm/ui/NewsForm";
 
 /**
  * Class provides signup form
@@ -28,6 +29,9 @@ export class SignupForm extends View {
    */
   render() {
     this.#parent.innerHTML = SignUpFormTemplate();
+    const authRoot = this.#parent.querySelector('#news-root')!;
+    const newsForm = new NewsForm(authRoot);
+    newsForm.render();
 
     const aElement = document.querySelector("#login_href")!;
 
