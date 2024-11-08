@@ -1,7 +1,7 @@
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
 import { API } from "@/shared/api/api.ts";
-import { ChatsResponse} from "@/shared/api/types";
+import { ChatsResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
@@ -29,14 +29,13 @@ export class MainPage extends View {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
-    let avatar : string;
+    let avatar: string;
     if (user.avatarURL) {
       avatar = serverHost + user.avatarURL;
-    }
-    else{
+    } else {
       avatar = "/assets/image/default-avatar.svg";
     }
-    
+
     parent.innerHTML = MainPageTemplate({ user, avatar });
 
     const chatUserInfo = parent.querySelector("#chat-info-container")!;
@@ -70,8 +69,8 @@ export class MainPage extends View {
     };
     settingsButton.addEventListener("click", handleSettings);
 
-    const userAvatar = parent.querySelector('#user-avatar')!;
-    userAvatar.addEventListener('click', handleSettings);
+    const userAvatar = parent.querySelector("#user-avatar")!;
+    userAvatar.addEventListener("click", handleSettings);
 
     const contactButton = parent.querySelector("#contact-button");
 
@@ -89,6 +88,6 @@ export class MainPage extends View {
 
     homeButton.addEventListener("click", handleHome);
 
-    wsConn.subscribe("message",renderMessage);
+    wsConn.subscribe("message", renderMessage);
   }
 }

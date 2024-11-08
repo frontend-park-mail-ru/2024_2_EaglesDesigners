@@ -1,13 +1,13 @@
 import { API } from "@/shared/api/api";
 import { TUser } from "../index";
-import { AuthResponse} from "@/shared/api/types";
+import { AuthResponse } from "@/shared/api/types";
 import { wsConn } from "@/shared/api/ws";
 
 class UserStore {
   #user: TUser;
 
   constructor() {
-    this.#user = { id: "", name: "", username: "", avatarURL: ""};
+    this.#user = { id: "", name: "", username: "", avatarURL: "" };
   }
 
   async init() {
@@ -22,7 +22,7 @@ class UserStore {
     this.#user = user;
   }
 
-  setAvatar(avatar : string) {
+  setAvatar(avatar: string) {
     this.#user.avatarURL = avatar;
   }
 

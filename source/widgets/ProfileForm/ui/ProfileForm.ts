@@ -3,7 +3,12 @@ import "./ProfileForm.scss";
 import { API } from "@/shared/api/api";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
-import { EmptyRequest, EmptyResponse, ProfileRequest, ProfileResponse } from "@/shared/api/types";
+import {
+  EmptyRequest,
+  EmptyResponse,
+  ProfileRequest,
+  ProfileResponse,
+} from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
 import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
@@ -25,17 +30,15 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    
+
     if (response.avatarURL) {
       response.avatarURL = serverHost + response.avatarURL;
-    }
-    else if (UserStorage.getUser().avatarURL){
+    } else if (UserStorage.getUser().avatarURL) {
       response.avatarURL = UserStorage.getUser().avatarURL;
-    }
-    else {
+    } else {
       response.avatarURL = "/assets/image/default-avatar.svg";
     }
-    
+
     const currentDate = new Date();
     this.#parent.innerHTML = ProfileFormTemplate({
       user,
@@ -53,14 +56,19 @@ export class ProfileForm {
     const handleAvatar = () => {
       if (avatarInput.files) {
         const file = avatarInput.files[0];
-        const maxFileSize = 10*1024*1024;
+        const maxFileSize = 10 * 1024 * 1024;
         if (file) {
-          const avatarSpanError : HTMLSpanElement = this.#parent.querySelector('#avatar-error')!;
+          const avatarSpanError: HTMLSpanElement =
+            this.#parent.querySelector("#avatar-error")!;
           if (file.size > maxFileSize) {
-            validateForm(avatarInput, "Размер файла не должен превышать 10МБ", avatarSpanError);
+            validateForm(
+              avatarInput,
+              "Размер файла не должен превышать 10МБ",
+              avatarSpanError,
+            );
             return;
-          } else{
-            avatarSpanError.innerText = '';
+          } else {
+            avatarSpanError.innerText = "";
           }
           avatarUser.src = URL.createObjectURL(file);
           avatarFile = file;
@@ -95,14 +103,20 @@ export class ProfileForm {
       const nicknameSpan: HTMLSpanElement =
         this.#parent.querySelector("#nickname")!;
       if (!validateNickname(profileData.name)) {
-        validateForm(nameInput, "Допустимы только латинские и русские буквы, пробелы, цифры и нижние подчеркивания.", nicknameSpan);
+        validateForm(
+          nameInput,
+          "Допустимы только латинские и русские буквы, пробелы, цифры и нижние подчеркивания.",
+          nicknameSpan,
+        );
         flag = false;
-      }
-      else if (profileData.name.length > 20) {
-        validateForm(nameInput, "Имя не может быть длиннее 20 символов", nicknameSpan);
+      } else if (profileData.name.length > 20) {
+        validateForm(
+          nameInput,
+          "Имя не может быть длиннее 20 символов",
+          nicknameSpan,
+        );
         flag = false;
-      }
-      else {
+      } else {
         nicknameSpan.textContent = "";
       }
       const dateInput: HTMLInputElement = this.#parent.querySelector("#date")!;
@@ -137,9 +151,10 @@ export class ProfileForm {
         );
         return;
       }
-      
+
       if (avatarFile) {
-        const userAvatar : HTMLImageElement =  document.querySelector('#user-avatar')!;
+        const userAvatar: HTMLImageElement =
+          document.querySelector("#user-avatar")!;
         userAvatar.src = URL.createObjectURL(avatarFile);
         UserStorage.setAvatar(userAvatar.src);
       }
@@ -148,7 +163,6 @@ export class ProfileForm {
       handleBack();
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
-
 
     const exitButton = this.#parent.querySelector(".exit-btn")!;
 
@@ -159,7 +173,7 @@ export class ProfileForm {
       );
 
       if (!response.error) {
-        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: ""});
+        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: "" });
         wsConn.close();
         Router.go("/login");
       }

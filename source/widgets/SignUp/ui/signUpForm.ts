@@ -29,7 +29,7 @@ export class SignupForm extends View {
    */
   render() {
     this.#parent.innerHTML = SignUpFormTemplate();
-    const authRoot = this.#parent.querySelector('#news-root')!;
+    const authRoot = this.#parent.querySelector("#news-root")!;
     const newsForm = new NewsBlock(authRoot);
     newsForm.render();
 
@@ -179,7 +179,7 @@ export class SignupForm extends View {
         name: user.name,
         username: user.username,
         avatarURL: user.avatarURL,
-      },);
+      });
 
       wsConn.start();
       Router.go("/");

@@ -55,15 +55,24 @@ export class GroupUpdate {
     const handleConfirmChanges = async () => {
       const groupNameInput: HTMLInputElement =
         this.#parent.querySelector("#group-name")!;
-      const groupNameError : HTMLSpanElement = this.#parent.querySelector("#group-name-error")!;
+      const groupNameError: HTMLSpanElement =
+        this.#parent.querySelector("#group-name-error")!;
       if (groupNameInput.value === "") {
-        validateForm(groupNameInput, "Название группы не может быть пустым", groupNameError);
+        validateForm(
+          groupNameInput,
+          "Название группы не может быть пустым",
+          groupNameError,
+        );
         return;
       }
       if (groupNameInput.value.length > 20) {
-        validateForm(groupNameInput, "Название группы не может быть длиннее 20 символов", groupNameError);
+        validateForm(
+          groupNameInput,
+          "Название группы не может быть длиннее 20 символов",
+          groupNameError,
+        );
         return;
-      } 
+      }
       const name: GroupUpdateRequest = { chatName: groupNameInput.value };
 
       const groupName = JSON.stringify(name);
@@ -83,16 +92,16 @@ export class GroupUpdate {
         }
         ChatStorage.setChat(chat);
 
-        const chatName : HTMLSpanElement = document.querySelector("#chat-name")!;
+        const chatName: HTMLSpanElement = document.querySelector("#chat-name")!;
         chatName.innerText = name.chatName;
 
         if (response.updatedAvatarPath) {
-            const chatAvatar : HTMLImageElement = document.querySelector("#chat-avatar")!;
-            chatAvatar.src = URL.createObjectURL(groupAvatarFile);
+          const chatAvatar: HTMLImageElement =
+            document.querySelector("#chat-avatar")!;
+          chatAvatar.src = URL.createObjectURL(groupAvatarFile);
         }
-        
 
-        this.#parent.innerHTML = '';
+        this.#parent.innerHTML = "";
       }
     };
 

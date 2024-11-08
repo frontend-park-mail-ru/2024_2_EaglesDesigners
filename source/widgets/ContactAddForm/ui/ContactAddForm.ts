@@ -11,8 +11,13 @@ export class ContactAddForm {
   #parent;
   #chat;
   #contactList;
-  #chatList
-  constructor(parent: Element, chat: Chat,contactList: Element, chatList: ChatList) {
+  #chatList;
+  constructor(
+    parent: Element,
+    chat: Chat,
+    contactList: Element,
+    chatList: ChatList,
+  ) {
     this.#parent = parent;
     this.#chat = chat;
     this.#contactList = contactList;

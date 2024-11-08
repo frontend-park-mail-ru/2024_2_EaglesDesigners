@@ -1,5 +1,5 @@
 import { API } from "@/shared/api/api.ts";
-import { AuthResponse, LoginRequest} from "@/shared/api/types";
+import { AuthResponse, LoginRequest } from "@/shared/api/types";
 import { validateLogin } from "@/shared/validation/loginValidation.ts";
 import { validatePassword } from "@/shared/validation/passwordValidation.ts";
 import LoginFormTemplate from "./loginForm.hbs";
@@ -26,7 +26,7 @@ export class LoginForm extends View {
    */
   render() {
     this.#parent.innerHTML = LoginFormTemplate();
-    const authRoot = this.#parent.querySelector('#news-root')!;
+    const authRoot = this.#parent.querySelector("#news-root")!;
     const newsForm = new NewsBlock(authRoot);
     newsForm.render();
 
@@ -83,7 +83,7 @@ export class LoginForm extends View {
         username,
         password,
       });
-      
+
       if (response.error) {
         loginInput.classList.add("error");
         passwordInput.classList.add("error");
@@ -101,7 +101,7 @@ export class LoginForm extends View {
         });
         wsConn.start();
       } else {
-        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: ""});
+        UserStorage.setUser({ id: "", name: "", username: "", avatarURL: "" });
       }
       Router.go("/");
     };

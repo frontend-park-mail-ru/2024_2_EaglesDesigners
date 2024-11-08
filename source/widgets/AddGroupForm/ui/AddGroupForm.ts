@@ -11,110 +11,113 @@ import { SelectedContacts } from "../lib/SelectedContacts";
 import { TChat } from "@/entities/Chat";
 
 export class AddGroupForm {
-    #parent;
-    #chat;
-  
-    constructor(parent: Element, chat: Chat) {
-      this.#parent = parent;
-      this.#chat = chat;
-    }
-  
-    async render() {
-      this.#parent.innerHTML = AddGroupTemplate();
+  #parent;
+  #chat;
 
-      const avatarRender: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-      avatarRender.src = "/assets/image/default-avatar.svg";
-      const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
-      let avatarFile: File;
-      const handleAvatar = () => {
-        if (avatarInput.files) {
-          const file = avatarInput.files[0];
-          if (file) {
-            avatarRender.src = URL.createObjectURL(file);
-            avatarFile = file;
-          }
-        }
-      };
-      avatarInput.addEventListener("change", handleAvatar);
-      
-      const selectedContacts = new SelectedContacts();
+  constructor(parent: Element, chat: Chat) {
+    this.#parent = parent;
+    this.#chat = chat;
+  }
 
-      const response = await API.get<ContactResponse>("/contacts");
-      const contactList = this.#parent.querySelector("#contacts-list")!;
-      const contactCard = new ContactCard(contactList, this.#chat);
+  async render() {
+    this.#parent.innerHTML = AddGroupTemplate();
 
-      if (!response.error) {
-        const contacts = response.contacts;
-
-        if (contacts) {
-          contacts.forEach((element) => {
-            contactCard.renderForm(element, selectedContacts);
-          });
+    const avatarRender: HTMLImageElement =
+      this.#parent.querySelector("#avatar")!;
+    avatarRender.src = "/assets/image/default-avatar.svg";
+    const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
+    let avatarFile: File;
+    const handleAvatar = () => {
+      if (avatarInput.files) {
+        const file = avatarInput.files[0];
+        if (file) {
+          avatarRender.src = URL.createObjectURL(file);
+          avatarFile = file;
         }
       }
+    };
+    avatarInput.addEventListener("change", handleAvatar);
 
-      const updateProfileInfo = async () => {
-        const nameInput: HTMLInputElement =
-          this.#parent.querySelector("#user-name")!;
-  
-        const chatName: string = nameInput.value;
-  
-        const newChat: NewChatRequest = {
-          chatName: chatName,
-          chatType: 'group',
-          usersToAdd: selectedContacts.getSelectedContacts(),
-        };
-        
-  
-        const chatNameRender: HTMLSpanElement =
-          this.#parent.querySelector("#nickname")!;
-        if (!validateNickname(newChat.chatName) || newChat.chatName.length > 20) {
-          validateForm(nameInput, "Не валидное название", chatNameRender);
-          return;
-        } else {
-          chatNameRender.textContent = "";
-        }
+    const selectedContacts = new SelectedContacts();
 
-        if (selectedContacts.getSelectedContacts().length === 0) {
-          validateForm(nameInput, "Выберите хотя бы одного участника для создания группы  ", chatNameRender);
-          return;
-        } else {
-          chatNameRender.textContent = "";
-        }
+    const response = await API.get<ContactResponse>("/contacts");
+    const contactList = this.#parent.querySelector("#contacts-list")!;
+    const contactCard = new ContactCard(contactList, this.#chat);
 
+    if (!response.error) {
+      const contacts = response.contacts;
 
-        
-        const formData: FormData = new FormData();
-        const jsonProfileData = JSON.stringify(newChat);
-        formData.append("chat_data", jsonProfileData);
-        formData.append("avatar", avatarFile);
-      
-        const newChatRes = await API.postFormData<TChat>(
-          "/addchat",
-          formData,
-        );
+      if (contacts) {
+        contacts.forEach((element) => {
+          contactCard.renderForm(element, selectedContacts);
+        });
+      }
+    }
 
-        if(!newChatRes.error){
-          const chatList = new ChatList(this.#parent, this.#chat);
-          chatList.render();
-          this.#chat.render(newChatRes);
-        }
+    const updateProfileInfo = async () => {
+      const nameInput: HTMLInputElement =
+        this.#parent.querySelector("#user-name")!;
 
-        if (newChatRes.error) {
-          validateForm(nameInput, "Произошла какая-то ошибка, попробуйте еще раз", chatNameRender);
-        }
+      const chatName: string = nameInput.value;
+
+      const newChat: NewChatRequest = {
+        chatName: chatName,
+        chatType: "group",
+        usersToAdd: selectedContacts.getSelectedContacts(),
       };
 
-      const confirmButton = this.#parent.querySelector("#confirm-button");
-      confirmButton?.addEventListener("click", updateProfileInfo);
-      
-      const backButton = this.#parent.querySelector("#back-button")!;
+      const chatNameRender: HTMLSpanElement =
+        this.#parent.querySelector("#nickname")!;
+      if (!validateNickname(newChat.chatName) || newChat.chatName.length > 20) {
+        validateForm(nameInput, "Не валидное название", chatNameRender);
+        return;
+      } else {
+        chatNameRender.textContent = "";
+      }
 
-      const handleBack = () => {
+      if (selectedContacts.getSelectedContacts().length === 0) {
+        validateForm(
+          nameInput,
+          "Выберите хотя бы одного участника для создания группы  ",
+          chatNameRender,
+        );
+        return;
+      } else {
+        chatNameRender.textContent = "";
+      }
+
+      const formData: FormData = new FormData();
+      const jsonProfileData = JSON.stringify(newChat);
+      formData.append("chat_data", jsonProfileData);
+      formData.append("avatar", avatarFile);
+
+      const newChatRes = await API.postFormData<TChat>("/addchat", formData);
+
+      if (!newChatRes.error) {
         const chatList = new ChatList(this.#parent, this.#chat);
         chatList.render();
-      };
-      
-      backButton.addEventListener("click", handleBack);
-    }
+        this.#chat.render(newChatRes);
+      }
+
+      if (newChatRes.error) {
+        validateForm(
+          nameInput,
+          "Произошла какая-то ошибка, попробуйте еще раз",
+          chatNameRender,
+        );
+      }
+    };
+
+    const confirmButton = this.#parent.querySelector("#confirm-button");
+    confirmButton?.addEventListener("click", updateProfileInfo);
+
+    const backButton = this.#parent.querySelector("#back-button")!;
+
+    const handleBack = () => {
+      const chatList = new ChatList(this.#parent, this.#chat);
+      chatList.render();
+    };
+
+    backButton.addEventListener("click", handleBack);
+  }
 }

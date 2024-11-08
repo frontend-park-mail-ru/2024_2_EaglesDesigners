@@ -47,9 +47,13 @@ export class ChatMessage {
       if (!this.#newestMessage) {
         this.#newestMessage = messageWithFlags;
       }
-      
-      const profile = await API.get<ProfileResponse>("/profile/" + message.authorID);
-      const avatarURL = profile.avatarURL? serverHost + profile.avatarURL : "/assets/image/default-avatar.svg";
+
+      const profile = await API.get<ProfileResponse>(
+        "/profile/" + message.authorID,
+      );
+      const avatarURL = profile.avatarURL
+        ? serverHost + profile.avatarURL
+        : "/assets/image/default-avatar.svg";
 
       this.#parent.insertAdjacentHTML(
         "beforeend",
@@ -72,11 +76,10 @@ export class ChatMessage {
         if (this.#parent.firstElementChild) {
           this.#parent.firstElementChild!.classList.remove("last-message");
         }
-        
       }
-  
+
       const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
-  
+
       const messageWithFlags: TChatMessageWithFlags = {
         ...message,
         first:
@@ -85,12 +88,16 @@ export class ChatMessage {
         last: true,
         isFromOtherUser: isFromOtherUser,
       };
-  
+
       this.#newestMessage = messageWithFlags;
-  
-      const profile = await API.get<ProfileResponse>("/profile/" + message.authorID);
-      const avatarURL = profile.avatarURL? serverHost + profile.avatarURL : "/assets/image/default-avatar.svg";
-  
+
+      const profile = await API.get<ProfileResponse>(
+        "/profile/" + message.authorID,
+      );
+      const avatarURL = profile.avatarURL
+        ? serverHost + profile.avatarURL
+        : "/assets/image/default-avatar.svg";
+
       this.#parent.insertAdjacentHTML(
         "afterbegin",
         ChatMessageTemplate({
@@ -102,6 +109,5 @@ export class ChatMessage {
         }),
       );
     }
-    
   }
 }

@@ -1,9 +1,16 @@
 <a class="contact-card" href={{contact.id}}>
-  {{#if contact.form }}
-  <div class="contact-card-checkbox">
-      <img class="contact-card-unchecked" src="/assets/image/checkbox-unchecked.svg"/>
-      <img class="contact-card-checked" src="/assets/image/checkbox-checked.svg" style="display: none;"/>
-  </div>
+  {{#if contact.form}}
+    <div class="contact-card-checkbox">
+      <img
+        class="contact-card-unchecked"
+        src="/assets/image/checkbox-unchecked.svg"
+      />
+      <img
+        class="contact-card-checked"
+        src="/assets/image/checkbox-checked.svg"
+        style="display: none;"
+      />
+    </div>
   {{/if}}
   <div class="contact-card-content">
     <img class="contact-card-content__img-avatar" src="{{contact.avatarURL}}" />
@@ -18,6 +25,6 @@
         В сети
       </span>
     </div>
-    
+
   </div>
 </a>
