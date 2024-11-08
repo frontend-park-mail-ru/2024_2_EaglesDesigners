@@ -8,6 +8,7 @@ import { API } from "@/shared/api/api";
 import { Chat } from "@/widgets/Chat";
 import { TNewChat } from "@/entities/Chat/model/type";
 import { SelectedContacts } from "@/widgets/AddGroupForm/lib/SelectedContacts";
+import { ChatList } from "@/widgets/ChatList";
 
 export class ContactCard {
   #parent;
@@ -35,7 +36,7 @@ export class ContactCard {
     });
   }
 
-  renderChat(contact: TContact) {
+  renderChat(contact: TContact, chatListInstance: ChatList) {
     if (contact.avatarURL !== null) {
       contact.avatarURL = serverHost + contact.avatarURL;
     } else {
@@ -61,6 +62,7 @@ export class ContactCard {
           const usersRes = await API.get<ChatsResponse>("/chat/" + elem.chatId + "/users");
 
           if (usersRes.usersId && usersRes.usersId.includes(contact.id)) {
+            chatListInstance.render();
             this.#chat.render(elem);
             return;
           }
@@ -81,8 +83,10 @@ export class ContactCard {
         "/addchat",
         formData,
       );
-
-      this.#chat.render(newChatRes);    
+      if(!newChatRes.error){
+        chatListInstance.render();
+        this.#chat.render(newChatRes);    
+        }
     });
   }
 
