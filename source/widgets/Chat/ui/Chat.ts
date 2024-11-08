@@ -104,7 +104,6 @@ export class Chat {
     );
     
     const messages: TChatMessage[] = response.messages ?? [];
-    console.log(messages);
     if (messages.length > 0) {
       chatMessage.renderMessages(messages);
       

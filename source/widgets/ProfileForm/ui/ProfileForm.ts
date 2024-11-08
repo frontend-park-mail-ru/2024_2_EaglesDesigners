@@ -142,7 +142,6 @@ export class ProfileForm {
         UserStorage.setAvatar(userAvatar.src);
       }
       UserStorage.setUserName(nickname);
-      console.log(UserStorage);
 
       handleBack();
     };

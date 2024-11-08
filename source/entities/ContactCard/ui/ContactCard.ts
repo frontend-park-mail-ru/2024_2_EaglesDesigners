@@ -19,7 +19,6 @@ export class ContactCard {
   }
 
   render(contact: TContact) {
-    console.log(contact.avatarURL);
     contact.avatarURL = serverHost + contact.avatarURL;
     this.#parent.insertAdjacentHTML(
       "beforeend",
@@ -79,7 +78,6 @@ export class ContactCard {
         "/addchat",
         formData,
       );
-      console.log(newChatRes);
 
       this.#chat.render(newChatRes);    
     });
