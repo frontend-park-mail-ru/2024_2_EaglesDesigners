@@ -29,11 +29,12 @@ class Api {
         },
         credentials: "include",
       });
-      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      const CSRFToken =
+        response.headers.get("x-csrf-token") ?? localStorage.getItem("csrf");
       if (CSRFToken) {
         Csrf.set(CSRFToken);
       }
-      
+
       const body: Response = await response.json();
       return body;
     } catch {
@@ -51,12 +52,12 @@ class Api {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
-      const state : RequestInit = {
+      const state: RequestInit = {
         method: "POST",
         mode: "cors",
         headers: {
           "Access-Control-Allow-Credentials": "true",
-          "not_csrf" : Csrf.get(),
+          not_csrf: Csrf.get(),
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(body),
@@ -64,7 +65,8 @@ class Api {
       };
 
       const response = await fetch(url, state);
-      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      const CSRFToken =
+        response.headers.get("x-csrf-token") ?? localStorage.getItem("csrf");
       if (CSRFToken) {
         Csrf.set(CSRFToken);
         localStorage.setItem("csrf", Csrf.get());
@@ -79,29 +81,31 @@ class Api {
 
   async postFormData<TResponse>(path: string, formData: FormData) {
     type Response = TResponse & ResponseError;
-    const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
+    const CSRFToken = Csrf.get() ?? localStorage.getItem("csrf");
     try {
       const url = this.#baseURl + path;
-      const state : RequestInit = CSRFToken ? {
-        method: "POST",
-        headers: {
-          "Access-Control-Allow-Credentials": "true",
-          "not_csrf": CSRFToken,
-          enctype: "multipart/form-data",
-        },
-        mode: "cors",
-        body: formData,
-        credentials: "include",
-      } : {
-        method: "POST",
-        headers: {
-          "Access-Control-Allow-Credentials": "true",
-          enctype: "multipart/form-data",
-        },
-        mode: "cors",
-        body: formData,
-        credentials: "include",
-      };
+      const state: RequestInit = CSRFToken
+        ? {
+            method: "POST",
+            headers: {
+              "Access-Control-Allow-Credentials": "true",
+              not_csrf: CSRFToken,
+              enctype: "multipart/form-data",
+            },
+            mode: "cors",
+            body: formData,
+            credentials: "include",
+          }
+        : {
+            method: "POST",
+            headers: {
+              "Access-Control-Allow-Credentials": "true",
+              enctype: "multipart/form-data",
+            },
+            mode: "cors",
+            body: formData,
+            credentials: "include",
+          };
 
       const response = await fetch(url, state);
       const responseBody: Response = await response.json();
@@ -116,19 +120,20 @@ class Api {
     try {
       const url = this.#baseURl + path;
 
-      const state : RequestInit = {
+      const state: RequestInit = {
         method: "PUT",
         headers: {
           "Access-Control-Allow-Credentials": "true",
           enctype: "multipart/form-data",
-          "not_csrf" : Csrf.get(),
+          not_csrf: Csrf.get(),
         },
         mode: "cors",
         body: formData,
         credentials: "include",
       };
       const response = await fetch(url, state);
-      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      const CSRFToken =
+        response.headers.get("x-csrf-token") ?? localStorage.getItem("csrf");
       if (CSRFToken) {
         Csrf.set(CSRFToken);
         localStorage.setItem("csrf", Csrf.get());
@@ -144,18 +149,19 @@ class Api {
     type Response = TResponse & ResponseError;
     try {
       const url = this.#baseURl + path;
-      const state : RequestInit = {
+      const state: RequestInit = {
         method: "DELETE",
         body: body,
         headers: {
-          "not_csrf": Csrf.get(),
+          not_csrf: Csrf.get(),
         },
         mode: "cors",
         credentials: "include",
       };
-      
+
       const response = await fetch(url, state);
-      const CSRFToken = response.headers.get('x-csrf-token') ?? localStorage.getItem("csrf");
+      const CSRFToken =
+        response.headers.get("x-csrf-token") ?? localStorage.getItem("csrf");
       if (CSRFToken) {
         Csrf.set(CSRFToken);
         localStorage.setItem("csrf", Csrf.get());

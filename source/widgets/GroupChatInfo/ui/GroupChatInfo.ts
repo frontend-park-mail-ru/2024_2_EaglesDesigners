@@ -27,16 +27,19 @@ export class GroupChatInfo {
       avatar = "/assets/image/default-avatar.svg";
     }
     const ChatUsersId = await API.get<UsersIdRequest>(
-        "/chat/" + chat.chatId + "/users",
+      "/chat/" + chat.chatId + "/users",
     );
     const usersCount = ChatUsersId.usersId.length;
 
-    this.#parent.innerHTML = GroupChatInfoTemplate({ chat, avatar, usersCount });
+    this.#parent.innerHTML = GroupChatInfoTemplate({
+      chat,
+      avatar,
+      usersCount,
+    });
 
     const chatUsersList = this.#parent.querySelector("#users-list")!;
     const userCard = new ContactCard(chatUsersList);
 
-    
     if (ChatUsersId.usersId) {
       ChatUsersId.usersId.forEach(async (element) => {
         const userProfile = await API.get<ProfileResponse>(
@@ -51,8 +54,8 @@ export class GroupChatInfo {
         userCard.render(user);
         const lastChatUser = chatUsersList.lastElementChild;
         if (lastChatUser instanceof HTMLElement) {
-          lastChatUser.style.pointerEvents = 'none';
-        }      
+          lastChatUser.style.pointerEvents = "none";
+        }
       });
     }
 

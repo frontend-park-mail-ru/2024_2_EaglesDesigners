@@ -38,37 +38,44 @@ export class ChatList {
       chatCard.render(chat);
     });
 
-    const addChat = document.querySelector('.add-chat')!;
-    const addChatButton = addChat.querySelector('#addChatButton')!;
-    const addIcon = addChat.querySelector<HTMLElement>('.add-icon')!;
-    const cancelIcon = addChat.querySelector<HTMLElement>('.cancel-icon')!;
-    const addChatPopup = addChat.querySelector<HTMLElement>('#addChatPopUp')!;
+    const addChat = document.querySelector(".add-chat")!;
+    const addChatButton = addChat.querySelector("#addChatButton")!;
+    const addIcon = addChat.querySelector<HTMLElement>(".add-icon")!;
+    const cancelIcon = addChat.querySelector<HTMLElement>(".cancel-icon")!;
+    const addChatPopup = addChat.querySelector<HTMLElement>("#addChatPopUp")!;
 
-    addChatButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        addChatPopup.style.display = addChatPopup.style.display === 'none' ? 'flex' : 'none';
-        
-        cancelIcon.style.display = cancelIcon.style.display === 'none' ? 'inline' : 'none';
-        addIcon.style.display = addIcon.style.display === 'none' ? 'inline' : 'none';
-      });
+    addChatButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      addChatPopup.style.display =
+        addChatPopup.style.display === "none" ? "flex" : "none";
 
-    document.addEventListener('click', () => {
-        addChatPopup.style.display = 'none';
-
-        if(addIcon.style.display === 'none'){
-          cancelIcon.style.display = 'none';
-          addIcon.style.display = 'inline';
-        }
+      cancelIcon.style.display =
+        cancelIcon.style.display === "none" ? "inline" : "none";
+      addIcon.style.display =
+        addIcon.style.display === "none" ? "inline" : "none";
     });
 
-    addChat.querySelector('.create-personal-chat')!.addEventListener('click', () => {
+    document.addEventListener("click", () => {
+      addChatPopup.style.display = "none";
+
+      if (addIcon.style.display === "none") {
+        cancelIcon.style.display = "none";
+        addIcon.style.display = "inline";
+      }
+    });
+
+    addChat
+      .querySelector(".create-personal-chat")!
+      .addEventListener("click", () => {
         const contactForm = new ContactsList(this.#parent, this.#chat);
         contactForm.render();
-    });
+      });
 
-    addChat.querySelector('.create-group-chat')!.addEventListener('click', () => {
+    addChat
+      .querySelector(".create-group-chat")!
+      .addEventListener("click", () => {
         const addGroupForm = new AddGroupForm(this.#parent, this.#chat);
-        addGroupForm.render(); 
-    });
+        addGroupForm.render();
+      });
   }
 }

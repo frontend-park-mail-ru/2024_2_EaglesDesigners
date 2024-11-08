@@ -102,13 +102,13 @@ export class Chat {
     const response = await API.get<ChatMessagesResponse>(
       "/chat/" + chat.chatId + "/messages",
     );
-    
+
     const messages: TChatMessage[] = response.messages ?? [];
 
     if (messages.length > 0) {
       chatMessage.renderMessages(messages);
     }
-    
+
     const chatHeader = this.#parent.querySelector("#header-chat")!;
 
     const handleChatHeader = () => {

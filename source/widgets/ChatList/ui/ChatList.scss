@@ -61,7 +61,7 @@ $text-over-primary: #ffffff;
   }
 }
 
-.add-chat{
+.add-chat {
   display: flex;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -72,22 +72,23 @@ $text-over-primary: #ffffff;
   }
 
   &__popup {
-    position: absolute; 
+    position: absolute;
     background: $primary-shadow-25;
     border-radius: 20px;
     padding: 10px 10px 10px 10px;
-    
-    bottom: 90px;
-  
-    flex-direction: column;
-    gap: 5px  ;
 
-    .create-personal-chat, .create-group-chat{
+    bottom: 90px;
+
+    flex-direction: column;
+    gap: 5px;
+
+    .create-personal-chat,
+    .create-group-chat {
       @include font-settings("Inter", 400, 16px, $text-over-primary);
-      
+
       display: flex;
       gap: 5px;
-      justify-items: flex-end; 
+      justify-items: flex-end;
     }
   }
 }

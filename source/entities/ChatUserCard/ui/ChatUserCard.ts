@@ -15,7 +15,7 @@ export class ChatUserCard {
     } else {
       userProfile.avatarURL = "/assets/image/default-avatar.svg";
     }
-    
+
     this.#parent.insertAdjacentHTML(
       "beforeend",
       ChatUserCardTemplate({ userProfile }),
@@ -23,7 +23,7 @@ export class ChatUserCard {
 
     const lastChild = this.#parent.lastElementChild;
     if (lastChild instanceof HTMLElement) {
-      lastChild.style.pointerEvents = 'none';
+      lastChild.style.pointerEvents = "none";
     }
   }
 }

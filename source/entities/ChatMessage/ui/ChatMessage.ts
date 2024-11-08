@@ -47,9 +47,13 @@ export class ChatMessage {
       if (!this.#newestMessage) {
         this.#newestMessage = messageWithFlags;
       }
-      
-      const profile = await API.get<ProfileResponse>("/profile/" + message.authorID);
-      const avatarURL = profile.avatarURL? serverHost + profile.avatarURL : "/assets/image/default-avatar.svg";
+
+      const profile = await API.get<ProfileResponse>(
+        "/profile/" + message.authorID,
+      );
+      const avatarURL = profile.avatarURL
+        ? serverHost + profile.avatarURL
+        : "/assets/image/default-avatar.svg";
 
       this.#parent.insertAdjacentHTML(
         "beforeend",
@@ -84,8 +88,12 @@ export class ChatMessage {
 
     this.#newestMessage = messageWithFlags;
 
-    const profile = await API.get<ProfileResponse>("/profile/" + message.authorID);
-    const avatarURL = profile.avatarURL? serverHost + profile.avatarURL : "/assets/image/default-avatar.svg";
+    const profile = await API.get<ProfileResponse>(
+      "/profile/" + message.authorID,
+    );
+    const avatarURL = profile.avatarURL
+      ? serverHost + profile.avatarURL
+      : "/assets/image/default-avatar.svg";
 
     this.#parent.insertAdjacentHTML(
       "afterbegin",

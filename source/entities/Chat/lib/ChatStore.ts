@@ -18,7 +18,7 @@ class ChatStore {
         datetime: "",
         isRedacted: false,
         messageId: "",
-        text: ""
+        text: "",
       },
       usersId: [],
     };

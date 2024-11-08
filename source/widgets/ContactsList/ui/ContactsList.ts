@@ -46,7 +46,12 @@ export class ContactsList {
     const addContactButton = this.#parent.querySelector("#add-contact-button")!;
 
     const handleAddContact = () => {
-      const ContactForm = new ContactAddForm(contactAdd, this.#chat,contactList, chatList);
+      const ContactForm = new ContactAddForm(
+        contactAdd,
+        this.#chat,
+        contactList,
+        chatList,
+      );
       ContactForm.render();
     };
 

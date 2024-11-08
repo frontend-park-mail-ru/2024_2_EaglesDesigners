@@ -1,56 +1,56 @@
 <div class="add-group">
-    <div class="add-group-header">
+  <div class="add-group-header">
     <div class="add-group-header-img">
-        <img
+      <img
         id="back-button"
         class="add-group-header-img__img"
         src="/assets/image/back-btn-img.svg"
         alt=""
-        />
+      />
     </div>
     <div class="add-group-header-name">
-        <span class="add-group-header-name__span">Новая группа</span>
+      <span class="add-group-header-name__span">Новая группа</span>
     </div>
-    </div>
+  </div>
 
-    <form class="add-group-form-user" method="post" onsubmit="return false;">
-      <label for="ava">
-        <img
-          id="avatar"
-          class="add-group-form-user__img"
-          src={{response.avatarURL}}
-        />
-        <input
-          type="file"
-          id="ava"
-          name="ava"
-          class="profile-form-user__input-avatar"
-          accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
-        />
-        <div class="add-group-error">
-          <span id="nickname" class="profile-error__span"></span>
-        </div>
-        <input
-          id="user-name"
-          class="add-group-form-user__input-name add-group-form-user__input"
-          type="text"
-          placeholder="Название"
-          name="text"
-        /><br />
-      </label>
-    </form>
+  <form class="add-group-form-user" method="post" onsubmit="return false;">
+    <label for="ava">
+      <img
+        id="avatar"
+        class="add-group-form-user__img"
+        src={{response.avatarURL}}
+      />
+      <input
+        type="file"
+        id="ava"
+        name="ava"
+        class="profile-form-user__input-avatar"
+        accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
+      />
+      <div class="add-group-error">
+        <span id="nickname" class="profile-error__span"></span>
+      </div>
+      <input
+        id="user-name"
+        class="add-group-form-user__input-name add-group-form-user__input"
+        type="text"
+        placeholder="Название"
+        name="text"
+      /><br />
+    </label>
+  </form>
 
-    <p class="add-contacts-caption">Добавьте участников</p>
+  <p class="add-contacts-caption">Добавьте участников</p>
 
-    <div class="group-contacts-list" id="contacts-list">
-    
-    </div>
+  <div class="group-contacts-list" id="contacts-list">
 
-    <div id="confirm-button" class="add-group-form-confirm">
-        <img
-        class="add-group-form-confirm__img"
-        src="/assets/image/confirm.svg"
-        alt=""
-        />
-    </div>
+  </div>
+
+  <div id="confirm-button" class="add-group-form-confirm">
+    <img
+      class="add-group-form-confirm__img"
+      src="/assets/image/confirm.svg"
+      alt=""
+    />
+  </div>
 </div>

@@ -78,7 +78,7 @@ export class LoginForm extends View {
         username,
         password,
       });
-      
+
       if (response.error) {
         loginInput.classList.add("error");
         passwordInput.classList.add("error");

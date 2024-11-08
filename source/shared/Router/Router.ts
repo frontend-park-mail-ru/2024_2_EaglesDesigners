@@ -21,10 +21,7 @@ class Route {
     };
   }
 
-  setRoutes(
-    routes: Routes,
-    strictRoutes: string[],
-  ) {
+  setRoutes(routes: Routes, strictRoutes: string[]) {
     this.#routes = routes;
     this.#strictRoutes = strictRoutes;
   }

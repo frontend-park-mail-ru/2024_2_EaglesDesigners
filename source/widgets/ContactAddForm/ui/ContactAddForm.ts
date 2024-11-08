@@ -11,8 +11,13 @@ export class ContactAddForm {
   #parent;
   #chat;
   #contactList;
-  #chatList
-  constructor(parent: Element, chat: Chat,contactList: Element, chatList: ChatList) {
+  #chatList;
+  constructor(
+    parent: Element,
+    chat: Chat,
+    contactList: Element,
+    chatList: ChatList,
+  ) {
     this.#parent = parent;
     this.#chat = chat;
     this.#contactList = contactList;
@@ -40,7 +45,7 @@ export class ContactAddForm {
       if (!response.error) {
         spanError.textContent = "";
         const contactCard = new ContactCard(this.#contactList);
-        contactCard.renderChat(response, this.#chat,this.#chatList);
+        contactCard.renderChat(response, this.#chat, this.#chatList);
         const contactCardElements = document.querySelectorAll(".contact-card")!;
         contactCardElements[contactCardElements.length - 1].addEventListener(
           "click",

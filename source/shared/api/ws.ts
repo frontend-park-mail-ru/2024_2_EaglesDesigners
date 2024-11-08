@@ -77,7 +77,9 @@ class wsConnection {
 
   unsubscribe(messageType: string, handler: THandler) {
     if (!this.handlers[messageType]) return;
-    this.handlers[messageType] = this.handlers[messageType].filter((h) => h !== handler);
+    this.handlers[messageType] = this.handlers[messageType].filter(
+      (h) => h !== handler,
+    );
   }
 }
 
