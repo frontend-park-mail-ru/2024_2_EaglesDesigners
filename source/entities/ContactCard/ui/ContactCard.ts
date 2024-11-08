@@ -105,8 +105,8 @@ export class ContactCard {
     );
 
     const checkbox = this.#parent.lastElementChild!.querySelector('.contact-card-checkbox')!;
-    const checkedIcon = checkbox.querySelector('.contact-card-unchecked')!;
-    const uncheckedIcon = checkbox.querySelector('.contact-card-checked')!;
+    const checkedIcon = checkbox.querySelector<HTMLElement>('.contact-card-unchecked')!;
+    const uncheckedIcon = checkbox.querySelector<HTMLElement>('.contact-card-checked')!;
 
     this.#parent.lastElementChild!.addEventListener('click', (event) => {
       event.preventDefault();
