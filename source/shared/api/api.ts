@@ -79,9 +79,20 @@ class Api {
 
   async postFormData<TResponse>(path: string, formData: FormData) {
     type Response = TResponse & ResponseError;
+    const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
     try {
       const url = this.#baseURl + path;
-      const state : RequestInit = {
+      const state : RequestInit = CSRFToken ? {
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          "not_csrf": CSRFToken,
+          enctype: "multipart/form-data",
+        },
+        mode: "cors",
+        body: formData,
+        credentials: "include",
+      } : {
         method: "POST",
         headers: {
           "Access-Control-Allow-Credentials": "true",
@@ -91,11 +102,6 @@ class Api {
         body: formData,
         credentials: "include",
       };
-      const CSRFToken = Csrf.get() ?? localStorage.getItem('csrf');
-      if (CSRFToken) {
-        Csrf.set(CSRFToken);
-        state.headers["not_csrf"] = CSRFToken;
-      }
 
       const response = await fetch(url, state);
       const responseBody: Response = await response.json();
