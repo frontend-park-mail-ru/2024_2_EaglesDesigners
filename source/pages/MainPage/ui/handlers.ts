@@ -2,7 +2,7 @@ import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { UserStorage } from "@/entities/User";
 
-export const renderMessage = (message: TChatMessage) => {
+export const renderMessage = async (message: TChatMessage) => {
   if (message.chatId !== ChatStorage.getChat().chatId) {
     return;
   }

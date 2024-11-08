@@ -25,7 +25,7 @@ export class MainPage extends View {
    * @function render
    * @async
    */
-  async render(chatid = null) {
+  async render(chatid: string | null = null) {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
