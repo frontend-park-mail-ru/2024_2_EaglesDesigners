@@ -1,7 +1,10 @@
 import { serverHost } from "@/app/config";
+import { TMessageWS } from "./types";
+
+type THandler = (payload: TMessageWS) => Promise<void>;
 
 class wsConnection {
-  handlers: { [key: string]: ((payload: any) => Promise<void>)[] };
+  handlers: Record<string, THandler[]>;
   status;
   ws: WebSocket | null;
   url;
@@ -65,14 +68,14 @@ class wsConnection {
     console.log("WebSocket начал процесс отключения");
   }
 
-  subscribe(messageType: string, handler: (payload: any) => Promise<void>) {
+  subscribe(messageType: string, handler: THandler) {
     if (!this.handlers[messageType]) {
       this.handlers[messageType] = [];
     }
     this.handlers[messageType].push(handler);
   }
 
-  unsubscribe(messageType: string, handler: (payload: any) => Promise<void>) {
+  unsubscribe(messageType: string, handler: THandler) {
     if (!this.handlers[messageType]) return;
     this.handlers[messageType] = this.handlers[messageType].filter((h) => h !== handler);
   }
