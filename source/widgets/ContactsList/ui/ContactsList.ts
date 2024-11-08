@@ -20,14 +20,14 @@ export class ContactsList {
 
     const response = await API.get<ContactResponse>("/contacts");
     const contactList = this.#parent.querySelector("#contacts-list")!;
-    const contactCard = new ContactCard(contactList, this.#chat);
+    const contactCard = new ContactCard(contactList);
     const chatList = new ChatList(this.#parent, this.#chat);
 
     if (!response.error) {
       const contacts = response.contacts;
       if (contacts) {
         contacts.forEach((element) => {
-          contactCard.renderChat(element, chatList);
+          contactCard.renderChat(element, this.#chat, chatList);
         });
       }
     }

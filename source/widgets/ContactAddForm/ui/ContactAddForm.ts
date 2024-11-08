@@ -39,8 +39,8 @@ export class ContactAddForm {
 
       if (!response.error) {
         spanError.textContent = "";
-        const contactCard = new ContactCard(this.#contactList, this.#chat);
-        contactCard.renderChat(response, this.#chatList);
+        const contactCard = new ContactCard(this.#contactList);
+        contactCard.renderChat(response, this.#chat,this.#chatList);
         const contactCardElements = document.querySelectorAll(".contact-card")!;
         contactCardElements[contactCardElements.length - 1].addEventListener(
           "click",

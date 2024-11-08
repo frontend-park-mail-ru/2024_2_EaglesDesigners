@@ -12,11 +12,9 @@ import { ChatList } from "@/widgets/ChatList";
 
 export class ContactCard {
   #parent;
-  #chat;
 
-  constructor(parent: Element, chat: Chat) {
+  constructor(parent: Element) {
     this.#parent = parent;
-    this.#chat = chat;
   }
 
   render(contact: TContact) {
@@ -36,7 +34,7 @@ export class ContactCard {
     });
   }
 
-  renderChat(contact: TContact, chatListInstance: ChatList) {
+  renderChat(contact: TContact, chat: Chat, chatList: ChatList) {
     if (contact.avatarURL !== null) {
       contact.avatarURL = serverHost + contact.avatarURL;
     } else {
@@ -51,7 +49,8 @@ export class ContactCard {
     this.#parent.lastElementChild!.addEventListener("click", async (e) => {
       e.preventDefault();
     
-      const response = await API.get<ChatUsersResponse>("/chats");
+      const response = await API.get<ChatsResponse>("/chats");
+
       if (!response.chats) {
         return;
       }
@@ -59,11 +58,10 @@ export class ContactCard {
     
       for (const elem of chats) {
         if (elem.chatType === 'personal') {
-          const usersRes = await API.get<ChatsResponse>("/chat/" + elem.chatId + "/users");
-
+          const usersRes = await API.get<ChatUsersResponse>("/chat/" + elem.chatId + "/users");
           if (usersRes.usersId && usersRes.usersId.includes(contact.id)) {
-            chatListInstance.render();
-            this.#chat.render(elem);
+            chatList.render();
+            chat.render(elem);
             return;
           }
         }
@@ -83,9 +81,10 @@ export class ContactCard {
         "/addchat",
         formData,
       );
+
       if(!newChatRes.error){
-        chatListInstance.render();
-        this.#chat.render(newChatRes);    
+        chatList.render();
+        chat.render(newChatRes);    
         }
     });
   }

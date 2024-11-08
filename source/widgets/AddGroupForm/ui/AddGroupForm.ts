@@ -40,7 +40,7 @@ export class AddGroupForm {
 
       const response = await API.get<ContactRequest>("/contacts");
       const contactList = this.#parent.querySelector("#contacts-list")!;
-      const contactCard = new ContactCard(contactList, this.#chat);
+      const contactCard = new ContactCard(contactList);
 
       if (!response.error) {
         const contacts = response.contacts;
