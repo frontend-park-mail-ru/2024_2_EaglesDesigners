@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 240px;
 }
 
 .group-header-images {
@@ -102,6 +103,22 @@
   font-family: var(--main-font-family);
   font-size: 14px;
   opacity: 0.4;
+}
+
+.users-list{
+  overflow-y: scroll;
+  max-height: 60vh;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #b8b6b6;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
 }
 
 .delete-group {

@@ -33,6 +33,19 @@ $background: var(--background);
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 30px;
+
+  &__span {
+    color: var(--text-over-primary);
+    font-family: var(--main-font-family);
+    font-family: var(--base-font-size);
+
+    display: block;
+    max-width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
 }
 
 .main-page-user-avatar {

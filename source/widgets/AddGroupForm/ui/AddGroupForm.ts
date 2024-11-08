@@ -23,7 +23,7 @@ export class AddGroupForm {
       this.#parent.innerHTML = AddGroupTemplate();
 
       const avatarRender: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-
+      avatarRender.src = "/assets/image/default-avatar.svg";
       const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
       let avatarFile: File;
       const handleAvatar = () => {
@@ -107,7 +107,14 @@ export class AddGroupForm {
 
       const confirmButton = this.#parent.querySelector("#confirm-button");
       confirmButton?.addEventListener("click", updateProfileInfo);
+      
+      const backButton = this.#parent.querySelector("#back-button")!;
 
-  
+      const handleBack = () => {
+        const chatList = new ChatList(this.#parent, this.#chat);
+        chatList.render();
+      };
+      
+      backButton.addEventListener("click", handleBack);
     }
 }

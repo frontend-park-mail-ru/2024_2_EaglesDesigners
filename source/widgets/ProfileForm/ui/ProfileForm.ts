@@ -48,7 +48,7 @@ export class ProfileForm {
     birthdayInput.value = birthday;
 
     const avatarUser: HTMLImageElement = this.#parent.querySelector("#avatar")!;
-
+    avatarUser.src = "/assets/image/default-avatar.svg";
     const avatarInput: HTMLInputElement = this.#parent.querySelector("#ava")!;
     let avatarFile: File;
     const handleAvatar = () => {
