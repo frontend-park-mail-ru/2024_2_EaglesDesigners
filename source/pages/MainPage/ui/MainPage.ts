@@ -31,7 +31,7 @@ export class MainPage extends View {
     const parent = document.getElementById("root")!;
     let avatar : string;
     if (user.avatarURL) {
-      avatar = serverHost + user.avatarURL + "?" + Date.now();
+      avatar = serverHost + user.avatarURL;
     }
     else{
       avatar = "/assets/image/default-avatar.svg";

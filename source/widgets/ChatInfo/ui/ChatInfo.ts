@@ -31,7 +31,7 @@ export class ChatInfo {
           const birthdate = moment(profileUser.birthdate).utc().format("YYYY-MM-DD");
           if (profileUser.avatarURL) {
             profileUser.avatarURL =
-              serverHost + profileUser.avatarURL + "?" + Date.now();
+              serverHost + profileUser.avatarURL;
           } else {
             profileUser.avatarURL = "/assets/image/default-avatar.svg";
           }

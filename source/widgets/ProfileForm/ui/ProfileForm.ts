@@ -26,7 +26,10 @@ export class ProfileForm {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
     if (response.avatarURL) {
-      response.avatarURL = serverHost + response.avatarURL + "?" + Date.now();
+      response.avatarURL = serverHost + response.avatarURL;
+    }
+    else if (UserStorage.getUser().avatarURL){
+      response.avatarURL = UserStorage.getUser().avatarURL;
     }
     else {
       response.avatarURL = "/assets/image/default-avatar.svg";

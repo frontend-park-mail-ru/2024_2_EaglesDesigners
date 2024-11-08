@@ -22,7 +22,7 @@ export class GroupChatInfo {
     const chat = this.#chat;
     let avatar: string;
     if (chat.avatarPath !== "") {
-      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath;
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }

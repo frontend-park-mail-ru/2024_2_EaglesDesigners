@@ -61,6 +61,7 @@ export class UserAddChat {
           const ChatUsersId = await API.get<UsersIdRequest>(
             "/chat/" + chat.chatId + "/users",
           );
+          console.log(ChatUsersId);
           if (ChatUsersId.usersId) {
             chatUsersList.innerHTML = "";
             const userCard = new ContactCard(chatUsersList);

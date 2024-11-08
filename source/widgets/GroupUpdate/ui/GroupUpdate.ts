@@ -17,7 +17,7 @@ export class GroupUpdate {
   render(chat: TChat) {
     let avatar: string;
     if (chat.avatarPath !== "") {
-      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath;
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }
