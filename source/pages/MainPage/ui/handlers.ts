@@ -12,5 +12,5 @@ export const renderMessage = (message: TChatMessage) => {
     return;
   }
 
-  ChatStorage.getChatMessageInstance().renderNewMessage(message);
+  ChatStorage.getChatMessageInstance()?.renderNewMessage(message);
 };

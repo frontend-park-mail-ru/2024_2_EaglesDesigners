@@ -3,18 +3,26 @@ import { ChatMessage } from "@/entities/ChatMessage";
 
 class ChatStore {
   #chat: TChat;
-  #chatMessageInstance: ChatMessage;
+  #chatMessageInstance: ChatMessage | null;
 
   constructor() {
     this.#chat = {
-      avatarURL: "",
+      avatarPath: "",
       chatId: "",
       chatName: "",
-      chatType: "personalMessages",
-      lastMessage: "",
+      chatType: "personal",
+      lastMessage: {
+        authorID: "",
+        authorName: "",
+        chatId: "",
+        datetime: "",
+        isRedacted: false,
+        messageId: "",
+        text: ""
+      },
       usersId: [],
     };
-    this.#chatMessageInstance = new ChatMessage(null);
+    this.#chatMessageInstance = null;
   }
 
   setChat(chat: TChat) {
