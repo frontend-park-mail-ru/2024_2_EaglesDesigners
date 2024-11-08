@@ -21,6 +21,9 @@ export class ChatUserCard {
       ChatUserCardTemplate({ userProfile }),
     );
 
-    this.#parent.lastElementChild!.style.pointerEvents = "none";
+    const lastChild = this.#parent.lastElementChild;
+    if (lastChild instanceof HTMLElement) {
+      lastChild.style.pointerEvents = "none";
+    }
   }
 }

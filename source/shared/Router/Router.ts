@@ -5,11 +5,9 @@ import { UserStorage } from "@/entities/User";
 class Route {
   #routes: Routes;
   #strictRoutes: string[];
-  #defaultAuthRoutes: string[];
   constructor() {
-    this.#routes = {};
+    this.#routes = { paths: [] };
     this.#strictRoutes = [];
-    this.#defaultAuthRoutes = [];
 
     window.onpopstate = async (event) => {
       const index = this.#strictRoutes.findIndex(
@@ -23,14 +21,9 @@ class Route {
     };
   }
 
-  setRoutes(
-    routes: Routes,
-    strictRoutes: string[],
-    defaultAuthRoutes: string[],
-  ) {
+  setRoutes(routes: Routes, strictRoutes: string[]) {
     this.#routes = routes;
     this.#strictRoutes = strictRoutes;
-    this.#defaultAuthRoutes = defaultAuthRoutes;
   }
 
   async go(url: string, addToHistory = true) {
@@ -73,7 +66,9 @@ class Route {
         const urlMatch = url.match(currentURL.path!);
         urlMatch?.shift();
         if (urlMatch?.length) {
-          currentURL.view.render(...(urlMatch as [string, string]));
+          // console.log("urlMat", urlMatch);
+          // console.log("lol", ...(urlMatch as [string, string]));
+          currentURL.view.render(urlMatch[0]);
         } else {
           currentURL.view.render();
         }

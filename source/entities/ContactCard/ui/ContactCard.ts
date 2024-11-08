@@ -3,7 +3,11 @@ import { TContact } from "../api/ContactType";
 import "./ContactCard.scss";
 import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
-import { ChatsResponse, ChatUsersResponse } from "@/shared/api/types";
+import {
+  ChatResponse,
+  ChatsResponse,
+  ChatUsersResponse,
+} from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { Chat } from "@/widgets/Chat";
 import { TNewChat } from "@/entities/Chat/model/type";
@@ -12,11 +16,9 @@ import { ChatList } from "@/widgets/ChatList";
 
 export class ContactCard {
   #parent;
-  #chat;
 
-  constructor(parent: Element, chat: Chat) {
+  constructor(parent: Element) {
     this.#parent = parent;
-    this.#chat = chat;
   }
 
   render(contact: TContact) {
@@ -37,7 +39,7 @@ export class ContactCard {
     });
   }
 
-  renderChat(contact: TContact, chatListInstance: ChatList) {
+  renderChat(contact: TContact, chat: Chat, chatList: ChatList) {
     if (contact.avatarURL !== null) {
       contact.avatarURL = serverHost + contact.avatarURL;
     } else {
@@ -53,6 +55,7 @@ export class ContactCard {
       e.preventDefault();
 
       const response = await API.get<ChatsResponse>("/chats");
+
       if (!response.chats) {
         return;
       }
@@ -63,10 +66,9 @@ export class ContactCard {
           const usersRes = await API.get<ChatUsersResponse>(
             "/chat/" + elem.chatId + "/users",
           );
-
           if (usersRes.usersId && usersRes.usersId.includes(contact.id)) {
-            chatListInstance.render();
-            this.#chat.render(elem);
+            chatList.render();
+            chat.render(elem);
             return;
           }
         }
@@ -82,10 +84,14 @@ export class ContactCard {
       const jsonProfileData = JSON.stringify(newChat);
       formData.append("chat_data", jsonProfileData);
 
-      const newChatRes = await API.postFormData<TChat>("/addchat", formData);
+      const newChatRes = await API.postFormData<ChatResponse>(
+        "/addchat",
+        formData,
+      );
+
       if (!newChatRes.error) {
-        chatListInstance.render();
-        this.#chat.render(newChatRes);
+        chatList.render();
+        chat.render(newChatRes);
       }
     });
   }
@@ -109,8 +115,12 @@ export class ContactCard {
     const checkbox = this.#parent.lastElementChild!.querySelector(
       ".contact-card-checkbox",
     )!;
-    const checkedIcon = checkbox.querySelector(".contact-card-unchecked")!;
-    const uncheckedIcon = checkbox.querySelector(".contact-card-checked")!;
+    const checkedIcon = checkbox.querySelector<HTMLElement>(
+      ".contact-card-unchecked",
+    )!;
+    const uncheckedIcon = checkbox.querySelector<HTMLElement>(
+      ".contact-card-checked",
+    )!;
 
     this.#parent.lastElementChild!.addEventListener("click", (event) => {
       event.preventDefault();

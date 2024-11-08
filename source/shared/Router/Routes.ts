@@ -25,4 +25,3 @@ export const routes: Routes = {
 };
 
 export const strictRoutes = ["/login", "/signup"];
-export const defaultAuthRoutes: string[] = [];

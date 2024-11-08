@@ -40,9 +40,9 @@ export class ChatList {
 
     const addChat = document.querySelector(".add-chat")!;
     const addChatButton = addChat.querySelector("#addChatButton")!;
-    const addIcon = addChat.querySelector(".add-icon")!;
-    const cancelIcon = addChat.querySelector(".cancel-icon")!;
-    const addChatPopup = addChat.querySelector("#addChatPopUp")!;
+    const addIcon = addChat.querySelector<HTMLElement>(".add-icon")!;
+    const cancelIcon = addChat.querySelector<HTMLElement>(".cancel-icon")!;
+    const addChatPopup = addChat.querySelector<HTMLElement>("#addChatPopUp")!;
 
     addChatButton.addEventListener("click", (event) => {
       event.stopPropagation();

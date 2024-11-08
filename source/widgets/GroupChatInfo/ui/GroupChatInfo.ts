@@ -52,7 +52,10 @@ export class GroupChatInfo {
           username: "",
         };
         userCard.render(user);
-        chatUsersList.lastElementChild!.style.pointerEvents = "none";
+        const lastChatUser = chatUsersList.lastElementChild;
+        if (lastChatUser instanceof HTMLElement) {
+          lastChatUser.style.pointerEvents = "none";
+        }
       });
     }
 

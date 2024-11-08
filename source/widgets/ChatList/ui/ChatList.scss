@@ -61,34 +61,34 @@ $text-over-primary: #ffffff;
   }
 }
 
+.add-chat-btn {
+  cursor: pointer;
+}
+
 .add-chat {
   display: flex;
   margin-right: 20px;
   margin-bottom: 20px;
   justify-content: flex-end;
-}
 
-.add-chat-btn {
-  cursor: pointer;
-}
+  &__popup {
+    position: absolute;
+    background: $primary-shadow-25;
+    border-radius: 20px;
+    padding: 10px 10px 10px 10px;
 
-.add-chat-popup {
-  position: absolute;
-  background: $primary-shadow-25;
-  border-radius: 20px;
-  padding: 10px 10px 10px 10px;
+    bottom: 90px;
 
-  bottom: 90px;
-
-  flex-direction: column;
-  gap: 5px;
-
-  .create-personal-chat,
-  .create-group-chat {
-    @include font-settings("Inter", 400, 16px, $text-over-primary);
-
-    display: flex;
+    flex-direction: column;
     gap: 5px;
-    justify-items: flex-end;
+
+    .create-personal-chat,
+    .create-group-chat {
+      @include font-settings("Inter", 400, 16px, $text-over-primary);
+
+      display: flex;
+      gap: 5px;
+      justify-items: flex-end;
+    }
   }
 }

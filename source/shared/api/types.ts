@@ -29,10 +29,7 @@ export interface ProfileResponse {
   name: string;
 }
 
-export interface ChatResponse {
-  message: string;
-  chat: TChat;
-}
+export type ChatResponse = TChat;
 
 export interface ChatsResponse {
   message: string;

@@ -1,4 +1,9 @@
-<div class="message{{#if message.first}} first-message{{/if}}{{#if message.last}} last-message{{/if}}{{#if message.isFromOtherUser}} left-side{{/if}}">
+<div
+  class="message
+    {{#if message.first}}first-message{{/if}}
+    {{#if message.last}}last-message{{/if}}
+    {{#if message.isFromOtherUser}}left-side{{/if}}"
+>
   <div class="message__body">
     <span class="message__body__username">
       {{message.authorName}}
@@ -8,11 +13,11 @@
     </span>
     <span class="message__body__meta">
       <span class="timedate">
-        {{ message.datetime }}
+        {{message.datetime}}
       </span>
     </span>
   </div>
   <div class="message__avatar">
-    <img class="message__avatar__img" src="{{ message.avatarURL }}" />
+    <img class="message__avatar__img" src="{{message.avatarURL}}" />
   </div>
 </div>

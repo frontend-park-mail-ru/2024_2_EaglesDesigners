@@ -81,6 +81,7 @@ class Api {
 
   async postFormData<TResponse>(path: string, formData: FormData) {
     type Response = TResponse & ResponseError;
+
     try {
       const url = this.#baseURl + path;
       const CSRFToken = Csrf.get() ?? localStorage.getItem("csrf");
