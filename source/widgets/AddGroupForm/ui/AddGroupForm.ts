@@ -1,7 +1,7 @@
 import { API } from "@/shared/api/api";
 import AddGroupTemplate from "./AddGroupForm.handlebars";
 import "./AddGroupForm.scss";
-import { ChatResponse, ContactRequest, NewChatRequest } from "@/shared/api/types";
+import { ChatResponse, ContactRequest, ContactResponse, NewChatRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
@@ -38,7 +38,7 @@ export class AddGroupForm {
       
       const selectedContacts = new SelectedContacts();
 
-      const response = await API.get<ContactRequest>("/contacts");
+      const response = await API.get<ContactResponse>("/contacts");
       const contactList = this.#parent.querySelector("#contacts-list")!;
       const contactCard = new ContactCard(contactList);
 
