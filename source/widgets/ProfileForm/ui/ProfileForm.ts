@@ -25,12 +25,9 @@ export class ProfileForm {
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");
-    console.log(response, UserStorage.getUser);
     
     if (response.avatarURL) {
-      
       response.avatarURL = serverHost + response.avatarURL;
-      console.log(response.avatarURL)
     }
     else if (UserStorage.getUser().avatarURL){
       response.avatarURL = UserStorage.getUser().avatarURL;
