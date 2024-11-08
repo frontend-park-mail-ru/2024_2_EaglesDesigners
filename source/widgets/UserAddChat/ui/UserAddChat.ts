@@ -33,7 +33,7 @@ export class UserAddChat {
     const response = await API.get<ContactResponse>("/contacts");
     if (!response.error) {
       const contacts = response.contacts;
-      if (contacts.length) {
+      if (contacts && contacts.length) {
         contacts.forEach((elem) => {
           const contact = new ContactCard(contactListContainer);
           contact.render(elem);

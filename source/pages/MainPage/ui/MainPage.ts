@@ -1,17 +1,17 @@
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
 import { API } from "@/shared/api/api.ts";
-import { ChatsResponse, EmptyRequest, EmptyResponse } from "@/shared/api/types";
+import { ChatsResponse } from "@/shared/api/types";
 import MainPageTemplate from "./MainPage.handlebars";
 import "./MainPage.scss";
 import { View } from "@/app/View";
-import { Router } from "@/shared/Router/Router";
 import { TUser, UserStorage } from "@/entities/User";
 import { ProfileForm } from "@/widgets/ProfileForm";
 import { ContactsList } from "@/widgets/ContactsList";
 import { wsConn } from "@/shared/api/ws";
 import { TChat } from "@/entities/Chat";
 import { renderMessage } from "./handlers";
+import { serverHost } from "@/app/config";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -29,7 +29,14 @@ export class MainPage extends View {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
-    parent.innerHTML = MainPageTemplate({ user });
+    let avatar: string;
+    if (user.avatarURL) {
+      avatar = serverHost + user.avatarURL;
+    } else {
+      avatar = "/assets/image/default-avatar.svg";
+    }
+
+    parent.innerHTML = MainPageTemplate({ user, avatar });
 
     const chatUserInfo = parent.querySelector("#chat-info-container")!;
     const chatListParent = parent.querySelector("#widget-import")!;
@@ -55,29 +62,15 @@ export class MainPage extends View {
       }
     }
 
-    const exitButton = parent.querySelector(".exit-btn")!;
-
-    const handleExitClick = async () => {
-      const response = await API.post<EmptyResponse, EmptyRequest>(
-        "/logout",
-        {},
-      );
-
-      if (!response.error) {
-        UserStorage.setUser({ id: "", name: "", username: "" });
-        wsConn.close();
-        Router.go("/login");
-      }
-    };
-
-    exitButton.addEventListener("click", handleExitClick);
-
     const settingsButton = parent.querySelector("#settings-button")!;
     const handleSettings = () => {
       const profileForm = new ProfileForm(chatListParent, chat);
       profileForm.render();
     };
     settingsButton.addEventListener("click", handleSettings);
+
+    const userAvatar = parent.querySelector("#user-avatar")!;
+    userAvatar.addEventListener("click", handleSettings);
 
     const contactButton = parent.querySelector("#contact-button");
 
@@ -95,6 +88,6 @@ export class MainPage extends View {
 
     homeButton.addEventListener("click", handleHome);
 
-    wsConn.subscribe("message",renderMessage);
+    wsConn.subscribe("message", renderMessage);
   }
 }

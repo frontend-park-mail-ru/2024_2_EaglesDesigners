@@ -57,6 +57,13 @@
     font-size: 14px;
     opacity: 0.4;
     font-family: var(--main-font-family);
+  }
+
+  &__span-error {
+    color: red;
+    font-size: 14px;
+    font-family: var(--main-font-family);
+    min-height: 33px;
     margin-top: 20px;
   }
 

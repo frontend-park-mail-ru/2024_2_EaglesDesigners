@@ -5,8 +5,8 @@ import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { serverHost } from "@/app/config";
 import { GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
-import { Router } from "@/shared/Router/Router";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { validateForm } from "@/shared/validation/formValidation";
 
 export class GroupUpdate {
   #parent;
@@ -17,11 +17,10 @@ export class GroupUpdate {
   render(chat: TChat) {
     let avatar: string;
     if (chat.avatarPath !== "") {
-      avatar = serverHost + chat.avatarPath + "?" + Date.now();
+      avatar = serverHost + chat.avatarPath;
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }
-
     this.#parent.innerHTML = GroupUpdateTempalte({ chat, avatar });
     const backButton = this.#parent.querySelector("#back-button")!;
 
@@ -56,6 +55,24 @@ export class GroupUpdate {
     const handleConfirmChanges = async () => {
       const groupNameInput: HTMLInputElement =
         this.#parent.querySelector("#group-name")!;
+      const groupNameError: HTMLSpanElement =
+        this.#parent.querySelector("#group-name-error")!;
+      if (groupNameInput.value === "") {
+        validateForm(
+          groupNameInput,
+          "Название группы не может быть пустым",
+          groupNameError,
+        );
+        return;
+      }
+      if (groupNameInput.value.length > 20) {
+        validateForm(
+          groupNameInput,
+          "Название группы не может быть длиннее 20 символов",
+          groupNameError,
+        );
+        return;
+      }
       const name: GroupUpdateRequest = { chatName: groupNameInput.value };
 
       const groupName = JSON.stringify(name);
@@ -69,14 +86,22 @@ export class GroupUpdate {
         formData,
       );
       if (!response.error) {
-        chat.chatName = groupName;
+        chat.chatName = name.chatName;
         if (response.updatedAvatarPath !== "") {
           chat.avatarPath = response.updatedAvatarPath;
         }
-
         ChatStorage.setChat(chat);
 
-        Router.go("/chat/" + chat.chatId, false);
+        const chatName: HTMLSpanElement = document.querySelector("#chat-name")!;
+        chatName.innerText = name.chatName;
+
+        if (response.updatedAvatarPath) {
+          const chatAvatar: HTMLImageElement =
+            document.querySelector("#chat-avatar")!;
+          chatAvatar.src = URL.createObjectURL(groupAvatarFile);
+        }
+
+        this.#parent.innerHTML = "";
       }
     };
 

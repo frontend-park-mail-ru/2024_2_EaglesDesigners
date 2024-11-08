@@ -22,35 +22,35 @@ export class ChatInfo {
     );
     let userId;
     if (usersId.usersId) {
-        if (usersId.usersId[0] !== UserStorage.getUser().id) {
-            userId = usersId.usersId[0];
-          } else {
-            userId = usersId.usersId[1];
-          }
-          const profileUser = await API.get<ProfileResponse>("/profile/" + userId);
-          const birthdate = moment(profileUser.birthdate).utc().format("YYYY-MM-DD");
-          if (profileUser.avatarURL) {
-            profileUser.avatarURL =
-              serverHost + profileUser.avatarURL + "?" + Date.now();
-          } else {
-            profileUser.avatarURL = "/assets/image/default-avatar.svg";
-          }
-          this.#parent.innerHTML = ChatInfoTemplate({ profileUser, birthdate });
-      
-          const deleteChatButton = this.#parent.querySelector("#delete-chat")!;
-      
-          const handleDeleteGroup = async () => {
-            const response = await API.delete(
-              "/chat/" + this.#chat.chatId + "/delete",
-              this.#chat.chatId,
-            );
-            if (!response.error) {
-              Router.go("/");
-            }
-          };
-      
-          deleteChatButton.addEventListener("click", handleDeleteGroup);
+      if (usersId.usersId[0] !== UserStorage.getUser().id) {
+        userId = usersId.usersId[0];
+      } else {
+        userId = usersId.usersId[1];
+      }
+      const profileUser = await API.get<ProfileResponse>("/profile/" + userId);
+      const birthdate = moment(profileUser.birthdate)
+        .utc()
+        .format("YYYY-MM-DD");
+      if (profileUser.avatarURL) {
+        profileUser.avatarURL = serverHost + profileUser.avatarURL;
+      } else {
+        profileUser.avatarURL = "/assets/image/default-avatar.svg";
+      }
+      this.#parent.innerHTML = ChatInfoTemplate({ profileUser, birthdate });
+
+      const deleteChatButton = this.#parent.querySelector("#delete-chat")!;
+
+      const handleDeleteGroup = async () => {
+        const response = await API.delete(
+          "/chat/" + this.#chat.chatId + "/delete",
+          this.#chat.chatId,
+        );
+        if (!response.error) {
+          Router.go("/");
         }
-    
+      };
+
+      deleteChatButton.addEventListener("click", handleDeleteGroup);
+    }
   }
 }

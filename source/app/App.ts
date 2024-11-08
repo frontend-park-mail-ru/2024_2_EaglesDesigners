@@ -22,8 +22,8 @@ export class App {
 
     const currentURL = window.location.pathname;
 
-    const index = routes.paths.find(
-      (element) => element.path.exec(currentURL) !== null,
+    const index = routes.paths?.find(
+      (element) => element.path?.exec(currentURL) !== null,
     );
     if (index !== undefined) {
       if (currentURL == "/signup") {

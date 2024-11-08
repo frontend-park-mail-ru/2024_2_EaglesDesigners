@@ -26,9 +26,11 @@
           name="ava"
           class="profile-form-user__input-avatar"
           accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
-        /><br />
+        />
+        <span id="avatar-error" class="avatar-error"></span>
+        <br />
       </label>
-      <div class="profile-error">
+      <div class="profile-error-nickname">
         <span id="nickname" class="profile-error__span"></span>
       </div>
       <input
@@ -70,11 +72,22 @@
     </form>
 
   </div>
-  <div id="confirm-button" class="profile-form-confirm">
-    <img
-      class="profile-form-confirm__img"
-      src="/assets/image/confirm.svg"
-      alt=""
-    />
+  <div class="profile-buttons">
+    <div id="exit-btn" class="exit-btn">
+      <img
+        class="exit-btn__img"
+        style="width: 54px; height: 54px"
+        src="/assets/image/IconLogout.svg"
+        alt=""
+      />
+    </div>
+    <div class="profile-form-confirm">
+      <img
+        id="confirm-button"
+        class="profile-form-confirm__img"
+        src="/assets/image/confirm.svg"
+        alt=""
+      />
+    </div>
   </div>
 </div>
