@@ -93,7 +93,6 @@ export class GroupUpdate {
         
 
         this.#parent.innerHTML = '';
-        //Router.go("/chat/" + chat.chatId, false);
       }
     };
 

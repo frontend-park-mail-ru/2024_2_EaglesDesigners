@@ -26,13 +26,6 @@
   }
 }
 
-// .avatar-error {
-//   color: red;
-//   font-family: var(--main-font-family);
-//   font-size: 14px;
-//   margin-top: 5px;
-// }
-
 .profile-form-header-name {
   margin-left: 20px;
   display: flex;
@@ -61,7 +54,6 @@
     padding-left: 10px;
     width: 320px;
     height: var(--input-height);
-    // font-size: var(--base-font-size);
     font-size: 18px;
     font-family: var(--main-font-family);
     color: var(--text-over-primary);
