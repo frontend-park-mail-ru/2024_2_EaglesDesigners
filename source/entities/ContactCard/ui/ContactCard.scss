@@ -43,6 +43,11 @@
 
   &__span {
     padding: 10px;
+    display: block;
+    max-width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

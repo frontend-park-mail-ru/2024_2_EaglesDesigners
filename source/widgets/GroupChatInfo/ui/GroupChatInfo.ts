@@ -49,6 +49,7 @@ export class GroupChatInfo {
           username: "",
         };
         userCard.render(user);
+        chatUsersList.lastElementChild!.style.pointerEvents = 'none';
       });
     }
 
