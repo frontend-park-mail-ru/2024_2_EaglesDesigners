@@ -69,7 +69,7 @@ export class ContactAddForm {
       return;
     };
 
-    this.#parent.addEventListener("keyup", handleEnterClick);
+    usernameInput.addEventListener("keyup", handleEnterClick);
 
     const cancelButton = this.#parent.querySelector("#cancel-btn")!;
 

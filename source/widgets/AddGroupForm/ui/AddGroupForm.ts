@@ -1,7 +1,7 @@
 import { API } from "@/shared/api/api";
 import AddGroupTemplate from "./AddGroupForm.handlebars";
 import "./AddGroupForm.scss";
-import { ChatResponse, ContactRequest, ContactResponse, NewChatRequest } from "@/shared/api/types";
+import { ChatResponse, ContactResponse, NewChatRequest } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import { validateForm } from "@/shared/validation/formValidation";
