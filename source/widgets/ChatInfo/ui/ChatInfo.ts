@@ -30,7 +30,7 @@ export class ChatInfo {
       const profileUser = await API.get<ProfileResponse>("/profile/" + userId);
       const birthdate = moment(profileUser.birthdate)
         .utc()
-        .format("YYYY-MM-DD");
+        .format("DD.MM.YYYY");
       if (profileUser.avatarURL) {
         profileUser.avatarURL = serverHost + profileUser.avatarURL;
       } else {

@@ -27,6 +27,11 @@ export class ProfileForm {
     this.#chat = chat;
   }
 
+
+  destructor() {
+    console.log('destructor');
+  }
+
   async render() {
     const user = UserStorage.getUser();
     const response = await API.get<ProfileResponse>("/profile");

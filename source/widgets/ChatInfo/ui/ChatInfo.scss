@@ -1,3 +1,6 @@
+$whitecolor: var(--text-over-primary);
+$redcolor: var(--text-error-message);
+
 .chat-info {
   background-color: #4f82bf;
   width: 90%;
@@ -25,13 +28,13 @@
 
   &__span-user-name {
     display: block;
-    color: #fff;
+    color: $whitecolor;
     font-family: var(--main-font-family);
     font-size: 20px;
   }
 
   &__span-online-status {
-    color: #fff;
+    color: $whitecolor;
     font-family: var(--main-font-family);
     font-size: 14px;
     opacity: 0.4;
@@ -40,7 +43,7 @@
 
 .chat-user-info {
   margin-top: 20px;
-  padding-left: 20px;
+  padding: 0px 20px 0px 20px  ;
 }
 
 .chat-user-birthday {
@@ -49,7 +52,7 @@
   &__span {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
-    color: #fff;
+    color: $whitecolor;
   }
 }
 
@@ -59,12 +62,12 @@
   &__span {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
-    color: #fff;
+    color: $whitecolor;
   }
 }
 
 .span-description {
-  color: #fff;
+  color: $whitecolor;
   font-size: 14px;
   opacity: 0.4;
   font-family: var(--main-font-family);
@@ -83,16 +86,17 @@
   display: flex;
   justify-content: center;
   align-items: end;
+
+  &__button {
+    width: 95%;
+    height: 39px;
+    color: $whitecolor;
+    font-size: 16px;
+    font-family: var(--main-font-family);
+    background-color: $redcolor;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
 }
 
-.delete-chat-btn__button {
-  width: 95%;
-  height: 39px;
-  color: red;
-  font-size: 16px;
-  font-family: var(--main-font-family);
-  background-color: #afcbee;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}

@@ -1,3 +1,6 @@
+$whitecolor: var(--text-over-primary);
+$redcolor: var(--text-error-message);
+
 .group-info {
   width: 100%;
   height: 100%;
@@ -55,11 +58,11 @@
     display: block;
     font-size: 20px;
     font-family: var(--main-font-family);
-    color: #fff;
+    color: $whitecolor;
   }
 
   &__span {
-    color: #fff;
+    color: $whitecolor;
     font-size: 14px;
     font-family: var(--main-font-family);
     opacity: 0.4;
@@ -80,7 +83,7 @@
   margin-right: 10px;
 
   &__span {
-    color: #fff;
+    color: $whitecolor;
     font-family: var(--main-font-family);
     font-size: 14px;
     text-align: center;
@@ -99,7 +102,7 @@
 }
 
 .users-count {
-  color: #fff;
+  color: $whitecolor;
   font-family: var(--main-font-family);
   font-size: 14px;
   opacity: 0.4;
@@ -131,8 +134,8 @@
     width: 90%;
     height: 29px;
     border-radius: 5px;
-    background-color: #afcbee;
-    color: red;
+    background-color: $redcolor;
+    color: $whitecolor;
     border: none;
     cursor: pointer;
   }

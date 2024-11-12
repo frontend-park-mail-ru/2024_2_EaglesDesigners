@@ -10,14 +10,16 @@ class Route {
     this.#strictRoutes = [];
 
     window.onpopstate = async (event) => {
-      const index = this.#strictRoutes.findIndex(
-        (element) => element === event.state.url,
-      );
-      if (UserStorage.getUser().name === "" && index === -1) {
-        this.go("/login", false);
-        return;
+      if (event.state) {
+        const index = this.#strictRoutes.findIndex(
+          (element) => element === event.state.url,
+        );
+        if (UserStorage.getUser().name === "" && index === -1) {
+          this.go("/login", false);
+          return;
+        }
+        this.go(event.state.url, false);
       }
-      this.go(event.state.url, false);
     };
   }
 
@@ -27,6 +29,7 @@ class Route {
   }
 
   async go(url: string, addToHistory = true) {
+    console.log(window.history);
     const index = this.#strictRoutes.findIndex((elem) => url === elem);
     if (index !== -1 && UserStorage.getUser().name !== "") {
       this.go("/");
