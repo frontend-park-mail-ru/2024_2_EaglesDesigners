@@ -10,24 +10,12 @@ $text-over-primary: #ffffff;
   color: $color;
 }
 
-.chat-list {
-  background: transparent;
-
-  height: 100%;
-
-  display: grid;
-  grid-template-areas:
-    "cl-margin"
-    "cl-box";
-  grid-template-rows: 1fr 94.1176470588vh;
-
-  line-height: 22px;
-}
-
 .chat-list-container {
+  height: 100%;
   width: 404px;
 
-  grid-area: cl-box;
+  margin-top: 20px;
+
   display: flex;
   flex-direction: column;
 }
