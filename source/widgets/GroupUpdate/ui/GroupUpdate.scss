@@ -1,3 +1,8 @@
+$secondary: var(--secondary);
+
+$text-over-primary: var(--text-over-primary);
+$text-error-message: var(--text-error-message);
+
 .group-update {
   width: 95%;
   margin-left: 3%;
@@ -12,7 +17,7 @@
   align-items: center;
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-size: 18px;
     font-family: var(--main-font-family);
     padding: auto;
@@ -53,14 +58,14 @@
   flex-direction: column;
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-size: 14px;
     opacity: 0.4;
     font-family: var(--main-font-family);
   }
 
   &__span-error {
-    color: red;
+    color: $text-error-message;
     font-size: 14px;
     font-family: var(--main-font-family);
     min-height: 33px;
@@ -70,14 +75,14 @@
   &__input {
     border: none;
     background-color: inherit;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid $text-over-primary;
     outline: none;
-    color: #fff;
+    color: $text-over-primary;
     font-size: 18px;
     width: 90%;
 
     &:focus {
-      border-bottom: 2px solid #4f82bf;
+      border-bottom: 2px solid $secondary;
       transition: 1s;
     }
   }

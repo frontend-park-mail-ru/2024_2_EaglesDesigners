@@ -1,7 +1,9 @@
 $primary: var(--primary);
-$primary-shadow-25: #0a0e16;
+$primary-shadow-25: var(--primary-shadow-25);
 
-$text-over-primary: #ffffff;
+$text-over-primary: var(--text-over-primary);
+
+$scroll-bar-color: var(--scroll-bar-color);
 
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
@@ -11,8 +13,7 @@ $text-over-primary: #ffffff;
 }
 
 .chat-list-container {
-  height: 100%;
-  width: 404px;
+  width: 400px;
 
   margin-top: 20px;
 
@@ -41,7 +42,7 @@ $text-over-primary: #ffffff;
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #b8b6b6;
+    background: $scroll-bar-color;
     border-radius: 40px;
   }
   &::-webkit-scrollbar-track {

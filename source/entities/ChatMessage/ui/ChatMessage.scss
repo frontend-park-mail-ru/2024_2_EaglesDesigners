@@ -1,12 +1,12 @@
-$background-shadow-50: #0c0f15;
+$background-shadow-50: var(--background-shadow-50);
 $primary: var(--primary);
-$primary-shadow-25: #0a0e16;
+$primary-shadow-25: var(--primary-shadow-25);
 $secondary: var(--secondary);
-$accent: #afcbee;
+$accent: var(--accent);
 
-$text-over-primary: #ffffff;
-$text-over-primary-shadow-50: #85878a;
-$text-over-secondary: #ffffff;
+$text-over-primary: var(--text-over-primary);
+$text-over-primary-shadow-50: var(--text-over-primary-shadow-50);
+$text-over-secondary: var(--text-over-secondary);
 
 $avatar-size: 50px;
 $messages-container-width: 700px;

@@ -1,3 +1,6 @@
+$text-over-primary: var(--text-over-primary);
+$text-error-message: var(--text-error-message);
+
 .profile-form {
   display: flex;
   flex-direction: column;
@@ -34,7 +37,7 @@
   &__span {
     font-size: 22px;
     font-family: var(--main-font-family);
-    color: #fff;
+    color: $text-over-primary;
   }
 }
 
@@ -96,7 +99,7 @@
 }
 
 .avatar-error {
-  color: red;
+  color: $text-error-message;
   font-size: 14px;
   font-family: var(--main-font-family);
 }
@@ -110,7 +113,7 @@
     display: flex;
     width: 320px;
     font-size: 14px;
-    color: red;
+    color: $text-error-message;
     font-family: var(--main-font-family);
   }
 }

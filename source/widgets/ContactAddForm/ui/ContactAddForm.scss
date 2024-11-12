@@ -1,3 +1,8 @@
+$secondary: var(--secondary);
+
+$text-over-primary: var(--text-over-primary);
+$text-error-message: var(--text-error-message);
+
 .contact-add {
   position: fixed;
   top: 0;
@@ -17,7 +22,7 @@
   margin-top: 20%;
   width: 351px;
   height: 232px;
-  background-color: #4f82bf;
+  background-color: $secondary;
 }
 
 .contact-header {
@@ -30,7 +35,7 @@
 
 .contact-header-name {
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-size: 22px;
     font-family: var(--main-font-family);
   }
@@ -51,7 +56,7 @@
   padding-left: 15px;
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-size: 16px;
     font-family: var(--main-font-family);
   }
@@ -67,7 +72,7 @@
     border: none;
     border-bottom: 2px solid var(--text-over-primary);
     color: var(--text-over-primary);
-    background-color: #4f82bf;
+    background-color: $secondary;
     outline: none;
     transition: 1s;
     font-size: 16px;
@@ -96,7 +101,7 @@
   padding-left: 15px;
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-size: 12px;
     opacity: 50%;
     font-family: var(--main-font-family);
@@ -120,9 +125,9 @@
 }
 
 .error-span {
-  color: red;
+  color: $text-error-message;
 }
 
 .not-error-span {
-  color: #fff;
+  color: $text-over-primary;
 }

@@ -1,7 +1,9 @@
+$text-over-primary: var(--text-over-primary);
+
 .contact-card {
   width: 100%;
   height: 62px;
-  color: #fff;
+  color: $text-over-primary;
   font-family: var(--main-font-family);
   text-decoration: none;
 

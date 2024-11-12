@@ -1,6 +1,8 @@
 $primary: var(--primary);
 $background: var(--background);
 
+$button-over-background-hover: var(--button-over-background-hover);
+
 .main-page {
   background: $primary;
   display: flex;
@@ -138,7 +140,7 @@ $background: var(--background);
   transition-duration: 0.2s;
 
   &:hover {
-    background-color: #272727;
+    background-color: $button-over-background-hover;
     border-radius: 100%;
   }
 }

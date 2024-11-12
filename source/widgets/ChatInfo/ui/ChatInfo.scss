@@ -1,5 +1,11 @@
+$secondary: var(--secondary);
+
+$text-over-primary: var(--text-over-primary);
+$text-error-message: var(--text-error-message);
+$form-button-access: var(--form-button-access);
+
 .chat-info {
-  background-color: #4f82bf;
+  background-color: $secondary;
   width: 90%;
   max-width: 240px;
   margin-left: 5%;
@@ -25,13 +31,13 @@
 
   &__span-user-name {
     display: block;
-    color: #fff;
+    color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: 20px;
   }
 
   &__span-online-status {
-    color: #fff;
+    color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: 14px;
     opacity: 0.4;
@@ -49,7 +55,7 @@
   &__span {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
-    color: #fff;
+    color: $text-over-primary;
   }
 }
 
@@ -59,12 +65,12 @@
   &__span {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
-    color: #fff;
+    color: $text-over-primary;
   }
 }
 
 .span-description {
-  color: #fff;
+  color: $text-over-primary;
   font-size: 14px;
   opacity: 0.4;
   font-family: var(--main-font-family);
@@ -88,10 +94,10 @@
 .delete-chat-btn__button {
   width: 95%;
   height: 39px;
-  color: red;
+  color: $text-error-message;
   font-size: 16px;
   font-family: var(--main-font-family);
-  background-color: #afcbee;
+  background-color: $form-button-access;
   border-radius: 5px;
   border: none;
   cursor: pointer;

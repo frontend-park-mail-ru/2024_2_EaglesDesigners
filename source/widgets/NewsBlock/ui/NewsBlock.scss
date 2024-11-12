@@ -1,3 +1,5 @@
+$text-over-primary: var(--text-over-primary);
+
 .news-block {
   width: 50%;
   height: 100%;
@@ -19,7 +21,7 @@
   }
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: 45px;
     position: absolute;
@@ -36,7 +38,7 @@
   margin-right: 15px;
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: 16px;
   }

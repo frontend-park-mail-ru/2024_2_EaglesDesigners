@@ -1,4 +1,5 @@
-$text-over-primary: #ffffff;
+$text-over-primary: var(--text-over-primary);
+$scroll-bar-color: var(--scroll-bar-color);
 
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
@@ -36,7 +37,7 @@ $text-over-primary: #ffffff;
   padding: 7px;
 
   &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: var(--form-font-size);
   }
@@ -116,7 +117,7 @@ $text-over-primary: #ffffff;
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #b8b6b6;
+    background: $scroll-bar-color;
     border-radius: 40px;
   }
   &::-webkit-scrollbar-track {
