@@ -1,14 +1,14 @@
 $background-shadow-50: var(--background-shadow-50);
 $primary: var(--primary);
 $primary-shadow-25: var(--primary-shadow-25);
-$secondary: var(--secondary);
 $accent: var(--accent);
 
 $text-over-primary: var(--text-over-primary);
 $text-over-primary-shadow-50: var(--text-over-primary-shadow-50);
-$text-over-secondary: var(--text-over-secondary);
 
-$messages-container-width: 700px;
+$chat-header-height: 70px;
+$chat-min-width: 500px;
+$messages-container-max-width: 600px;
 
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
@@ -19,7 +19,6 @@ $messages-container-width: 700px;
 
 textarea {
   border: none;
-  overflow: none;
   outline: none;
 
   display: inline-block;
@@ -39,32 +38,38 @@ textarea {
 }
 
 .chat {
+  width: 100%;
+  min-width: $chat-min-width;
+
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 100%;
-  min-height: 100%;
-  min-width: 100%;
+  max-height: calc(100% - $chat-header-height);
+  flex: 1;
 }
 
 .header {
-  width: 100%;
   background: $background-shadow-50;
+  width: 100%;
+  height: $chat-header-height;
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-sizing: border-box;
   padding: 10px;
 
+  cursor: pointer;
+
   display: flex;
-  flex-direction: row;
   align-items: center;
 
   .avatar-container{
-    width: 50px;
-    height: 50px;
     margin-left: 20px;
     margin-right: 8px;
+
+    cursor: pointer;
 
     display: flex;
 
@@ -73,21 +78,15 @@ textarea {
       height: 50px;
       border-radius: 100%;
   
-      margin-left: 0px;
-      margin-right: 0px;
+      margin: 0px;
     }
   }
 }
 
 .info {
-  height: fit-content;
-
   display: flex;
   flex-direction: column;
-  row-gap: 2px;
-  max-height: 100%;
-  min-height: 100%;
-  min-width: 100%;
+  gap: 2px;
 
   &__chat-name {
     @include font-settings("Inter", 500, 20px, $text-over-primary);
@@ -97,37 +96,14 @@ textarea {
   }
 }
 
-.header {
-  width: 100%;
-  background: $background-shadow-50;
-
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-sizing: border-box;
-  padding: 10px;
-
-  display: flex;
-  flex-direction: row;
-  cursor: pointer;
-
-  .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-
-    margin-left: 20px;
-    margin-right: 8px;
-  }
-}
-
 .messages {
-  max-height: 100%;
-  width: $messages-container-width;
-  margin-top: auto;
+  width: 100%;
+  max-width: $messages-container-max-width;
+  flex: 1;
 
   display: flex;
   flex-direction: column-reverse;
-  row-gap: 5px;
+  gap: 5px;
 
   overflow: scroll;
   -ms-overflow-style: none;
@@ -139,20 +115,21 @@ textarea {
 }
 
 .input {
-  width: $messages-container-width;
+  width: 100%;
+  max-width: $messages-container-max-width;
 
   margin-top: 10px;
   margin-bottom: 15px;
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
   gap: 10px;
 }
 
 .input-bubble {
-  flex-grow: 1;
   background: $primary-shadow-25;
   border-radius: 25px;
+
+  flex: 1;
 
   box-sizing: border-box;
   padding: 15px;
@@ -169,7 +146,7 @@ textarea {
 }
 
 .text-area {
-  width: 100%;
+  flex: 1;
   height: 19px;
   max-height: calc(10 * 19px);
   line-height: 19px;
@@ -186,7 +163,6 @@ textarea {
   background: $accent;
 
   border-radius: 100%;
-  box-sizing: border-box;
   cursor: pointer;
 
   display: flex;
