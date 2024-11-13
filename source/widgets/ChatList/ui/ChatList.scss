@@ -5,6 +5,8 @@ $text-over-primary: var(--text-over-primary);
 
 $scroll-bar-color: var(--scroll-bar-color);
 
+$chat-margin-top: 20px;
+
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
   font-weight: $font-weight;
@@ -13,28 +15,26 @@ $scroll-bar-color: var(--scroll-bar-color);
 }
 
 .chat-list-container {
-  width: 400px;
+  position: relative;
+  width: 100%;
 
-  margin-top: 20px;
+  margin-top: $chat-margin-top;
 
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .chat-list-container-search {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    var(--primary);
+  background: $primary-shadow-25;
   height: 85px;
 
   border-radius: 20px;
 
-  box-sizing: border-box;
-  margin-inline: 9px;
-  margin-bottom: 10px;
+  margin: 0 10px;
 }
 
 .chat-list-container-chatlist {
-  --avatar-size: 60px;
   height: 100%;
   overflow-y: scroll;
 
@@ -55,29 +55,29 @@ $scroll-bar-color: var(--scroll-bar-color);
 }
 
 .add-chat {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
   display: flex;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
 
   &__popup {
-    position: absolute;
     background: $primary-shadow-25;
-    border-radius: 20px;
-    padding: 10px 10px 10px 10px;
-
-    bottom: 90px;
+    border-radius: 10px;
+    padding: 10px;
 
     flex-direction: column;
     gap: 5px;
 
-    .create-personal-chat,
-    .create-group-chat {
+    &__item {
+      cursor: pointer;
       @include font-settings("Inter", 400, 16px, $text-over-primary);
 
       display: flex;
       gap: 5px;
-      justify-items: flex-end;
     }
   }
 }
