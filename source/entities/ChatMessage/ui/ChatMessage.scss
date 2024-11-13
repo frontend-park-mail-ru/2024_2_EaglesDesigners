@@ -20,9 +20,9 @@ $messages-container-width: 700px;
 
 .message {
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+
   &__body {
     max-width: 500px;
     background: $secondary;
@@ -31,13 +31,12 @@ $messages-container-width: 700px;
 
     box-sizing: border-box;
     position: relative;
-    padding: 6px 6px 3px 6px;
+    padding: 6px 12px;
+    padding-bottom: 3px;
 
     &__username {
       @include font-settings("Inter", 400, 14px, $secondary);
 
-      display: block;
-      max-width: auto;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -58,7 +57,7 @@ $messages-container-width: 700px;
       float: right;
       column-gap: 1px;
       box-sizing: border-box;
-      padding-left: 2px;
+      padding-left: 4px;
       .timedate {
         @include font-settings("Inter", 400, 10px, $text-over-secondary);
         opacity: 0.6;
@@ -72,8 +71,7 @@ $messages-container-width: 700px;
     display: flex;
     align-items: flex-end;
 
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0px 5px;
 
     &__img {
       width: 40px;
@@ -86,7 +84,6 @@ $messages-container-width: 700px;
 
   &:not(.left-side).last-message {
     .message__body {
-      position: relative;
       border-bottom-right-radius: 0px;
 
       &::after {
@@ -116,7 +113,6 @@ $messages-container-width: 700px;
 
     &.last-message {
       .message__body {
-        position: relative;
         border-bottom-left-radius: 0px;
 
         &::before {
