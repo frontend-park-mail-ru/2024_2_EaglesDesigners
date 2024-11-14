@@ -51,13 +51,26 @@ $chat-margin-top: 20px;
 }
 
 .add-chat-btn {
+  width: 54px;
+  height: 54px;
+
   cursor: pointer;
+
+  .add-icon{
+    width: 54px;
+    height: 54px;
+  }
+
+  .cancel-icon{
+    width: 54px;
+    height: 54px;
+  }
 }
 
 .add-chat {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 15px;
+  bottom: 15px;
 
   display: flex;
   flex-direction: column-reverse;

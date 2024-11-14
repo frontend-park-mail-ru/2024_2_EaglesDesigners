@@ -4,10 +4,11 @@ $accent: var(--accent);
 $text-over-primary: var(--text-over-primary);
 $text-error-message: var(--text-error-message);
 
+$main-page-right-column-width: var(--main-page-right-column-width);
 $scroll-bar-color: var(--scroll-bar-color);
 
 .group-info {
-  width: 240px;
+  width: $main-page-right-column-width;
   flex: 1;
   min-height: 0;
 
