@@ -2,29 +2,32 @@ $text-over-primary: var(--text-over-primary);
 $text-error-message: var(--text-error-message);
 
 .profile-form {
+  position: relative;
+  width: 100%;
+
+  background: var(--primary);
+
   display: flex;
   flex-direction: column;
-  background: var(--primary);
-  flex: 1350 0 0;
-  width: 402px;
 }
 
 .profile-form-header {
+  height: 60px;
+
   background: var(--header);
+
   display: flex;
-  flex-direction: row;
-  justify-content: left;
   align-items: center;
-  height: 59px;
-  margin-bottom: 20px;
 }
 
 .profile-form-header-img {
   padding-left: 10px;
+  width: 24px;
   height: 24px;
 
   &__img {
     width: 24px;
+    height: 24px;
     cursor: pointer;
   }
 }
@@ -32,7 +35,6 @@ $text-error-message: var(--text-error-message);
 .profile-form-header-name {
   margin-left: 20px;
   display: flex;
-  align-items: center;
 
   &__span {
     font-size: 22px;
@@ -42,20 +44,21 @@ $text-error-message: var(--text-error-message);
 }
 
 .profile-form-user-info {
+  margin: 20px;
+
   display: flex;
   justify-content: center;
-  height: 78%;
 }
 
 .profile-form-user {
-  margin: 3% auto auto auto;
 
   &__input {
     display: block;
     border: none;
     border-bottom: 2px solid var(--text-over-primary);
     padding-left: 10px;
-    width: 320px;
+    box-sizing: border-box;
+    width: 100%;
     height: var(--input-height);
     font-size: 18px;
     font-family: var(--main-font-family);
@@ -89,8 +92,6 @@ $text-error-message: var(--text-error-message);
   }
 
   &__p {
-    display: flex;
-    width: 320px;
     font-size: 14px;
     color: var(--text-over-primary);
     opacity: 50%;
@@ -105,13 +106,11 @@ $text-error-message: var(--text-error-message);
 }
 
 .profile-error-nickname {
-  min-height: 51px;
+  min-height: 50px;
 }
 
 .profile-error {
   &__span {
-    display: flex;
-    width: 320px;
     font-size: 14px;
     color: $text-error-message;
     font-family: var(--main-font-family);
@@ -119,23 +118,30 @@ $text-error-message: var(--text-error-message);
 }
 
 .profile-buttons {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+
   display: flex;
 }
 
 .exit-btn {
-  width: 50%;
-  padding-left: 20px;
+  margin-left: 15px;
+  
+  display: flex;
 
   &__img {
+    width: 54px;
+    height: 54px;
     cursor: pointer;
   }
 }
 
 .profile-form-confirm {
+  margin-left: auto;
+  margin-right: 15px;
+  
   display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
-  width: 50%;
 
   &__img {
     width: 54px;
