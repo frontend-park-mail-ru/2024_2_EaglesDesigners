@@ -74,6 +74,7 @@ $main-page-left-column-max-width: 400px;
 
   height: calc(100% - $chat-margin-top);
   box-sizing: border-box;
+  margin: 0 20px;
   margin-top: $chat-margin-top;
 
   border-top-left-radius: 20px;
@@ -118,11 +119,6 @@ $main-page-left-column-max-width: 400px;
   height: 114px;
 }
 
-.chat-user-info {
-  background: transparent;
-  height: auto;
-}
-
 .main-page__info-container-div {
   background: transparent;
   height: auto;
@@ -150,4 +146,12 @@ $main-page-left-column-max-width: 400px;
   align-items: center;
   height: 50%;
   margin-top: 100%;
+}
+
+.chat-info-container{
+  margin-top: 20px;
+  margin-right: 20px;
+  
+  display: flex;
+  flex-direction: column;
 }
