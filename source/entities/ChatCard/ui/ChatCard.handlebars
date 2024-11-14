@@ -1,26 +1,18 @@
 <a class="chat-card" href={{chat.chatId}}>
-
-  <div class="chat-card__div">
-    <img class="chat-card__div__img" src="{{avatar}}" />
-    <div class="chat-card__div__chat-info">
-      <div class="chat-card__div__chat-info__div-chat-name">
-        <span class="chat-card__div__chat-info__div-chat-name__span">
-          {{chat.chatName}}
-        </span>
-      </div>
-      <div class="chat-card__div__chat-info__date">
-        <span class="chat-card__div__chat-info__date__span">
-          {{chat.lastMessage.datetime}}
-        </span>
-      </div>
+  <img class="chat-card__img" src="{{avatar}}" />
+  <div class="chat-card__info">
+    <div class="info__upper-row">
+      <span class="upper-row__chat-name">
+        {{chat.chatName}}
+      </span>
+      <span class="upper-row__date-time">
+        {{chat.lastMessage.datetime}}
+      </span>
     </div>
-    <div class="chat-card__div__div-message">
-      <div class="chat-card__div__div-message__div">
-        <span class="chat-card__div__div-message__div__span">
-          {{chat.lastMessage.text}}
-        </span>
-      </div>
-
+    <div class="info__lower-row">
+      <span class="lower-row__message">
+        {{chat.lastMessage.text}}
+      </span>
     </div>
   </div>
 </a>
