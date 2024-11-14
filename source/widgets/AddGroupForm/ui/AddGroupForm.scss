@@ -10,31 +10,37 @@ $scroll-bar-color: var(--scroll-bar-color);
 
 .add-group {
   position: relative;
+  width: 100%;
+
+  background: var(--primary);
+
   display: flex;
   flex-direction: column;
-  background: var(--primary);
-  flex: 1350 0 0;
-  width: 402px;
-  max-height: 100%;
 }
 
 .add-group-header {
+  height: 60px;
+
   background: var(--header);
+
   display: flex;
-  flex-direction: row;
-  justify-content: left;
   align-items: center;
-  height: 59px;
-  margin-bottom: 20px;
 }
 
 .add-group-header-img {
   margin-left: 10px;
+  width: 24px;
+  height: 24px;
+
   cursor: pointer;
+  
+  &__img {
+    width: 24px;
+    height: 24px;
+  }
 }
 .add-group-header-name {
-  margin-left: 13px;
-  padding: 7px;
+  margin-left: 20px;
 
   &__span {
     color: $text-over-primary;
@@ -44,7 +50,8 @@ $scroll-bar-color: var(--scroll-bar-color);
 }
 
 .add-group-form-user {
-  margin: 10px 20px 0px 20px;
+  margin: 20px;
+  margin-bottom: 0;
 
   &__input {
     display: block;
@@ -106,7 +113,7 @@ $scroll-bar-color: var(--scroll-bar-color);
 
 .add-contacts-caption {
   @include font-settings("Inter", 400, 20px, $text-over-primary);
-  margin: 20px 20px 10px 20px;
+  margin: 10px 20px;
 }
 
 .group-contacts-list {
@@ -127,6 +134,9 @@ $scroll-bar-color: var(--scroll-bar-color);
 
 .add-group-form-confirm {
   position: absolute;
+  width: 54px;
+  height: 54px;
+  
   right: 20px;
   bottom: 20px;
   cursor: pointer;
