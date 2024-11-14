@@ -1,14 +1,16 @@
+$primary-shadow-25: var(--primary-shadow-25);
+
+$text-over-primary: var(--text-over-primary);
+
 .chat-card__div {
   border-radius: 15px;
-  margin-inline: 9px;
-  padding-inline: 10px;
+  padding-right: 10px;
 
   display: grid;
   grid-template-areas:
     "avatar up"
     "avatar low";
   grid-template-columns: min-content auto;
-  grid-template-rows: 50% 50%;
 }
 
 .chat-card {
@@ -19,29 +21,21 @@
 .chat-card__div__img {
   grid-area: avatar;
   border-radius: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    var(--primary);
+  background: $primary-shadow-25;
 
-  box-sizing: border-box;
   width: var(--avatar-size);
   height: var(--avatar-size);
   margin: 10px;
-  margin-left: 0;
-  align-self: center;
-  justify-self: center;
 }
 
 .chat-card__div__chat-info {
   grid-area: up;
-  width: auto;
-  height: fit-content;
 
   padding-bottom: 4px;
 
   align-self: flex-end;
   display: grid;
   grid-template-areas: "chat-name-container last-message-time";
-  grid-template-columns: auto fit-content;
 }
 
 .chat-card__div__chat-info__div-chat-name {
@@ -53,10 +47,9 @@
   line-height: 21px;
   font-weight: 500;
   font-size: 16px;
-  color: white;
+  color: $text-over-primary;
 
   display: block;
-  max-width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -73,27 +66,23 @@
   line-height: 16px;
   font-weight: 300;
   font-size: 12px;
-  color: var(--text-over-primary);
+  color: $text-over-primary;
   filter: brightness(50%);
 
   justify-self: flex-start;
 }
 .chat-card__div__div-message {
   grid-area: low;
-  width: auto;
-  height: fit-content;
 
   padding-top: 4px;
 
   display: grid;
   grid-template-areas: "chat-name-containerl last-message-timel";
-  grid-template-columns: auto fit-content;
 }
 
 .chat-card__div__div-message__div {
   grid-area: chat-name-containerl;
   overflow: hidden;
-  display: inline-flex;
 }
 
 .chat-card__div__div-message__div__span {
@@ -102,17 +91,13 @@
   font-weight: 400;
   font-size: 16px;
   display: block;
-  color: var(--text-over-primary);
+  color: $text-over-primary;
   filter: brightness(50%);
 
-  flex-shrink: 0;
-  flex-grow: 1;
-  flex-basis: 0px;
+  flex: 1;
   min-width: 0px;
 
   display: block;
-  min-width: none;
-  max-width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
