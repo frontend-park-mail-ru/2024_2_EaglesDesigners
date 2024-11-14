@@ -50,6 +50,8 @@ $text-over-primary: var(--text-over-primary);
           }
 
           &__date-time {
+            padding-left: 2px;
+            
             font-family: "Inter";
             line-height: 16px;
             font-weight: 300;
