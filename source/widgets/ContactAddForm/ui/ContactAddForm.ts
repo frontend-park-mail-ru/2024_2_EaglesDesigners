@@ -58,7 +58,12 @@ export class ContactAddForm {
         spanError.classList.remove("error-span");
       }
 
-      if (response.error) {
+      if (response.error === "Contact already exists") {
+        spanError.classList.add("error-span");
+        spanError.textContent = "Такой пользователь уже добавлен";
+        spanError.classList.remove("not-error-span");
+      }
+      if (response.error === "Invalid data") {
         spanError.classList.add("error-span");
         spanError.textContent = "Такой пользователь не найден";
         spanError.classList.remove("not-error-span");
