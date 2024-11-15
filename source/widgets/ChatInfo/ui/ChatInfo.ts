@@ -20,7 +20,6 @@ export class ChatInfo {
     const usersInChat = await API.get<UsersIdResponse>(
       "/chat/" + this.#chat.chatId,
     );
-    console.log(usersInChat);
     let user;
     if (usersInChat.users) {
       if (usersInChat.users[0].id !== UserStorage.getUser().id) {

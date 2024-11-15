@@ -66,7 +66,6 @@ export class ContactCard {
           const usersRes = await API.get<UsersIdResponse>(
             "/chat/" + elem.chatId,
           );
-          console.log(usersRes, contact.id);
           if (usersRes.users && (usersRes.users[0].id === contact.id  || usersRes.users[1].id === contact.id)) {
             chatList.render();
             chat.render(elem);
@@ -83,14 +82,12 @@ export class ContactCard {
 
       const formData: FormData = new FormData();
       const jsonProfileData = JSON.stringify(newChat);
-      console.log(jsonProfileData)
       formData.append("chat_data", jsonProfileData);
 
       const newChatRes = await API.postFormData<ChatResponse>(
         "/addchat",
         formData,
       );
-      console.log(newChatRes)
 
       if (!newChatRes.error) {
         chatList.render();

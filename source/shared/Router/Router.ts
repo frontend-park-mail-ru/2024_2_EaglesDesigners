@@ -29,7 +29,6 @@ class Route {
   }
 
   async go(url: string, addToHistory = true) {
-    console.log(window.history);
     const index = this.#strictRoutes.findIndex((elem) => url === elem);
     if (index !== -1 && UserStorage.getUser().name !== "") {
       this.go("/");
@@ -69,8 +68,6 @@ class Route {
         const urlMatch = url.match(currentURL.path!);
         urlMatch?.shift();
         if (urlMatch?.length) {
-          // console.log("urlMat", urlMatch);
-          // console.log("lol", ...(urlMatch as [string, string]));
           currentURL.view.render(urlMatch[0]);
         } else {
           currentURL.view.render();
