@@ -1,6 +1,3 @@
-$whitecolor: var(--text-over-primary);
-$redcolor: var(--text-error-message);
-
 .group-info {
   width: 100%;
   height: 100%;
@@ -58,11 +55,11 @@ $redcolor: var(--text-error-message);
     display: block;
     font-size: 20px;
     font-family: var(--main-font-family);
-    color: $whitecolor;
+    color: var(--text-over-primary);
   }
 
   &__span {
-    color: $whitecolor;
+    color: var(--text-over-primary);
     font-size: 14px;
     font-family: var(--main-font-family);
     opacity: 0.4;
@@ -83,7 +80,7 @@ $redcolor: var(--text-error-message);
   margin-right: 10px;
 
   &__span {
-    color: $whitecolor;
+    color: var(--text-over-primary);
     font-family: var(--main-font-family);
     font-size: 14px;
     text-align: center;
@@ -102,7 +99,7 @@ $redcolor: var(--text-error-message);
 }
 
 .users-count {
-  color: $whitecolor;
+  color: var(--text-over-primary);
   font-family: var(--main-font-family);
   font-size: 14px;
   opacity: 0.4;
@@ -134,8 +131,8 @@ $redcolor: var(--text-error-message);
     width: 90%;
     height: 29px;
     border-radius: 5px;
-    background-color: $redcolor;
-    color: $whitecolor;
+    background-color: var(--text-error-message);
+    color: var(--text-over-primary);
     border: none;
     cursor: pointer;
   }
