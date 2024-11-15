@@ -25,13 +25,13 @@
 
   &__span-user-name {
     display: block;
-    color: var(--text-over-primary);
+    color: #fff;
     font-family: var(--main-font-family);
     font-size: 20px;
   }
 
   &__span-online-status {
-    color: var(--text-over-primary);
+    color: #fff;
     font-family: var(--main-font-family);
     font-size: 14px;
     opacity: 0.4;
@@ -49,7 +49,7 @@
   &__span {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
-    color: var(--text-over-primary);
+    color: #fff;
   }
 }
 
@@ -59,12 +59,12 @@
   &__span {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
-    color: var(--text-over-primary);
+    color: #fff;
   }
 }
 
 .span-description {
-  color: var(--text-over-primary);
+  color: #fff;
   font-size: 14px;
   opacity: 0.4;
   font-family: var(--main-font-family);
@@ -87,7 +87,7 @@
   &__button {
     width: 95%;
     height: 39px;
-    color: var(--text-over-primary);
+    color: #fff;
     font-size: 16px;
     font-family: var(--main-font-family);
     background-color: var(--text-error-message);

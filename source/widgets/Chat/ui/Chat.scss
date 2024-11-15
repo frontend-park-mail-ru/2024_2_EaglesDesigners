@@ -30,6 +30,10 @@ textarea {
 
   resize: none;
 
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+    
   @include font-settings("Inter", 400, 16px, $text-over-primary);
   background: transparent;
   padding: 0px;
