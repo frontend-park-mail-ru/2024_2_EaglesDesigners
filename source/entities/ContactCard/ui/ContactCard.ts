@@ -6,7 +6,7 @@ import { TChat } from "@/entities/Chat";
 import {
   ChatResponse,
   ChatsResponse,
-  ChatUsersResponse,
+  UsersIdResponse,
 } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { Chat } from "@/widgets/Chat";
@@ -63,10 +63,11 @@ export class ContactCard {
 
       for (const elem of chats) {
         if (elem.chatType === "personal") {
-          const usersRes = await API.get<ChatUsersResponse>(
-            "/chat/" + elem.chatId + "/users",
+          const usersRes = await API.get<UsersIdResponse>(
+            "/chat/" + elem.chatId,
           );
-          if (usersRes.usersId && usersRes.usersId.includes(contact.id)) {
+          console.log(usersRes, contact.id);
+          if (usersRes.users && (usersRes.users[0].id === contact.id  || usersRes.users[1].id === contact.id)) {
             chatList.render();
             chat.render(elem);
             return;
@@ -75,19 +76,21 @@ export class ContactCard {
       }
 
       const newChat: TNewChat = {
-        chatName: contact.username,
+        chatName: contact.name,
         chatType: "personal",
         usersToAdd: [contact.id],
       };
 
       const formData: FormData = new FormData();
       const jsonProfileData = JSON.stringify(newChat);
+      console.log(jsonProfileData)
       formData.append("chat_data", jsonProfileData);
 
       const newChatRes = await API.postFormData<ChatResponse>(
         "/addchat",
         formData,
       );
+      console.log(newChatRes)
 
       if (!newChatRes.error) {
         chatList.render();

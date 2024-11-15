@@ -84,7 +84,8 @@ export interface UsersIdRequest {
 }
 
 export interface UsersIdResponse {
-  usersId: string[];
+  messages: TChatMessage[];
+  users: TUser[];
 }
 
 export interface GroupUpdateRequest {
