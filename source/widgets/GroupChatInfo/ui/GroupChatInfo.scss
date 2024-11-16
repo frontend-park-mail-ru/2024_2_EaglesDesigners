@@ -26,23 +26,14 @@ $scroll-bar-color: var(--scroll-bar-color);
   justify-content: center;
 }
 
-.group-update-image {
+.group-update-image__img {
   position: absolute;
   top: 20px;
   right: 20px;
 
-  display: flex;
-
-  &__img {
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-  }
-}
-
-.group-avatar {
-  display: flex;
-  justify-content: center;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
 }
 
 .group-info-header {

@@ -96,7 +96,7 @@ export class Chat {
     textArea.addEventListener("keypress", KeyPressHandler);
 
     document
-      .querySelector(".input-send-btn__img")!
+      .querySelector(".input-send-btn")!
       .addEventListener("click", sendInputMessage);
 
     const response = await API.get<ChatMessagesResponse>(

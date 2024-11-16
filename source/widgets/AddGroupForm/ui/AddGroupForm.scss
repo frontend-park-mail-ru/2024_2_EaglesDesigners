@@ -25,6 +25,7 @@ $scroll-bar-color: var(--scroll-bar-color);
 
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .add-group-header-img {
@@ -33,20 +34,11 @@ $scroll-bar-color: var(--scroll-bar-color);
   height: 24px;
 
   cursor: pointer;
-  
-  &__img {
-    width: 24px;
-    height: 24px;
-  }
 }
 .add-group-header-name {
-  margin-left: 20px;
-
-  &__span {
-    color: $text-over-primary;
-    font-family: var(--main-font-family);
-    font-size: var(--form-font-size);
-  }
+  color: $text-over-primary;
+  font-family: var(--main-font-family);
+  font-size: var(--form-font-size);
 }
 
 .add-group-form-user {
@@ -102,15 +94,6 @@ $scroll-bar-color: var(--scroll-bar-color);
   }
 }
 
-.contacts-list-header-img {
-  padding-left: 10px;
-  height: 24px;
-
-  &__img {
-    cursor: pointer;
-  }
-}
-
 .add-contacts-caption {
   @include font-settings("Inter", 400, 20px, $text-over-primary);
   margin: 10px 20px;
@@ -132,12 +115,13 @@ $scroll-bar-color: var(--scroll-bar-color);
   }
 }
 
-.add-group-form-confirm {
+.add-group-form-confirm-img {
   position: absolute;
+  right: 20px;
+  bottom: 20px;
+
   width: 54px;
   height: 54px;
   
-  right: 20px;
-  bottom: 20px;
   cursor: pointer;
 }

@@ -18,6 +18,7 @@ $text-error-message: var(--text-error-message);
 
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .profile-form-header-img {
@@ -25,32 +26,17 @@ $text-error-message: var(--text-error-message);
   width: 24px;
   height: 24px;
 
-  &__img {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-  }
+  cursor: pointer;
 }
 
 .profile-form-header-name {
-  margin-left: 20px;
-  display: flex;
-
-  &__span {
-    font-size: 22px;
-    font-family: var(--main-font-family);
-    color: $text-over-primary;
-  }
-}
-
-.profile-form-user-info {
-  margin: 20px;
-
-  display: flex;
-  justify-content: center;
+  font-size: 22px;
+  font-family: var(--main-font-family);
+  color: $text-over-primary;
 }
 
 .profile-form-user {
+  margin: 20px;
 
   &__input {
     display: block;
@@ -125,27 +111,21 @@ $text-error-message: var(--text-error-message);
   display: flex;
 }
 
-.exit-btn {
+.exit-btn-img {
   margin-left: 15px;
-  
-  display: flex;
 
-  &__img {
-    width: 54px;
-    height: 54px;
-    cursor: pointer;
-  }
+  width: 54px;
+  height: 54px;
+
+  cursor: pointer;
 }
 
-.profile-form-confirm {
+.profile-form-confirm-img {
   margin-left: auto;
   margin-right: 15px;
   
-  display: flex;
+  width: 54px;
+  height: 54px;
 
-  &__img {
-    width: 54px;
-    height: 54px;
-    cursor: pointer;
-  }
+  cursor: pointer;
 }

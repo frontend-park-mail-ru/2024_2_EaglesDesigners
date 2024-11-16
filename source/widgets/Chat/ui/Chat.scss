@@ -65,22 +65,13 @@ textarea {
 
   display: flex;
   align-items: center;
+  gap: 8px;
 
-  .avatar-container{
+  .avatar {
     margin-left: 20px;
-    margin-right: 8px;
-
-    cursor: pointer;
-
-    display: flex;
-
-    .avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 100%;
-  
-      margin: 0px;
-    }
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
   }
 }
 
@@ -140,9 +131,9 @@ textarea {
   gap: 15px;
 }
 
-.attach-btn {
-  height: 24px;
+.attach-icon {
   width: 24px;
+  height: 24px;
 }
 
 .text-area {
@@ -152,25 +143,15 @@ textarea {
   line-height: 19px;
 }
 
-.emoji-btn {
-  height: 24px;
+.emoji-icon {
   width: 24px;
+  height: 24px;
 }
 
 .input-send-btn {
   width: 54px;
   height: 54px;
-  background: $accent;
-
+  
   border-radius: 100%;
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__img {
-    width: 22px;
-    height: 22px;
-  }
 }

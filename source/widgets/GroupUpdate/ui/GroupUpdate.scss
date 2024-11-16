@@ -95,16 +95,12 @@ $main-page-right-column-width: var(--main-page-right-column-width);
   }
 }
 
-.confirm-group-update {
+.confirm-group-update__img {
   position: absolute;
   bottom: 15px;
   right: 15px;
 
-  display: flex;
-
-  &__img {
-    width: 54px;
-    height: 54px;
-    cursor: pointer;
-  }
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
 }

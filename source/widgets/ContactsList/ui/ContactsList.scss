@@ -18,44 +18,32 @@ $scroll-bar-color: var(--scroll-bar-color);
   background: var(--header);
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .contacts-list-header-name {
-  margin-left: 20px;
-
-  &__span {
     color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: var(--form-font-size);
-  }
 }
 
-.button-add{
+.button-add-img{
   position: absolute;
   right: 15px;
   bottom: 15px;
 
-  display: flex;
+  width: 54px;
+  height: 54px;
 
-  &__img {
-    width: 54px;
-    height: 54px;
-
-    cursor: pointer;
-  }
+  cursor: pointer;
 }
 
 .contacts-list-header-img {
-  padding-left: 10px;
+  margin-left: 10px;
   width: 24px;
   height: 24px;
 
-  &__img {
-    width: 24px;
-    height: 24px;
-
-    cursor: pointer;
-  }
+  cursor: pointer;
 }
 
 .contacts-user-list {
