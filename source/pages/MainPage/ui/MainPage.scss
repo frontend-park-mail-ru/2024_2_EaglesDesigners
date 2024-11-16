@@ -84,39 +84,19 @@ $main-page-left-column-max-width: 400px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-}
 
-.chat-content-dialog {
-  width: 38vw;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.dialog-content {
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__p {
+  &__placeholder {
     color: var(--text-over-primary);
     font-family: "Inter";
     line-height: 21px;
     font-weight: 400;
     font-size: 16px;
     opacity: 50%;
-  }
-}
 
-.dialog-content-input {
-  width: 100%;
-  height: 114px;
+    flex: 1;
+    align-self: center;
+    align-content: center;
+  }
 }
 
 .main-page__info-container-div {
