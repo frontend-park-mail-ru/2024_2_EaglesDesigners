@@ -9,7 +9,7 @@
 
   </div>
 
-  <div class="add-chat">
+  <div class="add-chat" id="add-chat">
     <div class="add-chat-btn" id="addChatButton">
       <img class="add-icon" src="/assets/image/add-24px.svg" />
       <img
@@ -19,14 +19,20 @@
       />
     </div>
     <div class="add-chat__popup" id="addChatPopUp" style="display: none;">
-      <span class="create-personal-chat add-chat__popup__item">
+      <span 
+        class="create-personal-chat add-chat__popup__item" 
+        id="create-personal-chat"
+      >
         <img
           class="create-personal-chat__icon"
           src="/assets/image/user.svg"
         />
         Создать личный чат
       </span>
-      <span class="create-group-chat add-chat__popup__item">
+      <span 
+        class="create-group-chat add-chat__popup__item" 
+        id="create-group-chat"
+      >
         <img class="create-group-chat__icon" src="/assets/image/users.svg" />
         Создать группу
       </span>

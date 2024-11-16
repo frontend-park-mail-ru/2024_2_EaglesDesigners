@@ -27,7 +27,7 @@ $chat-margin-top: 20px;
 
 .chat-list-container-search {
   background: $primary-shadow-25;
-  height: 85px;
+  height: 70px;
 
   border-radius: 20px;
 
@@ -35,7 +35,7 @@ $chat-margin-top: 20px;
 }
 
 .chat-list-container-chatlist {
-  height: 100%;
+  flex: 1;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {

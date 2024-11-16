@@ -41,7 +41,7 @@ export class MainPage extends View {
     const chatUserInfo = parent.querySelector("#chat-info-container")!;
     const chatListParent = parent.querySelector("#widget-import")!;
 
-    const chatParent = parent.querySelector(".chat-content")!;
+    const chatParent = parent.querySelector("#chat-content")!;
     const chat = new Chat(chatParent, chatUserInfo);
 
     const chatList = new ChatList(chatListParent, chat);

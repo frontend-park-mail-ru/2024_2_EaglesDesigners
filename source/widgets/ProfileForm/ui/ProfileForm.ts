@@ -164,7 +164,7 @@ export class ProfileForm {
     };
     confirmButton?.addEventListener("click", updateProfileInfo);
 
-    const exitButton = this.#parent.querySelector(".exit-btn-img")!;
+    const exitButton = this.#parent.querySelector("#logout")!;
 
     const handleExitClick = async () => {
       const response = await API.post<EmptyResponse, EmptyRequest>(

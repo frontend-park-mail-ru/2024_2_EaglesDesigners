@@ -38,7 +38,7 @@ export class ChatList {
       chatCard.render(chat);
     });
 
-    const addChat = document.querySelector(".add-chat")!;
+    const addChat = document.querySelector("#add-chat")!;
     const addChatButton = addChat.querySelector("#addChatButton")!;
     const addIcon = addChat.querySelector<HTMLElement>(".add-icon")!;
     const cancelIcon = addChat.querySelector<HTMLElement>(".cancel-icon")!;
@@ -65,14 +65,14 @@ export class ChatList {
     });
 
     addChat
-      .querySelector(".create-personal-chat")!
+      .querySelector("#create-personal-chat")!
       .addEventListener("click", () => {
         const contactForm = new ContactsList(this.#parent, this.#chat);
         contactForm.render();
       });
 
     addChat
-      .querySelector(".create-group-chat")!
+      .querySelector("#create-group-chat")!
       .addEventListener("click", () => {
         const addGroupForm = new AddGroupForm(this.#parent, this.#chat);
         addGroupForm.render();
