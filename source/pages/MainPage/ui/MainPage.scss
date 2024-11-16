@@ -1,4 +1,6 @@
 $primary: var(--primary);
+$primary-shadow-15: var(--primary-shadow-15);
+
 $background: var(--background);
 
 $button-over-background-hover: var(--button-over-background-hover);
@@ -15,48 +17,25 @@ $main-page-left-column-max-width: 400px;
 .main-page-content {
   background: $background;
   width: 100px;
-  height: auto;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.main-page-logo {
-  display: flex;
+.main-page-logo-img {
   width: 100px;
   height: 100px;
-  align-content: center;
-  justify-content: center;
 }
 
-.main-page-sidebar {
-  display: flex;
-  height: 50%;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 30px;
+.main-page-user-avatar-img {
+  margin-bottom: 30px;
+  width: 54px;
+  height: 54px;
 
-  &__span {
-    color: var(--text-over-primary);
-    font-family: var(--main-font-family);
-    font-family: var(--base-font-size);
-
-    display: block;
-    max-width: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-.main-page-user-avatar {
-  display: flex;
-  justify-content: center;
-
-  &__img {
-    border-radius: 100px;
-    cursor: pointer;
-  }
+  border-radius: 100px;
+  cursor: pointer;
 }
 
 .main-page-widget {
@@ -64,15 +43,12 @@ $main-page-left-column-max-width: 400px;
   min-width: $main-page-left-column-min-width;
   max-width: $main-page-left-column-max-width;
   width: 30vw;
-  max-height: 100%;
 }
 
 .chat-content {
-  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
-  $primary;
+  background: $primary-shadow-15;
   flex: 1;
 
-  box-sizing: border-box;
   margin-right: 20px;
   margin-top: $chat-margin-top;
 
@@ -98,21 +74,20 @@ $main-page-left-column-max-width: 400px;
   }
 }
 
-.main-page__info-container-div {
-  background: transparent;
-  height: auto;
-}
-
 .main-page-navigators-button {
+  padding: 0;
+
   height: 50px;
   width: 50px;
   background-color: inherit;
   border: none;
-  cursor: pointer;
-  margin-bottom: 25px;
-
   transition-duration: 0.2s;
+  cursor: pointer;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    
   &:hover {
     background-color: $button-over-background-hover;
     border-radius: 100%;
@@ -122,14 +97,12 @@ $main-page-left-column-max-width: 400px;
 .main-page-navigators {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 50%;
-  margin-top: 100%;
+  gap: 25px;
 }
 
 .chat-info-container{
   position: relative;
-  margin-top: 20px;
+  margin-top: $chat-margin-top;
   
   display: flex;
   flex-direction: column;
