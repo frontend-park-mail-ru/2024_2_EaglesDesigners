@@ -1,10 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const path = require('path')
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 
 module.exports = {

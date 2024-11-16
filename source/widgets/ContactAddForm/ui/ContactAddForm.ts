@@ -6,6 +6,7 @@ import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Chat } from "@/widgets/Chat";
 import { ChatList } from "@/widgets/ChatList";
+import { errors } from "@/shared/config/lang";
 
 export class ContactAddForm {
   #parent;
@@ -58,14 +59,10 @@ export class ContactAddForm {
         spanError.classList.remove("error-span");
       }
 
-      if (response.error === "Contact already exists") {
+      
+      if (response.error in errors) {
         spanError.classList.add("error-span");
-        spanError.textContent = "Такой пользователь уже добавлен";
-        spanError.classList.remove("not-error-span");
-      }
-      if (response.error === "Invalid data") {
-        spanError.classList.add("error-span");
-        spanError.textContent = "Такой пользователь не найден";
+        spanError.textContent = errors[response.error];
         spanError.classList.remove("not-error-span");
       }
     };

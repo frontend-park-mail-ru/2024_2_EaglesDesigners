@@ -22,11 +22,7 @@ export class ChatInfo {
     );
     let user;
     if (usersInChat.users) {
-      if (usersInChat.users[0].id !== UserStorage.getUser().id) {
-        user = usersInChat.users[0];
-      } else {
-        user = usersInChat.users[1];
-      }
+      user = usersInChat.users[(usersInChat.users[0].id !== UserStorage.getUser().id) ? 0 : 1];
       const profileUser = await API.get<ProfileResponse>("/profile/" + user.id);
       const birthdate = moment(profileUser.birthdate)
         .utc()
