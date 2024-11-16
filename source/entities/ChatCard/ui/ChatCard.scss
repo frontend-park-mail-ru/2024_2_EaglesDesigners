@@ -4,7 +4,7 @@ $text-over-primary: var(--text-over-primary);
 
 .chat-card {
   border-radius: 15px;
-  padding-right: 10px;
+  margin-right: 10px;
 
   cursor: pointer;
   text-decoration: none;
@@ -12,12 +12,13 @@ $text-over-primary: var(--text-over-primary);
   display: flex;
 
   &__img {
+    margin: 10px;
+
     border-radius: 100%;
     background: $primary-shadow-25;
 
     width: var(--avatar-size);
     height: var(--avatar-size);
-    margin: 10px;
   }
 
   &__info {
@@ -50,7 +51,7 @@ $text-over-primary: var(--text-over-primary);
           }
 
           &__date-time {
-            padding-left: 2px;
+            margin-left: 2px;
             
             font-family: "Inter";
             line-height: 16px;

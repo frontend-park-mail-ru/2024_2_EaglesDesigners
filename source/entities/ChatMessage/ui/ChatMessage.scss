@@ -31,8 +31,7 @@ $messages-container-width: 700px;
 
     box-sizing: border-box;
     position: relative;
-    padding: 6px 12px;
-    padding-bottom: 3px;
+    padding: 6px 12px 3px 12px;
 
     &__username {
       @include font-settings("Inter", 400, 14px, $secondary);
@@ -47,7 +46,6 @@ $messages-container-width: 700px;
       @include font-settings("Inter", 400, 16px, $text-over-secondary);
 
       display: inline;
-      padding-bottom: 6px;
       word-wrap: break-word;
     }
     &__meta {
@@ -56,8 +54,7 @@ $messages-container-width: 700px;
       align-items: flex-end;
       float: right;
       column-gap: 1px;
-      box-sizing: border-box;
-      padding-left: 4px;
+      margin-left: 4px;
       .timedate {
         @include font-settings("Inter", 400, 10px, $text-over-secondary);
         opacity: 0.6;

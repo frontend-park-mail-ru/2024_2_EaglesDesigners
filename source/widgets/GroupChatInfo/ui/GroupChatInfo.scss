@@ -68,8 +68,8 @@ $scroll-bar-color: var(--scroll-bar-color);
 }
 
 .group-content {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 10px 0 0 10px;
+
   flex: 1;
   min-height: 0;
 
@@ -78,8 +78,9 @@ $scroll-bar-color: var(--scroll-bar-color);
 }
 
 .group-content-header {
-  display: flex;
   margin-right: 10px;
+
+  display: flex;  
   align-items: flex-end;
 
   &__span {
@@ -92,6 +93,7 @@ $scroll-bar-color: var(--scroll-bar-color);
     margin-left: auto;
     box-sizing: border-box;
     padding: 5px;
+
     background-color: $accent;
     border-radius: 5px;
     border: none;
@@ -126,8 +128,7 @@ $scroll-bar-color: var(--scroll-bar-color);
 .delete-group__button {
   height: 40px;
 
-  margin-top: auto;
-  margin-bottom: 20px;
+  margin: auto 0 20px 0;
 
   color: $text-error-message;
   font-size: 16px;
