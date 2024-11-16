@@ -10,16 +10,18 @@ class Route {
     this.#strictRoutes = [];
 
     window.onpopstate = async (event) => {
-      if (event.state) {
-        const index = this.#strictRoutes.findIndex(
-          (element) => element === event.state.url,
-        );
-        if (UserStorage.getUser().name === "" && index === -1) {
-          this.go("/login", false);
-          return;
-        }
-        this.go(event.state.url, false);
+      if (!event.state) {
+        return;
       }
+      const index = this.#strictRoutes.findIndex(
+        (element) => element === event.state.url,
+      );
+      if (UserStorage.getUser().name === "" && index === -1) {
+        this.go("/login", false);
+        return;
+      }
+      this.go(event.state.url, false);
+      
     };
   }
 

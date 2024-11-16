@@ -1,3 +1,5 @@
+@import "@/shared/styles/styles.scss";
+
 .chat-info {
   background-color: #4f82bf;
   width: 90%;
@@ -40,7 +42,7 @@
 
 .chat-user-info {
   margin-top: 20px;
-  padding: 0px 20px 0px 20px  ;
+  padding: 0px 20px;
 }
 
 .chat-user-birthday {
@@ -85,15 +87,8 @@
   align-items: end;
 
   &__button {
-    width: 95%;
-    height: 39px;
-    color: #fff;
-    font-size: 16px;
-    font-family: var(--main-font-family);
-    background-color: var(--text-error-message);
+    @include btn();
     border-radius: 5px;
-    border: none;
-    cursor: pointer;
   }
 }
 
