@@ -40,14 +40,14 @@ textarea {
 .chat {
   width: 100%;
   min-width: $chat-min-width;
-
+  flex: 1;
+  min-height: 0;
+  
   box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: calc(100% - $chat-header-height);
-  flex: 1;
 }
 
 .header {
