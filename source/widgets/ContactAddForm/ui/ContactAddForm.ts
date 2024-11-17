@@ -60,13 +60,7 @@ export class ContactAddForm {
       }
 
       if (response.error) {
-        let message : string;
-        if (response.error in errors) {
-          message = errors[response.error];
-        }
-        else {
-          message = errors["Default error"];
-        }
+        const message : string = errors[response.error] ?? errors["Default error"];
         spanError.textContent = message;
         spanError.classList.add("error-span");
         spanError.classList.remove("not-error-span");
