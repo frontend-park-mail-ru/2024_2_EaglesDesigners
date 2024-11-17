@@ -6,6 +6,7 @@ $accent: var(--accent);
 $text-over-primary: var(--text-over-primary);
 $text-over-primary-shadow-50: var(--text-over-primary-shadow-50);
 
+$scroll-bar-color: var(--scroll-bar-color);
 $chat-header-height: 70px;
 $chat-min-width: 500px;
 $messages-container-max-width: 600px;
@@ -29,8 +30,18 @@ textarea {
   resize: none;
 
   overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
 
   @include font-settings("Inter", 400, 16px, $text-over-primary);
   background: transparent;
@@ -98,8 +109,18 @@ textarea {
   gap: 5px;
 
   overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
 }
 
 .messages:hover {

@@ -2,8 +2,8 @@ $secondary: var(--secondary);
 $accent: var(--accent);
 
 $text-over-primary: var(--text-over-primary);
-$text-error-message: var(--text-error-message);
 
+$delete-button-color: var(--delete-button-color);
 $main-page-right-column-width: var(--main-page-right-column-width);
 $scroll-bar-color: var(--scroll-bar-color);
 
@@ -130,10 +130,10 @@ $scroll-bar-color: var(--scroll-bar-color);
 
   margin: auto 0 20px 0;
 
-  color: $text-error-message;
+  color: $text-over-primary;
   font-size: 16px;
   font-family: var(--main-font-family);
-  background-color: $accent;
+  background-color: $delete-button-color;
   border-radius: 5px;
   border: none;
   cursor: pointer;

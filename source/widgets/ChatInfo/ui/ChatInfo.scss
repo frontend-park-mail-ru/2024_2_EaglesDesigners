@@ -1,8 +1,9 @@
 $secondary: var(--secondary);
 
+$text-over-primary: var(--text-over-primary);
 $text-over-secondary: var(--text-over-secondary);
-$text-error-message: var(--text-error-message);
-$form-button-access: var(--form-button-access);
+
+$delete-button-color: var(--delete-button-color);
 
 .chat-info-column{
   width: 240px;
@@ -87,10 +88,10 @@ $form-button-access: var(--form-button-access);
 
   margin: auto 0 20px 0;
 
-  color: $text-error-message;
+  color: $text-over-primary;
   font-size: 16px;
   font-family: var(--main-font-family);
-  background-color: $form-button-access;
+  background-color: $delete-button-color;
   border-radius: 5px;
   border: none;
   cursor: pointer;

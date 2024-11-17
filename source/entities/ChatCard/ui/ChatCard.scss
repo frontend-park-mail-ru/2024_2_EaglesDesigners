@@ -68,6 +68,7 @@ $text-over-primary: var(--text-over-primary);
       &__lower-row {
         
         .lower-row__message{
+          min-height: 21px;
           font-family: "Inter";
           line-height: 21px;
           font-weight: 400;
