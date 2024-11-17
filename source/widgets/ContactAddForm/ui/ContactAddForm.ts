@@ -59,12 +59,19 @@ export class ContactAddForm {
         spanError.classList.remove("error-span");
       }
 
-      
-      if (response.error in errors) {
+      if (response.error) {
+        let message : string;
+        if (response.error in errors) {
+          message = errors[response.error];
+        }
+        else {
+          message = errors["Default error"];
+        }
+        spanError.textContent = message;
         spanError.classList.add("error-span");
-        spanError.textContent = errors[response.error];
         spanError.classList.remove("not-error-span");
       }
+      
     };
 
     confirmButton.addEventListener("click", handleAddContact);
