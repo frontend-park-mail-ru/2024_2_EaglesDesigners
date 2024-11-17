@@ -17,20 +17,16 @@ export class ChatInfo {
   }
 
   async render() {
-    const usersId = await API.get<UsersIdResponse>(
-      "/chat/" + this.#chat.chatId + "/users",
+    const usersInChat = await API.get<UsersIdResponse>(
+      "/chat/" + this.#chat.chatId,
     );
-    let userId;
-    if (usersId.usersId) {
-      if (usersId.usersId[0] !== UserStorage.getUser().id) {
-        userId = usersId.usersId[0];
-      } else {
-        userId = usersId.usersId[1];
-      }
-      const profileUser = await API.get<ProfileResponse>("/profile/" + userId);
+    let user;
+    if (usersInChat.users) {
+      user = usersInChat.users[(usersInChat.users[0].id !== UserStorage.getUser().id) ? 0 : 1];
+      const profileUser = await API.get<ProfileResponse>("/profile/" + user.id);
       const birthdate = moment(profileUser.birthdate)
         .utc()
-        .format("YYYY-MM-DD");
+        .format("DD.MM.YYYY");
       if (profileUser.avatarURL) {
         profileUser.avatarURL = serverHost + profileUser.avatarURL;
       } else {

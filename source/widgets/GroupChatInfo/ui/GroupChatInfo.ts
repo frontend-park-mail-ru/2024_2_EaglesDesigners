@@ -2,9 +2,9 @@ import { API } from "@/shared/api/api";
 import GroupChatInfoTemplate from "./GroupChatInfo.handlebars";
 import "./GroupChatInfo.scss";
 import { TChat } from "@/entities/Chat";
-import { UserAddChat } from "@/widgets/UserAddChat/ui/UserAddChat";
+import { UserAddChat } from "@/widgets/UserAddChat";
 import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
-import { ProfileResponse, UsersIdRequest } from "@/shared/api/types";
+import { UsersIdResponse } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
@@ -26,10 +26,10 @@ export class GroupChatInfo {
     } else {
       avatar = "/assets/image/default-avatar.svg";
     }
-    const ChatUsersId = await API.get<UsersIdRequest>(
-      "/chat/" + chat.chatId + "/users",
+    const ChatUsers = await API.get<UsersIdResponse>(
+      "/chat/" + chat.chatId,
     );
-    const usersCount = ChatUsersId.usersId.length;
+    const usersCount = ChatUsers.users.length;
 
     this.#parent.innerHTML = GroupChatInfoTemplate({
       chat,
@@ -40,16 +40,13 @@ export class GroupChatInfo {
     const chatUsersList = this.#parent.querySelector("#users-list")!;
     const userCard = new ContactCard(chatUsersList);
 
-    if (ChatUsersId.usersId) {
-      ChatUsersId.usersId.forEach(async (element) => {
-        const userProfile = await API.get<ProfileResponse>(
-          "/profile/" + element,
-        );
+    if (ChatUsers.users) {
+        ChatUsers.users.forEach(async (element) => {
         const user: TContact = {
-          id: element,
-          name: userProfile.name,
-          avatarURL: userProfile.avatarURL,
-          username: "",
+          id: element.id,
+          name: element.name,
+          avatarURL: element.avatarURL,
+          username: element.username,
         };
         userCard.render(user);
         const lastChatUser = chatUsersList.lastElementChild;

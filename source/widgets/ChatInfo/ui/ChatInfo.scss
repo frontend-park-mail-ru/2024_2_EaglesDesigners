@@ -1,3 +1,5 @@
+@import "@/shared/styles/styles.scss";
+
 .chat-info {
   background-color: #4f82bf;
   width: 90%;
@@ -40,7 +42,7 @@
 
 .chat-user-info {
   margin-top: 20px;
-  padding-left: 20px;
+  padding: 0px 20px;
 }
 
 .chat-user-birthday {
@@ -83,16 +85,10 @@
   display: flex;
   justify-content: center;
   align-items: end;
+
+  &__button {
+    @include btn();
+    border-radius: 5px;
+  }
 }
 
-.delete-chat-btn__button {
-  width: 95%;
-  height: 39px;
-  color: red;
-  font-size: 16px;
-  font-family: var(--main-font-family);
-  background-color: #afcbee;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}

@@ -1,0 +1,10 @@
+@mixin btn {
+    width: 90%;
+    height: 29px;
+    border-radius: 5px;
+    background-color: tomato;
+    font-family: var(--main-font-family);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }

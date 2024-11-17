@@ -6,6 +6,7 @@ import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Chat } from "@/widgets/Chat";
 import { ChatList } from "@/widgets/ChatList";
+import { errors } from "@/shared/config/lang";
 
 export class ContactAddForm {
   #parent;
@@ -59,10 +60,12 @@ export class ContactAddForm {
       }
 
       if (response.error) {
+        const message : string = errors[response.error] ?? errors["Default error"];
+        spanError.textContent = message;
         spanError.classList.add("error-span");
-        spanError.textContent = "Такой пользователь не найден";
         spanError.classList.remove("not-error-span");
       }
+      
     };
 
     confirmButton.addEventListener("click", handleAddContact);
