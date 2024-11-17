@@ -1,0 +1,51 @@
+<div class="add-channel">
+  <div class="add-channel-header">
+    <div class="add-channel-header-img">
+      <img
+        id="back-button"
+        class="add-channel-header-img__img"
+        src="/assets/image/back-btn-img.svg"
+        alt=""
+      />
+    </div>
+    <div class="add-channel-header-name">
+      <span class="add-channel-header-name__span">Новый канал</span>
+    </div>
+  </div>
+
+  <form class="add-channel-form-user" method="post" onsubmit="return false;">
+    <label for="ava">
+      <img
+        id="avatar"
+        class="add-channel-form-user__img"
+        src="/assets/image/default-avatar.svg"
+      />
+      <input
+        type="file"
+        id="ava"
+        name="ava"
+        class="add-channel-form-user__input-avatar"
+        accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
+      />
+      <span id="avatar-error" style="color: red;"></span>
+      <div class="add-group-error">
+        <span id="chanel-error-name" class="add-group-error__span span-error"></span>
+      </div>
+      <input
+        id="channel-name"
+        class="add-channel-form-user__input-name add-channel-form-user__input"
+        type="text"
+        placeholder="Название"
+        name="text"
+      /><br />
+    </label>
+  </form>
+
+  <div id="confirm-button" class="add-channel-form-confirm">
+    <img
+      class="add-channel-form-confirm__img"
+      src="/assets/image/confirm.svg"
+      alt=""
+    />
+  </div>
+</div>

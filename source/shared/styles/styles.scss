@@ -8,3 +8,12 @@
     border: none;
     cursor: pointer;
   }
+
+@mixin error {
+    font-size: var(--error-font-size);
+    font-family: var(--main-font-family);
+    color: var(--text-error-message);
+    height: fit-content;
+    display: inline-block;
+    align-self: flex-start;
+}

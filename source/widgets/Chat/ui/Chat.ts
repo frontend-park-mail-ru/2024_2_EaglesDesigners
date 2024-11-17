@@ -116,7 +116,7 @@ export class Chat {
       } else if (chat.chatType === "personal") {
         const chatInfo = new ChatInfo(this.#chatInfo, chat);
         chatInfo.render();
-      } else if (chat.chatType === "group") {
+      } else if (chat.chatType === "group" || chat.chatType === "channel") {
         const chatInfo = new GroupChatInfo(this.#chatInfo, chat);
         chatInfo.render();
       }

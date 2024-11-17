@@ -7,6 +7,7 @@ import "./ChatList.scss";
 import { Chat } from "@/widgets/Chat/ui/Chat";
 import { ContactsList } from "@/widgets/ContactsList";
 import { AddGroupForm } from "@/widgets/AddGroupForm";
+import { AddChannelForm } from "@/widgets/AddChannelForm/ui/AddChannelForm";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -77,5 +78,13 @@ export class ChatList {
         const addGroupForm = new AddGroupForm(this.#parent, this.#chat);
         addGroupForm.render();
       });
+
+    const createChannelBtn = addChat.querySelector("#create-channel")!;
+
+    const handelCreateChannel = () => {
+      const addChannelForm = new AddChannelForm(this.#parent, this.#chat);
+      addChannelForm.render();
+    }
+    createChannelBtn.addEventListener('click', handelCreateChannel);
   }
 }
