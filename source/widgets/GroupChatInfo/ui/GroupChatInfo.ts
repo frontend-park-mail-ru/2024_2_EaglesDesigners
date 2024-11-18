@@ -9,17 +9,22 @@ import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import { serverHost } from "@/app/config";
+import { UserType } from "@/widgets/AddChannelForm/lib/types";
+import { UserStorage } from "@/entities/User";
 
 export class GroupChatInfo {
   #parent;
   #chat;
-  constructor(parent: Element, chat: TChat) {
+  #userType;
+  constructor(parent: Element, chat: TChat, userType : UserType) {
     this.#parent = parent;
     this.#chat = chat;
+    this.#userType = userType;
   }
 
   async render() {
     const chat = this.#chat;
+    const userType = this.#userType;
     let avatar: string;
     if (chat.avatarPath !== "") {
       avatar = serverHost + chat.avatarPath;
@@ -30,30 +35,41 @@ export class GroupChatInfo {
       "/chat/" + chat.chatId,
     );
     const usersCount = ChatUsers.users.length;
-
+    const chatType = {channel: false, group: false};
+    if (chat.chatType == "group") {
+      chatType.group = true;
+    } else{
+      chatType.channel = true;
+    }
     this.#parent.innerHTML = GroupChatInfoTemplate({
       chat,
+      chatType,
       avatar,
       usersCount,
+      userType,
     });
 
-    const chatUsersList = this.#parent.querySelector("#users-list")!;
-    const userCard = new ContactCard(chatUsersList);
+    const chatUsersList = this.#parent.querySelector("#users-list")! || null;
+    
+    if (chatType.group) {
+      
+      const userCard = new ContactCard(chatUsersList);
 
-    if (ChatUsers.users) {
-        ChatUsers.users.forEach(async (element) => {
-        const user: TContact = {
-          id: element.id,
-          name: element.name,
-          avatarURL: element.avatarURL,
-          username: element.username,
-        };
-        userCard.render(user);
-        const lastChatUser = chatUsersList.lastElementChild;
-        if (lastChatUser instanceof HTMLElement) {
-          lastChatUser.style.pointerEvents = "none";
-        }
-      });
+      if (ChatUsers.users) {
+          ChatUsers.users.forEach(async (element) => {
+          const user: TContact = {
+            id: element.id,
+            name: element.name,
+            avatarURL: element.avatarURL,
+            username: element.username,
+          };
+          userCard.render(user);
+          const lastChatUser = chatUsersList.lastElementChild;
+          if (lastChatUser instanceof HTMLElement) {
+            lastChatUser.style.pointerEvents = "none";
+          }
+        });
+      }
     }
 
     const addUser = this.#parent.querySelector("#add-user")!;
@@ -64,17 +80,28 @@ export class GroupChatInfo {
       userAddChat.render(this.#chat, chatUsersList, usersCount);
     };
 
-    addUser.addEventListener("click", handleAddUser);
+    if (chatType.group) {
+      addUser.addEventListener("click", handleAddUser);
+    }
 
     const deleteGroupButton = this.#parent.querySelector("#delete-group")!;
     const handleDeleteGroup = async () => {
-      const response = await API.delete(
-        "/chat/" + chat.chatId + "/delete",
-        chat.chatId,
-      );
-
-      if (!response.error) {
-        Router.go("/");
+      if (userType.owner) {
+        const response = await API.delete(
+          "/chat/" + chat.chatId + "/delete",
+          chat.chatId,
+        );
+        if (!response.error) {
+          Router.go("/");
+        }
+        return;
+      }
+      else {
+        const response = await API.delete("/chat/" + chat.chatId + "/delusers", UserStorage.getUser().id);
+        if (!response.error) {
+          console.log(response);
+          Router.go("/");
+        }
       }
     };
 
@@ -84,9 +111,13 @@ export class GroupChatInfo {
 
     const handleGroupUpdate = () => {
       this.#parent.innerHTML = "";
-      const groupUpdate = new GroupUpdate(this.#parent);
+      const groupUpdate = new GroupUpdate(this.#parent, userType);
       groupUpdate.render(this.#chat);
     };
-    updateGroupButton.addEventListener("click", handleGroupUpdate);
+
+    if (userType.owner) {
+      updateGroupButton.addEventListener("click", handleGroupUpdate);
+    }
+    
   }
 }

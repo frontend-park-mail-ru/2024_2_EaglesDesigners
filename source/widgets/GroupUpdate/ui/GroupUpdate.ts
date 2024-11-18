@@ -7,11 +7,14 @@ import { GroupUpdateRequest, GroupUpdateResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { validateForm } from "@/shared/validation/formValidation";
+import { UserType } from "@/widgets/AddChannelForm/lib/types";
 
 export class GroupUpdate {
   #parent;
-  constructor(parent: Element) {
+  #userType;
+  constructor(parent: Element, userType : UserType) {
     this.#parent = parent;
+    this.#userType = userType;
   }
 
   render(chat: TChat) {
@@ -26,7 +29,7 @@ export class GroupUpdate {
 
     const handleBack = () => {
       this.#parent.innerHTML = "";
-      const groupChatInfo = new GroupChatInfo(this.#parent, chat);
+      const groupChatInfo = new GroupChatInfo(this.#parent, chat, this.#userType);
       groupChatInfo.render();
     };
 

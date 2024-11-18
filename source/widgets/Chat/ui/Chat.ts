@@ -4,6 +4,7 @@ import "./Chat.scss";
 import {
   ChatMessagesResponse,
   EmptyResponse,
+  ResponseChat,
   SendMessageRequest,
 } from "@/shared/api/types";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
@@ -14,6 +15,7 @@ import { getChatLabel } from "@/shared/helpers/getChatLabel";
 import { ChatInfo } from "@/widgets/ChatInfo";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { serverHost } from "@/app/config";
+import { UserType } from "@/widgets/AddChannelForm/lib/types";
 
 export class Chat {
   #parent;
@@ -110,14 +112,23 @@ export class Chat {
 
     const chatHeader = this.#parent.querySelector("#header-chat")!;
 
-    const handleChatHeader = () => {
+    const handleChatHeader = async () => {
       if (this.#chatInfo.innerHTML !== "") {
         this.#chatInfo.innerHTML = "";
       } else if (chat.chatType === "personal") {
         const chatInfo = new ChatInfo(this.#chatInfo, chat);
         chatInfo.render();
       } else if (chat.chatType === "group" || chat.chatType === "channel") {
-        const chatInfo = new GroupChatInfo(this.#chatInfo, chat);
+        const responseChatInfo = await API.get<ResponseChat>("/chat/" + chat.chatId);
+        const userType : UserType = {owner: false, admin: false, user: false};
+        if (responseChatInfo.role === "owner") {
+          userType.owner = true;
+        } else if (responseChatInfo.role === "admin") {
+          userType.admin = true;
+        } else{
+          userType.user = true;
+        }
+        const chatInfo = new GroupChatInfo(this.#chatInfo, chat, userType);
         chatInfo.render();
       }
     };

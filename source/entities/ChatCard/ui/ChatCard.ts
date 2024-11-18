@@ -38,7 +38,6 @@ export class ChatCard {
     );
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
-
       if (ChatStorage.getChat() !== chat) {
         const newUrl = `/chat/${chat.chatId}`;
         history.pushState({ url: newUrl }, "", newUrl);

@@ -6,6 +6,12 @@ import { TNewChat } from "@/entities/Chat/model/type";
 
 export type TMessageWS = TChatMessage;
 
+export interface ResponseChat {
+  messages: TChatMessage[];
+  role: string;
+  users: TUser[];
+}
+
 export interface ResponseError {
   error: string;
   status: string;

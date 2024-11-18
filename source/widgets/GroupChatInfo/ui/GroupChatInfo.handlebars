@@ -4,31 +4,38 @@
       <div class="group-avatar">
         <img class="group-info-header__img" src="{{avatar}}" alt="" />
       </div>
+      
       <div class="group-update-image">
+        {{#if userType.owner}}
         <img
           id="update-group"
           class="group-update-image__img"
           src="/assets/image/update-group.svg"
           alt=""
         />
+        {{/if}}
       </div>
+      
     </div>
     <span class="group-info-header__span-group-name">{{chat.chatName}}</span>
-    <span class="group-info-header__span">Группа</span>
+    <span class="group-info-header__span">{{#if chatType.channel}}Канал{{/if}}{{#if chatType.group}}Группа{{/if}}</span>
   </div>
   <div class="group-content">
     <div class="group-content-header">
       <span class="group-content-header__span">Участники
         <span id="users-count" class="users-count">{{usersCount}}</span></span>
+      {{#if chatType.group}}  
       <button id="add-user" class="group-content-header__button">+ Пригласить</button>
+      {{/if}}
     </div>
     <hr class="horizontal-line" />
     <div id="users-list" class="users-list">
 
     </div>
   </div>
+  
   <div class="delete-group">
-    <button id="delete-group" class="delete-group__button">Удалить группу</button>
+    <button id="delete-group" class="delete-group__button">{{#if userType.owner}}{{#if chatType.group}}Удалить группу{{else}}Удалить канал{{/if}}{{else}}{{#if chatType.group}}Выйти из группы{{else}}Выйти из канала{{/if}}{{/if}}</button>
   </div>
   <div id="modal-container">
 

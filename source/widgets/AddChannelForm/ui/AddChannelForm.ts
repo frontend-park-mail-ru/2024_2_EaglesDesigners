@@ -7,6 +7,7 @@ import { ChatResponse, NewChatRequest } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { validateNickname } from "@/shared/validation/nicknameValidation";
 import "./AddChannelForm.scss";
+import { UserType } from "../lib/types";
 
 export class AddChannelForm{
     #parent;
