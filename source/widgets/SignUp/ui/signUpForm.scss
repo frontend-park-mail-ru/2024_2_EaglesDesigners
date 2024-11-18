@@ -1,3 +1,9 @@
+.signup-page {
+  height: 100vh;
+  display: flex;
+  overflow-y: hidden;
+}
+
 .auth-form-input {
   padding-left: 10px;
   margin-bottom: 10px;
@@ -32,7 +38,7 @@
     font-size: 30px;
     color: var(--text-over-primary);
     font-family: var(--main-font-family);
-    margin-top: 100px;
+    margin-top: 75px;
     margin-bottom: 50px;
   }
 }
