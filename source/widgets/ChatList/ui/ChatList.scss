@@ -50,21 +50,12 @@ $chat-margin-top: 20px;
   }
 }
 
-.add-chat-btn {
+.add-icon {
   width: 54px;
   height: 54px;
 
+  transition: transform 300ms ease;
   cursor: pointer;
-
-  .add-icon{
-    width: 54px;
-    height: 54px;
-  }
-
-  .cancel-icon{
-    width: 54px;
-    height: 54px;
-  }
 }
 
 .add-chat {
