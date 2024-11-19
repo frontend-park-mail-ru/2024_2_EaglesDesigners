@@ -2,7 +2,7 @@ import { API } from "@/shared/api/api";
 import ChatTemplate from "./Chat.handlebars";
 import "./Chat.scss";
 import {
-  ChatMessagesResponse,
+  ChatResponse,
   EmptyResponse,
   SendMessageRequest,
 } from "@/shared/api/types";
@@ -99,9 +99,11 @@ export class Chat {
       .querySelector("#chat__input-send-btn")!
       .addEventListener("click", sendInputMessage);
 
-    const response = await API.get<ChatMessagesResponse>(
-      "/chat/" + chat.chatId + "/messages",
+    const response = await API.get<ChatResponse>(
+      "/chat/" + chat.chatId,
     );
+    ChatStorage.setRole(response.role ?? "");
+    ChatStorage.setUsers(response.users ?? []);
 
     const messages: TChatMessage[] = response.messages ?? [];
     if (messages.length > 0) {

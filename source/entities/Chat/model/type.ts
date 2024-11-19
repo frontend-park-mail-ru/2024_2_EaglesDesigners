@@ -16,3 +16,11 @@ export interface TNewChat {
   chatType: ChatType;
   usersToAdd: string[];
 }
+
+export interface TChatUser {
+  avatarURL:	string;
+  id:	string;
+  name:	string;
+  role:	string;
+  username:	string;
+}
