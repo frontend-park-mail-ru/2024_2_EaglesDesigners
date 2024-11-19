@@ -30,12 +30,9 @@ export class Chat {
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
     ChatStorage.setChat(chat);
-    let avatar;
-    if (chat.avatarPath != "") {
-      avatar = serverHost + chat.avatarPath;
-    } else {
-      avatar = "/assets/image/default-avatar.svg";
-    }
+    const avatar = chat.avatarPath
+        ? serverHost + chat.avatarPath
+        : "/assets/image/default-avatar.svg";
 
     this.#parent.innerHTML = ChatTemplate({
       chat: {
@@ -65,8 +62,8 @@ export class Chat {
 
         const message: TChatMessage = {
           authorID: user.id,
-          authorName: user.name,
           chatId: ChatStorage.getChat().chatId,
+          branchId: "",
           datetime: new Date().toISOString(),
           isRedacted: false,
           messageId: "",

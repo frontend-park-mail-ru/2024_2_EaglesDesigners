@@ -15,8 +15,8 @@ class ChatStore {
       chatType: "personal",
       lastMessage: {
         authorID: "",
-        authorName: "",
         chatId: "",
+        branchId: "",
         datetime: "",
         isRedacted: false,
         messageId: "",
