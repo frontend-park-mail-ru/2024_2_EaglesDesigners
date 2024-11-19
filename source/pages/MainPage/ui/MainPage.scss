@@ -8,6 +8,10 @@ $chat-margin-top: 20px;
 $main-page-left-column-min-width: 300px;
 $main-page-left-column-max-width: 400px;
 
+body#main {
+  background-color: var(--primary);
+}
+
 .main-page {
   background: $primary;
   display: flex;
