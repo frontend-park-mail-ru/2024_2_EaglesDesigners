@@ -1,0 +1,15 @@
+@import "@/shared/styles/styles.scss";
+
+.message-menu-edit {
+    cursor: pointer;
+    &__span {
+        @include text();
+    }
+}
+
+.message-menu-delete {
+    cursor: pointer;
+    &__span {
+        @include text();
+    }
+}

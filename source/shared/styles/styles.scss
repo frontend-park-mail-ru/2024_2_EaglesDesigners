@@ -17,3 +17,9 @@
     display: inline-block;
     align-self: flex-start;
 }
+
+@mixin text {
+  color: var(--text-over-primary);
+  font-family: var(--main-font-family);
+  font-size: 18px;
+}

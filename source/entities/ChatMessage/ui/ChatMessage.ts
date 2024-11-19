@@ -9,6 +9,7 @@ import { getTimeString } from "@/shared/helpers/getTimeString";
 import { serverHost } from "@/app/config";
 import { ProfileResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
+import { MessageMenu } from "@/widgets/MessageMenu/ui/messageMenu";
 
 export class ChatMessage {
   #parent;
@@ -26,8 +27,14 @@ export class ChatMessage {
     ) {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
+    const handleMessageClick = (event) => {
+      console.log(event)
+      const messageMenu = new MessageMenu(this.#parent);
+      messageMenu.render();
 
+    };
     for (const [index, message] of messages.entries()) {
+      console.log(message);
       const isFirst =
         index === messages.length - 1 ||
         message.authorID !== messages[index + 1].authorID;
@@ -55,17 +62,22 @@ export class ChatMessage {
         ? serverHost + profile.avatarURL
         : "/assets/image/default-avatar.svg";
 
+      const msg = ChatMessageTemplate({
+        message: {
+          ...messageWithFlags,
+          datetime: getTimeString(messageWithFlags.datetime),
+          avatarURL,
+        },
+      });
       this.#parent.insertAdjacentHTML(
         "beforeend",
-        ChatMessageTemplate({
-          message: {
-            ...messageWithFlags,
-            datetime: getTimeString(messageWithFlags.datetime),
-            avatarURL,
-          },
-        }),
+        msg,
       );
+      this.#parent.lastElementChild!.addEventListener('contextmenu', handleMessageClick); 
     }
+
+    
+
   }
   async renderNewMessage(message: TChatMessage) {
     if (message.text) {
