@@ -1,39 +1,35 @@
-<div class="chat-list">
-
-  <div class="chat-list-container">
-    <div class="chat-list-container-search">
-      <div class="chat-list-container-search-input">
-
-      </div>
-    </div>
-
-    <div id="chat-list" class="chat-list-container-chatlist">
+<div class="chat-list-container">
+  <div class="chat-list-container-search">
+    <div class="chat-list-container-search-input">
 
     </div>
+  </div>
 
-    <div class="add-chat">
-      <div class="add-chat-btn" id="addChatButton">
-        <img class="add-icon" src="/assets/image/add-24px.svg" />
-        <img
-          class="cancel-icon"
-          src="/assets/image/cancel-24px.svg"
-          style="display: none;"
-        />
-      </div>
-      <div class="add-chat__popup" id="addChatPopUp" style="display: none;">
-        <span class="create-personal-chat">
-          <img
-            class="create-personal-chat__icon"
-            src="/assets/image/user.svg"
-          />
-          Создать личный чат
-        </span>
-        <span class="create-group-chat">
-          <img class="create-group-chat__icon" src="/assets/image/users.svg" />
-          Создать группу
-        </span>
-      </div>
-    </div>
+  <div id="chat-list" class="chat-list-container-chatlist">
 
   </div>
+
+  <div class="add-chat" id="add-chat">
+    <img class="add-icon" id="addChatIcon" src="/assets/image/add-24px.svg" />
+    <div class="add-chat__popup" id="addChatPopUp" style="display: none;">
+      <span 
+        class="create-personal-chat add-chat__popup__item" 
+        id="create-personal-chat"
+      >
+        <img
+          class="create-personal-chat__icon"
+          src="/assets/image/user.svg"
+        />
+        Создать личный чат
+      </span>
+      <span 
+        class="create-group-chat add-chat__popup__item" 
+        id="create-group-chat"
+      >
+        <img class="create-group-chat__icon" src="/assets/image/users.svg" />
+        Создать группу
+      </span>
+    </div>
+  </div>
+
 </div>

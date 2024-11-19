@@ -1,4 +1,5 @@
-$text-over-primary: #ffffff;
+$text-over-primary: var(--text-over-primary);
+$scroll-bar-color: var(--scroll-bar-color);
 
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
@@ -9,41 +10,39 @@ $text-over-primary: #ffffff;
 
 .add-group {
   position: relative;
+  width: 100%;
+
+  background: var(--primary);
+
   display: flex;
   flex-direction: column;
-  background: var(--primary);
-  flex: 1350 0 0;
-  width: 402px;
-  max-height: 100%;
 }
 
 .add-group-header {
+  height: 60px;
+
   background: var(--header);
+
   display: flex;
-  flex-direction: row;
-  justify-content: left;
   align-items: center;
-  height: 59px;
-  margin-bottom: 20px;
+  gap: 20px;
 }
 
 .add-group-header-img {
   margin-left: 10px;
+  width: 24px;
+  height: 24px;
+
   cursor: pointer;
 }
 .add-group-header-name {
-  margin-left: 13px;
-  padding: 7px;
-
-  &__span {
-    color: #fff;
-    font-family: var(--main-font-family);
-    font-size: var(--form-font-size);
-  }
+  color: $text-over-primary;
+  font-family: var(--main-font-family);
+  font-size: var(--form-font-size);
 }
 
 .add-group-form-user {
-  margin: 10px 20px 0px 20px;
+  margin: 20px 20px 0 20px;
 
   &__input {
     display: block;
@@ -94,18 +93,9 @@ $text-over-primary: #ffffff;
   }
 }
 
-.contacts-list-header-img {
-  padding-left: 10px;
-  height: 24px;
-
-  &__img {
-    cursor: pointer;
-  }
-}
-
 .add-contacts-caption {
   @include font-settings("Inter", 400, 20px, $text-over-primary);
-  margin: 20px 20px 10px 20px;
+  margin: 10px 20px;
 }
 
 .group-contacts-list {
@@ -116,7 +106,7 @@ $text-over-primary: #ffffff;
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #b8b6b6;
+    background: $scroll-bar-color;
     border-radius: 40px;
   }
   &::-webkit-scrollbar-track {
@@ -124,9 +114,13 @@ $text-over-primary: #ffffff;
   }
 }
 
-.add-group-form-confirm {
+.add-group-form-confirm-img {
   position: absolute;
   right: 20px;
   bottom: 20px;
+
+  width: 54px;
+  height: 54px;
+  
   cursor: pointer;
 }

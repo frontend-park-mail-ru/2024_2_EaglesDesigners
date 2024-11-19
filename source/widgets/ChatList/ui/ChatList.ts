@@ -38,41 +38,36 @@ export class ChatList {
       chatCard.render(chat);
     });
 
-    const addChat = document.querySelector(".add-chat")!;
-    const addChatButton = addChat.querySelector("#addChatButton")!;
-    const addIcon = addChat.querySelector<HTMLElement>(".add-icon")!;
-    const cancelIcon = addChat.querySelector<HTMLElement>(".cancel-icon")!;
+    const addChat = document.querySelector("#add-chat")!;
+    const addChatIcon = addChat.querySelector<HTMLElement>(".add-icon")!;
     const addChatPopup = addChat.querySelector<HTMLElement>("#addChatPopUp")!;
 
-    addChatButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-      addChatPopup.style.display =
-        addChatPopup.style.display === "none" ? "flex" : "none";
 
-      cancelIcon.style.display =
-        cancelIcon.style.display === "none" ? "inline" : "none";
-      addIcon.style.display =
-        addIcon.style.display === "none" ? "inline" : "none";
+    let degrees = 0;
+    addChatIcon.addEventListener("click", (event) => {
+      event.stopPropagation();
+      addChatPopup.style.display = addChatPopup.style.display === "none" ? "flex" : "none";
+      degrees += 45;
+      addChatIcon.style.transform = 'rotate(' + degrees + 'deg)';
     });
 
     document.addEventListener("click", () => {
-      addChatPopup.style.display = "none";
-
-      if (addIcon.style.display === "none") {
-        cancelIcon.style.display = "none";
-        addIcon.style.display = "inline";
+      if (addChatPopup.style.display !== "none") {
+        addChatPopup.style.display = "none";
+        degrees += 45;
+        addChatIcon.style.transform = 'rotate(' + degrees + 'deg)';
       }
     });
 
     addChat
-      .querySelector(".create-personal-chat")!
+      .querySelector("#create-personal-chat")!
       .addEventListener("click", () => {
         const contactForm = new ContactsList(this.#parent, this.#chat);
         contactForm.render();
       });
 
     addChat
-      .querySelector(".create-group-chat")!
+      .querySelector("#create-group-chat")!
       .addEventListener("click", () => {
         const addGroupForm = new AddGroupForm(this.#parent, this.#chat);
         addGroupForm.render();

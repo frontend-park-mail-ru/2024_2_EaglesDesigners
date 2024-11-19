@@ -28,6 +28,7 @@ export class SignupForm extends View {
    * @returns {}
    */
   render() {
+    document.body.id = 'signup';
     this.#parent.innerHTML = SignUpFormTemplate();
     const authRoot = this.#parent.querySelector("#news-root")!;
     const newsForm = new NewsBlock(authRoot);

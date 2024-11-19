@@ -6,18 +6,31 @@ body {
 
 :root {
   --background: #090707;
+  --background-shadow-50: #0c0f15;
   --primary: #101723;
+  --primary-shadow-15: #0e141e;
+  --primary-shadow-25: #0a0e16;
   --secondary: #4f82bf;
-  --text-error-message: red;
+  --accent: #afcbee;
+
   --text-over-primary: #ffffff;
+  --text-over-primary-shadow-50: #85878a;
+  --text-over-secondary: #ffffff;
+  --text-error-message: red;
+
+  --delete-button-color: tomato;
+  --button-over-background-hover: #272727;
+  --scroll-bar-color: #b8b6b6;
   --form-button-access: #afcbee;
   --a-element: #99c3ff;
   --render-signup-button: #2d3339;
+  --main-page-right-column-width: 240px;
   --input-width: 356px;
   --input-height: 55px;
   --main-font-family: "Inter";
   --form-font-size: 22px;
   --error-font-size: 14px;
   --base-font-size: 16px;
+  --avatar-size: 60px;
   --header: #0e141e;
 }

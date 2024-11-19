@@ -25,6 +25,7 @@ export class LoginForm extends View {
    * @returns {}
    */
   render() {
+    document.body.id = 'login';
     this.#parent.innerHTML = LoginFormTemplate();
     const authRoot = this.#parent.querySelector("#news-root")!;
     const newsForm = new NewsBlock(authRoot);

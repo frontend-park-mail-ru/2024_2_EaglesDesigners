@@ -53,7 +53,7 @@ export class ContactCard {
 
     this.#parent.lastElementChild!.addEventListener("click", async (e) => {
       e.preventDefault();
-
+      console.log("cock",contact)
       const response = await API.get<ChatsResponse>("/chats");
 
       if (!response.chats) {

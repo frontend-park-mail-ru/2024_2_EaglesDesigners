@@ -1,12 +1,12 @@
-$background-shadow-50: #0c0f15;
+$background-shadow-50: var(--background-shadow-50);
 $primary: var(--primary);
-$primary-shadow-25: #0a0e16;
+$primary-shadow-25: var(--primary-shadow-25);
 $secondary: var(--secondary);
-$accent: #afcbee;
+$accent: var(--accent);
 
-$text-over-primary: #ffffff;
-$text-over-primary-shadow-50: #85878a;
-$text-over-secondary: #ffffff;
+$text-over-primary: var(--text-over-primary);
+$text-over-primary-shadow-50: var(--text-over-primary-shadow-50);
+$text-over-secondary: var(--text-over-secondary);
 
 $avatar-size: 50px;
 $messages-container-width: 700px;
@@ -20,9 +20,9 @@ $messages-container-width: 700px;
 
 .message {
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+
   &__body {
     max-width: 500px;
     background: $secondary;
@@ -31,13 +31,11 @@ $messages-container-width: 700px;
 
     box-sizing: border-box;
     position: relative;
-    padding: 6px 6px 3px 6px;
+    padding: 6px 12px 3px 12px;
 
     &__username {
       @include font-settings("Inter", 400, 14px, $secondary);
 
-      display: block;
-      max-width: auto;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -48,7 +46,6 @@ $messages-container-width: 700px;
       @include font-settings("Inter", 400, 16px, $text-over-secondary);
 
       display: inline;
-      padding-bottom: 6px;
       word-wrap: break-word;
     }
     &__meta {
@@ -57,8 +54,7 @@ $messages-container-width: 700px;
       align-items: flex-end;
       float: right;
       column-gap: 1px;
-      box-sizing: border-box;
-      padding-left: 2px;
+      margin-left: 4px;
       .timedate {
         @include font-settings("Inter", 400, 10px, $text-over-secondary);
         opacity: 0.6;
@@ -72,8 +68,7 @@ $messages-container-width: 700px;
     display: flex;
     align-items: flex-end;
 
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 0px 5px;
 
     &__img {
       width: 40px;
@@ -86,7 +81,6 @@ $messages-container-width: 700px;
 
   &:not(.left-side).last-message {
     .message__body {
-      position: relative;
       border-bottom-right-radius: 0px;
 
       &::after {
@@ -116,7 +110,6 @@ $messages-container-width: 700px;
 
     &.last-message {
       .message__body {
-        position: relative;
         border-bottom-left-radius: 0px;
 
         &::before {

@@ -36,12 +36,13 @@ export class MainPage extends View {
       avatar = "/assets/image/default-avatar.svg";
     }
 
+    document.body.id = 'main';
     parent.innerHTML = MainPageTemplate({ user, avatar });
 
     const chatUserInfo = parent.querySelector("#chat-info-container")!;
     const chatListParent = parent.querySelector("#widget-import")!;
 
-    const chatParent = parent.querySelector("#chat-content-block")!;
+    const chatParent = parent.querySelector("#chat-content")!;
     const chat = new Chat(chatParent, chatUserInfo);
 
     const chatList = new ChatList(chatListParent, chat);

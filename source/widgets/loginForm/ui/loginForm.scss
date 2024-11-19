@@ -1,17 +1,26 @@
-body {
+body#login {
   background-color: var(--background);
 }
 
-.root {
-  margin: auto auto;
+.login-page {
+  height: 100vh;
   display: flex;
-  flex-direction: row;
   overflow-y: hidden;
 }
-.auth-form {
+
+.news-block {
+  width: 50%;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  background: var(--primary);
+}
+
+.auth-form {
+  flex: 1;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 
   &__button {
@@ -56,13 +65,9 @@ body {
 }
 
 .btn {
-  align-items: center;
   margin-bottom: 20px;
   display: block;
-  border-top: 0px;
-  border-left: 0px;
-  border-bottom: 0px;
-  border-right: 0px;
+  border: none;
   width: var(--input-width);
   height: var(--input-height);
   border-radius: 60px 60px 60px 60px;
