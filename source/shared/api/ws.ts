@@ -21,7 +21,7 @@ class wsConnection {
       return;
     }
 
-    this.ws = new WebSocket(this.url + "/chat/startwebsocket");
+    this.ws = new WebSocket(this.url + "/startwebsocket");
 
     this.ws.onmessage = (event: MessageEvent) => {
       try {
