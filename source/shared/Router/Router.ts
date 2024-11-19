@@ -10,6 +10,9 @@ class Route {
     this.#strictRoutes = [];
 
     window.onpopstate = async (event) => {
+      if (!event.state) {
+        return;
+      }
       const index = this.#strictRoutes.findIndex(
         (element) => element === event.state.url,
       );
@@ -18,6 +21,7 @@ class Route {
         return;
       }
       this.go(event.state.url, false);
+      
     };
   }
 
@@ -66,8 +70,6 @@ class Route {
         const urlMatch = url.match(currentURL.path!);
         urlMatch?.shift();
         if (urlMatch?.length) {
-          // console.log("urlMat", urlMatch);
-          // console.log("lol", ...(urlMatch as [string, string]));
           currentURL.view.render(urlMatch[0]);
         } else {
           currentURL.view.render();

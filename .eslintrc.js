@@ -20,5 +20,6 @@ module.exports = {
     rules: {
         semi: ['warn', 'always'],
         quotes: 'off',
+        '@typescript-eslint/no-var-requires': 0,
     },
 }

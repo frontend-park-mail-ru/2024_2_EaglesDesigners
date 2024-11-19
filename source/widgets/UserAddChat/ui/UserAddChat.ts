@@ -5,8 +5,8 @@ import { API } from "@/shared/api/api";
 import {
   AddUserResponse,
   ContactResponse,
-  ProfileResponse,
   UsersIdRequest,
+  UsersIdResponse,
 } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
@@ -58,25 +58,22 @@ export class UserAddChat {
         );
         if (!response.error) {
           this.#parent.innerHTML = "";
-          const ChatUsersId = await API.get<UsersIdRequest>(
-            "/chat/" + chat.chatId + "/users",
+          const ChatUsersId = await API.get<UsersIdResponse>(
+            "/chat/" + chat.chatId,
           );
-          if (ChatUsersId.usersId) {
+          if (ChatUsersId.users) {
             chatUsersList.innerHTML = "";
             const userCard = new ContactCard(chatUsersList);
-            ChatUsersId.usersId.forEach(async (element) => {
-              const userProfile = await API.get<ProfileResponse>(
-                "/profile/" + element,
-              );
+            ChatUsersId.users.forEach(async (element) => {
               const user: TContact = {
-                id: element,
-                name: userProfile.name,
-                avatarURL: userProfile.avatarURL,
-                username: "",
+                id: element.id,
+                name: element.name,
+                avatarURL: element.avatarURL,
+                username: element.username,
               };
               userCard.render(user);
             });
-            usersCount.innerHTML = ChatUsersId.usersId.length.toString();
+            usersCount.innerHTML = ChatUsersId.users.length.toString();
           }
         }
       });

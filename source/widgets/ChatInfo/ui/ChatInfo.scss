@@ -1,3 +1,5 @@
+@import "@/shared/styles/styles.scss";
+
 $secondary: var(--secondary);
 
 $text-over-primary: var(--text-over-primary);
@@ -84,17 +86,7 @@ $delete-button-color: var(--delete-button-color);
 }
 
 .delete-chat-btn__button {
-  height: 40px;
-
   margin: auto 0 20px 0;
 
-  color: $text-over-primary;
-  font-size: 16px;
-  font-family: var(--main-font-family);
-  background-color: $delete-button-color;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-
-  align-content: center;
+  @include delete-btn();
 }
