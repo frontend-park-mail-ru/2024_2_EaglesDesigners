@@ -16,6 +16,7 @@ body#main {
   background: $primary;
   display: flex;
   height: 100vh;
+  overflow-y: hidden;
 }
 
 .main-page-content {
