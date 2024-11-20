@@ -23,3 +23,16 @@
   font-family: var(--main-font-family);
   font-size: 18px;
 }
+$delete-button-color: var(--delete-button-color);
+
+@mixin delete-btn {
+  height: 40px;
+
+  color: $text-over-primary;
+  font-size: 16px;
+  font-family: var(--main-font-family);
+  background-color: $delete-button-color;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  }

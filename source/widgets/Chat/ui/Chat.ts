@@ -47,7 +47,7 @@ export class Chat {
       avatar,
     });
 
-    const messagesImport = this.#parent.querySelector(".messages")!;
+    const messagesImport = this.#parent.querySelector("#chat__messages")!;
     const chatMessage = new ChatMessage(messagesImport);
     ChatStorage.setChatMessageInstance(chatMessage);
 
@@ -98,7 +98,7 @@ export class Chat {
     textArea.addEventListener("keypress", KeyPressHandler);
 
     document
-      .querySelector(".input-send-btn__img")!
+      .querySelector("#chat__input-send-btn")!
       .addEventListener("click", sendInputMessage);
 
     const response = await API.get<ChatMessagesResponse>(

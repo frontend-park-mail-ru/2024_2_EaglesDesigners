@@ -1,7 +1,11 @@
 $primary: var(--primary);
-$primary-shadow-25: #0a0e16;
+$primary-shadow-25: var(--primary-shadow-25);
 
-$text-over-primary: #ffffff;
+$text-over-primary: var(--text-over-primary);
+
+$scroll-bar-color: var(--scroll-bar-color);
+
+$chat-margin-top: 20px;
 
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
@@ -10,50 +14,35 @@ $text-over-primary: #ffffff;
   color: $color;
 }
 
-.chat-list {
-  background: transparent;
-
-  height: 100%;
-
-  display: grid;
-  grid-template-areas:
-    "cl-margin"
-    "cl-box";
-  grid-template-rows: 1fr 94.1176470588vh;
-
-  line-height: 22px;
-}
-
 .chat-list-container {
-  width: 404px;
+  position: relative;
+  width: 100%;
 
-  grid-area: cl-box;
+  margin-top: $chat-margin-top;
+
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .chat-list-container-search {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    var(--primary);
-  height: 85px;
+  background: $primary-shadow-25;
+  height: 70px;
 
   border-radius: 20px;
 
-  box-sizing: border-box;
-  margin-inline: 9px;
-  margin-bottom: 10px;
+  margin: 0 10px;
 }
 
 .chat-list-container-chatlist {
-  --avatar-size: 60px;
-  height: 100%;
+  flex: 1;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #b8b6b6;
+    background: $scroll-bar-color;
     border-radius: 40px;
   }
   &::-webkit-scrollbar-track {
@@ -61,41 +50,37 @@ $text-over-primary: #ffffff;
   }
 }
 
-.add-chat-btn {
+.add-icon {
+  width: 54px;
+  height: 54px;
+
+  transition: transform 300ms ease;
   cursor: pointer;
 }
 
 .add-chat {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+
   display: flex;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
 
   &__popup {
-    position: absolute;
     background: $primary-shadow-25;
-    border-radius: 20px;
-    padding: 10px 10px 10px 10px;
-
-    bottom: 90px;
+    border-radius: 10px;
+    padding: 10px;
 
     flex-direction: column;
 
-    .create-personal-chat,
-    .create-channel-chat,
-    .create-group-chat {
+    &__item {
+      cursor: pointer;
       @include font-settings("Inter", 400, 16px, $text-over-primary);
       cursor: pointer;
       display: flex;
-      gap: 10px;
-      padding: 5px;
-      justify-items: flex-end;
-      transition-duration: 0.2s;
-
-      &:hover {
-        background-color: #272727;
-        border-radius: 5px;
-      }
+      gap: 5px;
     }
   }
 }

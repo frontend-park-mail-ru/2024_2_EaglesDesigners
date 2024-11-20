@@ -1,55 +1,52 @@
+$text-over-primary: var(--text-over-primary);
+$scroll-bar-color: var(--scroll-bar-color);
+
 .contacts-list {
+  position: relative;
+  width: 100%;
+  flex: 1;
+
+  background: var(--primary);
+
   display: flex;
   flex-direction: column;
-  background: var(--primary);
-  flex: 1350 0 0;
-  width: 402px;
 }
 
 .contacts-list-header {
+  height: 60px;
+
   background: var(--header);
   display: flex;
-  flex-direction: row;
-  justify-content: left;
   align-items: center;
-  height: 59px;
-  margin-bottom: 20px;
+  gap: 20px;
 }
 
 .contacts-list-header-name {
-  margin-left: 10px;
-  padding: 7px;
-
-  &__span {
-    color: #fff;
+    color: $text-over-primary;
     font-family: var(--main-font-family);
     font-size: var(--form-font-size);
-  }
 }
 
-.button-add-img {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 15px;
-  padding-right: 20px;
+.button-add-img{
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
 
-  &__img {
-    cursor: pointer;
-    margin-bottom: 25px;
-  }
+  width: 54px;
+  height: 54px;
+
+  cursor: pointer;
 }
 
 .contacts-list-header-img {
-  padding-left: 10px;
+  margin-left: 10px;
+  width: 24px;
   height: 24px;
 
-  &__img {
-    cursor: pointer;
-  }
+  cursor: pointer;
 }
 
 .contacts-user-list {
-  min-height: 625px;
   flex: 1;
   overflow-y: scroll;
 
@@ -57,7 +54,7 @@
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #b8b6b6;
+    background: $scroll-bar-color;
     border-radius: 40px;
   }
   &::-webkit-scrollbar-track {

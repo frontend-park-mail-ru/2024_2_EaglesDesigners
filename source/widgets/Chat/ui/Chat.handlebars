@@ -1,39 +1,32 @@
-<div class="chat">
-  <div id="header-chat" class="header">
-    <div class="avatar-container"> 
-      <img id="chat-avatar" class="avatar" src="{{avatar}}" />
-    </div>
-    <div class="info">
-      <span id="chat-name" class="info__chat-name">
-        {{chat.chatName}}
-      </span>
-      <span class="info__chat-status">
-        {{chat.chatType}}
-      </span>
-    </div>
-    <span class="buttons">
 
+<div id="header-chat" class="header">
+  <img id="chat-avatar" class="avatar" src="{{avatar}}" />
+  <div class="info">
+    <span id="chat-name" class="info__chat-name">
+      {{chat.chatName}}
+    </span>
+    <span class="info__chat-status">
+      {{chat.chatType}}
     </span>
   </div>
-  <div class="messages">
+  <span class="buttons">
+
+  </span>
+</div>
+<div class="chat">
+  <div class="messages" id="chat__messages">
 
   </div>
   <div class="input">
     <div class="input-bubble">
-      <div class="attach-btn">
-        <img class="input-send-icon__img" src="/assets/image/Attach.svg" />
-      </div>
+      <img class="attach-icon" src="/assets/image/Attach.svg" />
       <textarea
         class="text-area"
         placeholder="Введите сообщение"
         maxlength="1000"
       ></textarea>
-      <div class="emoji-btn">
-        <img class="input-send-icon__img" src="/assets/image/Emoji.svg" />
-      </div>
+      <img class="emoji-icon" src="/assets/image/Emoji.svg" />
     </div>
-    <div class="input-send-btn">
-      <img class="input-send-btn__img" src="/assets/image/Send.svg" />
-    </div>
+    <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
   </div>
 </div>

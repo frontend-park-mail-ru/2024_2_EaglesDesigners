@@ -12,19 +12,13 @@
       />
     </div>
   {{/if}}
-  <div class="contact-card-content">
-    <img class="contact-card-content__img-avatar" src="{{contact.avatarURL}}" />
-
-    <div class="contact-card-name">
-      <span class="contact-card-name__span">
-        {{contact.name}}
-      </span>
-    </div>
-    <div class="contact-card-user-status">
-      <span class="contact-card-user-status__span">
-        В сети
-      </span>
-    </div>
-
+  <img class="contact-card__img-avatar" src="{{contact.avatarURL}}" />
+  <div class="contact-card-info">
+    <span class="contact-card-name">
+      {{contact.name}}
+    </span>
+    <span class="contact-card-user-status">
+      В сети
+    </span>
   </div>
 </a>
