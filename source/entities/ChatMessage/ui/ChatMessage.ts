@@ -57,7 +57,7 @@ export class ChatMessage {
         index === messages.length - 1 ||
         message.authorID !== messages[index + 1].authorID;
       const isLast =
-        index === 0 || message.authorID !== messages[index - 1].authorID;
+        !this.#oldestMessage || this.#oldestMessage.authorID !== message.authorID;
       const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
 
       const messageWithFlags: TChatMessageWithFlags = {
