@@ -7,8 +7,6 @@ import "./ChatMessage.scss";
 import { UserStorage } from "@/entities/User";
 import { getTimeString } from "@/shared/helpers/getTimeString";
 import { serverHost } from "@/app/config";
-import { ProfileResponse } from "@/shared/api/types";
-import { API } from "@/shared/api/api";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 
 export class ChatMessage {
@@ -91,11 +89,9 @@ export class ChatMessage {
 
       this.#newestMessage = messageWithFlags;
 
-      const profile = await API.get<ProfileResponse>(
-        "/profile/" + message.authorID,
-      );
-      const avatarURL = profile.avatarURL
-        ? serverHost + profile.avatarURL
+      const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
+      const avatarURL = user.avatarURL
+        ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
       this.#parent.insertAdjacentHTML(
@@ -104,7 +100,8 @@ export class ChatMessage {
           message: {
             ...messageWithFlags,
             datetime: getTimeString(messageWithFlags.datetime),
-            avatarURL,
+            avatarURL: avatarURL,
+            authorName: user?.name,
           },
         }),
       );
