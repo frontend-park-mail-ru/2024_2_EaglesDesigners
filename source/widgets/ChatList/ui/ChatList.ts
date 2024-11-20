@@ -79,7 +79,7 @@ export class ChatList {
     const handelCreateChannel = () => {
       const addChannelForm = new AddChannelForm(this.#parent, this.#chat);
       addChannelForm.render();
-    }
+    };
     createChannelBtn.addEventListener('click', handelCreateChannel);
   }
 }

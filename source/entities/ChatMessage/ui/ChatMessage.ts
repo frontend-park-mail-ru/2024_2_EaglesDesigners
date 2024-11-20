@@ -9,7 +9,7 @@ import { getTimeString } from "@/shared/helpers/getTimeString";
 import { serverHost } from "@/app/config";
 import { ProfileResponse } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
-import { MessageMenu } from "@/widgets/MessageMenu/ui/messageMenu";
+import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
 
 export class ChatMessage {
   #parent;
@@ -28,9 +28,11 @@ export class ChatMessage {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
     const handleMessageClick = (event) => {
-      console.log(event)
-      const messageMenu = new MessageMenu(this.#parent);
-      messageMenu.render();
+      const messageId = event.target.id;
+      const message = document.getElementById(messageId)!;
+      console.log(message);
+      // const messageMenu = new MessageMenu(this.#parent);
+      // messageMenu.render();
 
     };
     for (const [index, message] of messages.entries()) {
@@ -74,6 +76,7 @@ export class ChatMessage {
         msg,
       );
       this.#parent.lastElementChild!.addEventListener('contextmenu', handleMessageClick); 
+      console.log(this.#parent.lastElementChild?.id);
     }
 
     

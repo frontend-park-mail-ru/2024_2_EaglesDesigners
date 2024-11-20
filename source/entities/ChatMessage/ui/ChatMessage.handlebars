@@ -5,21 +5,21 @@
     {{#if message.last}}last-message{{/if}}
     {{#if message.isFromOtherUser}}left-side{{/if}}"
 >
-  <div class="message__body">
-    <span class="message__body__username">
+  <div id="{{message.messageId}}" class="message__body">
+    <span id="{{message.messageId}}" class="message__body__username">
       {{message.authorName}}
     </span>
-    <span class="message__body__text">
+    <span id="{{message.messageId}}" class="message__body__text">
       {{message.text}}
     </span>
-    <span class="message__body__meta">
-      <span class="timedate">
+    <span id="{{message.messageId}}" class="message__body__meta">
+      <span id="{{message.messageId}}" class="timedate">
         {{message.datetime}}
       </span>
     </span>
   </div>
-  <div class="message__avatar">
-    <img class="message__avatar__img" src="{{message.avatarURL}}" />
+  <div id="{{message.messageId}}" class="message__avatar">
+    <img id="{{message.messageId}}" class="message__avatar__img" src="{{message.avatarURL}}" />
   </div>
   <div class="menu-context"></div>
 </div>

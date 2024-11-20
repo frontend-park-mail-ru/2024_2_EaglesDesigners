@@ -1,39 +1,46 @@
 @import "@/shared/styles/styles.scss";
+$button-over-background-hover: var(--button-over-background-hover);
+$background: var(--background);
 
 .message-menu {
-    background: #4f82bf;
+    background: $background;
     border-radius: 10px;
     width: 100px;
     display: flex;
     flex-direction: column;
-    align-items: end;
-    padding: 5px;
+    
+    padding: 10px;
 }
 
 .message-menu-edit {
     cursor: pointer;
     width: 100%;
-    align-items: end;
+
     &__span {
+        padding: 2px 0px;
+        display: flex;
+        justify-content: end;
         width: 100%;
         @include text();
         transition-duration: 0.4s;
     }
     &:hover {
-        background-color: gray;
+        background-color: $button-over-background-hover;
     }
 }
 
 .message-menu-delete {
     cursor: pointer;
     width: 100%;
-    justify-content: end;
     &__span {
+        padding: 2px 0px;
+        display: flex;
+        justify-content: end;
         width: 100px;
         @include text();
         transition-duration: 0.4s;
     }
     &:hover {
-        background-color: gray;
+        background-color: $button-over-background-hover;
     }
 }
