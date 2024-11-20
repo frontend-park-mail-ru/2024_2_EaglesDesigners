@@ -22,7 +22,7 @@ class ChatStore {
         messageId: "",
         text: "",
       },
-      usersId: [],
+      countOfUsers: 0,
     };
     this.#role = "";
     this.#users = [];

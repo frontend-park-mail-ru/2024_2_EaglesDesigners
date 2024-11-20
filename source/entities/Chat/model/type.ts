@@ -8,7 +8,7 @@ export interface TChat {
   chatName: string;
   chatType: ChatType;
   lastMessage: TChatMessage;
-  usersId: string[];
+  countOfUsers: number;
 }
 
 export interface TNewChat {
