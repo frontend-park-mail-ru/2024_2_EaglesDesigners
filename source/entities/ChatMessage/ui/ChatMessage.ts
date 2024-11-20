@@ -8,6 +8,8 @@ import { UserStorage } from "@/entities/User";
 import { getTimeString } from "@/shared/helpers/getTimeString";
 import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { API } from "@/shared/api/api";
+import { ChatResponse } from "@/shared/api/types";
 
 export class ChatMessage {
   #parent;
@@ -16,6 +18,30 @@ export class ChatMessage {
 
   constructor(parent: Element) {
     this.#parent = parent;
+    
+    let nextPageLoading = false;
+    this.#parent.addEventListener('scroll', () => {  
+      if (this.#parent.offsetHeight - this.#parent.scrollTop >= this.#parent.scrollHeight-1) { 
+
+        if (nextPageLoading) {
+          return;
+        }
+        nextPageLoading = true; 
+        
+        if(this.#oldestMessage){
+          API.get<ChatResponse>(
+            '/chat/' + ChatStorage.getChat().chatId + '/messages/pages/' + this.#oldestMessage?.messageId,
+          ).then((res) => {
+            if(res.messages && res.messages.length > 0){
+              this.renderMessages(res.messages);
+            }
+            nextPageLoading = false;
+          }).catch(() => {
+            nextPageLoading = false;
+          });
+        }
+      }  
+    })
   }
 
   async renderMessages(messages: TChatMessage[]) {
