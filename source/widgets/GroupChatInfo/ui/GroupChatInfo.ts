@@ -34,7 +34,10 @@ export class GroupChatInfo {
     const ChatUsers = await API.get<UsersIdResponse>(
       "/chat/" + chat.chatId,
     );
-    const usersCount = ChatUsers.users.length;
+    let usersCount = 0;
+    if ( ChatUsers?.users?.length) {
+      usersCount = ChatUsers.users.length;
+    }
     const chatType = {channel: false, group: false};
     if (chat.chatType == "group") {
       chatType.group = true;

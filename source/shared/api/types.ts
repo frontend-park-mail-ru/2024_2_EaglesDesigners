@@ -153,3 +153,8 @@ export interface searchContactsResponse {
   global_users: TContact[];
   user_contacts: TContact[];
 }
+
+export interface searchChatsResponse {
+  global_channels: TChat[];
+  user_chats: TChat[];
+}

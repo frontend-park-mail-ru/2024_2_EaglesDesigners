@@ -1,12 +1,30 @@
 <div class="chat-list-container">
   <div class="chat-list-container-search">
     <div class="chat-list-container-search-input">
-
+      <img class="chat-list-container-search-input__img" src="/assets/image/search-icon.svg" alt="">
+      <input id="search-input" class="chat-list-container-search-input__input" type="text" name="text" placeholder="Поиск">
     </div>
   </div>
   <div id="chat-list" class="chat-list-container-chatlist">
 
   </div>
+  <div id="search-chats-list" class="search-chats" style="display: none;">
+    <div id="label-user-chats" class="user-chats" style="display: none;">
+      <hr style="width: 95%; opacity: 0.6;">
+      <span class="user-chats__span" style="color: #fff;">Ваши чаты</span>
+    </div>
+    <div id="search-user-chats" class="search-user-chats">
+
+    </div>
+    <div id="label-global-chats" class="global-chats" style="display: none;">
+      <hr style="width: 95%; opacity: 0.6;">
+    <span class="global-chats__span" style="color: #fff;">Глобальный поиск</span>
+    </div>
+    <div id="search-globals-chats" class="search-global-chats">
+
+    </div>
+  </div>
+  
 
   <div class="add-chat" id="add-chat">
     <img class="add-icon" id="addChatIcon" src="/assets/image/add-24px.svg" />

@@ -6,6 +6,7 @@ import "./ContactsList.scss";
 import { ContactAddForm } from "@/widgets/ContactAddForm/index.ts";
 import { ChatList } from "@/widgets/ChatList";
 import { Chat } from "@/widgets/Chat";
+import { debounce } from "@/shared/helpers/debounce";
 
 export class ContactsList {
   #parent;
@@ -59,7 +60,7 @@ export class ContactsList {
 
     const inputSearch : HTMLInputElement = this.#parent.querySelector("#search-input")!;
 
-    const handleSearch = async (event) => {
+    const handleSearch = async () => {
       console.log(event);
       const searchContacts : HTMLElement = this.#parent.querySelector("#contacts-list-search")!;
       const globalUsers = this.#parent.querySelector("#global-users")!;
@@ -69,23 +70,33 @@ export class ContactsList {
 
       const contactName : string = inputSearch.value;
         if (contactName != "") {
+          const labelUserContacts : HTMLElement = this.#parent.querySelector("#label-user-contacts")!;
+          const labelGlobalContacts : HTMLElement = this.#parent.querySelector("#label-global-contacts")!;
+
           const response = await API.get<searchContactsResponse>("/contacts/search" + "?key_word=" + contactName);
           if (!response.error) {
             contactList.style.display = "none";
             searchContacts.style.display = "block";
             if (response.global_users) {
+              labelGlobalContacts.style.display = "block";
               console.log(globalUsers, "global");
               response.global_users.forEach((element) => {
                 const contactGlobal = new ContactCard(globalUsers);
                 contactGlobal.renderChat(element, this.#chat, chatList);
               });
             }
+            else {
+              labelGlobalContacts.style.display = "none";
+            }
             if (response.user_contacts) {
-              console.log(response);
+              labelUserContacts.style.display = "block";
               response.user_contacts.forEach((element) => {
                 const contactSearch = new ContactCard(userContacts);
                 contactSearch.renderChat(element, this.#chat, chatList);
               });
+            }
+            else {
+              labelUserContacts.style.display = "none";
             }
             console.log(response);
           }
@@ -100,19 +111,4 @@ export class ContactsList {
 
     inputSearch.addEventListener("input", debouncedHandle);
   }
-}
-
-function debounce(callee : Function, timeoutMs : number) {
-  console.log(typeof callee)
-  return function perform(...args) {
-    const previousCall = this.lastCall;
-
-    this.lastCall = Date.now();
-
-    if (previousCall && this.lastCall - previousCall <= timeoutMs) {
-      clearTimeout(this.lastCallTimer);
-    }
-
-    this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs);
-  };
 }

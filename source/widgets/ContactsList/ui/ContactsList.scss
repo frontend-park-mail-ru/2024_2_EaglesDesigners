@@ -1,3 +1,4 @@
+@import "@/shared/styles/styles.scss";
 $text-over-primary: var(--text-over-primary);
 $scroll-bar-color: var(--scroll-bar-color);
 $primary-shadow-25: var(--primary-shadow-25);
@@ -24,10 +25,7 @@ $primary-shadow-25: var(--primary-shadow-25);
 }
 
 .chat-list-search-input {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  @include search-container();
 
   &__img {
     padding-left: 15px;
@@ -36,14 +34,7 @@ $primary-shadow-25: var(--primary-shadow-25);
   }
 
   &__input {
-    background: inherit;
-    border: none;
-    outline: none;
-    color: #fff;
-    height: 100%;
-    font-family: var(--main-font-family);
-    font-size: 18px;
-    margin-left: 15px;
+    @include search-input();
   }
   
 }
@@ -111,5 +102,19 @@ $primary-shadow-25: var(--primary-shadow-25);
   }
   &::-webkit-scrollbar-track {
     background: inherit;
+  }
+}
+
+.user-contacts {
+
+  &__span {
+    @include search-label-span();
+  }
+}
+
+.global-contacts {
+
+  &__span {
+    @include search-label-span();
   }
 }
