@@ -58,11 +58,28 @@ export class Chat {
       this.style.height = this.scrollHeight + "px";
     });
 
-    const sendInputMessage = () => {
+    const sendInputMessage = async () => {
       const messageText = textArea.value.trim();
       textArea.value = "";
+      console.log("tak")
 
       if (messageText) {
+        
+        if (textArea.classList.contains('edit')) {
+          console.log("я тут")
+          const messageId = textArea.classList[2]!;
+          const response = await API.put(
+            "/messages/" + messageId,
+            {
+              text: messageText,
+            },
+          );
+          console.log(response);
+          textArea.classList.remove('edit');
+          textArea.classList.remove(messageId);
+          return;
+        }
+
         const user = UserStorage.getUser();
 
         const message: TChatMessage = {

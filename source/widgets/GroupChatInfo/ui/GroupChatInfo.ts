@@ -98,7 +98,8 @@ export class GroupChatInfo {
         
       }
       else {
-        const response = await API.delete("/chat/" + chat.chatId + "/delusers", UserStorage.getUser().id);
+        console.log(UserStorage.getUser().id);
+        const response = await API.delete("/chat/" + chat.chatId + "/deluser/" + UserStorage.getUser().id, "");
         if (!response.error) {
           console.log(response);
           Router.go("/");

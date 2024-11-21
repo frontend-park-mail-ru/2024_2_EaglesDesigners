@@ -2,6 +2,16 @@
 $button-over-background-hover: var(--button-over-background-hover);
 $background: var(--background);
 
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8000;
+    opacity: 1;
+}
+
 .message-menu {
     background: $background;
     border-radius: 10px;

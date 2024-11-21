@@ -28,11 +28,18 @@ export class ChatMessage {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
     const handleMessageClick = (event) => {
+      console.log(event)
       const messageId = event.target.id;
       const message = document.getElementById(messageId)!;
       console.log(message);
-      // const messageMenu = new MessageMenu(this.#parent);
-      // messageMenu.render();
+      const menu = message.querySelector("#menu-context")!;
+      const messageText = message.querySelector(".message__body__text")?.textContent;
+      console.log(messageText)
+      const messageMenu = new MessageMenu(menu);
+      if (messageText) {
+        messageMenu.render(messageId, messageText, event.x, event.y);
+      }
+      
 
     };
     for (const [index, message] of messages.entries()) {
@@ -113,6 +120,7 @@ export class ChatMessage {
         ? serverHost + profile.avatarURL
         : "/assets/image/default-avatar.svg";
 
+      console.log(this.#parent);
       this.#parent.insertAdjacentHTML(
         "afterbegin",
         ChatMessageTemplate({

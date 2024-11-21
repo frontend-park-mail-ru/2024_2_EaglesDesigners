@@ -137,6 +137,35 @@ class Api {
       return { error: "could not fetch" } as Response;
     }
   }
+  async put<TResponse, TRequest>(path: string, body: TRequest ) {
+    type Response = TResponse & ResponseError;
+    try {
+      const url = this.#baseURl + path;
+
+      const state: RequestInit = {
+        method: "PUT",
+        headers: {
+          "Access-Control-Allow-Credentials": "true",
+          enctype: "multipart/form-data",
+          not_csrf: Csrf.get(),
+        },
+        mode: "cors",
+        body: JSON.stringify(body),
+        credentials: "include",
+      };
+      const response = await fetch(url, state);
+      const CSRFToken =
+        response.headers.get("x-csrf-token") ?? localStorage.getItem("csrf");
+      if (CSRFToken) {
+        Csrf.set(CSRFToken);
+        localStorage.setItem("csrf", Csrf.get());
+      }
+      const responseBody: Response = await response.json();
+      return responseBody;
+    } catch {
+      return { error: "could not fetch" } as Response;
+    }
+  }
 
   async delete<TResponse>(path: string, body: string) {
     type Response = TResponse & ResponseError;

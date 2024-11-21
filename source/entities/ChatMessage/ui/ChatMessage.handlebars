@@ -4,6 +4,7 @@
     {{#if message.first}}first-message{{/if}}
     {{#if message.last}}last-message{{/if}}
     {{#if message.isFromOtherUser}}left-side{{/if}}"
+    oncontextmenu="return false;"
 >
   <div id="{{message.messageId}}" class="message__body">
     <span id="{{message.messageId}}" class="message__body__username">
@@ -21,5 +22,5 @@
   <div id="{{message.messageId}}" class="message__avatar">
     <img id="{{message.messageId}}" class="message__avatar__img" src="{{message.avatarURL}}" />
   </div>
-  <div class="menu-context"></div>
+  <div id="menu-context" class="menu-context"></div>
 </div>
