@@ -97,3 +97,19 @@ $primary-shadow-25: var(--primary-shadow-25);
     background: inherit;
   }
 }
+
+.contacts-list-search {
+  flex: 1;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+}

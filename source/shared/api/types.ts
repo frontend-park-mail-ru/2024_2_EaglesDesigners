@@ -148,3 +148,8 @@ export interface SendMessageRequest {
 export interface profileFormRequest {
   avatar: File;
 }
+
+export interface searchContactsResponse {
+  global_users: TContact[];
+  user_contacts: TContact[];
+}

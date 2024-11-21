@@ -1,6 +1,6 @@
 import { API } from "@/shared/api/api";
 import ContactsListTemplate from "./ContactsList.handlebars";
-import { ContactResponse } from "@/shared/api/types";
+import { ContactResponse, searchContactsResponse } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import "./ContactsList.scss";
 import { ContactAddForm } from "@/widgets/ContactAddForm/index.ts";
@@ -19,7 +19,7 @@ export class ContactsList {
     this.#parent.innerHTML = ContactsListTemplate();
 
     const response = await API.get<ContactResponse>("/contacts");
-    const contactList = this.#parent.querySelector("#contacts-list")!;
+    const contactList : HTMLElement = this.#parent.querySelector("#contacts-list")!;
     const contactCard = new ContactCard(contactList);
     const chatList = new ChatList(this.#parent, this.#chat);
 
@@ -60,15 +60,59 @@ export class ContactsList {
     const inputSearch : HTMLInputElement = this.#parent.querySelector("#search-input")!;
 
     const handleSearch = async (event) => {
-      if (event.code === "Enter") {
-        const contactName : string = inputSearch.value;
+      console.log(event);
+      const searchContacts : HTMLElement = this.#parent.querySelector("#contacts-list-search")!;
+      const globalUsers = this.#parent.querySelector("#global-users")!;
+      const userContacts = this.#parent.querySelector("#user-contacts")!;
+      userContacts.innerHTML = '';
+      globalUsers.innerHTML = '';
 
-        const response = await API.get("/contacts/search" + "?key_word=" + contactName);
-        console.log(response);
+      const contactName : string = inputSearch.value;
+        if (contactName != "") {
+          const response = await API.get<searchContactsResponse>("/contacts/search" + "?key_word=" + contactName);
+          if (!response.error) {
+            contactList.style.display = "none";
+            searchContacts.style.display = "block";
+            if (response.global_users) {
+              console.log(globalUsers, "global");
+              response.global_users.forEach((element) => {
+                const contactGlobal = new ContactCard(globalUsers);
+                contactGlobal.renderChat(element, this.#chat, chatList);
+              });
+            }
+            if (response.user_contacts) {
+              console.log(response);
+              response.user_contacts.forEach((element) => {
+                const contactSearch = new ContactCard(userContacts);
+                contactSearch.renderChat(element, this.#chat, chatList);
+              });
+            }
+            console.log(response);
+          }
+        }
+        else {
+          contactList.style.display = "block";
+          searchContacts.style.display = "none";
+        }
         return;
-      }
     };
+    const debouncedHandle = debounce(handleSearch, 250);
 
-    inputSearch.addEventListener("keyup", handleSearch);
+    inputSearch.addEventListener("input", debouncedHandle);
   }
+}
+
+function debounce(callee : Function, timeoutMs : number) {
+  console.log(typeof callee)
+  return function perform(...args) {
+    const previousCall = this.lastCall;
+
+    this.lastCall = Date.now();
+
+    if (previousCall && this.lastCall - previousCall <= timeoutMs) {
+      clearTimeout(this.lastCallTimer);
+    }
+
+    this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs);
+  };
 }
