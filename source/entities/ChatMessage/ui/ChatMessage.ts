@@ -30,7 +30,7 @@ export class ChatMessage {
         
         if(this.#oldestMessage){
           API.get<ChatMessagesResponse>(
-            '/chat/' + ChatStorage.getChat().chatId + '/messages/pages/' + this.#oldestMessage?.messageId,
+            `/chat/${ChatStorage.getChat().chatId}/messages/pages/${this.#oldestMessage?.messageId}`,
           ).then((res) => {
             if(res.messages && res.messages.length > 0){
               this.renderMessages(res.messages);
