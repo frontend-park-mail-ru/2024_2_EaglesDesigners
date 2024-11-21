@@ -56,5 +56,19 @@ export class ContactsList {
     };
 
     addContactButton.addEventListener("click", handleAddContact);
+
+    const inputSearch : HTMLInputElement = this.#parent.querySelector("#search-input")!;
+
+    const handleSearch = async (event) => {
+      if (event.code === "Enter") {
+        const contactName : string = inputSearch.value;
+
+        const response = await API.get("/contacts/search" + "?key_word=" + contactName);
+        console.log(response);
+        return;
+      }
+    };
+
+    inputSearch.addEventListener("keyup", handleSearch);
   }
 }
