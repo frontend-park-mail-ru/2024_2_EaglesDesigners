@@ -31,16 +31,15 @@ export class ChatMessage {
       console.log(event)
       const messageId = event.target.id;
       const message = document.getElementById(messageId)!;
-      console.log(message);
-      const menu = message.querySelector("#menu-context")!;
-      const messageText = message.querySelector(".message__body__text")?.textContent;
-      console.log(messageText)
-      const messageMenu = new MessageMenu(menu);
-      if (messageText) {
-        messageMenu.render(messageId, messageText, event.x, event.y);
+      if (message) {
+        const menu = message.querySelector("#menu-context")!;
+        const messageText = message.querySelector(".message__body__text")?.textContent;
+        console.log(messageText)
+        const messageMenu = new MessageMenu(menu);
+        if (messageText) {
+          messageMenu.render(messageId, messageText, event.x, event.y);
+        }
       }
-      
-
     };
     for (const [index, message] of messages.entries()) {
       console.log(message);

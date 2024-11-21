@@ -36,3 +36,13 @@ $delete-button-color: var(--delete-button-color);
   border: none;
   cursor: pointer;
   }
+
+  @mixin message-popup-button {
+    width: 135px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: var(--base-font-family);
+    cursor: pointer;
+    border: none;
+  }
