@@ -1,4 +1,3 @@
-import { API } from "@/shared/api/api";
 import MessageMenuTemplate from "./MessageMenu.handlebars";
 import "./MessageMenu.scss";
 import { DeleteMessage } from "@/widgets/DeleteMessage";
@@ -11,28 +10,24 @@ export class MessageMenu {
 
     render(messageId : string, messageText : string, x : number, y : number) {
         this.#parent.innerHTML = MessageMenuTemplate({x, y});
-        const messageMenu = this.#parent.querySelector("#message-menu")!;
 
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
         const handleDelete = async () => {
             const deleteMessageMenu = new DeleteMessage(this.#parent);
             deleteMessageMenu.render(messageId);
-            // const response = await API.delete("/messages/" + messageId, messageId);
-            // console.log(response);
-            // this.#parent.innerHTML = '';
         };
 
         deleteButton.addEventListener("click", handleDelete);
 
         const editButton = this.#parent.querySelector("#edit-message")!;
         const textArea = document.querySelector("textarea")!;
-        textArea.innerText = "asd";
 
         const handleEdit = () => {
+            console.log("я тыкаю")
             textArea.classList.add("edit");
             textArea.classList.add(messageId);
-            textArea.innerText = messageText;
+            textArea.value = messageText.trim();
             this.#parent.innerHTML = '';
         };
         editButton.addEventListener("click", handleEdit);

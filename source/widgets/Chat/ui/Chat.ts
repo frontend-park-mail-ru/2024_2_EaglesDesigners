@@ -52,8 +52,8 @@ export class Chat {
     ChatStorage.setChatMessageInstance(chatMessage);
 
     const textArea = this.#parent.querySelector("textarea")!;
-
     textArea.addEventListener("input", function () {
+      console.log("asds")
       this.style.height = "";
       this.style.height = this.scrollHeight + "px";
     });
@@ -61,7 +61,6 @@ export class Chat {
     const sendInputMessage = async () => {
       const messageText = textArea.value.trim();
       textArea.value = "";
-      console.log("tak")
 
       if (messageText) {
         
@@ -74,9 +73,15 @@ export class Chat {
               text: messageText,
             },
           );
-          console.log(response);
-          textArea.classList.remove('edit');
-          textArea.classList.remove(messageId);
+          if (!response.error) {
+            textArea.classList.remove('edit');
+            textArea.classList.remove(messageId);
+            const message = document.getElementById(messageId)!;
+            const messageBody = message.querySelector(".message__body__text")!;
+            messageBody.textContent = messageText;
+          
+          }
+          
           return;
         }
 
