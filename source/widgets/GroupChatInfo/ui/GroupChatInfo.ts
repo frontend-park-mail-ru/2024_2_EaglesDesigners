@@ -87,7 +87,7 @@ export class GroupChatInfo {
       addUser.addEventListener("click", handleAddUser);
     }
 
-    const deleteGroupButton = this.#parent.querySelector("#delete-group")!;
+    const deleteGroupButton : HTMLElement = this.#parent.querySelector("#delete-group")!;
     const handleDeleteGroup = async () => {
       if (userType.owner) {
         const response = await API.delete(
@@ -102,7 +102,7 @@ export class GroupChatInfo {
       }
       else {
         console.log(UserStorage.getUser().id);
-        const response = await API.delete("/chat/" + chat.chatId + "/deluser/" + UserStorage.getUser().id, "");
+        const response = await API.delete("/chat/" + chat.chatId + "/leave", "");
         if (!response.error) {
           console.log(response);
           Router.go("/");
@@ -111,6 +111,21 @@ export class GroupChatInfo {
     };
 
     deleteGroupButton.addEventListener("click", handleDeleteGroup);
+
+    const handleSubscribe = async () => {
+      const responseSubscribe = await API.post("/chat/" + this.#chat.chatId + "/addusers", {"usersId": [UserStorage.getUser().id]});
+      console.log(responseSubscribe);
+      if (!responseSubscribe.error) {
+        this.#parent.innerHTML = '';
+      }
+    };
+    if (usersCount === 0 && chatType.channel) {
+      deleteGroupButton.style.display = "none";
+      const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
+      subscribeButton.style.display = "block";
+      console.log(subscribeButton);
+      subscribeButton.addEventListener("click", handleSubscribe);
+    }
 
     const updateGroupButton = this.#parent.querySelector("#update-group")!;
 

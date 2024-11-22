@@ -24,9 +24,13 @@ export class ChatInfo {
     if (usersInChat.users) {
       user = usersInChat.users[(usersInChat.users[0].id !== UserStorage.getUser().id) ? 0 : 1];
       const profileUser = await API.get<ProfileResponse>("/profile/" + user.id);
-      const birthdate = moment(profileUser.birthdate)
+      let birthdate;
+      if (profileUser.birthdate) {
+        birthdate= moment(profileUser.birthdate)
         .utc()
         .format("DD.MM.YYYY");
+      }
+       
       if (profileUser.avatarURL) {
         profileUser.avatarURL = serverHost + profileUser.avatarURL;
       } else {

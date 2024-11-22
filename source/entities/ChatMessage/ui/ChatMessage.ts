@@ -28,7 +28,6 @@ export class ChatMessage {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
     const handleMessageClick = (event) => {
-      console.log(event)
       const messageId = event.target.id;
       const message = document.getElementById(messageId)!;
       if (message) {

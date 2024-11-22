@@ -63,6 +63,7 @@ $delete-button-color: var(--delete-button-color);
   font-family: var(--main-font-family);
   font-size: 18px;
   margin-left: 15px;
+  width: 100%;
 }
 
 @mixin search-label-span {
