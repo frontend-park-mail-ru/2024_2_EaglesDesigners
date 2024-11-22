@@ -88,5 +88,7 @@ export class GroupChatInfo {
       groupUpdate.render(this.#chat);
     };
     updateGroupButton.addEventListener("click", handleGroupUpdate);
+
+    this.#parent.style.right = '0';
   }
 }

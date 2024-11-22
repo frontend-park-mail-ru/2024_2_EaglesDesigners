@@ -3,8 +3,9 @@ $primary-shadow-15: var(--primary-shadow-15);
 
 $background: var(--background);
 
+$scroll-bar-color: var(--scroll-bar-color);
 $button-over-background-hover: var(--button-over-background-hover);
-$chat-margin-top: 20px;
+$chat-padding-top: var(--chat-padding-top);
 $main-page-left-column-min-width: 300px;
 $main-page-left-column-max-width: 400px;
 
@@ -43,19 +44,39 @@ body#main {
   cursor: pointer;
 }
 
+.main-page-items {
+  flex: 1;
+  overflow-x: scroll;
+  display: flex;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+}
+
 .main-page-widget {
   display: flex;
   min-width: $main-page-left-column-min-width;
   max-width: $main-page-left-column-max-width;
   width: 30vw;
+  height: 100%;
+
+  background: $primary;
 }
 
 .chat-content {
   background: $primary-shadow-15;
   flex: 1;
 
-  margin-right: 20px;
-  margin-top: $chat-margin-top;
+  padding-right: 20px;
+  padding-top: $chat-padding-top;
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -107,8 +128,62 @@ body#main {
 
 .chat-info-container{
   position: relative;
-  margin-top: $chat-margin-top;
+  height: 100%;
   
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 950px) {
+
+  .main-page {
+    flex-direction: column-reverse;
+  }
+
+  .main-page-content {
+    width: 100%;
+    flex-direction: row;
+
+    .main-page-logo-img, .main-page-user-avatar-img {
+      display: none;
+    }
+
+    .main-page-navigators {
+      flex: 1;
+      height: 50px;
+
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+
+  .main-page-items {
+    position: relative;
+    overflow: hidden;
+
+    .main-page-widget {
+      position: absolute;
+      top: 0;
+      left: -100vw;
+      z-index: 1000;
+
+      width: 100vw;
+      min-width: 0;
+      max-width: none;
+    }
+
+    .chat-content {
+      padding-left: 20px;
+    }
+
+    .chat-info-container {
+      position: absolute;
+      top: 0;
+      right: -100vw;
+      z-index: 1000;
+
+      width: 100%;
+    }
+
+  }
 }

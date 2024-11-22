@@ -121,5 +121,8 @@ export class Chat {
       }
     };
     chatHeader.addEventListener("click", handleChatHeader);
+
+    document.querySelector<HTMLElement>('#widget-import')!.style.left = '-100vw'; 
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
   }
 }

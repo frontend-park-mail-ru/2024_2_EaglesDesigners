@@ -1,22 +1,20 @@
 @import "@/shared/styles/styles.scss";
 
+$primary: var(--primary);
 $secondary: var(--secondary);
 $accent: var(--accent);
 
 $text-over-primary: var(--text-over-primary);
-
-$main-page-right-column-width: var(--main-page-right-column-width);
 $scroll-bar-color: var(--scroll-bar-color);
 
 .group-info {
-  width: $main-page-right-column-width;
   flex: 1;
   min-height: 0;
 
-  margin-right: 20px;
-
   display: flex;
   flex-direction: column;
+
+  @include right-column();
 }
 
 .group-header-images {

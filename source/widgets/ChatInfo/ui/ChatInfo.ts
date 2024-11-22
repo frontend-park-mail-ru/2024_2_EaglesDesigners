@@ -48,5 +48,7 @@ export class ChatInfo {
 
       deleteChatButton.addEventListener("click", handleDeleteGroup);
     }
+
+    this.#parent.style.right = '0';
   }
 }

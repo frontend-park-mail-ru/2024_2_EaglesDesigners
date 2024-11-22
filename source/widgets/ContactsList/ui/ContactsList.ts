@@ -56,5 +56,8 @@ export class ContactsList {
     };
 
     addContactButton.addEventListener("click", handleAddContact);
+
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
+    this.#parent.style.left = '0';
   }
 }

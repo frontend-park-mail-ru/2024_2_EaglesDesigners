@@ -8,13 +8,11 @@ $text-over-secondary: var(--text-over-secondary);
 $delete-button-color: var(--delete-button-color);
 
 .chat-info-column{
-  width: 240px;
   flex: 1;
-
-  margin-right: 20px;
 
   display: flex;
   flex-direction: column;
+  @include right-column();
 }
 
 .chat-info {
