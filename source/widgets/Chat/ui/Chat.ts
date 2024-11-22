@@ -4,7 +4,9 @@ import "./Chat.scss";
 import {
   ChatResponse,
   EmptyResponse,
+  ProfileResponse,
   ResponseChat,
+  searchMessagesResponse,
   SendMessageRequest,
 } from "@/shared/api/types";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
@@ -17,6 +19,7 @@ import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
 import { debounce } from "@/shared/helpers/debounce";
+import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
 
 export class Chat {
   #parent;
@@ -45,7 +48,7 @@ export class Chat {
       avatar,
     });
 
-    const messagesImport = this.#parent.querySelector("#chat__messages")!;
+    const messagesImport : HTMLElement = this.#parent.querySelector("#chat__messages")!;
     const chatMessage = new ChatMessage(messagesImport);
     ChatStorage.setChatMessageInstance(chatMessage);
 
@@ -163,16 +166,28 @@ export class Chat {
     const searchImageContainer : HTMLElement = this.#parent.querySelector("#search-image-container")!;
 
 
-    const handleSearchMessages = async (event) => {
+    const handleSearchMessages = async (event : Event) => {
       event.stopPropagation();
       messagesSearch.style.display = "flex";
       chatInfoHeader.style.display = "none";
       searchImageContainer.style.display = "none";
+      const messagesSearchResult : HTMLElement = this.#parent.querySelector('#search-results-messages')!;
 
       const messageText = searchInput.value;
       if (messageText !== "") {
-        const response = await API.get("/chat/" + chat.chatId + "/messages/search?search_query=" + messageText);
-        console.log(response);
+        const response = await API.get<searchMessagesResponse>("/chat/" + chat.chatId + "/messages/search?search_query=" + messageText);
+        if (!response.error) {
+          if (response.messages) {
+            const searchMessages = new SearchedMessageCard(messagesSearchResult);
+            response.messages.forEach(async (element) => {
+              const profileUser = await API.get<ProfileResponse>("/profile/" + element.authorID);
+              searchMessages.render(element, profileUser.avatarURL, profileUser.name);
+            });
+          }
+        }
+      }
+      else {
+        messagesSearchResult.innerHTML = '';
       }
     };
     searchMessagesButton.addEventListener('click', handleSearchMessages);
@@ -184,7 +199,7 @@ export class Chat {
     });
 
     const cancelSearchButton = this.#parent.querySelector("#cancel-search")!;
-    const handleCancelSearch = (event) => {
+    const handleCancelSearch = (event : Event) => {
       event.stopPropagation();
       messagesSearch.style.display = "none";
       chatInfoHeader.style.display = "flex";

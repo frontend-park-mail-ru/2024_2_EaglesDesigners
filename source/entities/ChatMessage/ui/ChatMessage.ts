@@ -18,7 +18,7 @@ export class ChatMessage {
   #oldestMessage: TChatMessageWithFlags | null = null;
   #newestMessage: TChatMessageWithFlags | null = null;
 
-  constructor(parent: Element) {
+  constructor(parent: HTMLElement) {
     this.#parent = parent;
 
     let nextPageLoading = false;
@@ -59,7 +59,6 @@ export class ChatMessage {
       if (message) {
         const menu = message.querySelector("#menu-context")!;
         const messageText = message.querySelector(".message__body__text")?.textContent;
-        console.log(messageText)
         const messageMenu = new MessageMenu(menu);
         if (messageText) {
           messageMenu.render(messageId, messageText, event.x, event.y);
@@ -155,3 +154,4 @@ export class ChatMessage {
     }
   }
 }
+

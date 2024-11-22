@@ -1,0 +1,18 @@
+<a class="chat-card" href={{message.messageId}}>
+  <img class="chat-card__img" src="{{avatar}}" />
+  <div class="chat-card__info">
+    <div class="info__upper-row">
+      <span class="upper-row__chat-name">
+        {{person}}
+      </span>
+      <span class="upper-row__date-time">
+        {{message.datetime}}
+      </span>
+    </div>
+    <div class="info__lower-row">
+      <span class="lower-row__message">
+        {{message.text}}
+      </span>
+    </div>
+  </div>
+</a>

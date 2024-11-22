@@ -196,13 +196,17 @@ textarea {
   &__input {
     @include search-input();
     width: 100%;
+    height: 70px;
   }
 }
 
 .search-cancel {
   display: flex;
-  align-items: center;
+  align-items: end;
+  justify-content: center;
   margin-right: 20px;
+  flex-direction: column;
+  width: 100%;
 
   &__img{
     cursor: pointer;
@@ -215,5 +219,47 @@ textarea {
 
   &__img {
     margin-right: 10px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.search-results {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  flex: 1;
+  background-color: $background-shadow-50;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+.search-results-div {
+  position: relative;
+  background: $background-shadow-50;
+  margin-left: 15px;
+}
+
+.search-results-messages {
+  display: flex;
+  flex-direction: column-reverse;
+  color: #fff;
+  max-height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: $background-shadow-50;
+
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
   }
 }

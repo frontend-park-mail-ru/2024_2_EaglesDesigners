@@ -162,3 +162,7 @@ export interface searchChatsResponse {
   global_channels: TChat[];
   user_chats: TChat[];
 }
+
+export interface searchMessagesResponse {
+  messages: TChatMessage[];
+}
