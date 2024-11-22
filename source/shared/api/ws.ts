@@ -26,13 +26,13 @@ class wsConnection {
     this.ws.onmessage = (event: MessageEvent) => {
       try {
         const res = JSON.parse(event.data);
-
+        
         if (res.messageType === "error") {
           console.log("Ошибка на стороне сервера:", res.payload);
           return;
         }
 
-        const handlersForType = this.handlers[res.messageType] || [];
+        const handlersForType = this.handlers[res.action] || [];
         for (const handler of handlersForType) {
           handler(res.payload);
         }

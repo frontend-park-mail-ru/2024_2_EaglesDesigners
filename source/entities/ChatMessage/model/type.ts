@@ -1,7 +1,7 @@
 export interface TChatMessage {
   authorID: string;
-  authorName: string;
   chatId: string;
+  branchId: string;
   datetime: string;
   isRedacted: boolean;
   messageId: string;

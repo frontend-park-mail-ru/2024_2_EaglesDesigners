@@ -1,8 +1,10 @@
-import { TChat } from "../model/type";
+import { TChat, TChatUser } from "../model/type";
 import { ChatMessage } from "@/entities/ChatMessage";
 
 class ChatStore {
   #chat: TChat;
+  #role: string;
+  #users: TChatUser[];
   #chatMessageInstance: ChatMessage | null;
 
   constructor() {
@@ -13,15 +15,17 @@ class ChatStore {
       chatType: "personal",
       lastMessage: {
         authorID: "",
-        authorName: "",
         chatId: "",
+        branchId: "",
         datetime: "",
         isRedacted: false,
         messageId: "",
         text: "",
       },
-      usersId: [],
+      countOfUsers: 0,
     };
+    this.#role = "";
+    this.#users = [];
     this.#chatMessageInstance = null;
   }
 
@@ -31,6 +35,22 @@ class ChatStore {
 
   getChat() {
     return this.#chat;
+  }
+
+  setRole(role: string) {
+    this.#role = role;
+  }
+
+  getRole() {
+    return this.#role;
+  }
+
+  setUsers(users: TChatUser[]) {
+    this.#users = users;
+  }
+
+  getUsers() {
+    return this.#users;
   }
 
   setChatMessageInstance(chatMessage: ChatMessage) {

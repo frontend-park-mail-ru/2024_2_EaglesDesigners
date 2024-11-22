@@ -7,9 +7,11 @@ import "./ChatMessage.scss";
 import { UserStorage } from "@/entities/User";
 import { getTimeString } from "@/shared/helpers/getTimeString";
 import { serverHost } from "@/app/config";
-import { ProfileResponse } from "@/shared/api/types";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
+import { ChatMessagesResponse } from "@/shared/api/types";
+
 
 export class ChatMessage {
   #parent;
@@ -18,6 +20,30 @@ export class ChatMessage {
 
   constructor(parent: Element) {
     this.#parent = parent;
+
+    let nextPageLoading = false;
+    this.#parent.addEventListener('scroll', () => {  
+      if (this.#parent.offsetHeight - this.#parent.scrollTop >= this.#parent.scrollHeight-1) { 
+
+        if (nextPageLoading) {
+          return;
+        }
+        nextPageLoading = true; 
+        
+        if(this.#oldestMessage){
+          API.get<ChatMessagesResponse>(
+            `/chat/${ChatStorage.getChat().chatId}/messages/pages/${this.#oldestMessage?.messageId}`,
+          ).then((res) => {
+            if(res.messages && res.messages.length > 0){
+              this.renderMessages(res.messages);
+            }
+            nextPageLoading = false;
+          }).catch(() => {
+            nextPageLoading = false;
+          });
+        }
+      }  
+    })
   }
 
   async renderMessages(messages: TChatMessage[]) {
@@ -46,7 +72,7 @@ export class ChatMessage {
         index === messages.length - 1 ||
         message.authorID !== messages[index + 1].authorID;
       const isLast =
-        index === 0 || message.authorID !== messages[index - 1].authorID;
+        !this.#oldestMessage || this.#oldestMessage.authorID !== message.authorID;
       const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
 
       const messageWithFlags: TChatMessageWithFlags = {
@@ -62,23 +88,21 @@ export class ChatMessage {
         this.#newestMessage = messageWithFlags;
       }
 
-      const profile = await API.get<ProfileResponse>(
-        "/profile/" + message.authorID,
-      );
-      const avatarURL = profile.avatarURL
-        ? serverHost + profile.avatarURL
+      const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
+      const avatarURL = user.avatarURL
+        ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
-
-      const msg = ChatMessageTemplate({
-        message: {
-          ...messageWithFlags,
-          datetime: getTimeString(messageWithFlags.datetime),
-          avatarURL,
-        },
-      });
+      
       this.#parent.insertAdjacentHTML(
         "beforeend",
-        msg,
+        ChatMessageTemplate({
+          message: {
+            ...messageWithFlags,
+            datetime: getTimeString(messageWithFlags.datetime),
+            avatarURL: avatarURL,
+            authorName: user?.name,
+          },
+        }),
       );
       this.#parent.lastElementChild!.addEventListener('contextmenu', handleMessageClick); 
       console.log(this.#parent.lastElementChild?.id);
@@ -111,11 +135,9 @@ export class ChatMessage {
 
       this.#newestMessage = messageWithFlags;
 
-      const profile = await API.get<ProfileResponse>(
-        "/profile/" + message.authorID,
-      );
-      const avatarURL = profile.avatarURL
-        ? serverHost + profile.avatarURL
+      const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
+      const avatarURL = user.avatarURL
+        ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
       console.log(this.#parent);
@@ -125,7 +147,8 @@ export class ChatMessage {
           message: {
             ...messageWithFlags,
             datetime: getTimeString(messageWithFlags.datetime),
-            avatarURL,
+            avatarURL: avatarURL,
+            authorName: user?.name,
           },
         }),
       );

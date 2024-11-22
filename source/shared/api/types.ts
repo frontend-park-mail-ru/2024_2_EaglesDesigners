@@ -2,7 +2,7 @@ import { TChat } from "@/entities/Chat";
 import { TContact } from "@/entities/ContactCard/index.ts";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { TUser } from "@/entities/User";
-import { TNewChat } from "@/entities/Chat/model/type";
+import { TChatUser, TNewChat } from "@/entities/Chat/model/type";
 
 export type TMessageWS = TChatMessage;
 
@@ -35,7 +35,11 @@ export interface ProfileResponse {
   name: string;
 }
 
-export type ChatResponse = TChat;
+export interface ChatResponse {
+  role: string;
+  users: TChatUser[];
+  messages: TChatMessage[];
+}
 
 export interface ChatsResponse {
   message: string;

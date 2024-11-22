@@ -6,7 +6,6 @@ import { TChat } from "@/entities/Chat";
 import {
   ChatResponse,
   ChatsResponse,
-  UsersIdResponse,
 } from "@/shared/api/types";
 import { API } from "@/shared/api/api";
 import { Chat } from "@/widgets/Chat";
@@ -53,7 +52,6 @@ export class ContactCard {
 
     this.#parent.lastElementChild!.addEventListener("click", async (e) => {
       e.preventDefault();
-      console.log("cock",contact)
       const response = await API.get<ChatsResponse>("/chats");
 
       if (!response.chats) {
@@ -63,10 +61,10 @@ export class ContactCard {
 
       for (const elem of chats) {
         if (elem.chatType === "personal") {
-          const usersRes = await API.get<UsersIdResponse>(
+          const chatResponse = await API.get<ChatResponse>(
             "/chat/" + elem.chatId,
           );
-          if (usersRes.users && (usersRes.users[0].id === contact.id  || usersRes.users[1].id === contact.id)) {
+          if (chatResponse.users && (chatResponse.users.find(user => user.id === contact.id))) {
             chatList.render();
             chat.render(elem);
             return;
