@@ -1,17 +1,25 @@
 
 <div id="header-chat" class="header">
   <img id="chat-avatar" class="avatar" src="{{avatar}}" />
-  <div class="info">
+  <div id="chat-info" class="info">
     <span id="chat-name" class="info__chat-name">
       {{chat.chatName}}
     </span>
     <span class="info__chat-status">
       {{chat.chatType}}
     </span>
+    
   </div>
-  <span class="buttons">
-
-  </span>
+  <div id="search-image-container" class="search-messages">
+    <img id="search-messages" class="search-image-container__img" src="/assets/image/search-icon.svg" alt="">
+  </div>
+  <div id="message-search-input" class="input-search" style="display: none;" >
+    <input id="input-search" class="input-search__input" type="text" name="text" placeholder="Поиск">
+    <div class="search-cancel">
+      <img id="cancel-search" class="search-cancel__img" src="/assets/image/cancel.svg" alt="">
+    </div>
+  </div>
+  
 </div>
 <div class="chat">
   <div class="messages" id="chat__messages">

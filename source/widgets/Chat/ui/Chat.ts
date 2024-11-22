@@ -16,6 +16,7 @@ import { ChatInfo } from "@/widgets/ChatInfo";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
+import { debounce } from "@/shared/helpers/debounce";
 
 export class Chat {
   #parent;
@@ -154,5 +155,41 @@ export class Chat {
       }
     };
     chatHeader.addEventListener("click", handleChatHeader);
+
+    const searchMessagesButton : HTMLElement = this.#parent.querySelector("#search-messages")!;
+    const messagesSearch : HTMLElement = this.#parent.querySelector("#message-search-input")!;
+    const searchInput : HTMLInputElement = messagesSearch.querySelector("#input-search")!;
+    const chatInfoHeader : HTMLElement = this.#parent.querySelector("#chat-info")!;
+    const searchImageContainer : HTMLElement = this.#parent.querySelector("#search-image-container")!;
+
+
+    const handleSearchMessages = async (event) => {
+      event.stopPropagation();
+      messagesSearch.style.display = "flex";
+      chatInfoHeader.style.display = "none";
+      searchImageContainer.style.display = "none";
+
+      const messageText = searchInput.value;
+      if (messageText !== "") {
+        const response = await API.get("/chat/" + chat.chatId + "/messages/search?search_query=" + messageText);
+        console.log(response);
+      }
+    };
+    searchMessagesButton.addEventListener('click', handleSearchMessages);
+
+    const debouncedHandler = debounce(handleSearchMessages, 250);
+    searchInput.addEventListener("input", debouncedHandler);
+    searchInput.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+    const cancelSearchButton = this.#parent.querySelector("#cancel-search")!;
+    const handleCancelSearch = (event) => {
+      event.stopPropagation();
+      messagesSearch.style.display = "none";
+      chatInfoHeader.style.display = "flex";
+      searchImageContainer.style.display = "flex";
+    };
+    cancelSearchButton.addEventListener('click', handleCancelSearch);
   }
 }

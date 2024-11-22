@@ -1,3 +1,4 @@
+@import "@/shared/styles/styles.scss";
 $background-shadow-50: var(--background-shadow-50);
 $primary: var(--primary);
 $primary-shadow-25: var(--primary-shadow-25);
@@ -70,7 +71,6 @@ textarea {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-sizing: border-box;
-  padding: 10px;
 
   cursor: pointer;
 
@@ -90,6 +90,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  width: 100%;
 
   &__chat-name {
     @include font-settings("Inter", 500, 20px, $text-over-primary);
@@ -171,4 +172,48 @@ textarea {
   
   border-radius: 100%;
   cursor: pointer;
+}
+
+
+.search-messages {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+
+  &__img {
+    cursor: pointer;
+  }
+}
+
+.input-search {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+
+  &__input {
+    @include search-input();
+    width: 100%;
+  }
+}
+
+.search-cancel {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+
+  &__img{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.search-image-container {
+
+  &__img {
+    margin-right: 10px;
+  }
 }
