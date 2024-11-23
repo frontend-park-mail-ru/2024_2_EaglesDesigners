@@ -1,7 +1,10 @@
-import { TChatMessage } from "@/entities/ChatMessage";
+import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import SearchedMessageCardTempalte from "./SearchedMessageCard.handlebars";
 import { serverHost } from "@/app/config";
 import { getTimeString } from "@/shared/helpers/getTimeString";
+import { ChatMessagesResponse } from "@/shared/api/types";
+import { API } from "@/shared/api/api";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 
 export class SearchedMessageCard{
     #parent;
@@ -9,7 +12,7 @@ export class SearchedMessageCard{
         this.#parent = parent;
     }
 
-    render(message : TChatMessage, avatar : string, person : string) {
+    render(message : TChatMessage, avatar : string, person : string, chatMessages : HTMLElement, Message : ChatMessage) {
         message.datetime = getTimeString(message.datetime);
         console.log(this.#parent);
         if (avatar) {
@@ -17,10 +20,35 @@ export class SearchedMessageCard{
         }
         const messageResult = SearchedMessageCardTempalte({message, avatar, person});
         this.#parent.insertAdjacentHTML("beforeend", messageResult);
-        this.#parent.lastElementChild?.addEventListener("click", (event) => {
+        this.#parent.lastElementChild?.addEventListener("click", async (event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log("hi");
+            const messageId = event?.target?.id;
+            console.log(messageId)
+            const message = chatMessages.querySelector("[id='" + messageId + "']")!;
+            console.log(message)
+            if (message) {
+                message.scrollIntoView({ block: "center", behavior: "smooth" });
+            }
+            else {
+                while (!chatMessages.querySelector("[id='" + messageId + "']")!){
+                    const response = await API.get<ChatMessagesResponse>("/chat/" + ChatStorage.getChat().chatId + "/messages/pages/" + chatMessages.lastElementChild?.id)!;
+                    if (!response.error) {
+                        Message.renderMessages(response.messages);
+                    }
+                    else {
+                        return;
+                    }
+                }
+                chatMessages.querySelector("[id='" + messageId + "']")!.scrollIntoView({ block: "center", behavior: "smooth" });
+            }
+            const chatInfoHeader : HTMLElement = document.querySelector("#chat-info")!;
+            const searchImageContainer : HTMLElement = document.querySelector("#search-image-container")!;
+            const messagesSearch : HTMLElement = document.querySelector("#message-search-input")!;
+            chatInfoHeader.style.display = "flex";
+            searchImageContainer.style.display = "flex";
+            messagesSearch.style.display = "none";
+            this.#parent.innerHTML = "";
         });
     }
 }

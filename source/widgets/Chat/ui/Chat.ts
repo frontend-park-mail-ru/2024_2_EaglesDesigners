@@ -181,7 +181,7 @@ export class Chat {
             const searchMessages = new SearchedMessageCard(messagesSearchResult);
             response.messages.forEach(async (element) => {
               const profileUser = await API.get<ProfileResponse>("/profile/" + element.authorID);
-              searchMessages.render(element, profileUser.avatarURL, profileUser.name);
+              searchMessages.render(element, profileUser.avatarURL, profileUser.name, messagesImport, chatMessage);
             });
           }
         }

@@ -1,16 +1,16 @@
-<a class="chat-card" href={{message.messageId}}>
-  <img class="chat-card__img" src="{{avatar}}" />
-  <div class="chat-card__info">
-    <div class="info__upper-row">
-      <span class="upper-row__chat-name">
+<a class="chat-card" id="{{message.messageId}}" href="{{message.messageId}}">
+  <img id="{{message.messageId}}" class="chat-card__img" src="{{avatar}}" />
+  <div id="{{message.messageId}}" class="chat-card__info">
+    <div id="{{message.messageId}}" class="info__upper-row">
+      <span id="{{message.messageId}}" class="upper-row__chat-name">
         {{person}}
       </span>
-      <span class="upper-row__date-time">
+      <span id="{{message.messageId}}" class="upper-row__date-time">
         {{message.datetime}}
       </span>
     </div>
-    <div class="info__lower-row">
-      <span class="lower-row__message">
+    <div id="{{message.messageId}}" class="info__lower-row">
+      <span id="{{message.messageId}}" class="lower-row__message">
         {{message.text}}
       </span>
     </div>
