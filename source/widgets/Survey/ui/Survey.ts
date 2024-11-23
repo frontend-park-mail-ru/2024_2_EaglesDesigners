@@ -92,6 +92,9 @@ export class Survey {
         this.#parent.querySelector("#survey-next")?.addEventListener('click', () =>{
             this.renderQuestion(questionNum + 1);
         });
+        // this.#parent.querySelector("#survey-send")?.addEventListener('click', () =>{
+        //     this.renderQuestion(questionNum + 1);
+        // });
 
     }
 }
