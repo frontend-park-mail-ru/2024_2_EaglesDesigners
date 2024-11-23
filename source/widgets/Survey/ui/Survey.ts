@@ -21,30 +21,30 @@ export class Survey {
 
     async render(){
         const response = await API.get<SurveyResponse>('survey/main');
-        this.#topic = "Опрос";
-        this.#survey_id = "1451512512512";
-        this.#questions = [ 
-            {
-                question: "Как вам наше приложение??",
-                id: "125151251",
-                type: "Звезды",
-            },
-            {
-                question: "Я жил на триллионах планет",
-                id: "125151251",
-                type: "Звезды",
-            },
-            {
-                question: "Камеру вырубай",
-                id: "125151251",
-                type: "Звезды",
-            },
-            {
-                question: "Как вам наше приложение??",
-                id: "125151251",
-                type: "Звезды",
-            },
-        ]
+        // this.#topic = "Опрос";
+        // this.#survey_id = "1451512512512";
+        // this.#questions = [ 
+        //     {
+        //         question: "Как вам наше приложение??",
+        //         id: "125151251",
+        //         type: "Звезды",
+        //     },
+        //     {
+        //         question: "Я жил на триллионах планет",
+        //         id: "125151251",
+        //         type: "Звезды",
+        //     },
+        //     {
+        //         question: "Камеру вырубай",
+        //         id: "125151251",
+        //         type: "Звезды",
+        //     },
+        //     {
+        //         question: "Как вам наше приложение??",
+        //         id: "125151251",
+        //         type: "Звезды",
+        //     },
+        // ]
         
         // if (response.error) {
         //     return;
@@ -92,9 +92,9 @@ export class Survey {
         this.#parent.querySelector("#survey-next")?.addEventListener('click', () =>{
             this.renderQuestion(questionNum + 1);
         });
-        // this.#parent.querySelector("#survey-send")?.addEventListener('click', () =>{
-        //     this.renderQuestion(questionNum + 1);
-        // });
+        this.#parent.querySelector("#survey-send")?.addEventListener('click', () =>{
+            this.renderQuestion(questionNum + 1);
+        });
 
     }
 }

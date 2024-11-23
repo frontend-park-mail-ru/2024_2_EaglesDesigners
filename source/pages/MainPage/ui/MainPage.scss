@@ -114,13 +114,15 @@ body#main {
   flex-direction: column;
 }
 
+.main-page-left-column {
+  display: flex;
+  position: relative;
+}
+
 .survey {
   position: absolute;
-  bottom: 0;
   left: 0;
-
-  margin-left: 100px;
-  margin-bottom: 20px;
+  bottom: 0;
 
   border: none;
 }
