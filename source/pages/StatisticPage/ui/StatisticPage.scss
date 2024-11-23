@@ -1,3 +1,8 @@
+body {
+    background-color: var(--primary);
+    color: #fff;
+}
+
 .statistic-page {
     padding: 10px;
 }
@@ -26,6 +31,7 @@
 .statistic-value-type-content {
     display: flex;
     flex-direction: column;
+
 }
 
 .statistic-text-type-content {
@@ -33,6 +39,7 @@
     
 
     &__span-question{
+        font-size: 18px;
         display: flex;
         align-items: center;
     }
