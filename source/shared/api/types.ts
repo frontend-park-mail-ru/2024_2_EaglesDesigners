@@ -146,3 +146,5 @@ export interface SendMessageRequest {
 export interface profileFormRequest {
   avatar: File;
 }
+
+

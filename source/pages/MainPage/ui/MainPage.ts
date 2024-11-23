@@ -12,6 +12,7 @@ import { wsConn } from "@/shared/api/ws";
 import { TChat } from "@/entities/Chat";
 import { renderMessage } from "./handlers";
 import { serverHost } from "@/app/config";
+import { Survey } from "@/widgets/Survey/ui/Survey";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -29,6 +30,7 @@ export class MainPage extends View {
     const user: TUser = UserStorage.getUser();
 
     const parent = document.getElementById("root")!;
+    
     let avatar: string;
     if (user.avatarURL) {
       avatar = serverHost + user.avatarURL;
@@ -90,5 +92,9 @@ export class MainPage extends View {
     homeButton.addEventListener("click", handleHome);
 
     wsConn.subscribe("newMessage", renderMessage);
+
+    const surveyContainer : HTMLElement = parent.querySelector("#survey-container")!;
+    const survey = new Survey(surveyContainer);
+    survey.render();
   }
 }
