@@ -1,4 +1,54 @@
+
 .survey {
-  width: 200px;
-  height: 200px;
+  width: 570px;
+  height: 173px;
+  border: none;
+}
+
+$secondary: var(--secondary);
+
+.survey-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8000;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.survey-container {
+    opacity: 1;
+    z-index: 9000;
+    border-radius: 20px;
+    width: 570px;
+    height: 173px;
+    background-color: $secondary;
+}
+
+.survey-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+
+    &__span {
+    }
+    &__img{
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+}
+
+.survey-header-cancel {
+    display: flex;
+    flex: 1;
+    justify-content: end;
+    &__img{
+        margin-right: 20px;
+        cursor: pointer;
+    }
 }

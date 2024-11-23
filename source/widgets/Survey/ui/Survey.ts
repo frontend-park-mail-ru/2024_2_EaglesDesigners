@@ -8,7 +8,15 @@ export class Survey extends View {
     }
 
     render() {
-      const parent = document.querySelector('#root')!;
-      parent.innerHTML = SurveyTemplate();
+        const parent = document.querySelector('#root')!;
+        parent.innerHTML = SurveyTemplate();
+        console.log(parent)
+        const cancelSurveyButton = parent.querySelector("#cancel")!;
+        console.log(cancelSurveyButton)
+        const handleCancelSurvey = () => {
+            const surveyModal : HTMLElement = parent.querySelector("#survey-modal")!;
+            parent.innerHTML = '';
+        };
+        cancelSurveyButton.addEventListener("click", handleCancelSurvey);
     }
 }
