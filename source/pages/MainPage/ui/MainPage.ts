@@ -12,7 +12,6 @@ import { wsConn } from "@/shared/api/ws";
 import { TChat } from "@/entities/Chat";
 import { renderMessage } from "./handlers";
 import { serverHost } from "@/app/config";
-import { Survey } from "@/widgets/Survey/ui/Survey";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -91,10 +90,20 @@ export class MainPage extends View {
 
     homeButton.addEventListener("click", handleHome);
 
-    wsConn.subscribe("newMessage", renderMessage);
+    const iframe = document.getElementsByTagName('iframe');
+    console.log(iframe);
+    iframe[0].onload = function() {
+      const iframeWindow = iframe[0].contentDocument!;
+      console.log(iframeWindow)
+      const rootDocument = iframeWindow.getElementById("root")!;
+      const cancelSurveyButton = rootDocument.getElementsByClassName("survey-header-cancel__img")!;
+      const cancelBtn = cancelSurveyButton;
+      console.log(cancelBtn)
+    };
 
-    const surveyContainer : HTMLElement = parent.querySelector("#survey-import")!;
-    const survey = new Survey(surveyContainer);
-    survey.render();
+
+    
+
+    wsConn.subscribe("newMessage", renderMessage);
   }
 }

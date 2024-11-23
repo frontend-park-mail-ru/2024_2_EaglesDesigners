@@ -44,6 +44,7 @@ body#main {
 }
 
 .main-page-widget {
+  position: relative;
   display: flex;
   min-width: $main-page-left-column-min-width;
   max-width: $main-page-left-column-max-width;
@@ -113,11 +114,13 @@ body#main {
   flex-direction: column;
 }
 
-.survey-import {
+.survey {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
 
-  width: 500px;
-  height: 300px;
+  margin-left: 100px;
+  margin-bottom: 20px;
+
+  border: none;
 }

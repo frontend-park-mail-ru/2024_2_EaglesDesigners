@@ -1,6 +1,7 @@
 import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage";
 import { SignupPage } from "@/pages/SignupPage";
+import { StatisticPage } from "@/pages/StatisticPage/ui/StatisticPage";
 import { Routes } from "@/shared/Router/RouterTypes";
 
 export const routes: Routes = {
@@ -20,6 +21,10 @@ export const routes: Routes = {
     {
       path: /^\/$/,
       view: new MainPage(),
+    },
+    {
+      path: /^\/statistic$/,
+      view: new StatisticPage(),
     },
   ],
 };
