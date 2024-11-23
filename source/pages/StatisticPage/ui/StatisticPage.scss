@@ -1,0 +1,55 @@
+.statistic-page {
+    padding: 10px;
+}
+
+.statistic-page-header {
+
+    &__span {
+        font-size: 20px;
+        font-family: (--main-font-family);
+    }
+}
+
+.statistic-page-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.statistic-value-type {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.statistic-value-type-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.statistic-text-type-content {
+    display: flex;
+    
+
+    &__span-question{
+        display: flex;
+        align-items: center;
+    }
+
+    &__span-value {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.statistic-text-type {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.statistic-value-topic-cards {
+    display: flex;
+    flex-direction: column;
+}
