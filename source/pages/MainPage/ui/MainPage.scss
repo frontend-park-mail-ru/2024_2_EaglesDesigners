@@ -112,3 +112,12 @@ body#main {
   display: flex;
   flex-direction: column;
 }
+
+.survey-import {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 500px;
+  height: 300px;
+}

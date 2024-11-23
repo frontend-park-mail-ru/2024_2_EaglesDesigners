@@ -1,21 +1,25 @@
-<div class="survey-modal">
-    <div class="survey-container">
-        <div class="survey-header">
-            <span class="survey-header__span">Как вам наше приложение?</span>
-            <div class="survey-header-cancel">
-                <img class="survey-header-cancel__img" src="/assets/image/cancel.svg" alt="">
-            </div>
-            
-        </div>
-        <div class="survey-rating">
-            <img src="/assets/image/star.svg" alt="">
-            <img src="/assets/image/star.svg" alt="">
-            <img src="/assets/image/star.svg" alt="">
-            <img src="/assets/image/star.svg" alt="">
-            <img src="/assets/image/star.svg" alt="">
-        </div>
-        <div class="survey-confirm">
-            <button class="survey-confirm__button">Далее</button>
-        </div>
+<div class="survey-container">
+    <div class="survey-header">
+        <span class="survey-header__span">
+            {{question.question}}
+        </span>            
     </div>
+    <div class="survey-rating">
+        <img class="survey-star" alt="">
+        <img class="survey-star" alt="">
+        <img class="survey-star" alt="">
+        <img class="survey-star" alt="">
+        <img class="survey-star" alt="">
+    </div>
+
+    {{#if question.last}}
+        <button class="survey-button" id="survey-send">Отправить</button>
+    {{else}}
+        <button class="survey-button" id="survey-next">Далее</button>
+    {{/if}}
+    {{!-- <div class="survey-confirm">
+        <button class="survey-confirm__button">Далее</button>
+    </div> --}}
+
+    <img class="survey-header-cancel" src="/assets/image/cancel.svg" alt="">
 </div>

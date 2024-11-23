@@ -1,24 +1,46 @@
 $secondary: var(--secondary);
+$accent: var(--accent);
 
-.survey-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 8000;
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.5);
+$text-over-secondary: var(--text-over-secondary);
+
+$scroll-bar-color: var(--scroll-bar-color);
+
+@mixin font-settings($font-family, $font-weight, $font-size, $color) {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
 }
 
 .survey-container {
+    position: relative;
+    box-sizing: border-box;
+    padding: 15px 54px 15px 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        margin-block: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+       background: $scroll-bar-color;
+      border-radius: 40px;
+    }
+    &::-webkit-scrollbar-track {
+        background: inherit;
+        margin-block: 15px;
+    }
+
     opacity: 1;
     z-index: 9000;
     border-radius: 20px;
-    margin-left: 40%;
-    margin-top: 20%;
-    width: 570px;
-    height: 173px;
+    // width: 570px;
+    // height: 173px;
     background-color: $secondary;
 }
 
@@ -26,10 +48,10 @@ $secondary: var(--secondary);
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 10px;
     align-items: center;
 
     &__span {
+        @include font-settings("Inter", 400, 16px, $text-over-secondary);
     }
     &__img{
         width: 25px;
@@ -38,12 +60,53 @@ $secondary: var(--secondary);
     }
 }
 
-.survey-header-cancel {
+.survey-rating {
+    width: 100%;
+
     display: flex;
-    flex: 1;
-    justify-content: end;
-    &__img{
-        margin-right: 20px;
+    justify-content: space-evenly;
+
+    .survey-star {
+        width: 56px;
+        height: 56px;
+
+        mask: url("public/assets/image/star.svg") no-repeat center;
+      
+        background: #99A2AD;
+        
         cursor: pointer;
     }
+
+    .checked {
+        background: gold;
+    }
+}
+
+.survey-button {
+    margin-left: auto;
+    box-sizing: border-box;
+    padding: 5px;
+
+    background-color: $accent;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.survey-header-cancel {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+    // display: flex;
+    // flex: 1;
+    // justify-content: end;
+    // &__img{
+    //     margin-right: 20px;
+    //     cursor: pointer;
+    // }
 }

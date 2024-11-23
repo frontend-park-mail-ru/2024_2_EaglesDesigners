@@ -93,7 +93,7 @@ export class MainPage extends View {
 
     wsConn.subscribe("newMessage", renderMessage);
 
-    const surveyContainer : HTMLElement = parent.querySelector("#survey-container")!;
+    const surveyContainer : HTMLElement = parent.querySelector("#survey-import")!;
     const survey = new Survey(surveyContainer);
     survey.render();
   }

@@ -3,6 +3,7 @@ import { TContact } from "@/entities/ContactCard/index.ts";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { TUser } from "@/entities/User";
 import { TChatUser, TNewChat } from "@/entities/Chat/model/type";
+import { TSurvey, TSurveyQuestion } from "@/widgets/Survey/model/type";
 
 export type TMessageWS = TChatMessage;
 
@@ -52,6 +53,12 @@ export interface AddUserResponse {
 export interface ChatUsersResponse {
   message: string;
   usersId: string[];
+}
+
+export interface SurveyResponse {
+  survey_id: string;
+  topic: string;
+  questions: TSurveyQuestion[];
 }
 
 export type EmptyRequest = {
