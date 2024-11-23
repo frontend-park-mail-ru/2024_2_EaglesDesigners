@@ -8,7 +8,7 @@ export class Survey extends View {
     }
 
     render() {
-      const parent = document.querySelector('#survey')!;
+      const parent = document.querySelector('#root')!;
       parent.innerHTML = SurveyTemplate();
     }
 }
