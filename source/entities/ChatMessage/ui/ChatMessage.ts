@@ -10,7 +10,8 @@ import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
-import { ChatMessagesResponse } from "@/shared/api/types";
+import { ChatMessagesResponse, ResponseChat } from "@/shared/api/types";
+import { messageHandler } from "../api/MessageHandler";
 
 
 export class ChatMessage {
@@ -53,18 +54,7 @@ export class ChatMessage {
     ) {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
-    const handleMessageClick = (event) => {
-      const messageId = event.target.id;
-      const message = document.getElementById(messageId)!;
-      if (message) {
-        const menu = message.querySelector("#menu-context")!;
-        const messageText = message.querySelector(".message__body__text")?.textContent;
-        const messageMenu = new MessageMenu(menu);
-        if (messageText) {
-          messageMenu.render(messageId, messageText, event.x, event.y);
-        }
-      }
-    };
+    
     for (const [index, message] of messages.entries()) {
       const isFirst =
         index === messages.length - 1 ||
@@ -102,11 +92,10 @@ export class ChatMessage {
           },
         }),
       );
-      this.#parent.lastElementChild!.addEventListener('contextmenu', handleMessageClick); 
+      
+      const currentMessageId = this.#parent.lastElementChild!.id;
+      messageHandler(currentMessageId, messages);
     }
-
-    
-
   }
   async renderNewMessage(message: TChatMessage) {
     if (message.text) {
@@ -149,8 +138,9 @@ export class ChatMessage {
         }),
       );
 
-      const handleMessageClick = (event) => {
-        const messageId = event.target.id;
+      const newMessageElement = document.getElementById(message.messageId)!;
+      const handleMessageClick = (event : MouseEvent) => {
+        const messageId = newMessageElement.id;
         const message = document.getElementById(messageId)!;
         if (message) {
           const menu = message.querySelector("#menu-context")!;
@@ -162,7 +152,7 @@ export class ChatMessage {
         }
       };
 
-      const newMessageElement = document.getElementById(message.messageId)!;
+      
       newMessageElement.addEventListener("contextmenu", handleMessageClick);
     }
   }

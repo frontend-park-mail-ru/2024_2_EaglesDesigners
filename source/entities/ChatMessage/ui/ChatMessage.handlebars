@@ -6,21 +6,21 @@
     {{#if message.isFromOtherUser}}left-side{{/if}}"
     oncontextmenu="return false;"
 >
-  <div id="{{message.messageId}}" class="message__body">
-    <span id="{{message.messageId}}" class="message__body__username">
+  <div class="message__body">
+    <span class="message__body__username">
       {{message.authorName}}
     </span>
-    <span id="{{message.messageId}}" class="message__body__text">
+    <span class="message__body__text">
       {{message.text}}
     </span>
-    <span id="{{message.messageId}}" class="message__body__meta">
-      <span id="{{message.messageId}}" class="timedate">
+    <span class="message__body__meta">
+      <span class="timedate">
         {{message.datetime}}
       </span>
     </span>
   </div>
-  <div id="{{message.messageId}}" class="message__avatar">
-    <img id="{{message.messageId}}" class="message__avatar__img" src="{{message.avatarURL}}" />
+  <div class="message__avatar">
+    <img class="message__avatar__img" src="{{message.avatarURL}}" />
   </div>
   <div id="menu-context" class="menu-context"></div>
 </div>

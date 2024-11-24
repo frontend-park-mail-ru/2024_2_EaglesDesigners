@@ -118,3 +118,11 @@ $primary-shadow-25: var(--primary-shadow-25);
     @include search-label-span();
   }
 }
+
+.hiden {
+  display: none;
+}
+
+.block {
+  display: block;
+}

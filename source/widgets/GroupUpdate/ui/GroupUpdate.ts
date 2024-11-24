@@ -85,7 +85,7 @@ export class GroupUpdate {
       formData.append("avatar", groupAvatarFile);
 
       const response = await API.putFormData<GroupUpdateResponse>(
-        "/chat/" + chat.chatId,
+        `/chat/${chat.chatId}`,
         formData,
       );
       if (!response.error) {

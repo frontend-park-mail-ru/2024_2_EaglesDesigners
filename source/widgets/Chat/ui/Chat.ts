@@ -10,7 +10,6 @@ import {
   SendMessageRequest,
 } from "@/shared/api/types";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
-import { UserStorage } from "@/entities/User";
 import { TChat } from "@/entities/Chat";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getChatLabel } from "@/shared/helpers/getChatLabel";
@@ -40,7 +39,7 @@ export class Chat {
         ? serverHost + chat.avatarPath
         : "/assets/image/default-avatar.svg";
 
-    const responseInfo = await API.get<ChatResponse>("/chat/" + chat.chatId);
+    const responseInfo = await API.get<ChatResponse>(`/chat/${chat.chatId}`);
     const userType : UserType = {owner: false, user: false, admin: false};
     if (responseInfo.role === "owner") {
       userType.owner = true;
@@ -94,7 +93,7 @@ export class Chat {
         if (textArea.classList.contains('edit')) {
           const messageId = textArea.classList[2]!;
           const response = await API.put(
-            "/messages/" + messageId,
+            `/messages/${messageId}`,
             {
               text: messageText,
             },
@@ -111,22 +110,8 @@ export class Chat {
           return;
         }
 
-        const user = UserStorage.getUser();
-
-        const message: TChatMessage = {
-          authorID: user.id,
-          chatId: ChatStorage.getChat().chatId,
-          branchId: "",
-          datetime: new Date().toISOString(),
-          isRedacted: false,
-          messageId: "",
-          text: messageText,
-        };
-
-        //chatMessage.renderNewMessage(message);
-
         API.post<EmptyResponse, SendMessageRequest>(
-          "/chat/" + chat.chatId + "/messages",
+          `/chat/${chat.chatId}/messages`,
           {
             text: messageText,
           },
@@ -155,7 +140,7 @@ export class Chat {
     
 
     const responseChat = await API.get<ChatResponse>(
-      "/chat/" + chat.chatId,
+      `/chat/${chat.chatId}`,
     );
     ChatStorage.setRole(responseChat.role ?? "");
     ChatStorage.setUsers(responseChat.users ?? []);
@@ -174,7 +159,7 @@ export class Chat {
         const chatInfo = new ChatInfo(this.#chatInfo, chat);
         chatInfo.render();
       } else if (chat.chatType === "group" || chat.chatType === "channel") {
-        const responseChatInfo = await API.get<ResponseChat>("/chat/" + chat.chatId);
+        const responseChatInfo = await API.get<ResponseChat>(`/chat/${chat.chatId}`);
         const userType : UserType = {owner: false, admin: false, user: false};
         if (responseChatInfo.role === "owner") {
           userType.owner = true;
@@ -198,28 +183,29 @@ export class Chat {
 
     const handleSearchMessages = async (event : Event) => {
       event.stopPropagation();
-      messagesSearch.style.display = "flex";
-      chatInfoHeader.style.display = "none";
-      searchImageContainer.style.display = "none";
+      messagesSearch.classList.remove('hiden');
+      messagesSearch.classList.add('flex');
+      chatInfoHeader.classList.add('hiden');
+      searchImageContainer.classList.add('hiden');
       const messagesSearchResult : HTMLElement = this.#parent.querySelector('#search-results-messages')!;
 
       const messageText = searchInput.value;
       if (messageText !== "") {
-        const response = await API.get<searchMessagesResponse>("/chat/" + chat.chatId + "/messages/search?search_query=" + messageText);
+        const response = await API.get<searchMessagesResponse>(`/chat/${chat.chatId}/messages/search?search_query=${messageText}`);
         messagesSearchResult.innerHTML = '';
         if (!response.error) {
           if (response.messages) {
             const searchMessages = new SearchedMessageCard(messagesSearchResult);
             response.messages.forEach(async (element) => {
               const profileUser = ChatStorage.getUsers();
-              const index = profileUser.findIndex((elem) => {
+              const profile = profileUser.find((elem) => {
                 return element.authorID === elem.id;
               });
-              if (index !== -1) {
-                searchMessages.render(element, profileUser[index].avatarURL, profileUser[index].name, messagesImport, chatMessage);
+              if (profile) {
+                searchMessages.render(element, profile.avatarURL, profile.name, messagesImport, chatMessage);
               }
               else {
-                API.get<ProfileResponse>("/profile/" + element.authorID)
+                API.get<ProfileResponse>(`/profile/${element.authorID}`)
                   .then((res) => {
                     searchMessages.render(element, res.avatarURL, res.name, messagesImport, chatMessage);
                   });
@@ -243,9 +229,10 @@ export class Chat {
     const cancelSearchButton = this.#parent.querySelector("#cancel-search")!;
     const handleCancelSearch = (event : Event) => {
       event.stopPropagation();
-      messagesSearch.style.display = "none";
-      chatInfoHeader.style.display = "flex";
-      searchImageContainer.style.display = "flex";
+      messagesSearch.classList.remove("flex");
+      messagesSearch.classList.add("hiden");
+      chatInfoHeader.classList.remove("hiden");
+      searchImageContainer.classList.remove("hiden");
     };
     cancelSearchButton.addEventListener('click', handleCancelSearch);
   }

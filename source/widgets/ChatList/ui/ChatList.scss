@@ -121,11 +121,21 @@ $chat-margin-top: 20px;
   &__span{
     @include search-label-span();
   }
+
+  &__hr {
+    width: 95%; 
+    opacity: 0.6;
+  }
 }
 
 .global-chats {
 
   &__span {
     @include search-label-span();
+  }
+
+  &__hr {
+    width: 95%; 
+    opacity: 0.6;
   }
 }

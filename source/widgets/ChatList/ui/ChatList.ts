@@ -7,7 +7,7 @@ import "./ChatList.scss";
 import { Chat } from "@/widgets/Chat/ui/Chat";
 import { ContactsList } from "@/widgets/ContactsList";
 import { AddGroupForm } from "@/widgets/AddGroupForm";
-import { AddChannelForm } from "@/widgets/AddChannelForm/ui/AddChannelForm";
+import { AddChannelForm } from "@/widgets/AddChannelForm";
 import { debounce } from "@/shared/helpers/debounce";
 
 /**
@@ -98,7 +98,7 @@ export class ChatList {
         const labelGlobalContacts : HTMLInputElement = searchChatsList.querySelector("#label-global-chats")!;
         const labelUserContacts : HTMLInputElement = searchChatsList.querySelector("#label-user-chats")!;
 
-        const response = await API.get<searchChatsResponse>("/chat/search" + "?key_word="+ chatName);
+        const response = await API.get<searchChatsResponse>(`/chat/search?key_word=${chatName}`);
         if (!response.error) {
           chatList.style.display = "none";
           searchChatsList.style.display = "block";

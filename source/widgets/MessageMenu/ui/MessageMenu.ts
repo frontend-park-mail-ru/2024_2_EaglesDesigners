@@ -1,6 +1,6 @@
 import MessageMenuTemplate from "./MessageMenu.handlebars";
 import "./MessageMenu.scss";
-import { DeleteMessage } from "@/widgets/DeleteMessage";
+import { DeleteMessage } from "@/feature/DeleteMessage";
 
 export class MessageMenu {
     #parent;
@@ -10,7 +10,6 @@ export class MessageMenu {
 
     render(messageId : string, messageText : string, x : number, y : number) {
         this.#parent.innerHTML = MessageMenuTemplate({x, y});
-
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
         const handleDelete = async () => {
@@ -24,6 +23,8 @@ export class MessageMenu {
         const textArea = document.querySelector("textarea")!;
 
         const handleEdit = () => {
+            textArea.classList.remove(textArea.classList[1]);
+            textArea.classList.remove(textArea.classList[1]);
             textArea.classList.add("edit");
             textArea.classList.add(messageId);
             textArea.value = messageText.trim();

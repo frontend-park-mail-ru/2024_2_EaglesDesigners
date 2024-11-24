@@ -6,10 +6,5 @@ export const renderMessage = async (message: TMessageWS) => {
     return;
   }
 
-  // if (message.authorID === UserStorage.getUser().id) {
-  //   // TODO: добавить иконку отправки сообщения и при успешном response, убирать ее
-  //   return;
-  // }
-
   ChatStorage.getChatMessageInstance()?.renderNewMessage(message);
 };

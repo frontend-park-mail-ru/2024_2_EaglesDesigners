@@ -18,12 +18,12 @@ export class ChatInfo {
 
   async render() {
     const usersInChat = await API.get<UsersIdResponse>(
-      "/chat/" + this.#chat.chatId,
+      `/chat/${this.#chat.chatId}`,
     );
     let user;
     if (usersInChat.users) {
       user = usersInChat.users[(usersInChat.users[0].id !== UserStorage.getUser().id) ? 0 : 1];
-      const profileUser = await API.get<ProfileResponse>("/profile/" + user.id);
+      const profileUser = await API.get<ProfileResponse>(`/profile/${user.id}`);
       let birthdate;
       if (profileUser.birthdate) {
         birthdate= moment(profileUser.birthdate)
@@ -42,7 +42,7 @@ export class ChatInfo {
 
       const handleDeleteGroup = async () => {
         const response = await API.delete(
-          "/chat/" + this.#chat.chatId + "/delete",
+          `/chat/${this.#chat.chatId}/delete`,
           this.#chat.chatId,
         );
         if (!response.error) {

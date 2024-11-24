@@ -72,35 +72,44 @@ export class ContactsList {
           const labelUserContacts : HTMLElement = this.#parent.querySelector("#label-user-contacts")!;
           const labelGlobalContacts : HTMLElement = this.#parent.querySelector("#label-global-contacts")!;
 
-          const response = await API.get<searchContactsResponse>("/contacts/search" + "?key_word=" + contactName);
+          const response = await API.get<searchContactsResponse>(`/contacts/search?key_word=${contactName}`);
           if (!response.error) {
-            contactList.style.display = "none";
-            searchContacts.style.display = "block";
+            contactList.classList.remove('block');
+            contactList.classList.add("hiden");
+            searchContacts.classList.remove('hiden');
+            searchContacts.classList.add('block');
             if (response.global_users) {
-              labelGlobalContacts.style.display = "block";
+              labelGlobalContacts.classList.remove('hiden');
+              labelGlobalContacts.classList.add('block');
               response.global_users.forEach((element) => {
                 const contactGlobal = new ContactCard(globalUsers);
                 contactGlobal.renderChat(element, this.#chat, chatList);
               });
             }
             else {
-              labelGlobalContacts.style.display = "none";
+              labelGlobalContacts.classList.remove("block");
+              labelGlobalContacts.classList.add("hiden");
             }
             if (response.user_contacts) {
-              labelUserContacts.style.display = "block";
+              labelUserContacts.classList.add("block");
+              labelUserContacts.classList.remove("hiden");
               response.user_contacts.forEach((element) => {
                 const contactSearch = new ContactCard(userContacts);
                 contactSearch.renderChat(element, this.#chat, chatList);
               });
             }
             else {
+              labelUserContacts.classList.add("hiden");
+              labelUserContacts.classList.remove("block");
               labelUserContacts.style.display = "none";
             }
           }
         }
         else {
-          contactList.style.display = "block";
-          searchContacts.style.display = "none";
+          contactList.classList.add("block");
+          contactList.classList.remove("hiden");
+          searchContacts.classList.add("hiden");
+          searchContacts.classList.remove("block");
         }
         return;
     };

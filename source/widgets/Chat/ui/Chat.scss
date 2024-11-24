@@ -98,6 +98,7 @@ textarea {
   &__chat-status {
     @include font-settings("Inter", 400, 16px, $text-over-primary-shadow-50);
   }
+
 }
 
 .messages {
@@ -185,6 +186,7 @@ textarea {
   &__img {
     cursor: pointer;
   }
+  
 }
 
 .input-search {
@@ -198,6 +200,16 @@ textarea {
     width: 100%;
     height: 70px;
   }
+
+  
+}
+
+.hiden {
+  display: none;
+}
+
+.flex {
+  display: flex;
 }
 
 .search-cancel {

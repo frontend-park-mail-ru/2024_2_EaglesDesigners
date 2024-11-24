@@ -21,7 +21,7 @@ export class DeleteMessage {
         const deleteButton = this.#parent.querySelector("#delete-btn")!;
 
         const handleDelete = async () => {
-            const response = await API.delete("/messages/" + messageId, messageId);
+            const response = await API.delete(`/messages/${messageId}`, messageId);
             if (!response.error) {
                 this.#parent.innerHTML = '';
                 const deletedMessage = document.querySelector(`[id='${messageId}']`)!;

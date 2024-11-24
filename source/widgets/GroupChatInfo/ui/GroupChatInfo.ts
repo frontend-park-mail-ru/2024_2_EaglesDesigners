@@ -31,7 +31,7 @@ export class GroupChatInfo {
       avatar = "/assets/image/default-avatar.svg";
     }
     const ChatUsers = await API.get<UsersIdResponse>(
-      "/chat/" + chat.chatId,
+      `/chat/${chat.chatId}`,
     );
     let usersCount = 0;
     if ( ChatUsers?.users?.length) {
@@ -90,7 +90,7 @@ export class GroupChatInfo {
     const handleDeleteGroup = async () => {
       if (userType.owner) {
         const response = await API.delete(
-          "/chat/" + chat.chatId + "/delete",
+          `/chat/${chat.chatId}/delete`,
           chat.chatId,
         );
         if (!response.error) {
@@ -100,7 +100,7 @@ export class GroupChatInfo {
         
       }
       else {
-        const response = await API.delete("/chat/" + chat.chatId + "/leave", "");
+        const response = await API.delete(`/chat/${chat.chatId}/leave`, "");
         if (!response.error) {
           Router.go("/");
         }
@@ -110,15 +110,16 @@ export class GroupChatInfo {
     deleteGroupButton.addEventListener("click", handleDeleteGroup);
 
     const handleSubscribe = async () => {
-      const responseSubscribe = await API.post("/channel/" + this.#chat.chatId + "/join", {});
+      const responseSubscribe = await API.post(`/channel/${this.#chat.chatId}/join`, {});
       if (!responseSubscribe.error) {
         this.#parent.innerHTML = '';
       }
     };
     if (usersCount === 0 && chatType.channel) {
-      deleteGroupButton.style.display = "none";
+      deleteGroupButton.classList.add("hiden");
       const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
-      subscribeButton.style.display = "block";
+      subscribeButton.classList.remove('hiden');
+      subscribeButton.classList.add("block");
       subscribeButton.addEventListener("click", handleSubscribe);
     }
 

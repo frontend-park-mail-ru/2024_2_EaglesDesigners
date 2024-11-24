@@ -15,22 +15,22 @@ export class SearchedMessageCard{
 
     render(message : TChatMessage, avatar : string, person : string, chatMessages : HTMLElement, Message : ChatMessage) {
         message.datetime = getTimeString(message.datetime);
-        if (avatar) {
-            avatar = serverHost + avatar;
-        }
+
+        avatar = avatar ? serverHost + avatar : "/assets/image/default-avatar.svg";
         const messageResult = SearchedMessageCardTempalte({message, avatar, person});
         this.#parent.insertAdjacentHTML("beforeend", messageResult);
+        const currentMessage = this.#parent.lastElementChild!;
         this.#parent.lastElementChild?.addEventListener("click", async (event) => {
             event.preventDefault();
             event.stopPropagation();
-            const messageId = event?.target?.id;
+            const messageId = currentMessage.id;
             let message : HTMLElement = chatMessages.querySelector(`[id='${messageId}']`)!;
             if (message) {
                 message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
             else {
                 while (!chatMessages.querySelector(`[id='${messageId}']`)!){
-                    const response = await API.get<ChatMessagesResponse>("/chat/" + ChatStorage.getChat().chatId + "/messages/pages/" + chatMessages.lastElementChild?.id)!;
+                    const response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getChat().chatId}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
                     if (!response.error) {
                         Message.renderMessages(response.messages);
                     }
@@ -45,9 +45,10 @@ export class SearchedMessageCard{
             const chatInfoHeader : HTMLElement = document.querySelector("#chat-info")!;
             const searchImageContainer : HTMLElement = document.querySelector("#search-image-container")!;
             const messagesSearch : HTMLElement = document.querySelector("#message-search-input")!;
-            chatInfoHeader.style.display = "flex";
-            searchImageContainer.style.display = "flex";
-            messagesSearch.style.display = "none";
+            chatInfoHeader.classList.remove("hiden");
+            searchImageContainer.classList.remove("hiden");
+            messagesSearch.classList.remove("flex");
+            messagesSearch.classList.add('hiden');
             this.#parent.innerHTML = "";
         });
     }
