@@ -33,6 +33,7 @@
   <div class="messages" id="chat__messages">
 
   </div>
+  {{#if chatType.group}}
   <div class="input">
     <div class="input-bubble">
       <img class="attach-icon" src="/assets/image/Attach.svg" />
@@ -45,4 +46,49 @@
     </div>
     <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
   </div>
+  {{/if}}
+  {{#if chatType.personal}}
+  <div class="input">
+    <div class="input-bubble">
+      <img class="attach-icon" src="/assets/image/Attach.svg" />
+      <textarea
+        class="text-area"
+        placeholder="Введите сообщение"
+        maxlength="1000"
+      ></textarea>
+      <img class="emoji-icon" src="/assets/image/Emoji.svg" />
+    </div>
+    <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
+  </div>
+  {{/if}}
+  {{#if chatType.channel}}
+    {{#if userType.owner}}
+      <div class="input">
+      <div class="input-bubble">
+        <img class="attach-icon" src="/assets/image/Attach.svg" />
+        <textarea
+          class="text-area"
+          placeholder="Введите сообщение"
+          maxlength="1000"
+        ></textarea>
+        <img class="emoji-icon" src="/assets/image/Emoji.svg" />
+      </div>
+      <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
+      </div>
+    {{/if}}
+    {{#if userType.admin}}
+      <div class="input">
+      <div class="input-bubble">
+        <img class="attach-icon" src="/assets/image/Attach.svg" />
+        <textarea
+          class="text-area"
+          placeholder="Введите сообщение"
+          maxlength="1000"
+        ></textarea>
+        <img class="emoji-icon" src="/assets/image/Emoji.svg" />
+      </div>
+      <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
+      </div>
+    {{/if}}
+  {{/if}}
 </div>

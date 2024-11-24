@@ -40,12 +40,31 @@ export class Chat {
         ? serverHost + chat.avatarPath
         : "/assets/image/default-avatar.svg";
 
+    const responseInfo = await API.get<ChatResponse>("/chat/" + chat.chatId);
+    const userType : UserType = {owner: false, user: false, admin: false};
+    if (responseInfo.role === "owner") {
+      userType.owner = true;
+    } else if (responseInfo.role === "admin") {
+      userType.admin = true;
+    } else {
+      userType.user = true;
+    }
+    const chatType = {channel: false, group: false, personal: false};
+    if (chat.chatType == "group") {
+      chatType.group = true;
+    } else if (chat.chatType === "channel"){
+      chatType.channel = true;
+    } else{
+      chatType.personal = true;
+    }
     this.#parent.innerHTML = ChatTemplate({
       chat: {
         ...chat,
         chatType: getChatLabel(chat.chatType),
       },
       avatar,
+      userType,
+      chatType
     });
     const chatCard : HTMLElement = document.querySelector("[id='" + chat.chatId + "']")!;
     if (chatCard) {
@@ -56,11 +75,15 @@ export class Chat {
     const chatMessage = new ChatMessage(messagesImport);
     ChatStorage.setChatMessageInstance(chatMessage);
 
+    
     const textArea = this.#parent.querySelector("textarea")!;
-    textArea.addEventListener("input", function () {
-      this.style.height = "";
-      this.style.height = this.scrollHeight + "px";
-    });
+    if (textArea) {
+      textArea.addEventListener("input", function () {
+        this.style.height = "";
+        this.style.height = this.scrollHeight + "px";
+      });
+    }
+    
 
     const sendInputMessage = async () => {
       const messageText = textArea.value.trim();
@@ -120,11 +143,16 @@ export class Chat {
       }
     };
 
-    textArea.addEventListener("keypress", KeyPressHandler);
-
-    document
-      .querySelector("#chat__input-send-btn")!
-      .addEventListener("click", sendInputMessage);
+    if (textArea) {
+      textArea.addEventListener("keypress", KeyPressHandler);
+    }
+    
+    if (document.querySelector("#chat__input-send-btn")!) {
+        document
+        .querySelector("#chat__input-send-btn")!
+        .addEventListener("click", sendInputMessage);
+      }
+    
 
     const responseChat = await API.get<ChatResponse>(
       "/chat/" + chat.chatId,

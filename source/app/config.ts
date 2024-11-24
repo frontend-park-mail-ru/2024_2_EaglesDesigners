@@ -4,5 +4,5 @@ export const ChatLabel = {
   channel: "Канал",
 };
 
-//export const serverHost = "http://localhost:8080";
-export const serverHost = "http://212.233.98.59:8080";
+export const serverHost = "http://localhost:8080";
+//export const serverHost = "http://212.233.98.59:8080";
