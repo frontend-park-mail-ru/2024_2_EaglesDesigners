@@ -78,6 +78,15 @@ textarea {
   align-items: center;
   gap: 8px;
 
+  .chat-back-button-img {
+    margin-left: 4px;
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+
+    display: none;
+  }
   .avatar {
     margin-left: 20px;
     width: 50px;
@@ -171,4 +180,16 @@ textarea {
   
   border-radius: 100%;
   cursor: pointer;
+}
+
+@media screen and (max-width: 950px) {
+  .header {
+    .chat-back-button-img {
+      display: inline;
+    }
+
+    .avatar {
+      margin-left: 0;
+    }
+  }
 }
