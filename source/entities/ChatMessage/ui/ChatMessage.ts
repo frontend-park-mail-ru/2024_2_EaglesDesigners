@@ -137,9 +137,13 @@ export class ChatMessage {
       this.#newestMessage = messageWithFlags;
 
       const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
-      const avatarURL = user.avatarURL
+      
+      let avatarURL;
+      if (user.avatarURL) {
+        avatarURL = user.avatarURL
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
+      }
 
       this.#parent.insertAdjacentHTML(
         "afterbegin",
