@@ -24,12 +24,12 @@ export class SearchedMessageCard{
             event.preventDefault();
             event.stopPropagation();
             const messageId = event?.target?.id;
-            let message : HTMLElement = chatMessages.querySelector("[id='" + messageId + "']")!;
+            let message : HTMLElement = chatMessages.querySelector(`[id='${messageId}']`)!;
             if (message) {
                 message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
             else {
-                while (!chatMessages.querySelector("[id='" + messageId + "']")!){
+                while (!chatMessages.querySelector(`[id='${messageId}']`)!){
                     const response = await API.get<ChatMessagesResponse>("/chat/" + ChatStorage.getChat().chatId + "/messages/pages/" + chatMessages.lastElementChild?.id)!;
                     if (!response.error) {
                         Message.renderMessages(response.messages);
@@ -38,7 +38,7 @@ export class SearchedMessageCard{
                         return;
                     }
                 }
-                message = chatMessages.querySelector("[id='" + messageId + "']")!;
+                message = chatMessages.querySelector(`[id='${messageId}']`)!;
                 message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
 

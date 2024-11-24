@@ -39,7 +39,7 @@ export class ChatCard {
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
       if (ChatStorage.getChat().chatId) {
-        const currentChat = document.querySelector("[id='" + ChatStorage.getChat().chatId + "']")!;
+        const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
         if (currentChat) {
           currentChat.classList.remove('active');
         }

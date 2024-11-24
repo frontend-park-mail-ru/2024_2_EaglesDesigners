@@ -43,7 +43,7 @@ export class ChatMessage {
           });
         }
       }  
-    })
+    });
   }
 
   async renderMessages(messages: TChatMessage[]) {
@@ -87,13 +87,9 @@ export class ChatMessage {
       }
 
       const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
-      let avatarURL;
-      if (user.avatarURL) {
-        avatarURL = user.avatarURL
+      const avatarURL = user.avatarURL
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
-      }
-       
       
       this.#parent.insertAdjacentHTML(
         "beforeend",
@@ -137,13 +133,9 @@ export class ChatMessage {
       this.#newestMessage = messageWithFlags;
 
       const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
-      
-      let avatarURL;
-      if (user.avatarURL) {
-        avatarURL = user.avatarURL
+      const avatarURL = user.avatarURL
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
-      }
 
       this.#parent.insertAdjacentHTML(
         "afterbegin",

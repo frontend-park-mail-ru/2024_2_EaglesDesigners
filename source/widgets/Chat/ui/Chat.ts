@@ -66,7 +66,7 @@ export class Chat {
       userType,
       chatType
     });
-    const chatCard : HTMLElement = document.querySelector("[id='" + chat.chatId + "']")!;
+    const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
     if (chatCard) {
       chatCard.classList.add('active');
     }
@@ -206,6 +206,7 @@ export class Chat {
       const messageText = searchInput.value;
       if (messageText !== "") {
         const response = await API.get<searchMessagesResponse>("/chat/" + chat.chatId + "/messages/search?search_query=" + messageText);
+        messagesSearchResult.innerHTML = '';
         if (!response.error) {
           if (response.messages) {
             const searchMessages = new SearchedMessageCard(messagesSearchResult);
