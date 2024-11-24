@@ -49,6 +49,11 @@ export class ChatInfo {
       deleteChatButton.addEventListener("click", handleDeleteGroup);
     }
 
+    this.#parent.querySelector('#chat-info-close-button')!.addEventListener('click', () => {
+      this.#parent.style.right = '-100vw';
+      this.#parent.innerHTML = '';
+    });
+
     this.#parent.style.right = '0';
   }
 }

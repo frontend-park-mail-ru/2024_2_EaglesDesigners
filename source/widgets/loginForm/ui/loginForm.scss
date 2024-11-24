@@ -69,7 +69,7 @@ body#login {
   display: block;
   border: none;
   width: var(--input-width);
-  height: var(--input-height);
+  min-height: var(--input-height);
   border-radius: 60px 60px 60px 60px;
   font-size: var(--form-font-size);
   font-family: var(--main-font-family);
@@ -116,5 +116,14 @@ body#login {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .news-block {
+    display: none;
+  }
+  .login-page {
+    overflow-y: scroll;
   }
 }

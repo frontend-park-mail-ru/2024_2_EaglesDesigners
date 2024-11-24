@@ -17,6 +17,17 @@ $scroll-bar-color: var(--scroll-bar-color);
   @include right-column();
 }
 
+.group-info-close-button-img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  width: 24px;
+  height: 24px;
+
+  cursor: pointer;
+}
+
 .group-header-images {
   position: relative;
   width: 100%;

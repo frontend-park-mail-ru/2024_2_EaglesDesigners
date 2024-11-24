@@ -75,8 +75,8 @@ body#main {
   background: $primary-shadow-15;
   flex: 1;
 
-  padding-right: 20px;
-  padding-top: $chat-padding-top;
+  margin-right: 20px;
+  margin-top: $chat-padding-top;
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -151,6 +151,7 @@ body#main {
     .main-page-navigators {
       flex: 1;
       height: 50px;
+      gap: 0;
 
       flex-direction: row;
       justify-content: space-around;
@@ -173,7 +174,7 @@ body#main {
     }
 
     .chat-content {
-      padding-left: 20px;
+      margin-left: 20px;
     }
 
     .chat-info-container {
