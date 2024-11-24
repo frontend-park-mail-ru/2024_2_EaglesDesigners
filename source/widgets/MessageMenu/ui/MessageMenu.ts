@@ -24,7 +24,6 @@ export class MessageMenu {
         const textArea = document.querySelector("textarea")!;
 
         const handleEdit = () => {
-            console.log("я тыкаю")
             textArea.classList.add("edit");
             textArea.classList.add(messageId);
             textArea.value = messageText.trim();

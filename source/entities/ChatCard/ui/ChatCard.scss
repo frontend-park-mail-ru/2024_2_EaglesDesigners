@@ -1,10 +1,13 @@
-$primary-shadow-25: var(--primary-shadow-25);
+@import "@/shared/styles/styles.scss";
 
+$primary-shadow-25: var(--primary-shadow-25);
+$secondary: var(--secondary);
 $text-over-primary: var(--text-over-primary);
+$button-over-background-hover: var(--button-over-background-hover);
 
 .chat-card {
   border-radius: 15px;
-  margin-right: 10px;
+  padding-right: 10px;
 
   cursor: pointer;
   text-decoration: none;
@@ -12,13 +15,7 @@ $text-over-primary: var(--text-over-primary);
   display: flex;
 
   &__img {
-    margin: 10px;
-
-    border-radius: 100%;
-    background: $primary-shadow-25;
-
-    width: var(--avatar-size);
-    height: var(--avatar-size);
+    @include message-avatar();
   }
 
   &__info {
@@ -58,7 +55,7 @@ $text-over-primary: var(--text-over-primary);
             font-weight: 300;
             font-size: 12px;
             color: $text-over-primary;
-            filter: brightness(50%);
+            filter: brightness(80%);
 
             align-self: flex-start;
           }
@@ -68,24 +65,26 @@ $text-over-primary: var(--text-over-primary);
       &__lower-row {
         
         .lower-row__message{
-          min-height: 21px;
-          font-family: "Inter";
-          line-height: 21px;
-          font-weight: 400;
-          font-size: 16px;
-          display: block;
-          color: $text-over-primary;
-          filter: brightness(50%);
-
-          flex: 1;
-          min-width: 0px;
-
-          display: block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          @include message-text();
         }
       }
     }
   }
+
+  &:hover {
+    
+  }
+
+  &:focus {
+    transition: 0.5s;
+    background-color: $secondary;
+  }
+}
+
+.hover {
+  background-color: $button-over-background-hover;
+}
+
+.active {
+  background-color: $secondary;
 }

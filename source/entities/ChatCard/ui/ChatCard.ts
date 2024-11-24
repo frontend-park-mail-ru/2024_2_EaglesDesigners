@@ -37,12 +37,27 @@ export class ChatCard {
       }),
     );
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
+      console.log('я кликаю');
       e.preventDefault();
+      if (ChatStorage.getChat()) {
+        const currentChat = document.querySelector('[id=' + ChatStorage.getChat().chatId + ']')!;
+        currentChat.classList.remove('active');
+        console.log(currentChat);
+      }
       if (ChatStorage.getChat() !== chat) {
         const newUrl = `/chat/${chat.chatId}`;
         history.pushState({ url: newUrl }, "", newUrl);
         this.#chat.render(chat);
       }
+    });
+
+    const chatCard = this.#parent.lastElementChild!;
+
+    chatCard.addEventListener("mouseover", () => {
+      chatCard.classList.add('hover');
+    });
+    chatCard.addEventListener("mouseout", () => {
+      chatCard.classList.remove('hover');
     });
   }
 }

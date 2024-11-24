@@ -47,6 +47,10 @@ export class Chat {
       },
       avatar,
     });
+    const chatCard : HTMLElement = document.querySelector("[id='" + chat.chatId + "']")!;
+    if (chatCard) {
+      chatCard.classList.add('active');
+    }
 
     const messagesImport : HTMLElement = this.#parent.querySelector("#chat__messages")!;
     const chatMessage = new ChatMessage(messagesImport);
@@ -54,7 +58,6 @@ export class Chat {
 
     const textArea = this.#parent.querySelector("textarea")!;
     textArea.addEventListener("input", function () {
-      console.log("asds")
       this.style.height = "";
       this.style.height = this.scrollHeight + "px";
     });
@@ -66,7 +69,6 @@ export class Chat {
       if (messageText) {
         
         if (textArea.classList.contains('edit')) {
-          console.log("я тут")
           const messageId = textArea.classList[2]!;
           const response = await API.put(
             "/messages/" + messageId,
@@ -124,13 +126,13 @@ export class Chat {
       .querySelector("#chat__input-send-btn")!
       .addEventListener("click", sendInputMessage);
 
-    const response = await API.get<ChatResponse>(
+    const responseChat = await API.get<ChatResponse>(
       "/chat/" + chat.chatId,
     );
-    ChatStorage.setRole(response.role ?? "");
-    ChatStorage.setUsers(response.users ?? []);
+    ChatStorage.setRole(responseChat.role ?? "");
+    ChatStorage.setUsers(responseChat.users ?? []);
 
-    const messages: TChatMessage[] = response.messages ?? [];
+    const messages: TChatMessage[] = responseChat.messages ?? [];
     if (messages.length > 0) {
       chatMessage.renderMessages(messages);
     }
@@ -180,8 +182,19 @@ export class Chat {
           if (response.messages) {
             const searchMessages = new SearchedMessageCard(messagesSearchResult);
             response.messages.forEach(async (element) => {
-              const profileUser = await API.get<ProfileResponse>("/profile/" + element.authorID);
-              searchMessages.render(element, profileUser.avatarURL, profileUser.name, messagesImport, chatMessage);
+              const profileUser = ChatStorage.getUsers();
+              const index = profileUser.findIndex((elem) => {
+                return element.authorID === elem.id;
+              });
+              if (index !== -1) {
+                searchMessages.render(element, profileUser[index].avatarURL, profileUser[index].name, messagesImport, chatMessage);
+              }
+              else {
+                API.get<ProfileResponse>("/profile/" + element.authorID)
+                  .then((res) => {
+                    searchMessages.render(element, res.avatarURL, res.name, messagesImport, chatMessage);
+                  });
+              }
             });
           }
         }

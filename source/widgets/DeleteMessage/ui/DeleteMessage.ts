@@ -24,6 +24,12 @@ export class DeleteMessage {
             const response = await API.delete("/messages/" + messageId, messageId);
             if (!response.error) {
                 this.#parent.innerHTML = '';
+                const deletedMessage = document.querySelector("[id='" + messageId + "']")!;
+                
+                deletedMessage.remove();
+            }
+            else {
+                
             }
         };
         deleteButton.addEventListener('click', handleDelete);

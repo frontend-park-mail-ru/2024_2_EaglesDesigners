@@ -1,5 +1,6 @@
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import SearchedMessageCardTempalte from "./SearchedMessageCard.handlebars";
+import "./SearchedMessageCard.scss";
 import { serverHost } from "@/app/config";
 import { getTimeString } from "@/shared/helpers/getTimeString";
 import { ChatMessagesResponse } from "@/shared/api/types";
@@ -24,9 +25,7 @@ export class SearchedMessageCard{
             event.preventDefault();
             event.stopPropagation();
             const messageId = event?.target?.id;
-            console.log(messageId)
-            const message = chatMessages.querySelector("[id='" + messageId + "']")!;
-            console.log(message)
+            let message : HTMLElement = chatMessages.querySelector("[id='" + messageId + "']")!;
             if (message) {
                 message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
@@ -40,8 +39,10 @@ export class SearchedMessageCard{
                         return;
                     }
                 }
-                chatMessages.querySelector("[id='" + messageId + "']")!.scrollIntoView({ block: "center", behavior: "smooth" });
+                message = chatMessages.querySelector("[id='" + messageId + "']")!;
+                message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
+
             const chatInfoHeader : HTMLElement = document.querySelector("#chat-info")!;
             const searchImageContainer : HTMLElement = document.querySelector("#search-image-container")!;
             const messagesSearch : HTMLElement = document.querySelector("#message-search-input")!;
