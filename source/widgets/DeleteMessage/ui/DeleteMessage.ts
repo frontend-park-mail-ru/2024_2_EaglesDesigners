@@ -29,7 +29,9 @@ export class DeleteMessage {
                 deletedMessage.remove();
             }
             else {
-                
+                const spanDelete = this.#parent.querySelector("#span-error-delete")!;
+                spanDelete.textContent = "Вы не можете удалять чужие сообщения";
+
             }
         };
         deleteButton.addEventListener('click', handleDelete);

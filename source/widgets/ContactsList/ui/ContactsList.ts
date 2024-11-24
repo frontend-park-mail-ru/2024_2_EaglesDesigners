@@ -61,7 +61,6 @@ export class ContactsList {
     const inputSearch : HTMLInputElement = this.#parent.querySelector("#search-input")!;
 
     const handleSearch = async () => {
-      console.log(event);
       const searchContacts : HTMLElement = this.#parent.querySelector("#contacts-list-search")!;
       const globalUsers = this.#parent.querySelector("#global-users")!;
       const userContacts = this.#parent.querySelector("#user-contacts")!;
@@ -79,7 +78,6 @@ export class ContactsList {
             searchContacts.style.display = "block";
             if (response.global_users) {
               labelGlobalContacts.style.display = "block";
-              console.log(globalUsers, "global");
               response.global_users.forEach((element) => {
                 const contactGlobal = new ContactCard(globalUsers);
                 contactGlobal.renderChat(element, this.#chat, chatList);
@@ -98,7 +96,6 @@ export class ContactsList {
             else {
               labelUserContacts.style.display = "none";
             }
-            console.log(response);
           }
         }
         else {

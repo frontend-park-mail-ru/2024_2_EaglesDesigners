@@ -99,7 +99,6 @@ export class ChatList {
         const labelUserContacts : HTMLInputElement = searchChatsList.querySelector("#label-user-chats")!;
 
         const response = await API.get<searchChatsResponse>("/chat/search" + "?key_word="+ chatName);
-        console.log(response);
         if (!response.error) {
           chatList.style.display = "none";
           searchChatsList.style.display = "block";

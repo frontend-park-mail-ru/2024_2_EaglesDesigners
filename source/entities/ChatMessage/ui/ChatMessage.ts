@@ -66,7 +66,6 @@ export class ChatMessage {
       }
     };
     for (const [index, message] of messages.entries()) {
-      console.log(message);
       const isFirst =
         index === messages.length - 1 ||
         message.authorID !== messages[index + 1].authorID;
@@ -104,7 +103,6 @@ export class ChatMessage {
         }),
       );
       this.#parent.lastElementChild!.addEventListener('contextmenu', handleMessageClick); 
-      console.log(this.#parent.lastElementChild?.id);
     }
 
     
@@ -139,7 +137,6 @@ export class ChatMessage {
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
-      console.log(this.#parent);
       this.#parent.insertAdjacentHTML(
         "afterbegin",
         ChatMessageTemplate({
@@ -151,6 +148,22 @@ export class ChatMessage {
           },
         }),
       );
+
+      const handleMessageClick = (event) => {
+        const messageId = event.target.id;
+        const message = document.getElementById(messageId)!;
+        if (message) {
+          const menu = message.querySelector("#menu-context")!;
+          const messageText = message.querySelector(".message__body__text")?.textContent;
+          const messageMenu = new MessageMenu(menu);
+          if (messageText) {
+            messageMenu.render(messageId, messageText, event.x, event.y);
+          }
+        }
+      };
+
+      const newMessageElement = document.getElementById(message.messageId)!;
+      newMessageElement.addEventListener("contextmenu", handleMessageClick);
     }
   }
 }

@@ -15,7 +15,6 @@ export class SearchedMessageCard{
 
     render(message : TChatMessage, avatar : string, person : string, chatMessages : HTMLElement, Message : ChatMessage) {
         message.datetime = getTimeString(message.datetime);
-        console.log(this.#parent);
         if (avatar) {
             avatar = serverHost + avatar;
         }

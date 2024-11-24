@@ -10,7 +10,6 @@ import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
-import { UserStorage } from "@/entities/User";
 
 export class GroupChatInfo {
   #parent;
@@ -101,10 +100,8 @@ export class GroupChatInfo {
         
       }
       else {
-        console.log(UserStorage.getUser().id);
         const response = await API.delete("/chat/" + chat.chatId + "/leave", "");
         if (!response.error) {
-          console.log(response);
           Router.go("/");
         }
       }
@@ -113,8 +110,7 @@ export class GroupChatInfo {
     deleteGroupButton.addEventListener("click", handleDeleteGroup);
 
     const handleSubscribe = async () => {
-      const responseSubscribe = await API.post("/chat/" + this.#chat.chatId + "/addusers", {"usersId": [UserStorage.getUser().id]});
-      console.log(responseSubscribe);
+      const responseSubscribe = await API.post("/channel/" + this.#chat.chatId + "/join", {});
       if (!responseSubscribe.error) {
         this.#parent.innerHTML = '';
       }
@@ -123,7 +119,6 @@ export class GroupChatInfo {
       deleteGroupButton.style.display = "none";
       const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
       subscribeButton.style.display = "block";
-      console.log(subscribeButton);
       subscribeButton.addEventListener("click", handleSubscribe);
     }
 

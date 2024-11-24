@@ -100,7 +100,7 @@ export class Chat {
           text: messageText,
         };
 
-        chatMessage.renderNewMessage(message);
+        //chatMessage.renderNewMessage(message);
 
         API.post<EmptyResponse, SendMessageRequest>(
           "/chat/" + chat.chatId + "/messages",

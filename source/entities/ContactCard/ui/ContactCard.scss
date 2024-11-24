@@ -1,4 +1,5 @@
 $text-over-primary: var(--text-over-primary);
+$button-over-background-hover: var(--button-over-background-hover);
 
 .contact-card {
   text-decoration: none;
@@ -12,6 +13,10 @@ $text-over-primary: var(--text-over-primary);
     height: 40px;
 
     border-radius: 100%;
+  }
+
+  &:hover {
+    background-color: $button-over-background-hover;
   }
 }
 
