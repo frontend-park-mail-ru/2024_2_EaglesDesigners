@@ -37,6 +37,8 @@ $text-error-message: var(--text-error-message);
 
 .profile-form-user {
   margin: 20px;
+  flex: 1;
+  overflow-y: scroll;
 
   &__input {
     display: block;

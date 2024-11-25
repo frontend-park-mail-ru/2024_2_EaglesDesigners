@@ -116,5 +116,9 @@ export class ContactsList {
     const debouncedHandle = debounce(handleSearch, 250);
 
     inputSearch.addEventListener("input", debouncedHandle);
+
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
+    this.#parent.style.left = '0';
+
   }
 }

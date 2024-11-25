@@ -8,16 +8,16 @@ $text-over-secondary: var(--text-over-secondary);
 $delete-button-color: var(--delete-button-color);
 
 .chat-info-column{
-  width: 240px;
   flex: 1;
-
-  margin-right: 20px;
 
   display: flex;
   flex-direction: column;
+  @include right-column();
 }
 
 .chat-info {
+  position: relative;
+
   background-color: $secondary;
 
   border-radius: 25px;
@@ -56,6 +56,17 @@ $delete-button-color: var(--delete-button-color);
 .chat-user-info {
   display: flex;
   flex-direction: column;
+}
+
+.chat-info-close-button-img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  width: 24px;
+  height: 24px;
+
+  cursor: pointer;
 }
 
 .chat-user-birthday {

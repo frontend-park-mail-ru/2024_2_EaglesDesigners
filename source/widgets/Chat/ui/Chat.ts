@@ -19,6 +19,7 @@ import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
 import { debounce } from "@/shared/helpers/debounce";
 import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
+import { ChatList } from "@/widgets/ChatList";
 
 export class Chat {
   #parent;
@@ -233,5 +234,18 @@ export class Chat {
       searchImageContainer.classList.remove("hidden");
     };
     cancelSearchButton.addEventListener('click', handleCancelSearch);
+
+    chatHeader.querySelector('#chat-back-button')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      history.pushState({ url: "/" }, "", "/");
+
+      const chatListImport = document.querySelector('#widget-import')!;
+      const chatList = new ChatList(chatListImport,this);
+      chatList.render();
+    });
+
+    document.querySelector<HTMLElement>('#widget-import')!.style.left = '-100vw'; 
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
   }
 }

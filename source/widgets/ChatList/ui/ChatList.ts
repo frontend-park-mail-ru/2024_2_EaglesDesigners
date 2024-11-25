@@ -135,5 +135,9 @@ export class ChatList {
     const debouncedHandle = debounce(handleSearchChats, 250);
 
     searchInput.addEventListener("input", debouncedHandle);
+
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
+    this.#parent.style.left = '0';
+
   }
 }
