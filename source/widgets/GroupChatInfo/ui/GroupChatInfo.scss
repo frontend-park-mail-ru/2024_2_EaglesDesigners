@@ -146,3 +146,22 @@ $scroll-bar-color: var(--scroll-bar-color);
   margin-right: 10px;
   opacity: 0.5;
 }
+
+.subscribe-channel {
+
+  &__button {
+    height: 40px;
+
+  color: $text-over-primary;
+  font-size: 16px;
+  font-family: var(--main-font-family);
+  background-color: var(--secondary);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  }
+}
+
+.block {
+  display: block;
+}

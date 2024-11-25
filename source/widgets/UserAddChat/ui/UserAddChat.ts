@@ -53,13 +53,13 @@ export class UserAddChat {
 
         e.preventDefault();
         const response = await API.post<AddUserResponse, UsersIdRequest>(
-          "/chat/" + chat.chatId + "/addusers",
+          `/chat/${chat.chatId}/addusers`,
           { usersId },
         );
         if (!response.error) {
           this.#parent.innerHTML = "";
           const ChatUsersId = await API.get<UsersIdResponse>(
-            "/chat/" + chat.chatId,
+            `/chat/${chat.chatId}`,
           );
           if (ChatUsersId.users) {
             chatUsersList.innerHTML = "";

@@ -1,3 +1,4 @@
+@import "@/shared/styles/styles.scss";
 $background-shadow-50: var(--background-shadow-50);
 $primary: var(--primary);
 $primary-shadow-25: var(--primary-shadow-25);
@@ -70,7 +71,6 @@ textarea {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-sizing: border-box;
-  padding: 10px;
 
   cursor: pointer;
 
@@ -101,6 +101,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  width: 100%;
 
   &__chat-name {
     @include font-settings("Inter", 500, 20px, $text-over-primary);
@@ -119,6 +120,7 @@ textarea {
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
   }
+
 }
 
 .messages {
@@ -195,6 +197,101 @@ textarea {
   cursor: pointer;
 }
 
+.search-messages {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+
+  &__img {
+    cursor: pointer;
+  }
+  
+}
+
+.input-search {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+
+  &__input {
+    @include search-input();
+    width: 100%;
+    height: 70px;
+  }
+
+  
+}
+
+.hidden {
+  display: none;
+}
+
+.search-cancel {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  margin-right: 20px;
+  flex-direction: column;
+  width: 100%;
+
+  &__img{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.search-image-container {
+
+  &__img {
+    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.search-results {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  flex: 1;
+  background-color: $background-shadow-50;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+.search-results-div {
+  position: relative;
+  background: $background-shadow-50;
+  margin-left: 15px;
+}
+
+.search-results-messages {
+  display: flex;
+  flex-direction: column-reverse;
+  color: #fff;
+  max-height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: $background-shadow-50;
+
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+}
 @media screen and (max-width: 950px) {
   .header {
     .chat-back-button-img {

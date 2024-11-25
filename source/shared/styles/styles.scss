@@ -1,3 +1,29 @@
+
+@mixin btn {
+    width: 90%;
+    height: 29px;
+    border-radius: 5px;
+    background-color: tomato;
+    font-family: var(--main-font-family);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+@mixin error {
+    font-size: var(--error-font-size);
+    font-family: var(--main-font-family);
+    color: var(--text-error-message);
+    height: fit-content;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+@mixin text {
+  color: var(--text-over-primary);
+  font-family: var(--main-font-family);
+  font-size: 18px;
+}
 $primary: var(--primary);
 
 $delete-button-color: var(--delete-button-color);
@@ -14,6 +40,70 @@ $chat-padding-top: var(--chat-padding-top);
   border-radius: 5px;
   border: none;
   cursor: pointer;
+
+  }
+
+  @mixin message-popup-button {
+    width: 135px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: var(--main-font-family);
+    cursor: pointer;
+    border: none;
+  }
+
+@mixin search-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin search-input {
+  background: inherit;
+  border: none;
+  outline: none;
+  color: #fff;
+  height: 100%;
+  font-family: var(--main-font-family);
+  font-size: 18px;
+  margin-left: 15px;
+  width: 100%;
+}
+
+@mixin search-label-span {
+  margin-left: 10px;
+  font-size: 16px;
+  font-family: var(--main-font-family);
+}
+
+@mixin message-avatar {
+  margin: 10px;
+
+  border-radius: 100%;
+  background: $primary-shadow-25;
+
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
+
+@mixin message-text {
+  min-height: 21px;
+  font-family: "Inter";
+  line-height: 21px;
+  font-weight: 400;
+  font-size: 16px;
+  display: block;
+  color: $text-over-primary;
+
+  flex: 1;
+  min-width: 0px;
+
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin right-column {

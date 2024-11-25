@@ -9,14 +9,17 @@ import { getTimeString } from "@/shared/helpers/getTimeString";
 import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
-import { ChatMessagesResponse } from "@/shared/api/types";
+import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
+import { ChatMessagesResponse, ResponseChat } from "@/shared/api/types";
+import { messageHandler } from "../api/MessageHandler";
+
 
 export class ChatMessage {
   #parent;
   #oldestMessage: TChatMessageWithFlags | null = null;
   #newestMessage: TChatMessageWithFlags | null = null;
 
-  constructor(parent: Element) {
+  constructor(parent: HTMLElement) {
     this.#parent = parent;
 
     let nextPageLoading = false;
@@ -41,7 +44,7 @@ export class ChatMessage {
           });
         }
       }  
-    })
+    });
   }
 
   async renderMessages(messages: TChatMessage[]) {
@@ -51,7 +54,7 @@ export class ChatMessage {
     ) {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
-
+    
     for (const [index, message] of messages.entries()) {
       const isFirst =
         index === messages.length - 1 ||
@@ -89,6 +92,9 @@ export class ChatMessage {
           },
         }),
       );
+      
+      const currentMessageId = this.#parent.lastElementChild!.id;
+      messageHandler(currentMessageId, messages);
     }
   }
   async renderNewMessage(message: TChatMessage) {
@@ -131,6 +137,24 @@ export class ChatMessage {
           },
         }),
       );
+
+      const newMessageElement = document.getElementById(message.messageId)!;
+      const handleMessageClick = (event : MouseEvent) => {
+        const messageId = newMessageElement.id;
+        const message = document.getElementById(messageId)!;
+        if (message) {
+          const menu = message.querySelector("#menu-context")!;
+          const messageText = message.querySelector(".message__body__text")?.textContent;
+          const messageMenu = new MessageMenu(menu);
+          if (messageText) {
+            messageMenu.render(messageId, messageText, event.x, event.y);
+          }
+        }
+      };
+
+      
+      newMessageElement.addEventListener("contextmenu", handleMessageClick);
     }
   }
 }
+

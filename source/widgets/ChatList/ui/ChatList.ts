@@ -1,5 +1,5 @@
 import { API } from "@/shared/api/api.ts";
-import { ChatsResponse } from "@/shared/api/types";
+import { ChatsResponse, searchChatsResponse } from "@/shared/api/types";
 import { TChat } from "@/entities/Chat";
 import { ChatCard } from "@/entities/ChatCard";
 import ChatListTemplate from "./ChatList.handlebars";
@@ -7,6 +7,8 @@ import "./ChatList.scss";
 import { Chat } from "@/widgets/Chat/ui/Chat";
 import { ContactsList } from "@/widgets/ContactsList";
 import { AddGroupForm } from "@/widgets/AddGroupForm";
+import { AddChannelForm } from "@/widgets/AddChannelForm";
+import { debounce } from "@/shared/helpers/debounce";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -31,7 +33,7 @@ export class ChatList {
 
     this.#parent.innerHTML = ChatListTemplate({});
 
-    const chatList = this.#parent.querySelector("#chat-list")!;
+    const chatList : HTMLElement = this.#parent.querySelector("#chat-list")!;
     const chatCard = new ChatCard(chatList, this.#chat);
 
     chats.forEach((chat) => {
@@ -73,7 +75,69 @@ export class ChatList {
         addGroupForm.render();
       });
 
+    const createChannelBtn = addChat.querySelector("#create-channel")!;
+
+    const handelCreateChannel = () => {
+      const addChannelForm = new AddChannelForm(this.#parent, this.#chat);
+      addChannelForm.render();
+    };
+    createChannelBtn.addEventListener('click', handelCreateChannel);
+
+    const searchInput : HTMLInputElement = this.#parent.querySelector("#search-input")!;
+
+    const handleSearchChats = async () => {
+      const searchChatsList : HTMLElement = this.#parent.querySelector('#search-chats-list')!;
+      const searchUserChats : HTMLElement = searchChatsList.querySelector("#search-user-chats")!;
+      const searchGlobalChats : HTMLElement = searchChatsList.querySelector("#search-globals-chats")!;
+      searchUserChats.innerHTML = '';
+      searchGlobalChats.innerHTML = '';
+      
+      const chatName = searchInput.value;
+      if (chatName !== "") {
+
+        const labelGlobalContacts : HTMLInputElement = searchChatsList.querySelector("#label-global-chats")!;
+        const labelUserContacts : HTMLInputElement = searchChatsList.querySelector("#label-user-chats")!;
+
+        const response = await API.get<searchChatsResponse>(`/chat/search?key_word=${chatName}`);
+        if (!response.error) {
+          chatList.style.display = "none";
+          searchChatsList.style.display = "block";
+          if (response.user_chats) {
+            searchUserChats.innerHTML = '';
+            labelUserContacts.style.display = "block";
+            const userChats = new ChatCard(searchUserChats, this.#chat);
+            response.user_chats.forEach((element) => {
+              userChats.render(element);
+            });
+          }
+          else {
+            labelUserContacts.style.display = "none";
+          }
+          if (response.global_channels) {
+            searchGlobalChats.innerHTML = '';
+            labelGlobalContacts.style.display = "block";
+            const globalChats = new ChatCard(searchGlobalChats, this.#chat);
+            response.global_channels.forEach((element) => {
+              globalChats.render(element);
+            });
+          }
+          else{
+            labelGlobalContacts.style.display = "none";
+          }
+        }
+      }
+      else {
+        searchChatsList.style.display = "none";
+        chatList.style.display = "block";
+      }
+      return;
+    };
+    const debouncedHandle = debounce(handleSearchChats, 250);
+
+    searchInput.addEventListener("input", debouncedHandle);
+
     document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
     this.#parent.style.left = '0';
+
   }
 }

@@ -38,12 +38,27 @@ export class ChatCard {
     );
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
-
+      if (ChatStorage.getChat().chatId) {
+        const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
+        if (currentChat) {
+          currentChat.classList.remove('active');
+        }
+        
+      }
       if (ChatStorage.getChat() !== chat) {
         const newUrl = `/chat/${chat.chatId}`;
         history.pushState({ url: newUrl }, "", newUrl);
         this.#chat.render(chat);
       }
+    });
+
+    const chatCard = this.#parent.lastElementChild!;
+
+    chatCard.addEventListener("mouseover", () => {
+      chatCard.classList.add('hover');
+    });
+    chatCard.addEventListener("mouseout", () => {
+      chatCard.classList.remove('hover');
     });
   }
 }

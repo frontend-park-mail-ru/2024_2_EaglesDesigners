@@ -62,7 +62,7 @@ export class ContactCard {
       for (const elem of chats) {
         if (elem.chatType === "personal") {
           const chatResponse = await API.get<ChatResponse>(
-            "/chat/" + elem.chatId,
+            `/chat/${elem.chatId}`,
           );
           if (chatResponse.users && (chatResponse.users.find(user => user.id === contact.id))) {
             chatList.render();

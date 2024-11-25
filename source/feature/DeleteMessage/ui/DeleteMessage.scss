@@ -1,0 +1,58 @@
+$secondary: var(--secondary);
+@import "@/shared/styles/styles.scss";
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8000;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-popup {
+    opacity: 1;
+    z-index: 9000;
+    border-radius: 10px;
+    margin-left: 40%;
+    margin-top: 20%;
+    width: 320px;
+    height: 120px;
+    background-color: $secondary;
+}
+
+.header-popup {
+    display: flex;
+    justify-content: center;
+    &__span {
+        padding: 15px 0px 0px 0px;
+        color: var(--text-over-primary);
+        font-size: 16px;
+        font-family: var(--main-font-family);
+    }
+}
+
+.delete-popup-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px 20px;
+
+    &__button-cancel{
+        @include message-popup-button;
+    }
+
+    &__button-delete{
+        margin-left: 30px;
+        background: tomato;
+        color: var(--text-over-primary);
+        @include message-popup-button;
+    }
+}
+
+.error-delete {
+    min-height: 33px;
+    padding: 0px 20px;
+}

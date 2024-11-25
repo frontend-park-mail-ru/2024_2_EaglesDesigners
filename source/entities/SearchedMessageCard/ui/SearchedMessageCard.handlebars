@@ -1,17 +1,17 @@
-<a id="{{chat.chatId}}" class="chat-card" href={{chat.chatId}}>
-  <img class="chat-card__img" src="{{avatar}}" />
-  <div class="chat-card__info">
+<a class="chat-searched-message" id="{{message.messageId}}" href="{{message.messageId}}">
+  <img class="chat-searched-message__img" src="{{avatar}}" />
+  <div class="chat-searched-message__info">
     <div class="info__upper-row">
       <span class="upper-row__chat-name">
-        {{chat.chatName}}
+        {{person}}
       </span>
       <span class="upper-row__date-time">
-        {{chat.lastMessage.datetime}}
+        {{message.datetime}}
       </span>
     </div>
     <div class="info__lower-row">
       <span class="lower-row__message">
-        {{chat.lastMessage.text}}
+        {{message.text}}
       </span>
     </div>
   </div>

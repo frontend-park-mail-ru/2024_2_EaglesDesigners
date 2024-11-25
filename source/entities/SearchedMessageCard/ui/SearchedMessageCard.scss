@@ -5,7 +5,7 @@ $secondary: var(--secondary);
 $text-over-primary: var(--text-over-primary);
 $button-over-background-hover: var(--button-over-background-hover);
 
-.chat-card {
+.chat-searched-message {
   border-radius: 15px;
   padding-right: 10px;
 
@@ -65,26 +65,15 @@ $button-over-background-hover: var(--button-over-background-hover);
       &__lower-row {
         
         .lower-row__message{
-          @include message-text();
+            @include message-text();
         }
       }
     }
   }
 
   &:hover {
-    
-  }
-
-  &:focus {
-    transition: 0.5s;
-    background-color: $secondary;
+    background-color: $button-over-background-hover;
   }
 }
 
-.hover {
-  background-color: $button-over-background-hover;
-}
 
-.active {
-  background-color: $secondary;
-}

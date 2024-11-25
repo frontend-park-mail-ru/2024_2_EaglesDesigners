@@ -9,8 +9,30 @@
     />
     <span class="contacts-list-header-name">Контакты</span>
   </div>
+  <div class="contact-list-search">
+    <div class="chat-list-search-input">
+      <img class="chat-list-search-input__img" src="/assets/image/search-icon.svg" alt="">
+      <input id="search-input" class="chat-list-search-input__input" type="text" name="text" placeholder="Поиск">
+    </div>
+  </div>
   <div class="contacts-user-list" id="contacts-list">
 
+  </div>
+  <div class="contacts-list-search hidden" id="contacts-list-search">
+    <div id="label-user-contacts" class="user-contacts hidden">
+      <hr style="width: 95%; opacity: 0.6;">
+    <span class="user-contacts__span" style="color: #fff;">Ваши контакты</span>
+    </div>
+    <div id="user-contacts" class="user-contacts">
+
+    </div>
+    <div id="label-global-contacts" class="global-contacts hidden" style="display: none;">
+      <hr style="width: 95%; opacity: 0.6;" >
+      <span class="global-contacts__span" style="color: #fff;">Глобальный поиск</span>
+      </div>
+    <div id="global-users" class="global-users">
+
+    </div>
   </div>
   <img
     id="add-contact-button"

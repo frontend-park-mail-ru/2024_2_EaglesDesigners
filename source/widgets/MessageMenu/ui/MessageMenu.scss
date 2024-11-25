@@ -1,0 +1,56 @@
+@import "@/shared/styles/styles.scss";
+$button-over-background-hover: var(--button-over-background-hover);
+$background: var(--background);
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8000;
+    opacity: 1;
+}
+
+.message-menu {
+    background: $background;
+    border-radius: 10px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    
+    padding: 10px;
+}
+
+.message-menu-edit {
+    cursor: pointer;
+    width: 100%;
+
+    &__span {
+        padding: 2px 0px;
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        @include text();
+        transition-duration: 0.4s;
+    }
+    &:hover {
+        background-color: $button-over-background-hover;
+    }
+}
+
+.message-menu-delete {
+    cursor: pointer;
+    width: 100%;
+    &__span {
+        padding: 2px 0px;
+        display: flex;
+        justify-content: end;
+        width: 100px;
+        @include text();
+        transition-duration: 0.4s;
+    }
+    &:hover {
+        background-color: $button-over-background-hover;
+    }
+}

@@ -1,3 +1,4 @@
+@import "@/shared/styles/styles.scss";
 $primary: var(--primary);
 $primary-shadow-25: var(--primary-shadow-25);
 
@@ -27,7 +28,7 @@ $chat-padding-top: var(--chat-padding-top);
 
 .chat-list-container-search {
   background: $primary-shadow-25;
-  height: 70px;
+  height: 55px;
 
   border-radius: 20px;
 
@@ -35,6 +36,22 @@ $chat-padding-top: var(--chat-padding-top);
 }
 
 .chat-list-container-chatlist {
+  flex: 1;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+}
+
+.search-chats {
   flex: 1;
   overflow-y: scroll;
 
@@ -74,14 +91,51 @@ $chat-padding-top: var(--chat-padding-top);
     padding: 10px;
 
     flex-direction: column;
-    gap: 5px;
 
     &__item {
       cursor: pointer;
       @include font-settings("Inter", 400, 16px, $text-over-primary);
-
+      cursor: pointer;
       display: flex;
       gap: 5px;
     }
+  }
+}
+
+.chat-list-container-search-input {
+  @include search-container();
+
+  &__img {
+    padding-left: 15px;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__input {
+    @include search-input();
+  }
+}
+
+.user-chats {
+
+  &__span{
+    @include search-label-span();
+  }
+
+  &__hr {
+    width: 95%; 
+    opacity: 0.6;
+  }
+}
+
+.global-chats {
+
+  &__span {
+    @include search-label-span();
+  }
+
+  &__hr {
+    width: 95%; 
+    opacity: 0.6;
   }
 }

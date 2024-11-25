@@ -6,6 +6,12 @@ import { TChatUser, TNewChat } from "@/entities/Chat/model/type";
 
 export type TMessageWS = TChatMessage;
 
+export interface ResponseChat {
+  messages: TChatMessage[];
+  role: string;
+  users: TUser[];
+}
+
 export interface ResponseError {
   error: string;
   status: string;
@@ -145,4 +151,18 @@ export interface SendMessageRequest {
 
 export interface profileFormRequest {
   avatar: File;
+}
+
+export interface searchContactsResponse {
+  global_users: TContact[];
+  user_contacts: TContact[];
+}
+
+export interface searchChatsResponse {
+  global_channels: TChat[];
+  user_chats: TChat[];
+}
+
+export interface searchMessagesResponse {
+  messages: TChatMessage[];
 }
