@@ -14,6 +14,7 @@ import { getChatLabel } from "@/shared/helpers/getChatLabel";
 import { ChatInfo } from "@/widgets/ChatInfo";
 import { GroupChatInfo } from "@/widgets/GroupChatInfo";
 import { serverHost } from "@/app/config";
+import { ChatList } from "@/widgets/ChatList";
 
 export class Chat {
   #parent;
@@ -121,5 +122,18 @@ export class Chat {
       }
     };
     chatHeader.addEventListener("click", handleChatHeader);
+
+    chatHeader.querySelector('#chat-back-button')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      history.pushState({ url: "/" }, "", "/");
+
+      const chatListImport = document.querySelector('#widget-import')!;
+      const chatList = new ChatList(chatListImport,this);
+      chatList.render();
+    });
+
+    document.querySelector<HTMLElement>('#widget-import')!.style.left = '-100vw'; 
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
   }
 }

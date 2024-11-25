@@ -78,6 +78,15 @@ textarea {
   align-items: center;
   gap: 8px;
 
+  .chat-back-button-img {
+    margin-left: 4px;
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+
+    display: none;
+  }
   .avatar {
     margin-left: 20px;
     width: 50px;
@@ -87,15 +96,28 @@ textarea {
 }
 
 .info {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   gap: 2px;
 
   &__chat-name {
     @include font-settings("Inter", 500, 20px, $text-over-primary);
+
+    max-width: 100% !important;
+
+    display: block;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
   &__chat-status {
     @include font-settings("Inter", 400, 16px, $text-over-primary-shadow-50);
+    display: block;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 }
 
@@ -171,4 +193,22 @@ textarea {
   
   border-radius: 100%;
   cursor: pointer;
+}
+
+@media screen and (max-width: 950px) {
+  .header {
+    .chat-back-button-img {
+      display: inline;
+    }
+
+    .avatar {
+      margin-left: 0;
+    }
+  }
+  .chat {
+    min-width: 0;
+  }
+  .text-area {
+    width: 100%;
+  }
 }

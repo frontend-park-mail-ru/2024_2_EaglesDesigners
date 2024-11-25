@@ -5,7 +5,7 @@ $text-over-primary: var(--text-over-primary);
 
 $scroll-bar-color: var(--scroll-bar-color);
 
-$chat-margin-top: 20px;
+$chat-padding-top: var(--chat-padding-top);
 
 @mixin font-settings($font-family, $font-weight, $font-size, $color) {
   font-family: $font-family;
@@ -18,7 +18,7 @@ $chat-margin-top: 20px;
   position: relative;
   width: 100%;
 
-  margin-top: $chat-margin-top;
+  margin-top: $chat-padding-top;
 
   display: flex;
   flex-direction: column;

@@ -88,5 +88,12 @@ export class GroupChatInfo {
       groupUpdate.render(this.#chat);
     };
     updateGroupButton.addEventListener("click", handleGroupUpdate);
+
+    this.#parent.querySelector('#group-info-close-button')!.addEventListener('click', () => {
+      this.#parent.style.right = '-100vw';
+      this.#parent.innerHTML = '';
+    });
+    
+    this.#parent.style.right = '0';
   }
 }

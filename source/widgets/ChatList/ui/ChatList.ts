@@ -72,5 +72,8 @@ export class ChatList {
         const addGroupForm = new AddGroupForm(this.#parent, this.#chat);
         addGroupForm.render();
       });
+
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
+    this.#parent.style.left = '0';
   }
 }
