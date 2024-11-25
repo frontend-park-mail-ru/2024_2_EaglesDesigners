@@ -49,7 +49,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-const manifest = require('./manifest.json');
+const manifest = require('public/manifest.json');
 
 const filesToCache = Object.values(manifest).map((file) => file.replace(/^\//, ''));
 
