@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 module.exports = {
   entry: './source/index.ts',
@@ -38,7 +39,10 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
         template: './public/index.html',
-    })
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'manifest.json'
+    }),
   ],
   mode: 'development',
 

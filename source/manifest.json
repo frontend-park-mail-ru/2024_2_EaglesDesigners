@@ -1,0 +1,151 @@
+{
+    "name": "Patefon",
+    "short_name": "Patefon",
+    "description": "This is Patefon - modern web messenger",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#101723",
+    "theme_color": "#4f82bf",
+    "icons": [
+        {
+          "src": "images/touch/icon-128x128.png",
+          "sizes": "128x128",
+          "type": "image/png"
+        }, 
+        {
+            "src": "public/assets/image/add-24px.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/user.svg public/assets/image/users.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/update-news-img.png",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/update-group.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/UnreadMessage.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/settings.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/Send.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/search-icon.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/ReadMessage.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/Patefon.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/news-header.png",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/IconLogout.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/home.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/eye.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/Emoji.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/emoji.png",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/delete-icon.png",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/default-avatar.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/Contacts.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/confirm.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/checkbox-unchecked.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/checkbox-checked.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/channel-icon.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/cancel.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/back-btn-img.svg ",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/Attach.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        },
+        {
+            "src": "public/assets/image/add-contact-button.svg",
+            "sizes": "24x24",
+            "type": "image/svg"
+        }
+    ]
+}
