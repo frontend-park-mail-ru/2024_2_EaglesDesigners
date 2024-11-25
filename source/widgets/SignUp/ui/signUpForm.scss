@@ -27,7 +27,6 @@ body#signup {
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
     text-decoration: underline;
-    margin-left: 30px;
   }
 
   &__button-create {
@@ -55,6 +54,17 @@ body#signup {
   margin-left: 20px;
 }
 
+.login-href-wrapper {
+  margin-left: 20px;
+  width: var(--input-width);
+  max-width: 100%;
+  #login-href {
+    margin-left: 0;
+    margin-right: auto;
+    overflow-wrap: anywhere;
+  }
+}
+
 .auth-form-error {
   min-height: 34px;
   max-width: var(--input-width);
@@ -71,5 +81,42 @@ body#signup {
     height: fit-content;
     display: inline-block;
     align-self: flex-start;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .signup-page {
+    overflow-y: scroll;
+  }
+
+  .auth-form-user {
+    max-width: 100%;
+    justify-items: center;
+
+    &__p {
+      overflow-wrap: anywhere;
+    }
+
+    &__button-create {
+      margin-left: 0;
+    }
+  }
+
+  .auth-form-input {
+    margin-left: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .auth-form-user-password {
+    max-width: 100%;
+  }
+
+  .signup-password-eye {
+    margin-right: 0;
+  }
+  
+  .auth-form-user-password__img-pass_show {
+    right: 10px;
   }
 }

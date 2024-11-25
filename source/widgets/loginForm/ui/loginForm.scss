@@ -42,6 +42,12 @@ body#login {
   width: 500px;
 }
 
+.login-page {
+  .password-visibility-toggle {
+    right: 10px;
+  }
+}
+
 .auth-form-user {
   &__input {
     display: block;
@@ -60,7 +66,6 @@ body#login {
     margin-top: 50px;
     background-color: var(--form-button-access);
     color: var(--primary);
-    margin-left: 8px;
   }
 }
 
@@ -125,5 +130,23 @@ body#login {
   }
   .login-page {
     overflow-y: scroll;
+  }
+
+  .btn {
+    max-width: 100%;
+  }
+
+  .auth-form {
+    min-width: 0;
+
+    .auth-form-user {
+      max-width: 100%;
+
+      &__input {
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      
+    }
   }
 }
