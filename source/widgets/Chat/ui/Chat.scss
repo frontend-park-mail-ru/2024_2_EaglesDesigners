@@ -51,7 +51,7 @@ textarea {
 
 .chat {
   width: 100%;
-  min-width: $chat-min-width;
+  min-width: 0;
   flex: 1;
   min-height: 0;
   
@@ -76,10 +76,10 @@ textarea {
 
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 
   .chat-back-button-img {
-    margin-left: 4px;
+    margin-left: 12px;
     width: 24px;
     height: 24px;
 
@@ -96,29 +96,29 @@ textarea {
 }
 
 .info {
-  width: 100%;
+  min-width: 0;
 
   display: flex;
   flex-direction: column;
   gap: 2px;
-  width: 100%;
 
   &__chat-name {
     @include font-settings("Inter", 500, 20px, $text-over-primary);
-
-    max-width: 100% !important;
+    min-width: 0;
 
     display: block;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &__chat-status {
     @include font-settings("Inter", 400, 16px, $text-over-primary-shadow-50);
+    min-width: 0;
+
     display: block;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
 }
@@ -189,6 +189,8 @@ textarea {
   flex: 1;
   height: 19px;
   max-height: calc(10 * 19px);
+  width: 100%;
+
   line-height: 19px;
 }
 
@@ -207,24 +209,21 @@ textarea {
   cursor: pointer;
 }
 
-.search-messages {
-  width: 100%;
+.search-image-container__img {
+  margin-right: 10px;
+  margin-left: auto;
   padding: 10px;
-  display: flex;
-  justify-content: end;
-  align-items: end;
 
-  &__img {
-    cursor: pointer;
-  }
-  
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
 }
 
 .input-search {
   display: flex;
-  width: 100%;
+  flex: 1;
   height: 100%;
-  flex-direction: row;
+  align-items: center;
 
   &__input {
     @include search-input();
@@ -239,37 +238,19 @@ textarea {
   display: none;
 }
 
-.search-cancel {
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  margin-right: 20px;
-  flex-direction: column;
-  width: 100%;
+.search-cancel__img{
+  margin-inline: 20px;
+  width: 30px;
+  height: 30px;
 
-  &__img{
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-  }
-}
-
-.search-image-container {
-
-  &__img {
-    margin-right: 10px;
-    width: 35px;
-    height: 35px;
-  }
+  cursor: pointer;
 }
 
 .search-results {
-  position: absolute;
-  width: 100%;
+  position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 1000px;
-  flex: 1;
   background-color: $background-shadow-50;
   border-radius: 20px;
   z-index: 100;
@@ -282,6 +263,11 @@ textarea {
 }
 
 .search-results-messages {
+  position: absolute;
+  top: 69px;
+
+  width: 100%;
+
   display: flex;
   flex-direction: column-reverse;
   color: #fff;
@@ -311,11 +297,5 @@ textarea {
     .avatar {
       margin-left: 0;
     }
-  }
-  .chat {
-    min-width: 0;
-  }
-  .text-area {
-    width: 100%;
   }
 }

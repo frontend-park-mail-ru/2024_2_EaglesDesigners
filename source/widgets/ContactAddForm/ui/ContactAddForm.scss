@@ -9,27 +9,33 @@ $text-error-message: var(--text-error-message);
   left: 0;
   width: 100%;
   height: 100%;
+
   z-index: 8000;
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.5);
+
+  align-content: center;
+    justify-items: center;
 }
 
 .contact-add-modal {
+  width: 100%;
+  max-width: 351px;
+
   opacity: 1;
   z-index: 9000;
   border-radius: 25px;
-  margin-left: 40%;
-  margin-top: 20%;
-  width: 351px;
-  height: 232px;
   background-color: $secondary;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-header {
   position: relative;
   display: flex;
   flex-direction: row;
-  padding-left: 15px;
+  padding-inline: 15px;
   padding-top: 10px;
 }
 
@@ -63,11 +69,15 @@ $text-error-message: var(--text-error-message);
 }
 
 .contact-add-input-data {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 15px;
+
   &__input {
     display: block;
-    width: 316px;
+    width: 100%;
+    max-width: 316px;
     height: 25px;
-    margin-left: 15px;
     display: block;
     border: none;
     border-bottom: 2px solid var(--text-over-primary);
@@ -89,11 +99,9 @@ $text-error-message: var(--text-error-message);
 }
 
 .contact-send {
-  height: 100%;
-  padding: 10px;
+  padding: 0 10px 10px 0;
   display: flex;
   justify-content: end;
-  margin-top: 3%;
 }
 
 .contact-add-input-info-data {

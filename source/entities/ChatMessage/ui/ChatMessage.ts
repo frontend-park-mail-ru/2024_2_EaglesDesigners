@@ -10,7 +10,7 @@ import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
-import { ChatMessagesResponse, ResponseChat } from "@/shared/api/types";
+import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 
 
@@ -52,7 +52,7 @@ export class ChatMessage {
     if(placeholder) {
       placeholder.remove();
     }
-    
+
     if (
       this.#oldestMessage?.first &&
       this.#oldestMessage.authorID === messages[0].authorID

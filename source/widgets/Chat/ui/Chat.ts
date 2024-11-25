@@ -179,7 +179,7 @@ export class Chat {
     const messagesSearch : HTMLElement = this.#parent.querySelector("#message-search-input")!;
     const searchInput : HTMLInputElement = messagesSearch.querySelector("#input-search")!;
     const chatInfoHeader : HTMLElement = this.#parent.querySelector("#chat-info")!;
-    const searchImageContainer : HTMLElement = this.#parent.querySelector("#search-image-container")!;
+    const searchImageContainer : HTMLElement = this.#parent.querySelector("#search-messages")!;
 
 
     const handleSearchMessages = async (event : Event) => {
