@@ -1,6 +1,8 @@
 $text-over-primary: var(--text-over-primary);
 $text-error-message: var(--text-error-message);
 
+$scroll-bar-color: var(--scroll-bar-color);
+
 .profile-form {
   position: relative;
   width: 100%;
@@ -84,6 +86,17 @@ $text-error-message: var(--text-error-message);
     color: var(--text-over-primary);
     opacity: 50%;
     font-family: var(--main-font-family);
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
   }
 }
 

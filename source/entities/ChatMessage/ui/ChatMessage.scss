@@ -79,6 +79,12 @@ $messages-container-width: 700px;
     }
   }
 
+  &:not(.left-side) {
+    .message__body {
+      margin-right: 20px;
+    }
+  }
+
   &:not(.left-side).last-message {
     .message__body {
       border-bottom-right-radius: 0px;

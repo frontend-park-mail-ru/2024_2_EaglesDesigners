@@ -10,7 +10,7 @@ import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
-import { ChatMessagesResponse, ResponseChat } from "@/shared/api/types";
+import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 
 
@@ -48,6 +48,11 @@ export class ChatMessage {
   }
 
   async renderMessages(messages: TChatMessage[]) {
+    const placeholder= this.#parent.querySelector('#msg-placeholder');
+    if(placeholder) {
+      placeholder.remove();
+    }
+
     if (
       this.#oldestMessage?.first &&
       this.#oldestMessage.authorID === messages[0].authorID
@@ -98,6 +103,11 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage) {
+    const placeholder= this.#parent.querySelector('#msg-placeholder');
+    if(placeholder) {
+      placeholder.remove();
+    }
+
     if (message.text) {
       if (
         this.#newestMessage?.last &&
