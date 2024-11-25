@@ -93,11 +93,13 @@ $chat-padding-top: var(--chat-padding-top);
     flex-direction: column;
 
     &__item {
-      cursor: pointer;
       @include font-settings("Inter", 400, 16px, $text-over-primary);
+      height: 30px;
       cursor: pointer;
+      
       display: flex;
-      gap: 5px;
+      gap: 10px;
+      align-items: center;
     }
   }
 }

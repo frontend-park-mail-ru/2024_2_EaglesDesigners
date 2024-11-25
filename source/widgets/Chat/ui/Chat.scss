@@ -147,6 +147,12 @@ textarea {
   }
 }
 
+.chat-messages-placeholder {
+  @include font-settings("Inter", 400, 16px, $text-over-primary-shadow-50);
+
+  margin: auto;
+}
+
 .input {
   width: 100%;
   max-width: $messages-container-max-width;
@@ -175,6 +181,8 @@ textarea {
 .attach-icon {
   width: 24px;
   height: 24px;
+  
+  display: none;
 }
 
 .text-area {
@@ -187,6 +195,8 @@ textarea {
 .emoji-icon {
   width: 24px;
   height: 24px;
+
+  display: none;
 }
 
 .input-send-btn {

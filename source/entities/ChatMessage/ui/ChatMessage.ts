@@ -48,6 +48,11 @@ export class ChatMessage {
   }
 
   async renderMessages(messages: TChatMessage[]) {
+    const placeholder= this.#parent.querySelector('#msg-placeholder');
+    if(placeholder) {
+      placeholder.remove();
+    }
+    
     if (
       this.#oldestMessage?.first &&
       this.#oldestMessage.authorID === messages[0].authorID
@@ -98,6 +103,11 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage) {
+    const placeholder= this.#parent.querySelector('#msg-placeholder');
+    if(placeholder) {
+      placeholder.remove();
+    }
+
     if (message.text) {
       if (
         this.#newestMessage?.last &&

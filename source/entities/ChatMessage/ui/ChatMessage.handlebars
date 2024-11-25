@@ -19,8 +19,11 @@
       </span>
     </span>
   </div>
-  <div class="message__avatar">
-    <img class="message__avatar__img" src="{{message.avatarURL}}" />
-  </div>
+  {{#if message.isFromOtherUser}}
+    <div class="message__avatar">
+      <img class="message__avatar__img" src="{{message.avatarURL}}" />
+    </div>
+  {{/if}}
+  
   <div id="menu-context" class="menu-context"></div>
 </div>
