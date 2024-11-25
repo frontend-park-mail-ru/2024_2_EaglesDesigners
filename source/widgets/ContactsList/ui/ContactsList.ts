@@ -75,11 +75,11 @@ export class ContactsList {
           const response = await API.get<searchContactsResponse>(`/contacts/search?key_word=${contactName}`);
           if (!response.error) {
             contactList.classList.remove('block');
-            contactList.classList.add("hiden");
-            searchContacts.classList.remove('hiden');
+            contactList.classList.add("hidden");
+            searchContacts.classList.remove('hidden');
             searchContacts.classList.add('block');
             if (response.global_users) {
-              labelGlobalContacts.classList.remove('hiden');
+              labelGlobalContacts.classList.remove('hidden');
               labelGlobalContacts.classList.add('block');
               response.global_users.forEach((element) => {
                 const contactGlobal = new ContactCard(globalUsers);
@@ -88,18 +88,18 @@ export class ContactsList {
             }
             else {
               labelGlobalContacts.classList.remove("block");
-              labelGlobalContacts.classList.add("hiden");
+              labelGlobalContacts.classList.add("hidden");
             }
             if (response.user_contacts) {
               labelUserContacts.classList.add("block");
-              labelUserContacts.classList.remove("hiden");
+              labelUserContacts.classList.remove("hidden");
               response.user_contacts.forEach((element) => {
                 const contactSearch = new ContactCard(userContacts);
                 contactSearch.renderChat(element, this.#chat, chatList);
               });
             }
             else {
-              labelUserContacts.classList.add("hiden");
+              labelUserContacts.classList.add("hidden");
               labelUserContacts.classList.remove("block");
               labelUserContacts.style.display = "none";
             }
@@ -107,8 +107,8 @@ export class ContactsList {
         }
         else {
           contactList.classList.add("block");
-          contactList.classList.remove("hiden");
-          searchContacts.classList.add("hiden");
+          contactList.classList.remove("hidden");
+          searchContacts.classList.add("hidden");
           searchContacts.classList.remove("block");
         }
         return;

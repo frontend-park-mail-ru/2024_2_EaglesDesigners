@@ -116,9 +116,9 @@ export class GroupChatInfo {
       }
     };
     if (usersCount === 0 && chatType.channel) {
-      deleteGroupButton.classList.add("hiden");
+      deleteGroupButton.classList.add("hidden");
       const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
-      subscribeButton.classList.remove('hiden');
+      subscribeButton.classList.remove('hidden');
       subscribeButton.classList.add("block");
       subscribeButton.addEventListener("click", handleSubscribe);
     }

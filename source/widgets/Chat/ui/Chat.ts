@@ -183,10 +183,9 @@ export class Chat {
 
     const handleSearchMessages = async (event : Event) => {
       event.stopPropagation();
-      messagesSearch.classList.remove('hiden');
-      messagesSearch.classList.add('flex');
-      chatInfoHeader.classList.add('hiden');
-      searchImageContainer.classList.add('hiden');
+      messagesSearch.classList.remove('hidden');
+      chatInfoHeader.classList.add('hidden');
+      searchImageContainer.classList.add('hidden');
       const messagesSearchResult : HTMLElement = this.#parent.querySelector('#search-results-messages')!;
 
       const messageText = searchInput.value;
@@ -229,10 +228,9 @@ export class Chat {
     const cancelSearchButton = this.#parent.querySelector("#cancel-search")!;
     const handleCancelSearch = (event : Event) => {
       event.stopPropagation();
-      messagesSearch.classList.remove("flex");
-      messagesSearch.classList.add("hiden");
-      chatInfoHeader.classList.remove("hiden");
-      searchImageContainer.classList.remove("hiden");
+      messagesSearch.classList.add("hidden");
+      chatInfoHeader.classList.remove("hidden");
+      searchImageContainer.classList.remove("hidden");
     };
     cancelSearchButton.addEventListener('click', handleCancelSearch);
   }
