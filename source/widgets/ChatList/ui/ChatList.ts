@@ -41,7 +41,7 @@ export class ChatList {
     });
 
     const addChat = document.querySelector("#add-chat")!;
-    const addChatIcon = addChat.querySelector<HTMLElement>(".add-icon")!;
+    const addChatIcon = addChat.querySelector<HTMLElement>("#addChatIcon")!;
     const addChatPopup = addChat.querySelector<HTMLElement>("#addChatPopUp")!;
 
 

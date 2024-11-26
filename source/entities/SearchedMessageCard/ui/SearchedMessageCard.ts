@@ -43,7 +43,7 @@ export class SearchedMessageCard{
             }
 
             const chatInfoHeader : HTMLElement = document.querySelector("#chat-info")!;
-            const searchImageContainer : HTMLElement = document.querySelector("#search-image-container")!;
+            const searchImageContainer : HTMLElement = document.querySelector("#search-messages")!;
             const messagesSearch : HTMLElement = document.querySelector("#message-search-input")!;
             chatInfoHeader.classList.remove("hidden");
             searchImageContainer.classList.remove("hidden");
