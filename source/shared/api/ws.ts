@@ -1,4 +1,4 @@
-import { serverHost } from "@/app/config";
+import { websocketHost } from "@/app/config";
 import { TMessageWS } from "./types";
 
 type THandler = (payload: TMessageWS) => Promise<void>;
@@ -42,6 +42,7 @@ class wsConnection {
     };
 
     this.ws.onopen = () => {
+      console.log(this.url);
       this.status = true;
       console.log("WebSocket подключен");
     };
@@ -83,4 +84,4 @@ class wsConnection {
   }
 }
 
-export const wsConn = new wsConnection(serverHost);
+export const wsConn = new wsConnection(websocketHost);
