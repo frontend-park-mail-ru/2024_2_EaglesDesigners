@@ -49,16 +49,16 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-const manifest = require('public/manifest.json');
+// const manifest = require('public/manifest.json');
 
-const filesToCache = Object.values(manifest).map((file) => {
-  file.replace(/^\//, '');
-});
+// const filesToCache = Object.values(manifest).map((file) => {
+//   file.replace(/^\//, '');
+// });
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE).then(cache => {
-      return cache.addAll(filesToCache);
-    })
-  );
-});
+// self.addEventListener('install', event => {
+//   event.waitUntil(
+//     caches.open(CACHE).then(cache => {
+//       return cache.addAll(filesToCache);
+//     })
+//   );
+// });
