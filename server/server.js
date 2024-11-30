@@ -10,7 +10,7 @@ app.use(static(require("path").join(__dirname, "..", "/source")));
 app.use(static(require("path").resolve(__dirname, "..", "node_modules")));
 app.use(json());
 
-const port = 8001;
+const port = 80;
 
 // Создаём HTTP-сервер
 app.get("*", (req, res) => {
