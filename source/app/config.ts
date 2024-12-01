@@ -6,5 +6,4 @@ export const ChatLabel = {
 
 //export const serverHost = "http://localhost:8080";
 export const serverHost = "https://patefon.site/api";
-//export const websocketHost = "http://localhost:8083";
-export const websocketHost = "https://patefon.site/api";
+export const websocketHost = "wss://patefon.site:8083/api";
