@@ -29,6 +29,20 @@ module.exports = {
   optimization: {
     minimizer: [
       new CssMinimizerPlugin(),
+      '...',
+      (compiler) => {
+        const TerserPlugin = require('terser-webpack-plugin');
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            compress: {
+              passes: 2,
+            },
+            ecma: 6,
+            
+          }
+        }).apply(compiler);
+      },
     ],
     minimize: true,
   },
