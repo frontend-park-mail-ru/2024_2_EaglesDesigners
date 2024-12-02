@@ -5,6 +5,7 @@ const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   entry: './source/index.ts',
@@ -38,11 +39,25 @@ module.exports = {
             compress: {
               passes: 2,
             },
-            ecma: 6,
+            ecma: 5,
             
           }
         }).apply(compiler);
       },
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.sharpMinify,
+          options: {
+            encodeOptions: {
+              webp: {
+                // https://sharp.pixelplumbing.com/api-output#webp
+                quality: 90,
+              },
+             
+            },
+          },
+        },
+      }),
     ],
     minimize: true,
   },
