@@ -4,8 +4,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   entry: './source/index.ts',
@@ -26,40 +24,6 @@ module.exports = {
         loader: 'handlebars-loader',
       },
     ]
-  },
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-      '...',
-      (compiler) => {
-        const TerserPlugin = require('terser-webpack-plugin');
-        new TerserPlugin({
-          parallel: true,
-          terserOptions: {
-            compress: {
-              passes: 2,
-            },
-            ecma: 5,
-            
-          }
-        }).apply(compiler);
-      },
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.sharpMinify,
-          options: {
-            encodeOptions: {
-              webp: {
-                // https://sharp.pixelplumbing.com/api-output#webp
-                quality: 90,
-              },
-             
-            },
-          },
-        },
-      }),
-    ],
-    minimize: true,
   },
   resolve: {
     extensions: ['.ts', '.js', '.scss', '.css', '.hbs'],
@@ -84,11 +48,7 @@ module.exports = {
       fileName: 'manifest.json'
     }),
   ],
-  mode: 'production',
-  performance: {
-    maxAssetSize: 600 * 1024, // 512 KiB
-    maxEntrypointSize: 600 * 1024, // 512 KiB
-  },
+  mode: 'development',
 
   devServer: {
     historyApiFallback: true,

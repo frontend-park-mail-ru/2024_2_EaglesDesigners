@@ -97,6 +97,13 @@ export class ChatMessage {
           },
         }),
       );
+      if (message.isRedacted) {
+        const redactedMessage = this.#parent.querySelector(`[id='${message.messageId}']`)!.querySelector("#redacted");
+        console.log(redactedMessage)
+        if (redactedMessage) {
+          redactedMessage.classList.remove("hidden");
+        }
+      }
       
       const currentMessageId = this.#parent.lastElementChild!.id;
       messageHandler(currentMessageId, messages);
@@ -147,6 +154,13 @@ export class ChatMessage {
           },
         }),
       );
+      
+      if (message.isRedacted) {
+        const redactedMessage = this.#parent.querySelector("#redacted")!;
+        if (redactedMessage) {
+          redactedMessage.classList.remove("redacted");
+        }
+      }
 
       const newMessageElement = document.getElementById(message.messageId)!;
       const handleMessageClick = (event : MouseEvent) => {

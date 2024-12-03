@@ -93,6 +93,10 @@ export class Chat {
         
         if (textArea.classList.contains('edit')) {
           const messageId = textArea.classList[2]!;
+          const initialMessageText = document.querySelector(`[id='${messageId}']`)!.querySelector("#message-text-content")!;
+          if (messageText === initialMessageText.textContent?.trim()) {
+            return;
+          }
           const response = await API.put(
             `/messages/${messageId}`,
             {
@@ -103,8 +107,10 @@ export class Chat {
             textArea.classList.remove('edit');
             textArea.classList.remove(messageId);
             const message = document.getElementById(messageId)!;
+            const redactedMessage = message.querySelector("#redacted")!;
             const messageBody = message.querySelector(".message__body__text")!;
             messageBody.textContent = messageText;
+            redactedMessage.classList.remove("hidden");
           
           }
           
