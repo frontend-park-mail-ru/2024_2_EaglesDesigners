@@ -84,7 +84,11 @@ module.exports = {
       fileName: 'manifest.json'
     }),
   ],
-  mode: 'development',
+  mode: 'production',
+  performance: {
+    maxAssetSize: 600 * 1024, // 512 KiB
+    maxEntrypointSize: 600 * 1024, // 512 KiB
+  },
 
   devServer: {
     historyApiFallback: true,
