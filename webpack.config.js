@@ -57,6 +57,5 @@ module.exports = {
     ],
     compress: true,
     hot: true,
-    port: 80,
   }
 };
