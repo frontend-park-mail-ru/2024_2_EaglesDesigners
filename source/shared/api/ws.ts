@@ -1,4 +1,4 @@
-import { serverHost } from "@/app/config";
+import { websocketHost } from "@/app/config";
 import { TMessageWS } from "./types";
 
 type THandler = (payload: TMessageWS) => Promise<void>;
@@ -17,7 +17,6 @@ class wsConnection {
 
   start() {
     if (this.status) {
-      console.log("WebSocket уже открыт");
       return;
     }
 
@@ -28,7 +27,6 @@ class wsConnection {
         const res = JSON.parse(event.data);
         
         if (res.messageType === "error") {
-          console.log("Ошибка на стороне сервера:", res.payload);
           return;
         }
 
@@ -43,12 +41,10 @@ class wsConnection {
 
     this.ws.onopen = () => {
       this.status = true;
-      console.log("WebSocket подключен");
     };
 
     this.ws.onclose = () => {
       this.status = false;
-      console.log("WebSocket отключен");
     };
 
     this.ws.onerror = (error: Event) => {
@@ -65,7 +61,6 @@ class wsConnection {
     this.handlers = {};
     this.ws = null;
 
-    console.log("WebSocket начал процесс отключения");
   }
 
   subscribe(messageType: string, handler: THandler) {
@@ -83,4 +78,4 @@ class wsConnection {
   }
 }
 
-export const wsConn = new wsConnection(serverHost);
+export const wsConn = new wsConnection(websocketHost);
