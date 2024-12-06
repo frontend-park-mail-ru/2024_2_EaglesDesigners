@@ -13,6 +13,7 @@ import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
 import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 import { InfoMessage } from "@/entities/InfoMessage/ui/InfoMessage";
+import { TChat } from "@/entities/Chat/model/type";
 
 
 export class ChatMessage {
