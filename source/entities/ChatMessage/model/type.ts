@@ -1,3 +1,7 @@
+export interface MessageType{
+  
+}
+
 export interface TChatMessage {
   authorID: string;
   chatId: string;
@@ -6,6 +10,7 @@ export interface TChatMessage {
   isRedacted: boolean;
   messageId: string;
   text: string;
+  message_type: MessageType;
 }
 
 export type TChatMessageWithFlags = TChatMessage & {

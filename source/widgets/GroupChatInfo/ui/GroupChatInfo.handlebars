@@ -37,22 +37,30 @@
 
     </div>
   </div>
+  {{#if chatType.group}}
   <button id="delete-group" class="delete-group__button">
-  {{#if userType.owner}}
-    {{#if chatType.group}}
+    {{#if userType.owner}}
       Удалить группу
     {{else}}
-      Удалить канал
-    {{/if}}
-  {{else}}
-    {{#if chatType.group}}
       Выйти из группы
-    {{else}}
-      Выйти из канала
+    {{/if}}
+  {{/if}}
+  {{#if chatType.channel}}
+    {{#if userType.owner}}
+    <button id="delete-group" class="delete-group__button">
+      Удалить группу
+    {{/if}}
+    {{#if userType.admin}}
+    <button id="delete-group" class="delete-group__button">
+      Выйти из группы
+    {{/if}}
+    {{#if userType.user}}
+    <button id="delete-group" class="delete-group__button">
+      Выйти из группы
     {{/if}}
   {{/if}}
   </button>
-  <button id="subscribe-channel" class="subscribe-channel__button hidden">Подписаться</button>
+  
   <div id="modal-container">
 
   </div>

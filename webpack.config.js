@@ -49,7 +49,7 @@ module.exports = {
     }),
   ],
   mode: 'development',
-
+  
   devServer: {
     historyApiFallback: true,
     static:[
@@ -57,5 +57,7 @@ module.exports = {
     ],
     compress: true,
     hot: true,
+    port: 80,
   }
+  
 };

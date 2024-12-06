@@ -5,7 +5,6 @@ import {
   ChatResponse,
   EmptyResponse,
   ProfileResponse,
-  ResponseChat,
   searchMessagesResponse,
   SendMessageRequest,
 } from "@/shared/api/types";
@@ -20,11 +19,12 @@ import { UserType } from "@/widgets/AddChannelForm/lib/types";
 import { debounce } from "@/shared/helpers/debounce";
 import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
 import { ChatList } from "@/widgets/ChatList";
+import { Router } from "@/shared/Router/Router";
 
 export class Chat {
   #parent;
   #chatInfo;
-  constructor(parent: Element, chatInfo: Element) {
+  constructor(parent: Element, chatInfo: HTMLElement) {
     this.#parent = parent;
     this.#chatInfo = chatInfo;
   }
@@ -41,14 +41,18 @@ export class Chat {
         : "/assets/image/default-avatar.svg";
 
     const responseInfo = await API.get<ChatResponse>(`/chat/${chat.chatId}`);
-    const userType : UserType = {owner: false, user: false, admin: false};
+    const userType : UserType = {owner: false, user: false, admin: false, not_in_chat: false};
+    console.log(userType);
     if (responseInfo.role === "owner") {
       userType.owner = true;
     } else if (responseInfo.role === "admin") {
       userType.admin = true;
-    } else {
+    } else if (responseInfo.role === "none") {
       userType.user = true;
+    } else{
+      userType.not_in_chat = true;
     }
+    console.log(userType);
     const chatType = {channel: false, group: false, personal: false};
     if (chat.chatType == "group") {
       chatType.group = true;
@@ -66,6 +70,25 @@ export class Chat {
       userType,
       chatType
     });
+    const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
+    const handleSubscribe = async () => {
+      const responseSubscribe = await API.post(`/channel/${chat.chatId}/join`, {});
+      
+      if (!responseSubscribe.error) {
+        console.log(responseSubscribe)
+        subscribeButton.classList.add('hidden');
+        Router.go(`/chat/${chat.chatId}`, false);
+      }
+    };
+    if (chatType.channel && responseInfo.error) {
+
+      if (subscribeButton) {
+        subscribeButton.classList.remove('hidden');
+        subscribeButton.addEventListener("click", handleSubscribe);
+      }
+      
+    }
+
     const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
     if (chatCard) {
       chatCard.classList.add('active');
@@ -143,7 +166,7 @@ export class Chat {
         document
         .querySelector("#chat__input-send-btn")!
         .addEventListener("click", sendInputMessage);
-      }
+    }
     
 
     const responseChat = await API.get<ChatResponse>(
@@ -166,15 +189,6 @@ export class Chat {
         const chatInfo = new ChatInfo(this.#chatInfo, chat);
         chatInfo.render();
       } else if (chat.chatType === "group" || chat.chatType === "channel") {
-        const responseChatInfo = await API.get<ResponseChat>(`/chat/${chat.chatId}`);
-        const userType : UserType = {owner: false, admin: false, user: false};
-        if (responseChatInfo.role === "owner") {
-          userType.owner = true;
-        } else if (responseChatInfo.role === "admin") {
-          userType.admin = true;
-        } else{
-          userType.user = true;
-        }
         const chatInfo = new GroupChatInfo(this.#chatInfo, chat, userType);
         chatInfo.render();
       }
