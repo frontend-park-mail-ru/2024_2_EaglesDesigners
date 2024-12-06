@@ -15,7 +15,7 @@ export const messageHandler = (messageId : string, messages : TChatMessage[]) =>
           const menu = document.querySelector("#menu-context")!;
           const messageMenu = new MessageMenu(menu);
           if (pickedMessage.text) {
-            messageMenu.render(messageId, pickedMessage.text, event.x, event.y);
+            messageMenu.render(messageId, pickedMessage.text, event.x-100, event.y-25);
           }
         }
       };

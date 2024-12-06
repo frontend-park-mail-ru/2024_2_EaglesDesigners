@@ -9,6 +9,7 @@ export class MessageMenu {
     }
 
     render(messageId : string, messageText : string, x : number, y : number) {
+        console.log(x, y);
         this.#parent.innerHTML = MessageMenuTemplate({x, y});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 

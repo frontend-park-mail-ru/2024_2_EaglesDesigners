@@ -164,6 +164,7 @@ export class ChatMessage {
 
       const newMessageElement = document.getElementById(message.messageId)!;
       const handleMessageClick = (event : MouseEvent) => {
+        
         const messageId = newMessageElement.id;
         const message = document.getElementById(messageId)!;
         if (message) {
@@ -171,7 +172,7 @@ export class ChatMessage {
           const messageText = message.querySelector(".message__body__text")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            messageMenu.render(messageId, messageText, event.x, event.y);
+            messageMenu.render(messageId, messageText, event.x-100, event.y-25);
           }
         }
       };
