@@ -11,7 +11,7 @@ import "./AddChannelForm.scss";
 export class AddChannelForm{
     #parent;
     #chat;
-    constructor(parent : Element, chat : Chat){
+    constructor(parent : HTMLElement, chat : Chat){
         this.#parent = parent;
         this.#chat = chat;
     }

@@ -11,7 +11,7 @@ import { debounce } from "@/shared/helpers/debounce";
 export class ContactsList {
   #parent;
   #chat;
-  constructor(parent: Element, chat: Chat) {
+  constructor(parent: HTMLElement, chat: Chat) {
     this.#parent = parent;
     this.#chat = chat;
   }

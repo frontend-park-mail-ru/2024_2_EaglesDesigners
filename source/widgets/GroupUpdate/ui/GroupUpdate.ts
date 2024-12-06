@@ -12,7 +12,7 @@ import { UserType } from "@/widgets/AddChannelForm/lib/types";
 export class GroupUpdate {
   #parent;
   #userType;
-  constructor(parent: Element, userType : UserType) {
+  constructor(parent: HTMLElement, userType : UserType) {
     this.#parent = parent;
     this.#userType = userType;
   }

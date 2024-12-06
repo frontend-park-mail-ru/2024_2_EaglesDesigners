@@ -12,6 +12,7 @@ import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
 import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
+import { InfoMessage } from "@/entities/InfoMessage/ui/InfoMessage";
 
 
 export class ChatMessage {
@@ -32,6 +33,7 @@ export class ChatMessage {
         nextPageLoading = true; 
         
         if(this.#oldestMessage){
+          console.log(this.#oldestMessage)
           API.get<ChatMessagesResponse>(
             `/chat/${ChatStorage.getChat().chatId}/messages/pages/${this.#oldestMessage?.messageId}`,
           ).then((res) => {
@@ -62,51 +64,58 @@ export class ChatMessage {
     
     for (const [index, message] of messages.entries()) {
       const isFirst =
-        index === messages.length - 1 ||
-        message.authorID !== messages[index + 1].authorID;
-      const isLast =
-        !this.#oldestMessage || this.#oldestMessage.authorID !== message.authorID;
-      const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
+          index === messages.length - 1 ||
+          message.authorID !== messages[index + 1].authorID;
+        const isLast =
+          !this.#oldestMessage || this.#oldestMessage.authorID !== message.authorID;
+        const isFromOtherUser = message.authorID !== UserStorage.getUser().id;
 
-      const messageWithFlags: TChatMessageWithFlags = {
-        ...message,
-        first: isFirst,
-        last: isLast,
-        isFromOtherUser: isFromOtherUser,
-      };
+        const messageWithFlags: TChatMessageWithFlags = {
+          ...message,
+          first: isFirst,
+          last: isLast,
+          isFromOtherUser: isFromOtherUser,
+        };
 
-      this.#oldestMessage = messageWithFlags;
+        this.#oldestMessage = messageWithFlags;
+      if (message.message_type === "default") {
+        
 
-      if (!this.#newestMessage) {
-        this.#newestMessage = messageWithFlags;
-      }
-
-      const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
-      const avatarURL = user.avatarURL
-        ? serverHost + user.avatarURL
-        : "/assets/image/default-avatar.svg";
-      
-      this.#parent.insertAdjacentHTML(
-        "beforeend",
-        ChatMessageTemplate({
-          message: {
-            ...messageWithFlags,
-            datetime: getTimeString(messageWithFlags.datetime),
-            avatarURL: avatarURL,
-            authorName: user?.name,
-          },
-        }),
-      );
-      if (message.isRedacted) {
-        const redactedMessage = this.#parent.querySelector(`[id='${message.messageId}']`)!.querySelector("#redacted");
-        console.log(redactedMessage)
-        if (redactedMessage) {
-          redactedMessage.classList.remove("hidden");
+        if (!this.#newestMessage) {
+          this.#newestMessage = messageWithFlags;
         }
+
+        const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
+        const avatarURL = user.avatarURL
+          ? serverHost + user.avatarURL
+          : "/assets/image/default-avatar.svg";
+        
+        this.#parent.insertAdjacentHTML(
+          "beforeend",
+          ChatMessageTemplate({
+            message: {
+              ...messageWithFlags,
+              datetime: getTimeString(messageWithFlags.datetime),
+              avatarURL: avatarURL,
+              authorName: user?.name,
+            },
+          }),
+        );
+        if (message.isRedacted) {
+          const redactedMessage = this.#parent.querySelector(`[id='${message.messageId}']`)!.querySelector("#redacted");
+          console.log(redactedMessage)
+          if (redactedMessage) {
+            redactedMessage.classList.remove("hidden");
+          }
+        }
+        
+        const currentMessageId = this.#parent.lastElementChild!.id;
+        messageHandler(currentMessageId, messages);
       }
-      
-      const currentMessageId = this.#parent.lastElementChild!.id;
-      messageHandler(currentMessageId, messages);
+      if (message.message_type === "informational") {
+        const infoMessage = new InfoMessage(this.#parent);
+        infoMessage.render(message);
+      }
     }
   }
   async renderNewMessage(message: TChatMessage) {

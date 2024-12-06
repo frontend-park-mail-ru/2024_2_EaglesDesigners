@@ -1,6 +1,4 @@
-export interface MessageType{
-  
-}
+export type  MessageType = "informational" | "default";
 
 export interface TChatMessage {
   authorID: string;

@@ -6,7 +6,6 @@ import {
   EmptyResponse,
   ProfileResponse,
   searchMessagesResponse,
-  SendMessageRequest,
 } from "@/shared/api/types";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import { TChat } from "@/entities/Chat";
@@ -20,6 +19,7 @@ import { debounce } from "@/shared/helpers/debounce";
 import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
 import { ChatList } from "@/widgets/ChatList";
 import { Router } from "@/shared/Router/Router";
+import { SendMessage } from "../api/SendMessage";
 
 export class Chat {
   #parent;
@@ -140,12 +140,7 @@ export class Chat {
           return;
         }
 
-        API.post<EmptyResponse, SendMessageRequest>(
-          `/chat/${chat.chatId}/messages`,
-          {
-            text: messageText,
-          },
-        );
+        SendMessage(chat.chatId, messageText);
       }
 
       textArea.style.height = "";
@@ -260,7 +255,7 @@ export class Chat {
 
       history.pushState({ url: "/" }, "", "/");
 
-      const chatListImport = document.querySelector('#widget-import')!;
+      const chatListImport : HTMLElement = document.querySelector('#widget-import')!;
       const chatList = new ChatList(chatListImport,this);
       chatList.render();
     });
