@@ -19,6 +19,9 @@ export const messageHandler = (messageId : string, messages : TChatMessage[]) =>
           }
         }
       };
-    document.getElementById(messageId)!.addEventListener("contextmenu", handleMessageClick);
+    if (document.getElementById(messageId)) {
+        document.getElementById(messageId)!.addEventListener("contextmenu", handleMessageClick);
+    }
+    
 };
 

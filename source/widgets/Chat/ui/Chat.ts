@@ -34,6 +34,17 @@ export class Chat {
    */
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
+    if (ChatStorage.getChat().chatId) {
+      const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
+      if (currentChat) {
+        currentChat.classList.remove('active');
+      }
+    }
+    const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
+    if (chatCard) {
+      chatCard.classList.add('active');
+      
+    }
     ChatStorage.setChat(chat);
     const avatar = chat.avatarPath
         ? serverHost + chat.avatarPath
@@ -83,11 +94,6 @@ export class Chat {
         subscribeButton.addEventListener("click", handleSubscribe);
       }
       
-    }
-
-    const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
-    if (chatCard) {
-      chatCard.classList.add('active');
     }
 
     const messagesImport : HTMLElement = this.#parent.querySelector("#chat__messages")!;

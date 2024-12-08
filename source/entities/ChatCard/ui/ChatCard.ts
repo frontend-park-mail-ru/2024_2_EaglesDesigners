@@ -52,6 +52,7 @@ export class ChatCard {
         }
         const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
         if (chatCard) {
+          console.log(chat, ChatStorage.getChat())
           chatCard.classList.add('active');
         }
 

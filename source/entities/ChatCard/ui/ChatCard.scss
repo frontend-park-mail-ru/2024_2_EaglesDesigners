@@ -71,14 +71,6 @@ $button-over-background-hover: var(--button-over-background-hover);
     }
   }
 
-  &:hover {
-    
-  }
-
-  &:focus {
-    transition: 0.5s;
-    background-color: $secondary;
-  }
 }
 
 .hover {
