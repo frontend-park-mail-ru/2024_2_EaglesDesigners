@@ -3,7 +3,6 @@ import ChatTemplate from "./Chat.handlebars";
 import "./Chat.scss";
 import {
   ChatResponse,
-  EmptyResponse,
   ProfileResponse,
   searchMessagesResponse,
 } from "@/shared/api/types";
