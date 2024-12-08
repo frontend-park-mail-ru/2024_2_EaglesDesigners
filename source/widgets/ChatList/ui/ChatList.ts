@@ -9,6 +9,7 @@ import { ContactsList } from "@/widgets/ContactsList";
 import { AddGroupForm } from "@/widgets/AddGroupForm";
 import { AddChannelForm } from "@/widgets/AddChannelForm";
 import { debounce } from "@/shared/helpers/debounce";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 
 /**
  * ChatList class provides functions for rendering list of user's chats
@@ -39,6 +40,13 @@ export class ChatList {
     chats.forEach((chat) => {
       chatCard.render(chat);
     });
+
+    if (ChatStorage.getChat().chatId) {
+      const chatCard : HTMLElement = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
+      if (chatCard) {
+        chatCard.classList.add('active');
+      }
+    }
 
     const addChat = document.querySelector("#add-chat")!;
     const addChatIcon = addChat.querySelector<HTMLElement>("#addChatIcon")!;

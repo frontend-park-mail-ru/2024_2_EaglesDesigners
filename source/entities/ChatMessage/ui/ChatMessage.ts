@@ -34,7 +34,6 @@ export class ChatMessage {
         nextPageLoading = true; 
         
         if(this.#oldestMessage){
-          console.log(this.#oldestMessage)
           API.get<ChatMessagesResponse>(
             `/chat/${ChatStorage.getChat().chatId}/messages/pages/${this.#oldestMessage?.messageId}`,
           ).then((res) => {
@@ -104,7 +103,6 @@ export class ChatMessage {
         );
         if (message.isRedacted) {
           const redactedMessage = this.#parent.querySelector(`[id='${message.messageId}']`)!.querySelector("#redacted");
-          console.log(redactedMessage)
           if (redactedMessage) {
             redactedMessage.classList.remove("hidden");
           }

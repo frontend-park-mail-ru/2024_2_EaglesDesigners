@@ -41,7 +41,6 @@ export class Chat {
 
     const responseInfo = await API.get<ChatResponse>(`/chat/${chat.chatId}`);
     const userType : UserType = {owner: false, user: false, admin: false, not_in_chat: false};
-    console.log(userType);
     if (responseInfo.role === "owner") {
       userType.owner = true;
     } else if (responseInfo.role === "admin") {
@@ -51,7 +50,6 @@ export class Chat {
     } else{
       userType.not_in_chat = true;
     }
-    console.log(userType);
     const chatType = {channel: false, group: false, personal: false};
     if (chat.chatType == "group") {
       chatType.group = true;
@@ -74,7 +72,6 @@ export class Chat {
       const responseSubscribe = await API.post(`/channel/${chat.chatId}/join`, {});
       
       if (!responseSubscribe.error) {
-        console.log(responseSubscribe)
         subscribeButton.classList.add('hidden');
         Router.go(`/chat/${chat.chatId}`, false);
       }
