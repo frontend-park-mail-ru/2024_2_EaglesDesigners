@@ -10,10 +10,11 @@
     <span class="message__body__username">
       {{message.authorName}}
     </span>
-    <span class="message__body__text">
+    <span id="message-text-content" class="message__body__text">
       {{message.text}}
     </span>
     <span class="message__body__meta">
+      <span id="redacted" class="edited hidden">изменено</span>
       <span class="timedate">
         {{message.datetime}}
       </span>

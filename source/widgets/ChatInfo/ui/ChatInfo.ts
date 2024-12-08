@@ -11,7 +11,7 @@ import * as moment from "moment";
 export class ChatInfo {
   #parent;
   #chat;
-  constructor(parent: Element, chat: TChat) {
+  constructor(parent: HTMLElement, chat: TChat) {
     this.#parent = parent;
     this.#chat = chat;
   }

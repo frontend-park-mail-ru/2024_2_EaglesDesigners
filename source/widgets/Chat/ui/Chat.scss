@@ -211,7 +211,7 @@ textarea {
 
 .search-messages {
 
-  
+
   margin-right: 10px;
   margin-left: auto;
   padding: 10px;
@@ -299,5 +299,16 @@ textarea {
     .avatar {
       margin-left: 0;
     }
+  }
+}
+
+.subscribe-channel {
+  &__button {
+    margin-bottom: 15px;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

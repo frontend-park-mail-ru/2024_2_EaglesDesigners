@@ -10,7 +10,7 @@
 ### Внешние ссылки
  - [Figma](https://www.figma.com/design/qZIoxUlx6qRxjXrYho4Qll/Telegram-test-design?node-id=0-1&node-type=canvas&t=3ZUlzFaSQLT4vWAK-0)
  - [Backend](https://github.com/go-park-mail-ru/2024_2_EaglesDesigners)
- - [Deploy](http://212.233.98.59:8001)
+ - [Deploy](https://patefon.site)
  - [Jira](https://ru.yougile.com/team/343b17e1c7b0/Patefon)
 
 ### Правила оформления Pull Requests

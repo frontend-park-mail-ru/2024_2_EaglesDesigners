@@ -15,7 +15,7 @@ export class GroupChatInfo {
   #parent;
   #chat;
   #userType;
-  constructor(parent: Element, chat: TChat, userType : UserType) {
+  constructor(parent: HTMLElement, chat: TChat, userType : UserType) {
     this.#parent = parent;
     this.#chat = chat;
     this.#userType = userType;
@@ -106,23 +106,10 @@ export class GroupChatInfo {
         }
       }
     };
-
-    deleteGroupButton.addEventListener("click", handleDeleteGroup);
-
-    const handleSubscribe = async () => {
-      const responseSubscribe = await API.post(`/channel/${this.#chat.chatId}/join`, {});
-      if (!responseSubscribe.error) {
-        this.#parent.innerHTML = '';
-      }
-    };
-    if (usersCount === 0 && chatType.channel) {
-      deleteGroupButton.classList.add("hidden");
-      const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
-      subscribeButton.classList.remove('hidden');
-      subscribeButton.classList.add("block");
-      subscribeButton.addEventListener("click", handleSubscribe);
+    if (deleteGroupButton) {
+      deleteGroupButton.addEventListener("click", handleDeleteGroup);
     }
-
+    
     const updateGroupButton = this.#parent.querySelector("#update-group")!;
 
     const handleGroupUpdate = () => {
