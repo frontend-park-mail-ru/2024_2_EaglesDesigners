@@ -1,0 +1,22 @@
+$text-over-primary: var(--text-over-primary);
+$main-font-size: var(--main-font-size);
+
+.info-message {
+    width: 100%;
+    
+}
+
+.info-message-content {
+    color: $text-over-primary;
+    display: flex;
+    justify-content: center;
+
+    &__span {
+        font-size: $main-font-size;
+        background-color: rgb(49, 49, 49);
+        font-family: var(--main-font-family);
+        padding: 10px;
+        border-radius: 10px;
+        opacity: 0.7;
+    }
+}

@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: './source/index.ts',
@@ -17,7 +18,7 @@ module.exports = {
         }
       }]
       },
-      { test: /\.(scss|css)$/, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
+      { test: /\.(scss|css)$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ] },
       { 
         test: /\.(handlebars|hbs)$/, 
         loader: 'handlebars-loader',
@@ -34,6 +35,9 @@ module.exports = {
     filename: 'index_bundle.js'
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "index.css",
+    }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "./source/serviceWorker.ts"),
     }),
@@ -45,7 +49,7 @@ module.exports = {
     }),
   ],
   mode: 'development',
-
+  
   devServer: {
     historyApiFallback: true,
     static:[
@@ -53,5 +57,7 @@ module.exports = {
     ],
     compress: true,
     hot: true,
+    port: 80,
   }
+  
 };

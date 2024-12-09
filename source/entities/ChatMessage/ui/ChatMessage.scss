@@ -59,6 +59,11 @@ $messages-container-width: 700px;
         @include font-settings("Inter", 400, 10px, $text-over-secondary);
         opacity: 0.6;
       }
+      .edited {
+        @include font-settings("Inter", 400, 10px, $text-over-secondary);
+        opacity: 0.6;
+        margin-right: 5px;
+      }
     }
   }
   &__avatar {
