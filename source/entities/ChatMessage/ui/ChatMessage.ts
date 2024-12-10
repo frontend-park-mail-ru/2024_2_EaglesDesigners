@@ -12,6 +12,7 @@ import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
 import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
+import { InfoMessage } from "@/entities/InfoMessage/";
 
 
 export class ChatMessage {
