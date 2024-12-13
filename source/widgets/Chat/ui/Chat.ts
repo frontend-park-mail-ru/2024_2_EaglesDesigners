@@ -282,6 +282,12 @@ export class Chat {
     const handleCancelBranch = () => {
       chatWidget.classList.remove("hidden");
       branchWidget.classList.add("hidden");
+
+      console.log(this.#parent);
+      this.#parent = chatWidget;
+      ChatStorage.getChatMessageInstance()?.setParent(chatWidget.querySelector('#chat__messages')!);
+      console.log(this.#parent)
+      ChatStorage.setCurrentBranchId('');
     };
 
     cancelBranchBtn.addEventListener("click", handleCancelBranch);

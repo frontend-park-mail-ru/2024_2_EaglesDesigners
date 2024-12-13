@@ -117,6 +117,7 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage) {
+    console.log(this.#parent, "я сюда рендер")
     const placeholder= this.#parent.querySelector('#msg-placeholder');
     if(placeholder) {
       placeholder.remove();

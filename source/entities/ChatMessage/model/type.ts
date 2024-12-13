@@ -9,6 +9,7 @@ export interface TChatMessage {
   messageId: string;
   text: string;
   message_type: MessageType;
+  parent_chat_id: string;
 }
 
 export type TChatMessageWithFlags = TChatMessage & {
