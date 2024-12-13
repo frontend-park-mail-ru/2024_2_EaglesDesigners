@@ -25,6 +25,7 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
           }
         }
       };
+      
     
     if (message) {
         message.addEventListener("contextmenu", handleMessageClick);
