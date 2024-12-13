@@ -8,8 +8,7 @@ export class MessageMenu {
         this.#parent = parent;
     }
 
-    render(messageId : string, messageText : string, x : number, y : number) {
-      console.log("salam")
+    render(messageId : string, messageText : string, x : number, y : number, branch : boolean = false) {
         this.#parent.innerHTML = MessageMenuTemplate({x, y});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
@@ -21,9 +20,18 @@ export class MessageMenu {
         deleteButton.addEventListener("click", handleDelete);
 
         const editButton = this.#parent.querySelector("#edit-message")!;
-        const textArea : HTMLTextAreaElement = document.querySelector("#textarea")!;
-
+        let textArea : HTMLTextAreaElement;
+        console.log(branch)
+        if (branch === false) {
+          textArea = document.querySelector("#textarea")!;
+        }
+        else {
+          textArea = document.getElementById('branch-textarea')!;
+        }
+        
+        
         const handleEdit = () => {
+          console.log(textArea)
             textArea.classList.remove(textArea.classList[1]);
             textArea.classList.remove(textArea.classList[1]);
             textArea.classList.add("edit");

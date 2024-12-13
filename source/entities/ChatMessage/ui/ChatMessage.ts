@@ -53,8 +53,8 @@ export class ChatMessage {
     if(placeholder) {
       placeholder.remove();
     }
-
-    if (
+    if ( 
+      this.#parent.innerHTML &&
       this.#oldestMessage?.first &&
       this.#oldestMessage.authorID === messages[0].authorID
     ) {

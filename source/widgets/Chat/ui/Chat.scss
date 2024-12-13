@@ -60,6 +60,15 @@ textarea {
 .header {
   @include chat-header();
 
+  .chat-back-button-img {
+    margin-left: 12px;
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+
+    display: none;
+  }
   .avatar {
     margin-left: 20px;
     width: 50px;
