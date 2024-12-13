@@ -18,8 +18,15 @@
       <span class="timedate">
         {{message.datetime}}
       </span>
+      <div id="branch" class="message-branch">
+        <img class="message-branch__img" src="/assets/image/branch-icon.png" alt="">
+        <span class="message-branch__span">
+          100  
+        </span>
+    </div>
     </span>
   </div>
+  
   {{#if message.isFromOtherUser}}
     <div class="message__avatar">
       <img class="message__avatar__img" src="{{message.avatarURL}}" />

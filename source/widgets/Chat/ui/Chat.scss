@@ -50,43 +50,16 @@ textarea {
 }
 
 .chat {
-  width: 100%;
-  min-width: 0;
-  flex: 1;
-  min-height: 0;
-  
-  box-sizing: border-box;
+  @include chat();
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+.chat-branch {
+  @include chat();
 }
 
 .header {
-  background: $background-shadow-50;
-  width: 100%;
-  height: $chat-header-height;
+  @include chat-header();
 
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-sizing: border-box;
-
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  .chat-back-button-img {
-    margin-left: 12px;
-    width: 24px;
-    height: 24px;
-
-    cursor: pointer;
-
-    display: none;
-  }
   .avatar {
     margin-left: 20px;
     width: 50px;
@@ -130,7 +103,6 @@ textarea {
 
   display: flex;
   flex-direction: column-reverse;
-  gap: 5px;
 
   overflow: scroll;
   overflow-x: hidden;
@@ -310,5 +282,21 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+.header-branch {
+  @include chat-header();
+  cursor: default;
+
+  &__img-cancel {
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  &__span {
+    @include font-settings("Inter", 500, 20px, $text-over-primary);
   }
 }

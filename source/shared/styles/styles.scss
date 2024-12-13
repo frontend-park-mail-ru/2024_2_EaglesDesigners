@@ -117,3 +117,33 @@ $chat-padding-top: var(--chat-padding-top);
     padding-left: 20px;
   }
 }
+
+@mixin chat {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+@mixin chat-header {
+  background: $background-shadow-50;
+  width: 100%;
+  height: $chat-header-height;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

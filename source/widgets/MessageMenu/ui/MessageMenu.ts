@@ -9,6 +9,7 @@ export class MessageMenu {
     }
 
     render(messageId : string, messageText : string, x : number, y : number) {
+      console.log("salam")
         this.#parent.innerHTML = MessageMenuTemplate({x, y});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
@@ -20,7 +21,7 @@ export class MessageMenu {
         deleteButton.addEventListener("click", handleDelete);
 
         const editButton = this.#parent.querySelector("#edit-message")!;
-        const textArea = document.querySelector("textarea")!;
+        const textArea : HTMLTextAreaElement = document.querySelector("#textarea")!;
 
         const handleEdit = () => {
             textArea.classList.remove(textArea.classList[1]);

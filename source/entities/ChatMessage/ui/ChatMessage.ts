@@ -108,7 +108,7 @@ export class ChatMessage {
         }
         
         const currentMessageId = this.#parent.lastElementChild!.id;
-        messageHandler(currentMessageId, messages);
+        messageHandler(currentMessageId, messages, this);
       }
       if (message.message_type === "informational") {
         const infoMessage = new InfoMessage(this.#parent);
@@ -188,5 +188,12 @@ export class ChatMessage {
       newMessageElement.addEventListener("contextmenu", handleMessageClick);
     }
   }
-}
 
+  getParent() {
+    return this.#parent;
+  }
+  
+  setParent(newParent : HTMLElement) {
+    this.#parent = newParent;
+  }
+}

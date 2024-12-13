@@ -19,9 +19,12 @@ $messages-container-width: 700px;
 }
 
 .message {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  margin-bottom: 20px;
+  border-radius: 10px;
 
   &__body {
     max-width: 500px;
@@ -90,21 +93,11 @@ $messages-container-width: 700px;
     }
   }
 
-  &:not(.left-side).last-message {
-    .message__body {
-      border-bottom-right-radius: 0px;
-
-      &::after {
-        content: "";
-        position: absolute;
-        right: -12px;
-        bottom: 0px;
-        border: 7px solid transparent;
-        border-bottom: 7px solid $secondary;
-        border-left: 7px solid $secondary;
-      }
-    }
-  }
+  // &:not(.left-side).last-message {
+  //   .message__body {
+  //     border-bottom-right-radius: 0px;
+  //   }
+  // }
 
   &.left-side {
     flex-direction: row-reverse;
@@ -137,5 +130,25 @@ $messages-container-width: 700px;
         display: block;
       }
     }
+  }
+}
+
+.message-branch {
+  position: absolute; 
+  color: #fff;
+  background: $secondary;
+  top: 28px;
+  right: 5px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  padding: 0px 5px;
+  cursor: pointer;
+
+  &__span {
+  }
+
+  &__img {
+
   }
 }

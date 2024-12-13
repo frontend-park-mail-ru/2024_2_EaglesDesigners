@@ -101,7 +101,7 @@ export class Chat {
     ChatStorage.setChatMessageInstance(chatMessage);
 
     
-    const textArea = this.#parent.querySelector("textarea")!;
+    const textArea : HTMLTextAreaElement = this.#parent.querySelector("#textarea")!;
     if (textArea) {
       textArea.addEventListener("input", function () {
         this.style.height = "";
@@ -110,7 +110,7 @@ export class Chat {
     }
     
 
-    const sendInputMessage = async () => {
+    const sendInputMessage = async (textArea : HTMLTextAreaElement, branch : boolean) => {
       const messageText = textArea.value.trim();
       textArea.value = "";
 
@@ -141,8 +141,11 @@ export class Chat {
           
           return;
         }
-
-        SendMessage(chat.chatId, messageText);
+        if (!branch) {
+          SendMessage(chat.chatId, messageText);
+          return;
+        }
+        SendMessage(ChatStorage.getCurrentBranchId(), messageText);
       }
 
       textArea.style.height = "";
@@ -151,7 +154,10 @@ export class Chat {
     const KeyPressHandler = (event: KeyboardEvent) => {
       if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
-        sendInputMessage();
+        if (event.target instanceof HTMLTextAreaElement) {
+          sendInputMessage(event.target, false);
+        }
+        
       }
     };
 
@@ -159,10 +165,14 @@ export class Chat {
       textArea.addEventListener("keypress", KeyPressHandler);
     }
     
+    const handleSendChatMessage = () => {
+      sendInputMessage(textArea, false);
+    };
+
     if (document.querySelector("#chat__input-send-btn")!) {
         document
         .querySelector("#chat__input-send-btn")!
-        .addEventListener("click", sendInputMessage);
+        .addEventListener("click", handleSendChatMessage);
     }
     
 
@@ -263,6 +273,45 @@ export class Chat {
     });
 
     document.querySelector<HTMLElement>('#widget-import')!.style.left = '-100vw'; 
-    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw';
+    
+    const cancelBranchBtn = this.#parent.querySelector("#cancel-branch")!;
+
+    const chatWidget : HTMLElement = this.#parent.querySelector("#chat")!;
+    const branchWidget : HTMLElement = this.#parent.querySelector("#chat-branch")!;
+    const handleCancelBranch = () => {
+      chatWidget.classList.remove("hidden");
+      branchWidget.classList.add("hidden");
+    };
+
+    cancelBranchBtn.addEventListener("click", handleCancelBranch);
+
+    const handleSearchInBranch = () => {
+
+    };
+
+    const branchSearchMessage = this.#parent.querySelector("#branch-search-input")!;
+    branchSearchMessage.addEventListener("click", handleSearchMessages);
+
+    const KeyPressBranchHandler = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        if (event.target instanceof HTMLTextAreaElement) {
+          sendInputMessage(event.target, true);
+        }
+        
+      }
+    };
+
+    const branchTextArea : HTMLElement = this.#parent.querySelector("#branch-textarea")!;
+    if (branchTextArea) {
+      branchTextArea.addEventListener("input", function () {
+        this.style.height = "";
+        this.style.height = this.scrollHeight + "px";
+      });
+    }
+    if (branchTextArea) {
+      branchTextArea.addEventListener("keypress", KeyPressBranchHandler);
+    }
   }
 }
