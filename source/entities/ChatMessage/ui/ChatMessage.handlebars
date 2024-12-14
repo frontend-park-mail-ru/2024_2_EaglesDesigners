@@ -18,12 +18,14 @@
       <span class="timedate">
         {{message.datetime}}
       </span>
+      {{#if chatIsNotBranch}}
       <div id="branch" class="message-branch">
         <img class="message-branch__img" src="/assets/image/branch-icon.png" alt="">
         <span class="message-branch__span">
           100  
         </span>
-    </div>
+      </div>
+      {{/if}}
     </span>
   </div>
   

@@ -48,7 +48,7 @@ export class ChatMessage {
     });
   }
 
-  async renderMessages(messages: TChatMessage[]) {
+  async renderMessages(messages: TChatMessage[], chatIsNotBranch = true) {
     const placeholder= this.#parent.querySelector('#msg-placeholder');
     if(placeholder) {
       placeholder.remove();
@@ -60,7 +60,7 @@ export class ChatMessage {
     ) {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
-    
+
     for (const [index, message] of messages.entries()) {
       const isFirst =
           index === messages.length - 1 ||
@@ -98,6 +98,7 @@ export class ChatMessage {
               avatarURL: avatarURL,
               authorName: user?.name,
             },
+            chatIsNotBranch
           }),
         );
         if (message.isRedacted) {

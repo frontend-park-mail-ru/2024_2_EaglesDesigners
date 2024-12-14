@@ -57,6 +57,13 @@ textarea {
   @include chat();
 }
 
+.start-branch{
+
+  &__button {
+    @include subscribe-start-btn(); 
+  }
+}
+
 .header {
   @include chat-header();
 
@@ -285,12 +292,7 @@ textarea {
 
 .subscribe-channel {
   &__button {
-    margin-bottom: 15px;
-    max-width: 600px;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include subscribe-start-btn(); 
   }
 }
 

@@ -34,6 +34,7 @@ export class Chat {
    */
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
+    console.log(this.#parent, chat);
     if (ChatStorage.getChat().chatId) {
       const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
       if (currentChat) {
@@ -284,7 +285,6 @@ export class Chat {
       branchWidget.classList.add("hidden");
 
       console.log(this.#parent);
-      this.#parent = chatWidget;
       ChatStorage.getChatMessageInstance()?.setParent(chatWidget.querySelector('#chat__messages')!);
       console.log(this.#parent)
       ChatStorage.setCurrentBranchId('');
@@ -292,12 +292,68 @@ export class Chat {
 
     cancelBranchBtn.addEventListener("click", handleCancelBranch);
 
-    const handleSearchInBranch = () => {
 
+    const branchImageMessageSearch = document.getElementById("branch-search-messages")!;
+    const branchChatInfo = document.getElementById("branch-chat-info")!;
+    const branchSearchContainer : HTMLInputElement = this.#parent.querySelector("#branch-search-input")!;
+
+    const inputBranchSearch : HTMLInputElement = this.#parent.querySelector("#branch-input-search")!;
+    const handleSearchInBranch = async (event : Event) => {
+      console.log("это мои запросы")
+      event.stopPropagation();
+      branchSearchContainer.classList.remove('hidden');
+      branchChatInfo.classList.add('hidden');
+      branchImageMessageSearch.classList.add('hidden');
+      const messagesSearchResult : HTMLElement = this.#parent.querySelector('#branch-search-results-messages')!;
+      messagesSearchResult.innerHTML = '';
+      
+
+      const messageText = inputBranchSearch.value;
+      if (messageText !== "") {
+        const response = await API.get<searchMessagesResponse>(`/chat/${ChatStorage.getCurrentBranchId()}/messages/search?search_query=${messageText}`);
+        messagesSearchResult.innerHTML = '';
+        if (!response.error) {
+          if (response.messages) {
+            const searchMessages = new SearchedMessageCard(messagesSearchResult);
+            response.messages.forEach(async (element) => {
+              const profileUser = ChatStorage.getUsers();
+              const profile = profileUser.find((elem) => {
+                return element.authorID === elem.id;
+              });
+              if (profile) {
+                searchMessages.render(element, profile.avatarURL, profile.name, messagesImport, chatMessage);
+              }
+              else {
+                API.get<ProfileResponse>(`/profile/${element.authorID}`)
+                  .then((res) => {
+                    searchMessages.render(element, res.avatarURL, res.name, messagesImport, chatMessage);
+                  });
+              }
+            });
+          }
+        }
+      }
+      else {
+        messagesSearchResult.innerHTML = '';
+      }
     };
 
-    const branchSearchMessage = this.#parent.querySelector("#branch-search-input")!;
-    branchSearchMessage.addEventListener("click", handleSearchMessages);
+    const branchSearchMessage = this.#parent.querySelector("#branch-search-messages")!;
+    branchSearchMessage.addEventListener("click", handleSearchInBranch);
+    const debouncedBranchHandler = debounce(handleSearchInBranch, 250);
+    inputBranchSearch.addEventListener("input", debouncedBranchHandler);
+    inputBranchSearch.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+
+    const cancelBranchSearch = document.getElementById("branch-cancel-search")!;
+    const handleCancelBranchSearch = () => {
+      branchSearchContainer.classList.add('hidden');
+      branchChatInfo.classList.remove('hidden');
+      branchImageMessageSearch.classList.remove('hidden');
+    };
+    cancelBranchSearch.addEventListener("click", handleCancelBranchSearch);
 
     const KeyPressBranchHandler = (event: KeyboardEvent) => {
       if (event.key === "Enter" && !event.shiftKey) {

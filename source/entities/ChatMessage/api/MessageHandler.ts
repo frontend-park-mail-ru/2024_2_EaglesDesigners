@@ -42,16 +42,20 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
                 return elem.messageId === messageId;
               });
             const startBranch = document.getElementById('start-branch')!;
+            const branchInput = document.getElementById("branch-input")!;
             if (pickedMessage?.branchId) {
                 ChatStorage.setCurrentBranchId(pickedMessage.branchId);
+                startBranch?.classList?.add("hidden");
+                branchInput?.classList?.remove("hidden");
             }
             else {
-                startBranch.classList.remove("hidden");
+                startBranch?.classList?.remove("hidden");
+                branchInput?.classList?.add("hidden");
             }
             const currentChat = document.getElementById('chat')!;
             const branchChat = document.getElementById("chat-branch")!;
-            currentChat.classList.add("hidden");
-            branchChat.classList.remove("hidden");
+            currentChat?.classList.add("hidden");
+            branchChat?.classList.remove("hidden");
             const chatBranch = document.getElementById("chat-branch")!;
             const chatBranchMessages : HTMLElement = chatBranch.querySelector("#chat__messages")!;
             chatBranchMessages.innerText = '';
@@ -61,21 +65,20 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
                 console.log(response);
                 if (!response.error) {
                     ChatStorage.setCurrentBranchId(response.id);
-                    startBranch.classList.add('hidden');
+                    startBranch?.classList.add("hidden");
+                    branchInput?.classList.remove("hidden");
                 }
+                return
             };
             
             if (pickedMessage?.branchId) {
-                if (startBranch) {
-                    startBranch.classList.add('hidden');
-                }
                 
                 ChatStorage.setCurrentBranchId(pickedMessage.branchId);
                 const branchMessages = await API.get<ChatMessagesResponse>(`/chat/${pickedMessage.branchId}/messages`);
                 
                 if (!branchMessages.error) {
                     chatMessageObject.setParent(chatBranchMessages);
-                    chatMessageObject.renderMessages(branchMessages.messages);
+                    chatMessageObject.renderMessages(branchMessages.messages, false);
                 }
             }
             if (startBranch) {

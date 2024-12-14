@@ -13,6 +13,7 @@ export class ChatCard {
   constructor(parent: Element, chat: Chat) {
     this.#parent = parent;
     this.#chat = chat;
+    console.log(chat, "chatCard")
   }
 
   render(chat: TChat) {
@@ -54,7 +55,8 @@ export class ChatCard {
         if (chatCard) {
           chatCard.classList.add('active');
         }
-
+        console.log(chat);
+        console.log(this.#chat)
         this.#chat.render(chat);
       }
     });

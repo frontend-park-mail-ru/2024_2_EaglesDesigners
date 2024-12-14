@@ -112,10 +112,11 @@
         src="/assets/image/cancel.svg"
         alt=""
       />
-    <span class="header-branch__span">
-      Обсуждение
-    </span>
-    <div id="chat-info" class="info">
+    
+    <div id="branch-chat-info" class="info">
+      <span class="header-branch__span">
+        Обсуждение
+      </span>
       {{!-- <span id="chat-name" class="info__chat-name">
         {{chat.chatName}}
       </span>
@@ -125,18 +126,18 @@
       
     </div>
     <div id="search-image-container" class="search-messages">
-      <img id="search-messages" class="search-messages__img" src="/assets/image/search-icon.svg" alt="">
+      <img id="branch-search-messages" class="search-messages__img" src="/assets/image/search-icon.svg" alt="">
     </div>
 
     <div id="branch-search-input" class="input-search hidden" >
       <div class="search-results">
-        <input id="input-search" class="input-search__input" type="text" name="text" placeholder="Поиск">
-        <div id="search-results-messages" class="search-results-messages">
+        <input id="branch-input-search" class="input-search__input" type="text" name="text" placeholder="Поиск">
+        <div id="branch-search-results-messages" class="search-results-messages">
           
         </div>
       </div>
 
-      <img id="cancel-search" class="search-cancel__img" src="/assets/image/cancel.svg" alt="">  
+      <img id="branch-cancel-search" class="search-cancel__img" src="/assets/image/cancel.svg" alt="">  
       
     </div>
     
@@ -150,7 +151,7 @@
   {{#if userType.admin}}
     <button id="start-branch" class="start-branch__button">Начать ветку</button>
   {{/if}}
-  <div class="input">
+  <div id="branch-input" class="input">
     <div class="input-bubble">
       <img class="attach-icon" src="/assets/image/Attach.svg" />
       <textarea

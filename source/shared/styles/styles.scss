@@ -147,3 +147,22 @@ $chat-padding-top: var(--chat-padding-top);
   align-items: center;
   gap: 12px;
 }
+
+@mixin subscribe-start-btn {
+  margin-bottom: 15px;
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+
+  color: $text-over-primary;
+  font-size: 16px;
+  font-family: var(--main-font-family);
+  background-color: var(--secondary);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
