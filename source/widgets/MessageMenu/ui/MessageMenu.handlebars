@@ -1,10 +1,12 @@
 <div class="modal">
     <div id="message-menu" class="message-menu" style="margin-left: {{x}}px; margin-top: {{y}}px;">
-        {{#if notBranch}}
-        <div id="branch-message" class="message-menu-branch">
-            <img class="message-menu-branch__img" src="/assets/image/branch-icon.png" alt="...">
-            <span class="message-menu-branch__span">Ветка</span>
-        </div>
+        {{#if notPersonalChat}}
+            {{#if notBranch}}
+            <div id="branch-message" class="message-menu-branch">
+                <img class="message-menu-branch__img" src="/assets/image/branch-icon.png" alt="...">
+                <span class="message-menu-branch__span">Ветка</span>
+            </div>
+            {{/if}}
         {{/if}}
         {{#if thisUser}}
         <div id="edit-message" class="message-menu-edit">
