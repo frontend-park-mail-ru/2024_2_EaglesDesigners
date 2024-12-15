@@ -101,3 +101,71 @@ $delete-button-color: var(--delete-button-color);
 
   @include delete-btn();
 }
+
+.notifications {
+  display: flex;
+  &__span {
+    width: 100%;
+    color: $text-over-primary;
+    font-family: var(--main-font-family);
+    padding: 5px;
+  }
+}
+
+.Toggle {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 1ch;
+}
+
+.Toggle__display {
+  --offset: 0.25em;
+  --diameter: 1.2em;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: calc(var(--diameter) * 2 + var(--offset) * 2);
+  height: calc(var(--diameter) + var(--offset) * 2);
+  box-sizing: content-box;
+
+  border: 0.1em solid rgb(0 0 0 / 0.2);
+
+  position: relative;
+  border-radius: 100vw;
+  background-color: tomato;
+
+  transition: 250ms;
+  cursor: pointer;
+}
+
+.Toggle__display::before {
+  content: '';
+
+  width: var(--diameter);
+  height: var(--diameter);
+  border-radius: 50%;
+
+  box-sizing: border-box;
+  border: 0.1 solid rgb(0 0 0 / 0.2);
+
+  position: absolute;
+  z-index: 2;
+  top: 50%; 
+  left: var(--offset);
+  transform: translate(0, -50%);
+
+  background-color: #fff;
+  transition: inherit;
+}
+
+.Toggle__input:checked + .Toggle__display {
+  background-color: #30D158;
+}
+
+.Toggle__input:checked + .Toggle__display::before {
+  transform: translate(100%, -50%);
+}
