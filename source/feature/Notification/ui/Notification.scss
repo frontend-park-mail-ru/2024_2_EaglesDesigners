@@ -1,0 +1,45 @@
+$secondary: var(--secondary);
+$text-over-primary: var(--text-over-primary);
+$font-family: var(--font-family);
+$button-over-background-hover: var(--button-over-background-hover);
+
+.notification {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: $secondary;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    transition-duration: opacity 0.5s;
+    width: 300px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $button-over-background-hover;
+    }
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.notification-header {
+    display: flex;
+    flex-direction: row;
+    //justify-content: flex-end;
+
+    &__img {
+        //width: 100%;
+        cursor: pointer;
+    }
+
+    &__span {
+        width: 100%;
+        color: $text-over-primary;
+        font-size: 16px;
+        font-family: "Inter";
+        padding: 5px;
+    }
+}
