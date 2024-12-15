@@ -195,6 +195,7 @@ export class ChatMessage {
                 return;
             };
             
+            
             if (message?.branchId) {
                 
                 ChatStorage.setCurrentBranchId(message.branchId);
