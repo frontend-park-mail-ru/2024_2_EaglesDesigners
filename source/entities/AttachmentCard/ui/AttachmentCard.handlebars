@@ -1,0 +1,15 @@
+{{#if photo}}
+    <img class="attached-photo attachment" src={{ photo.url }} />
+{{/if}}
+{{#if file}}
+    <div class="attached-file attachment">
+        <div class="attached-file__upper-row">
+            <img class="attached-file__icon" src="/assets/image/attached-file.svg" />
+            <div class="attached-file__info">
+                <span class="attached-file__extention">{{ file.type }}</span>
+                <span class="attached-file__size">{{ file.size }}</span>
+            </div>
+        </div>
+        <span class="attached-file__name">{{ file.name }}</span>
+    </div>
+{{/if}}

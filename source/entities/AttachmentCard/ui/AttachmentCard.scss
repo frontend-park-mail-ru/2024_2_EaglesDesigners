@@ -1,0 +1,75 @@
+@import "@/shared/styles/styles.scss";
+
+$text-over-primary: var(--text-over-primary);
+$text-over-primary-shadow-30: var(--text-over-primary-shadow-30);
+
+@mixin font-settings($font-family, $font-weight, $font-size, $color) {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+}
+
+.attachment {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+
+    background: $text-over-primary-shadow-30;
+
+    border-radius: 15px;
+}
+
+.attached-file {
+    box-sizing: border-box;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    &__upper-row {
+        display: flex;
+        gap: 2px;
+    }
+
+    &__icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    &__info {
+        flex: 1;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &__extention {
+        @include font-settings("Inter", 500, 14px, $text-over-primary);
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    &__size {
+        @include font-settings("Inter", 500, 10px, $text-over-primary);
+    }
+
+    &__name {
+        @include font-settings("Inter", 500, 12px, $text-over-primary);
+        flex: 1;
+
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+
+        overflow: hidden;
+        line-break: anywhere;
+    }
+}
+
+.attached-photo {
+    object-fit: cover;
+    transform: translate3d(0, 0, 1px);
+}

@@ -5,6 +5,7 @@ $secondary: var(--secondary);
 $accent: var(--accent);
 
 $text-over-primary: var(--text-over-primary);
+$text-over-primary-shadow-30: var(--text-over-primary-shadow-30);
 $text-over-primary-shadow-50: var(--text-over-primary-shadow-50);
 $text-over-secondary: var(--text-over-secondary);
 
@@ -42,11 +43,89 @@ $messages-container-width: 700px;
 
       display: none;
     }
-    &__text {
-      @include font-settings("Inter", 400, 16px, $text-over-secondary);
-
+    .contents {
       display: inline;
-      word-wrap: break-word;
+
+      &__photos-wrapper {
+        margin-bottom: 6px;
+        
+        display: flex;
+        flex-wrap: wrap;
+
+        .message-photo {
+          width: 100px;
+          height: 100px;
+
+          object-fit: cover;
+          transform: translate3d(0, 0, 1px);        
+        
+          border-radius: 15px;
+        }
+      }
+      &__files-wrapper {
+        margin-top: 6px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .message-file {
+          box-sizing: border-box;
+          padding: 10px;
+          
+          background: $text-over-primary-shadow-30;
+          border-radius: 10px;
+
+          display: flex;
+          flex-direction: column;
+        
+          &__upper-row {
+            display: flex;
+            gap: 2px;
+          }
+        
+          &__icon {
+            width: 36px;
+            height: 36px;
+          }
+        
+          &__info {
+            flex: 1;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+          }
+        
+          &__extention {
+            @include font-settings("Inter", 500, 14px, $text-over-primary);
+        
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+          &__size {
+            @include font-settings("Inter", 500, 12px, $text-over-primary);
+          }
+        
+          &__name {
+            @include font-settings("Inter", 500, 12px, $text-over-primary);
+        
+            display: block;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        
+            overflow: hidden;
+            line-break: anywhere;
+          }
+        }
+      }
+      &__text {
+        @include font-settings("Inter", 400, 16px, $text-over-secondary);
+
+        display: inline;
+        word-wrap: break-word;
+      }
     }
     &__meta {
       height: 20px;

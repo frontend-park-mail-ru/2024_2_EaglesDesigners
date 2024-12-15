@@ -20,13 +20,19 @@ import { UserType } from "@/widgets/AddChannelForm/lib/types";
 import { debounce } from "@/shared/helpers/debounce";
 import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
 import { ChatList } from "@/widgets/ChatList";
+import { AttachmentCard } from "@/entities/AttachmentCard";
+import { SendMessage } from "../api/SendMessage";
 
 export class Chat {
   #parent;
   #chatInfo;
+  #photos: File[];
+  #files: File[];
   constructor(parent: Element, chatInfo: Element) {
     this.#parent = parent;
     this.#chatInfo = chatInfo;
+    this.#photos = [];
+    this.#files = [];
   }
   /**
    * Render ChatList widget
@@ -66,6 +72,94 @@ export class Chat {
       userType,
       chatType
     });
+
+    const attachFilePopup = this.#parent.querySelector<HTMLElement>('#attachPopUp')!;
+    this.#parent.querySelector('#attachBtn')!.addEventListener("click", (event) => {
+      event.stopPropagation();
+      attachFilePopup.style.display = attachFilePopup.style.display === "none" ? "flex" : "none";
+    });
+
+    document.addEventListener("click", () => {
+      if (attachFilePopup.style.display !== "none") {
+        attachFilePopup.style.display = "none";
+      }
+    });
+
+    const filesCarousel = this.#parent.querySelector<HTMLElement>('#filesWrapper')!;
+    const filesContainer = document.querySelector<HTMLElement>('#filesContainer')!;
+
+    const attachmentCard = new AttachmentCard(filesContainer);
+    
+    const photoInput = this.#parent.querySelector<HTMLInputElement>("#attach-photo")!;
+    const handlePhotoAttachment = () => {
+      if (photoInput.files) {
+        const file = photoInput.files[0];
+        if (file) {
+          this.#photos.push(file);
+          attachmentCard.renderPhoto(file);
+          
+          filesCarousel.style.display = 'block';
+          updateButtonsVisibility();
+        }
+      }
+    };
+    photoInput.addEventListener("change", handlePhotoAttachment);
+
+    const fileInput: HTMLInputElement = this.#parent.querySelector("#attach-file")!;
+    const handleFileAttachment = () => {
+      if (fileInput.files) {
+        const file = fileInput.files[0];
+        if (file) {
+          this.#files.push(file);
+          attachmentCard.renderFile(file);
+
+          filesCarousel.style.display = 'block';
+          updateButtonsVisibility();
+        }
+      }
+    };
+    fileInput.addEventListener("change", handleFileAttachment);
+
+    const filesPrevBtn = document.querySelector<HTMLElement>('#inputPrevBtn')!;
+    const filesNextBtn = document.querySelector<HTMLElement>('#inputNextBtn')!;
+    const attachments = filesContainer!.children;
+
+    let currentIndex = 0;
+    const fileCardWidth = 100;
+    const fileCardsGap = 10;
+
+    const getVisibleCardsCount = () => {
+      const containerWidth = filesContainer.parentElement!.clientWidth;
+      return 1 + Math.floor((containerWidth - fileCardWidth)/(fileCardWidth + fileCardsGap));
+    }
+
+    function updateButtonsVisibility() {
+      filesPrevBtn.style.display = currentIndex === 0 ? 'none' : 'block';
+      const visibleCardsCount = getVisibleCardsCount();
+      filesNextBtn.style.display = attachments.length > visibleCardsCount && currentIndex !== attachments.length - 1 - attachments.length % visibleCardsCount ? 'block' : 'none';
+    }
+
+    function updateTransform() {
+      const offset = currentIndex*(fileCardWidth + fileCardsGap);
+
+      filesContainer.style.transform = `translateX(-${offset}px)`;
+    }
+
+    filesPrevBtn.addEventListener('click', () => {
+      currentIndex = Math.max(currentIndex - getVisibleCardsCount(), 0);
+
+      updateButtonsVisibility();
+      updateTransform();
+    });
+
+    filesNextBtn.addEventListener('click', () => {
+      const visibleCardsCount = getVisibleCardsCount();
+      currentIndex = Math.min(currentIndex + visibleCardsCount, attachments.length - 1 - attachments.length % visibleCardsCount);
+      
+      updateButtonsVisibility();
+      updateTransform();
+    });
+
     const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
     if (chatCard) {
       chatCard.classList.add('active');
@@ -111,12 +205,12 @@ export class Chat {
           return;
         }
 
-        API.post<EmptyResponse, SendMessageRequest>(
-          `/chat/${chat.chatId}/messages`,
-          {
-            text: messageText,
-          },
-        );
+        await SendMessage(chat.chatId, messageText, this.#files, this.#photos);
+        this.#files = [];
+        this.#photos = [];
+        
+        filesCarousel.style.display = 'none';
+        filesContainer.innerHTML = '';
       }
 
       textArea.style.height = "";

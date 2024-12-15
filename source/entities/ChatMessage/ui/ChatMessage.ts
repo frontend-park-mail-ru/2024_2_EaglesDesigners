@@ -12,6 +12,7 @@ import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
 import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
+import { formatBytes } from "@/shared/helpers/formatBytes";
 
 
 export class ChatMessage {
@@ -82,10 +83,30 @@ export class ChatMessage {
       }
 
       const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
-      const avatarURL = user.avatarURL
+      let avatarURL = "";
+      if(message.authorID !== "00000000-0000-0000-0000-000000000000") {
+        avatarURL = user.avatarURL
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
+      }
       
+      const photos = message.photos ? message.photos.map(photoURL => ({
+        url: `${serverHost}${photoURL.url}`
+      })) : [];
+
+      console.log('files', message);
+      const extentionRegex = /\.([^.]+)$/;
+      const nameRegex = /^(.+)\.[^.]+$/;
+
+      const files = message.files ? await Promise.all(message.files.map(async (file: string) => {
+
+        return {
+          name: nameRegex.exec(file.filename)![1],
+          extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+          size: formatBytes(file.size)
+        };
+      })) : [];
+
       this.#parent.insertAdjacentHTML(
         "beforeend",
         ChatMessageTemplate({
@@ -94,6 +115,8 @@ export class ChatMessage {
             datetime: getTimeString(messageWithFlags.datetime),
             avatarURL: avatarURL,
             authorName: user?.name,
+            photos: photos,
+            files: files
           },
         }),
       );
@@ -136,6 +159,23 @@ export class ChatMessage {
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
+      const photos = message.photos ? message.photos.map(photoURL => ({
+        url: `${serverHost}${photoURL.url}`
+      })) : [];
+
+      console.log('files', message);
+      const extentionRegex = /\.([^.]+)$/;
+      const nameRegex = /^(.+)\.[^.]+$/;
+
+      const files = message.files ? await Promise.all(message.files.map(async (file: string) => {
+
+        return {
+          name: nameRegex.exec(file.filename)![1],
+          extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+          size: formatBytes(file.size)
+        };
+      })) : [];
+    
       this.#parent.insertAdjacentHTML(
         "afterbegin",
         ChatMessageTemplate({
@@ -144,6 +184,8 @@ export class ChatMessage {
             datetime: getTimeString(messageWithFlags.datetime),
             avatarURL: avatarURL,
             authorName: user?.name,
+            photos: photos,
+            files: files
           },
         }),
       );

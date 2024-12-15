@@ -6,6 +6,8 @@ export interface TChatMessage {
   isRedacted: boolean;
   messageId: string;
   text: string;
+  photos: string[];
+  files: string[];
 }
 
 export type TChatMessageWithFlags = TChatMessage & {

@@ -41,13 +41,59 @@
   {{#if chatType.group}}
   <div class="input">
     <div class="input-bubble">
-      <img class="attach-icon" src="/assets/image/Attach.svg" />
-      <textarea
-        class="text-area"
-        placeholder="Введите сообщение"
-        maxlength="1000"
-      ></textarea>
-      <img class="emoji-icon" src="/assets/image/Emoji.svg" />
+      <div class="input-files-wrapper" id="filesWrapper" style="display: none;">
+        <div class="input-files" id="filesContainer">
+  
+        </div>
+        <img class="input-files__prev-page" id="inputPrevBtn" src="/assets/image/next-20px.svg" style="display: none;"/>
+        <img class="input-files__next-page" id="inputNextBtn" src="/assets/image/next-20px.svg" style="display: none;"/>
+      </div>
+      <div class="input-base">
+        <img class="attach-icon" id="attachBtn" src="/assets/image/Attach.svg" />
+        <textarea
+          class="text-area"
+          placeholder="Введите сообщение"
+          maxlength="1000"
+        ></textarea>
+        <img class="emoji-icon" src="/assets/image/Emoji.svg" />
+        
+        <div class="attach__popup" id="attachPopUp" style="display: none;">
+          <label for="attach-photo">
+            <input
+              type="file"
+              id="attach-photo"
+              name="attach-photo"
+              style="display: none;"
+              accept="image/webp, image/gif, image/jpeg, image/webp, image/png"
+            />
+            <span 
+              class="attach__popup__item" 
+              id="attachPhoto"
+            >
+              <img
+                class="attach-item__icon"
+                src="/assets/image/user.svg"
+              />
+              Фото
+            </span>
+          </label>
+          <label for="attach-file">
+            <input
+              type="file"
+              id="attach-file"
+              name="attach-file"
+              style="display: none;"
+            />
+            <span 
+              class="attach__popup__item" 
+              id="attachFile"
+            >
+              <img class="attach-item__icon" src="/assets/image/users.svg" />
+              Файл
+            </span>
+          </label>
+        </div>
+      </div>
     </div>
     <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
   </div>
