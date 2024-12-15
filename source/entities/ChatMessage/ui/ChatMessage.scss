@@ -132,23 +132,3 @@ $messages-container-width: 700px;
     }
   }
 }
-
-.message-branch {
-  position: absolute; 
-  color: #fff;
-  background: $secondary;
-  top: 28px;
-  right: 5px;
-  display: flex;
-  flex-direction: row;
-  border-radius: 10px;
-  padding: 0px 5px;
-  cursor: pointer;
-
-  &__span {
-  }
-
-  &__img {
-
-  }
-}

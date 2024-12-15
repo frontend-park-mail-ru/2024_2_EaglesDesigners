@@ -1,12 +1,18 @@
 <div class="modal">
     <div id="message-menu" class="message-menu" style="margin-left: {{x}}px; margin-top: {{y}}px;">
-        <div class="message-menu-edit">
-            <img class="message-menu-edit__img" src="/assets/image/update-group.svg" alt="...">
-            <span id="edit-message" class="message-menu-edit__span">Изменить</span>
+        {{#if notBranch}}
+        <div id="branch-message" class="message-menu-branch">
+            <img class="message-menu-branch__img" src="/assets/image/branch-icon.png" alt="...">
+            <span class="message-menu-branch__span">Ветка</span>
         </div>
-        <div class="message-menu-delete">
+        {{/if}}
+        <div id="edit-message" class="message-menu-edit">
+            <img class="message-menu-edit__img" src="/assets/image/update-group.svg" alt="...">
+            <span class="message-menu-edit__span">Изменить</span>
+        </div>
+        <div id="delete-message" class="message-menu-delete">
             <img class="message-menu-delete__img" src="/assets/image/delete-icon.png" alt="...">
-            <span id="delete-message" style="color: tomato;" class="message-menu-delete__span">Удалить</span>
+            <span style="color: tomato;" class="message-menu-delete__span">Удалить</span>
         </div>
     </div>
 </div>

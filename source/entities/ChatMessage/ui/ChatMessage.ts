@@ -159,59 +159,6 @@ export class ChatMessage {
         }),
       );
 
-      const messageInChat : HTMLElement = document.getElementById(message.messageId)!;
-      const branch = messageInChat.querySelector('#branch')!;
-    if (branch) {
-        branch.addEventListener("click", async () => {
-            const startBranch = document.getElementById('start-branch')!;
-            const branchInput = document.getElementById("branch-input")!;
-            if (message?.branchId) {
-                ChatStorage.setCurrentBranchId(message.branchId);
-                startBranch?.classList?.add("hidden");
-                branchInput?.classList?.remove("hidden");
-            }
-            else {
-                startBranch?.classList?.remove("hidden");
-                branchInput?.classList?.add("hidden");
-            }
-            const currentChat = document.getElementById('chat')!;
-            const branchChat = document.getElementById("chat-branch")!;
-            currentChat?.classList.add("hidden");
-            branchChat?.classList.remove("hidden");
-            const chatBranch = document.getElementById("chat-branch")!;
-            const chatBranchMessages : HTMLElement = chatBranch.querySelector("#chat__messages")!;
-            chatBranchMessages.innerText = '';
-
-            const handleStartBranch = async () => {
-                const response = await API.post<createBranchResponse, EmptyRequest>(`/chat/${message.chatId}/${message.messageId}/branch`, {});
-                console.log(response);
-                if (!response.error) {
-                    ChatStorage.setCurrentBranchId(response.id);
-                    startBranch?.classList.add("hidden");
-                    branchInput?.classList.remove("hidden");
-                    const chatBranch = document.querySelector("#chat-branch")!;
-                    this.setParent(chatBranch.querySelector("#chat__messages")!);
-                }
-                return;
-            };
-            
-            
-            if (message?.branchId) {
-                
-                ChatStorage.setCurrentBranchId(message.branchId);
-                const branchMessages = await API.get<ChatMessagesResponse>(`/chat/${message.branchId}/messages`);
-                
-                if (!branchMessages.error) {
-                    this.setParent(chatBranchMessages);
-                    this.renderMessages(branchMessages.messages, false);
-                }
-            }
-            if (startBranch) {
-                startBranch.addEventListener('click', handleStartBranch);
-            }
-            
-        });
-    }
       if (message.isRedacted) {
         const redactedMessage = this.#parent.querySelector("#redacted")!;
         if (redactedMessage) {
@@ -223,17 +170,17 @@ export class ChatMessage {
       const handleMessageClick = (event : MouseEvent) => {
         
         const messageId = newMessageElement.id;
-        const message = document.getElementById(messageId)!;
+        const messageInChat = document.getElementById(messageId)!;
         if (message) {
-          const menu = message.querySelector("#menu-context")!;
-          const messageText = message.querySelector(".message__body__text")?.textContent;
+          const menu = messageInChat.querySelector("#menu-context")!;
+          const messageText = messageInChat.querySelector(".message__body__text")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
             if (ChatStorage.getCurrentBranchId()) {
-              messageMenu.render(messageId, messageText, event.x-100, event.y-25, true);
+              messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, true);
               return;
             }
-            messageMenu.render(messageId, messageText, event.x-100, event.y-25, false);
+            messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, false);
           }
         }
       };

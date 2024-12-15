@@ -75,3 +75,30 @@ $background: var(--background);
         padding: 0px 5px;
     }
 }
+
+.message-menu-branch {
+    cursor: pointer;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    &__span {
+        padding: 2px 0px;
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        @include text();
+        transition-duration: 0.4s;
+    }
+    &:hover {
+        background-color: $button-over-background-hover;
+    }
+
+    &__img {
+        width: 18px;
+        height: 18px;
+        align-items: center;
+        padding: 0px 5px;
+    }
+}
