@@ -10,7 +10,7 @@ import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
-import { ChatMessagesResponse } from "@/shared/api/types";
+import { ChatMessagesResponse, createBranchResponse, EmptyRequest } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 import { InfoMessage } from "@/entities/InfoMessage/";
 
@@ -49,10 +49,6 @@ export class ChatMessage {
   }
 
   async renderMessages(messages: TChatMessage[], chatIsNotBranch = true) {
-    const placeholder= this.#parent.querySelector('#msg-placeholder');
-    if(placeholder) {
-      placeholder.remove();
-    }
     if ( 
       this.#parent.innerHTML &&
       this.#oldestMessage?.first &&
@@ -117,13 +113,8 @@ export class ChatMessage {
       }
     }
   }
-  async renderNewMessage(message: TChatMessage) {
-    console.log(this.#parent, "я сюда рендер")
-    const placeholder= this.#parent.querySelector('#msg-placeholder');
-    if(placeholder) {
-      placeholder.remove();
-    }
-
+  async renderNewMessage(message: TChatMessage, chatIsNotBranch = true) {
+    console.log(ChatStorage)
     if (message.text) {
       if (
         this.#newestMessage?.last &&
@@ -152,6 +143,9 @@ export class ChatMessage {
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
+      if (ChatStorage.getCurrentBranchId()) {
+        chatIsNotBranch = false;
+      }  
       this.#parent.insertAdjacentHTML(
         "afterbegin",
         ChatMessageTemplate({
@@ -161,9 +155,62 @@ export class ChatMessage {
             avatarURL: avatarURL,
             authorName: user?.name,
           },
+          chatIsNotBranch
         }),
       );
-      
+
+      const messageInChat : HTMLElement = document.getElementById(message.messageId)!;
+      const branch = messageInChat.querySelector('#branch')!;
+    if (branch) {
+        branch.addEventListener("click", async () => {
+            const startBranch = document.getElementById('start-branch')!;
+            const branchInput = document.getElementById("branch-input")!;
+            if (message?.branchId) {
+                ChatStorage.setCurrentBranchId(message.branchId);
+                startBranch?.classList?.add("hidden");
+                branchInput?.classList?.remove("hidden");
+            }
+            else {
+                startBranch?.classList?.remove("hidden");
+                branchInput?.classList?.add("hidden");
+            }
+            const currentChat = document.getElementById('chat')!;
+            const branchChat = document.getElementById("chat-branch")!;
+            currentChat?.classList.add("hidden");
+            branchChat?.classList.remove("hidden");
+            const chatBranch = document.getElementById("chat-branch")!;
+            const chatBranchMessages : HTMLElement = chatBranch.querySelector("#chat__messages")!;
+            chatBranchMessages.innerText = '';
+
+            const handleStartBranch = async () => {
+                const response = await API.post<createBranchResponse, EmptyRequest>(`/chat/${message.chatId}/${message.messageId}/branch`, {});
+                console.log(response);
+                if (!response.error) {
+                    ChatStorage.setCurrentBranchId(response.id);
+                    startBranch?.classList.add("hidden");
+                    branchInput?.classList.remove("hidden");
+                    const chatBranch = document.querySelector("#chat-branch")!;
+                    this.setParent(chatBranch.querySelector("#chat__messages")!);
+                }
+                return;
+            };
+            
+            if (message?.branchId) {
+                
+                ChatStorage.setCurrentBranchId(message.branchId);
+                const branchMessages = await API.get<ChatMessagesResponse>(`/chat/${message.branchId}/messages`);
+                
+                if (!branchMessages.error) {
+                    this.setParent(chatBranchMessages);
+                    this.renderMessages(branchMessages.messages, false);
+                }
+            }
+            if (startBranch) {
+                startBranch.addEventListener('click', handleStartBranch);
+            }
+            
+        });
+    }
       if (message.isRedacted) {
         const redactedMessage = this.#parent.querySelector("#redacted")!;
         if (redactedMessage) {
@@ -181,7 +228,11 @@ export class ChatMessage {
           const messageText = message.querySelector(".message__body__text")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            messageMenu.render(messageId, messageText, event.x-100, event.y-25);
+            if (ChatStorage.getCurrentBranchId()) {
+              messageMenu.render(messageId, messageText, event.x-100, event.y-25, true);
+              return;
+            }
+            messageMenu.render(messageId, messageText, event.x-100, event.y-25, false);
           }
         }
       };

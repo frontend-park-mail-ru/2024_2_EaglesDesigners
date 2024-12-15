@@ -26,7 +26,7 @@ export class MessageMenu {
           textArea = document.querySelector("#textarea")!;
         }
         else {
-          textArea = document.getElementById('branch-textarea')!;
+          textArea = document.querySelector('#branch-textarea')!;
         }
         
         

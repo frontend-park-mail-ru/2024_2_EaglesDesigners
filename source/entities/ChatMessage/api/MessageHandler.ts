@@ -68,7 +68,7 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
                     startBranch?.classList.add("hidden");
                     branchInput?.classList.remove("hidden");
                 }
-                return
+                return;
             };
             
             if (pickedMessage?.branchId) {

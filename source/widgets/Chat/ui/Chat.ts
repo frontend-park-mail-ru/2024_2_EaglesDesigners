@@ -47,6 +47,7 @@ export class Chat {
       
     }
     ChatStorage.setChat(chat);
+    ChatStorage.setCurrentBranchId("");
     const avatar = chat.avatarPath
         ? serverHost + chat.avatarPath
         : "/assets/image/default-avatar.svg";
