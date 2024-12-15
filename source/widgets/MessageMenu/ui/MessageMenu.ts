@@ -5,6 +5,7 @@ import { DeleteMessage } from "@/feature/DeleteMessage";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import { API } from "@/shared/api/api";
 import { ChatMessagesResponse, createBranchResponse, EmptyRequest } from "@/shared/api/types";
+import { UserStorage } from "@/entities/User";
 
 export class MessageMenu {
     #parent;
@@ -13,17 +14,23 @@ export class MessageMenu {
     }
 
     render(message : TChatMessage, messageId : string, messageText : string, x : number, y : number, chatMessageObject : ChatMessage, branch : boolean = false) {
-      const notBranch = !branch;
-        this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch});
+        
+        let thisUser = true;
+        if (message.authorID !== UserStorage.getUser().id) {
+          thisUser = false;
+        }
+        const notBranch = !branch;
+        this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch, thisUser});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
         const handleDelete = async () => {
             const deleteMessageMenu = new DeleteMessage(this.#parent);
             deleteMessageMenu.render(messageId);
         };
-
-        deleteButton.addEventListener("click", handleDelete);
-
+        if (deleteButton) {
+          deleteButton.addEventListener("click", handleDelete);
+        }
+        
         const editButton = this.#parent.querySelector("#edit-message")!;
         let textArea : HTMLTextAreaElement;
         if (branch === false) {
@@ -42,7 +49,9 @@ export class MessageMenu {
             textArea.value = messageText.trim();
             this.#parent.innerHTML = '';
         };
-        editButton.addEventListener("click", handleEdit);
+        if (editButton) {
+          editButton.addEventListener("click", handleEdit);
+        }
         
         const handlerClickOutsideModal = (e: Event) => {
             if (e.target instanceof Element) {

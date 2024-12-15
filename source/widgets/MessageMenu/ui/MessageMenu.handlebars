@@ -6,13 +6,17 @@
             <span class="message-menu-branch__span">Ветка</span>
         </div>
         {{/if}}
+        {{#if thisUser}}
         <div id="edit-message" class="message-menu-edit">
             <img class="message-menu-edit__img" src="/assets/image/update-group.svg" alt="...">
             <span class="message-menu-edit__span">Изменить</span>
         </div>
+        {{/if}}
+        {{#if thisUser}}
         <div id="delete-message" class="message-menu-delete">
             <img class="message-menu-delete__img" src="/assets/image/delete-icon.png" alt="...">
             <span style="color: tomato;" class="message-menu-delete__span">Удалить</span>
         </div>
+        {{/if}}
     </div>
 </div>

@@ -23,7 +23,6 @@ $messages-container-width: 700px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  margin-bottom: 20px;
   border-radius: 10px;
 
   &__body {
@@ -93,11 +92,22 @@ $messages-container-width: 700px;
     }
   }
 
-  // &:not(.left-side).last-message {
-  //   .message__body {
-  //     border-bottom-right-radius: 0px;
-  //   }
-  // }
+  &:not(.left-side).last-message {
+    .message__body {
+      border-bottom-right-radius: 0px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: -12px;
+        bottom: 0px;
+        border: 7px solid transparent;
+        border-bottom: 7px solid $secondary;
+        border-left: 7px solid $secondary;
+      }
+    }
+    
+  }
 
   &.left-side {
     flex-direction: row-reverse;

@@ -10,20 +10,20 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
         const pickedMessage = messages.find((elem) => {
           return elem.messageId === messageId;
         });
-        if (pickedMessage?.authorID !== UserStorage.getUser().id) {
-          return;
-        }
+
         if (message) {
           const messageText = message.querySelector("#message-text-content")!.innerHTML; 
           const menu = message.querySelector("#menu-context")!;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            if (pickedMessage.chatId === ChatStorage.getCurrentBranchId()) {
+            if (pickedMessage?.chatId === ChatStorage.getCurrentBranchId()) {
                 messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, true);
                 return;
             }
+
             messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, false);
-          }
+
+           }
         }
       };
 

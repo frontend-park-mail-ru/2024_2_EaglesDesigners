@@ -116,6 +116,7 @@ textarea {
   width: 100%;
   max-width: $messages-container-max-width;
   flex: 1;
+  gap: 5px;
 
   display: flex;
   flex-direction: column-reverse;
