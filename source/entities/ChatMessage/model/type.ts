@@ -1,4 +1,4 @@
-export type  MessageType = "informational" | "default";
+export type  MessageType = "informational" | "default" | "with_payload";
 
 export interface TChatMessage {
   authorID: string;
@@ -8,9 +8,15 @@ export interface TChatMessage {
   isRedacted: boolean;
   messageId: string;
   text: string;
-  photos: string[];
-  files: string[];
+  photos: TChatMessageAttachment[];
+  files: TChatMessageAttachment[];
   message_type: MessageType;
+}
+
+export interface TChatMessageAttachment {
+  url: string;
+  filename: string;
+  size: number;
 }
 
 export type TChatMessageWithFlags = TChatMessage & {

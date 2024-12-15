@@ -14,8 +14,6 @@ import { ChatMessagesResponse } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 import { formatBytes } from "@/shared/helpers/formatBytes";
 import { InfoMessage } from "@/entities/InfoMessage/ui/InfoMessage";
-import { TChat } from "@/entities/Chat/model/type";
-
 
 export class ChatMessage {
   #parent;
@@ -79,7 +77,7 @@ export class ChatMessage {
         };
 
         this.#oldestMessage = messageWithFlags;
-      if (message.message_type === "default") {
+      if (message.message_type === "default" || message.message_type === "with_payload") {
         
 
         if (!this.#newestMessage) {
@@ -87,22 +85,19 @@ export class ChatMessage {
         }
 
         const user = ChatStorage.getUsers().find(user => user.id === message.authorID)!;
-        let avatarURL = "";
-      if(message.authorID !== "00000000-0000-0000-0000-000000000000") {
-        avatarURL = user.avatarURL
+        const avatarURL = user.avatarURL
           ? serverHost + user.avatarURL
           : "/assets/image/default-avatar.svg";
-        }
       
-      const photos = message.photos ? message.photos.map(photoURL => ({
-        url: `${serverHost}${photoURL.url}`
+      const photos = message.photos ? message.photos.map(photo => ({
+        url: `${serverHost}${photo.url}`
       })) : [];
 
       console.log('files', message);
       const extentionRegex = /\.([^.]+)$/;
       const nameRegex = /^(.+)\.[^.]+$/;
 
-      const files = message.files ? await Promise.all(message.files.map(async (file: string) => {
+      const files = message.files ? await Promise.all(message.files.map(async (file) => {
 
         return {
           name: nameRegex.exec(file.filename)![1],
@@ -174,15 +169,15 @@ export class ChatMessage {
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
-      const photos = message.photos ? message.photos.map(photoURL => ({
-        url: `${serverHost}${photoURL.url}`
+      const photos = message.photos ? message.photos.map(photo => ({
+        url: `${serverHost}${photo.url}`
       })) : [];
 
       console.log('files', message);
       const extentionRegex = /\.([^.]+)$/;
       const nameRegex = /^(.+)\.[^.]+$/;
 
-      const files = message.files ? await Promise.all(message.files.map(async (file: string) => {
+      const files = message.files ? await Promise.all(message.files.map(async (file) => {
 
         return {
           name: nameRegex.exec(file.filename)![1],
