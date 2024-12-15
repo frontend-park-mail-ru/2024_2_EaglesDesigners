@@ -114,7 +114,6 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage, chatIsNotBranch = true) {
-    console.log(ChatStorage)
     if (message.text) {
       if (
         this.#newestMessage?.last &&

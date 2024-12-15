@@ -5,7 +5,6 @@ import { DeleteMessage } from "@/feature/DeleteMessage";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import { API } from "@/shared/api/api";
 import { ChatMessagesResponse, createBranchResponse, EmptyRequest } from "@/shared/api/types";
-import { event } from "jquery";
 
 export class MessageMenu {
     #parent;
@@ -14,7 +13,6 @@ export class MessageMenu {
     }
 
     render(message : TChatMessage, messageId : string, messageText : string, x : number, y : number, chatMessageObject : ChatMessage, branch : boolean = false) {
-      console.log(message)  
       const notBranch = !branch;
         this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
@@ -28,7 +26,6 @@ export class MessageMenu {
 
         const editButton = this.#parent.querySelector("#edit-message")!;
         let textArea : HTMLTextAreaElement;
-        console.log(branch)
         if (branch === false) {
           textArea = document.querySelector("#textarea")!;
         }
@@ -38,7 +35,6 @@ export class MessageMenu {
         
         
         const handleEdit = () => {
-          console.log(textArea)
             textArea.classList.remove(textArea.classList[1]);
             textArea.classList.remove(textArea.classList[1]);
             textArea.classList.add("edit");
@@ -85,7 +81,6 @@ export class MessageMenu {
 
             const handleStartBranch = async () => {
                 const response = await API.post<createBranchResponse, EmptyRequest>(`/chat/${message.chatId}/${message.messageId}/branch`, {});
-                console.log(response);
                 if (!response.error) {
                     ChatStorage.setCurrentBranchId(response.id);
                     startBranch?.classList.add("hidden");

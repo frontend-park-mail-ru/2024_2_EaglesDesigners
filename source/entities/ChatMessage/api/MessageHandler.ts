@@ -15,11 +15,9 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
         }
         if (message) {
           const messageText = message.querySelector("#message-text-content")!.innerHTML; 
-          console.log(messageText) 
           const menu = message.querySelector("#menu-context")!;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            console.log(pickedMessage, ChatStorage)
             if (pickedMessage.chatId === ChatStorage.getCurrentBranchId()) {
                 messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, true);
                 return;

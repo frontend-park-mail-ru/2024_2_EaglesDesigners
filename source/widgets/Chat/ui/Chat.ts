@@ -34,7 +34,7 @@ export class Chat {
    */
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
-    console.log(this.#parent, chat);
+
     if (ChatStorage.getChat().chatId) {
       const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
       if (currentChat) {
@@ -285,9 +285,7 @@ export class Chat {
       chatWidget.classList.remove("hidden");
       branchWidget.classList.add("hidden");
 
-      console.log(this.#parent);
       ChatStorage.getChatMessageInstance()?.setParent(chatWidget.querySelector('#chat__messages')!);
-      console.log(this.#parent)
       ChatStorage.setCurrentBranchId('');
     };
 
@@ -300,7 +298,6 @@ export class Chat {
 
     const inputBranchSearch : HTMLInputElement = this.#parent.querySelector("#branch-input-search")!;
     const handleSearchInBranch = async (event : Event) => {
-      console.log("это мои запросы")
       event.stopPropagation();
       branchSearchContainer.classList.remove('hidden');
       branchChatInfo.classList.add('hidden');
