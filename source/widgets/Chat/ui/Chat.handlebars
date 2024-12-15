@@ -141,5 +141,8 @@
       <img class="input-send-btn" id="chat__input-send-btn" src="/assets/image/Send.svg" />
       </div>
     {{/if}}
+    {{#if userType.not_in_chat}}
+      <button id="subscribe-channel" class="subscribe-channel__button hidden">Подписаться</button>
+    {{/if}}
   {{/if}}
 </div>

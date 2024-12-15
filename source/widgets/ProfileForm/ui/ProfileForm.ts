@@ -22,7 +22,7 @@ import { wsConn } from "@/shared/api/ws";
 export class ProfileForm {
   #parent;
   #chat;
-  constructor(parent: Element, chat: Chat) {
+  constructor(parent: HTMLElement, chat: Chat) {
     this.#parent = parent;
     this.#chat = chat;
   }

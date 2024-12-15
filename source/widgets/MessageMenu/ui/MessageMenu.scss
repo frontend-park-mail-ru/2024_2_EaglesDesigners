@@ -15,7 +15,7 @@ $background: var(--background);
 .message-menu {
     background: $background;
     border-radius: 10px;
-    width: 100px;
+    width: 140px;
     display: flex;
     flex-direction: column;
     
@@ -25,6 +25,9 @@ $background: var(--background);
 .message-menu-edit {
     cursor: pointer;
     width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 
     &__span {
         padding: 2px 0px;
@@ -37,20 +40,38 @@ $background: var(--background);
     &:hover {
         background-color: $button-over-background-hover;
     }
+
+    &__img {
+        width: 18px;
+        height: 18px;
+        align-items: center;
+        padding: 0px 5px;
+    }
 }
 
 .message-menu-delete {
     cursor: pointer;
     width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
     &__span {
         padding: 2px 0px;
         display: flex;
         justify-content: end;
-        width: 100px;
+        width: 100%;
         @include text();
         transition-duration: 0.4s;
     }
     &:hover {
         background-color: $button-over-background-hover;
+    }
+
+    &__img {
+        width: 18px;
+        height: 18px;
+        align-items: center;
+        padding: 0px 5px;
     }
 }

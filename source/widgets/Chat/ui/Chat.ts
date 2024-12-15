@@ -3,11 +3,8 @@ import ChatTemplate from "./Chat.handlebars";
 import "./Chat.scss";
 import {
   ChatResponse,
-  EmptyResponse,
   ProfileResponse,
-  ResponseChat,
   searchMessagesResponse,
-  SendMessageRequest,
 } from "@/shared/api/types";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import { TChat } from "@/entities/Chat";
@@ -20,6 +17,8 @@ import { UserType } from "@/widgets/AddChannelForm/lib/types";
 import { debounce } from "@/shared/helpers/debounce";
 import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
 import { ChatList } from "@/widgets/ChatList";
+import { Router } from "@/shared/Router/Router";
+import { SendMessage } from "../api/SendMessage";
 import { AttachmentCard } from "@/entities/AttachmentCard";
 import { SendMessage } from "../api/SendMessage";
 
@@ -28,7 +27,7 @@ export class Chat {
   #chatInfo;
   #photos: File[];
   #files: File[];
-  constructor(parent: Element, chatInfo: Element) {
+  constructor(parent: Element, chatInfo: HTMLElement) {
     this.#parent = parent;
     this.#chatInfo = chatInfo;
     this.#photos = [];
@@ -41,19 +40,28 @@ export class Chat {
    */
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
+    if (ChatStorage.getChat().chatId) {
+      const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
+      if (currentChat) {
+        currentChat.classList.remove('active');
+      }
+    }
+
     ChatStorage.setChat(chat);
     const avatar = chat.avatarPath
         ? serverHost + chat.avatarPath
         : "/assets/image/default-avatar.svg";
 
     const responseInfo = await API.get<ChatResponse>(`/chat/${chat.chatId}`);
-    const userType : UserType = {owner: false, user: false, admin: false};
+    const userType : UserType = {owner: false, user: false, admin: false, not_in_chat: false};
     if (responseInfo.role === "owner") {
       userType.owner = true;
     } else if (responseInfo.role === "admin") {
       userType.admin = true;
-    } else {
+    } else if (responseInfo.role === "none") {
       userType.user = true;
+    } else{
+      userType.not_in_chat = true;
     }
     const chatType = {channel: false, group: false, personal: false};
     if (chat.chatType == "group") {
@@ -164,6 +172,23 @@ export class Chat {
     if (chatCard) {
       chatCard.classList.add('active');
     }
+    const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
+    const handleSubscribe = async () => {
+      const responseSubscribe = await API.post(`/channel/${chat.chatId}/join`, {});
+      
+      if (!responseSubscribe.error) {
+        subscribeButton.classList.add('hidden');
+        Router.go(`/chat/${chat.chatId}`, false);
+      }
+    };
+    if (chatType.channel && responseInfo.error) {
+
+      if (subscribeButton) {
+        subscribeButton.classList.remove('hidden');
+        subscribeButton.addEventListener("click", handleSubscribe);
+      }
+      
+    }
 
     const messagesImport : HTMLElement = this.#parent.querySelector("#chat__messages")!;
     const chatMessage = new ChatMessage(messagesImport);
@@ -187,6 +212,10 @@ export class Chat {
         
         if (textArea.classList.contains('edit')) {
           const messageId = textArea.classList[2]!;
+          const initialMessageText = document.querySelector(`[id='${messageId}']`)!.querySelector("#message-text-content")!;
+          if (messageText === initialMessageText.textContent?.trim()) {
+            return;
+          }
           const response = await API.put(
             `/messages/${messageId}`,
             {
@@ -197,8 +226,10 @@ export class Chat {
             textArea.classList.remove('edit');
             textArea.classList.remove(messageId);
             const message = document.getElementById(messageId)!;
+            const redactedMessage = message.querySelector("#redacted")!;
             const messageBody = message.querySelector(".message__body__text")!;
             messageBody.textContent = messageText;
+            redactedMessage.classList.remove("hidden");
           
           }
           
@@ -231,7 +262,7 @@ export class Chat {
         document
         .querySelector("#chat__input-send-btn")!
         .addEventListener("click", sendInputMessage);
-      }
+    }
     
 
     const responseChat = await API.get<ChatResponse>(
@@ -254,15 +285,6 @@ export class Chat {
         const chatInfo = new ChatInfo(this.#chatInfo, chat);
         chatInfo.render();
       } else if (chat.chatType === "group" || chat.chatType === "channel") {
-        const responseChatInfo = await API.get<ResponseChat>(`/chat/${chat.chatId}`);
-        const userType : UserType = {owner: false, admin: false, user: false};
-        if (responseChatInfo.role === "owner") {
-          userType.owner = true;
-        } else if (responseChatInfo.role === "admin") {
-          userType.admin = true;
-        } else{
-          userType.user = true;
-        }
         const chatInfo = new GroupChatInfo(this.#chatInfo, chat, userType);
         chatInfo.render();
       }
@@ -334,7 +356,7 @@ export class Chat {
 
       history.pushState({ url: "/" }, "", "/");
 
-      const chatListImport = document.querySelector('#widget-import')!;
+      const chatListImport : HTMLElement = document.querySelector('#widget-import')!;
       const chatList = new ChatList(chatListImport,this);
       chatList.render();
     });

@@ -1,3 +1,5 @@
+export type  MessageType = "informational" | "default";
+
 export interface TChatMessage {
   authorID: string;
   chatId: string;
@@ -8,6 +10,7 @@ export interface TChatMessage {
   text: string;
   photos: string[];
   files: string[];
+  message_type: MessageType;
 }
 
 export type TChatMessageWithFlags = TChatMessage & {
