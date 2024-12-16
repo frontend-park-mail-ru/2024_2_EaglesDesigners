@@ -49,6 +49,7 @@ export class ChatMessage {
   }
 
   async renderMessages(messages: TChatMessage[], chatIsNotBranch = true) {
+    console.log(messages);
     if ( 
       this.#parent.innerHTML &&
       this.#oldestMessage?.first &&

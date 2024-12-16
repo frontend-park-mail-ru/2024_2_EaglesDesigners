@@ -14,6 +14,7 @@ export class SearchedMessageCard{
     }
 
     render(message : TChatMessage, avatar : string, person : string, chatMessages : HTMLElement, Message : ChatMessage) {
+        console.log(ChatStorage.getCurrentBranchId())
         message.datetime = getTimeString(message.datetime);
 
         avatar = avatar ? serverHost + avatar : "/assets/image/default-avatar.svg";
@@ -30,11 +31,21 @@ export class SearchedMessageCard{
             }
             else {
                 while (!chatMessages.querySelector(`[id='${messageId}']`)!){
-                    const response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getChat().chatId}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
-                    if (!response.error) {
+                    let response;
+                    if (ChatStorage.getCurrentBranchId()) {
+                        response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getCurrentBranchId()}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
+                    }
+                    else {
+                        response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getChat().chatId}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
+                   
+                    }
+                     if (!response.error) {
                         Message.renderMessages(response.messages);
                     }
                     else {
+                        return;
+                    }
+                    if (!response.messages.length) {
                         return;
                     }
                 }
