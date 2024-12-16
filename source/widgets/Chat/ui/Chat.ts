@@ -289,7 +289,7 @@ export class Chat {
             textArea.classList.remove(messageId);
             const message = document.getElementById(messageId)!;
             const redactedMessage = message.querySelector("#redacted")!;
-            const messageBody = message.querySelector(".message__body__text")!;
+            const messageBody = message.querySelector("#message-text-content")!;
             messageBody.textContent = messageText;
             redactedMessage.classList.remove("hidden");
           

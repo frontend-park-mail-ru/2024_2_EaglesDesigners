@@ -4,7 +4,7 @@ import "./ChatInfo.scss";
 import { UserStorage } from "@/entities/User";
 import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
-import { ProfileResponse, UsersIdResponse } from "@/shared/api/types";
+import { ChatResponse, ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
 import * as moment from "moment";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
@@ -39,44 +39,19 @@ export class ChatInfo {
         profileUser.avatarURL = "/assets/image/default-avatar.svg";
       }
 
-      const files = [
-        {
-            "url": "/files/675f466313dbaf51a93aa2e1",
-            "filename": "Технопарк. Ведомость. WEB. Весна 2024 - Модуль 1.pdf",
-            "size": 73677
-        },
-        {
-            "url": "/files/675f466313dbaf51a93aa2e4",
-            "filename": ".~lock.Lecture5 (1).pptx#",
-            "size": 109
-        }
-      ];
-
-      const photos = [
-        {
-            "url": "/files/675f473513dbaf51a93aa2e7",
-            "filename": "9d5b031369cec9acdc54614a4d928d8e.jpg",
-            "size": 904891
-        },
-        {
-            "url": "/files/675f473513dbaf51a93aa2ec",
-            "filename": "s-l500.jpg",
-            "size": 13863
-        }
-      ];
-
+      const chatInfo = await API.get<ChatResponse>(`/chat/${this.#chat.chatId}`);
       const extentionRegex = /\.([^.]+)$/;
       const nameRegex = /^(.+)\.[^.]+$/;
 
       this.#parent.innerHTML = ChatInfoTemplate({ profileUser, birthdate,
         chat: {
-          files: files ? files.map(file => ({
+          files: chatInfo.files ? chatInfo.files.map(file => ({
             url: `${serverHost}${file.url}`,
             name: nameRegex.exec(file.filename)![1],
             extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
             size: formatBytes(file.size),
           })) : [],
-          photos: photos ? photos.map(photo => ({
+          photos: chatInfo.photos ? chatInfo.photos.map(photo => ({
             url: `${serverHost}${photo.url}`
           })) : [],
           },
