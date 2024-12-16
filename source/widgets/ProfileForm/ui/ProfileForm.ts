@@ -10,7 +10,6 @@ import {
   ProfileResponse,
 } from "@/shared/api/types";
 import { UserStorage } from "@/entities/User";
-import * as moment from "moment";
 import { validateYear } from "@/shared/validation/yearValidation";
 import { serverHost } from "@/app/config";
 import { genProfileData } from "../api/updateProfile";
@@ -45,7 +44,9 @@ export class ProfileForm {
       response,
       currentDate,
     });
-    const birthday = moment(response.birthdate).utc().format("YYYY-MM-DD");
+    
+    const bhd = new Date(response.birthdate);
+    const birthday = `${bhd.getUTCFullYear()}-${bhd.getUTCMonth()+1}-${bhd.getUTCDate()}`
     const birthdayInput: HTMLInputElement =
       this.#parent.querySelector("#date")!;
     birthdayInput.value = birthday;

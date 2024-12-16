@@ -4,6 +4,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: './source/index.ts',
@@ -48,6 +49,12 @@ module.exports = {
       fileName: 'manifest.json'
     }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserWebpackPlugin()],
+  },
+
+
   mode: 'development',
   
   devServer: {
