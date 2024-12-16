@@ -17,6 +17,8 @@ export class ChatCard {
   }
 
   async render(chat: TChat, notificate = false, notificationChat : TChat | null = null) {
+
+    console.log(chat);
     if (notificationChat) {
       chat = notificationChat;
     }
@@ -40,6 +42,7 @@ export class ChatCard {
         avatar,
       }),
     );
+    console.log(chat.lastMessage.text)
     this.#parent.lastElementChild!.addEventListener("click", (e) => {
       e.preventDefault();
       

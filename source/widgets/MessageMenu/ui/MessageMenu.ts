@@ -20,9 +20,9 @@ export class MessageMenu {
           thisUser = false;
         }
         const notBranch = !branch;
-        let notPersonalChat = true;
+        const notPersonalChat = true;
         if (ChatStorage.getChat().chatType === "personal") {
-          notPersonalChat = false;
+          return;
         }
         this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch, thisUser, notPersonalChat});
         const deleteButton = this.#parent.querySelector("#delete-message")!;

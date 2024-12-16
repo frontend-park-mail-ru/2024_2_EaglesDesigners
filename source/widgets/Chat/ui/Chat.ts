@@ -139,9 +139,9 @@ export class Chat {
               stickersList.lastElementChild?.addEventListener('click', () => {
                 SendSticker(chat.chatId, sticker);
                 emojiPopup.style.display = 'none';
-              })
-            })
-          })
+              });
+            });
+          });
         });
       this.#parent.querySelector('#attachBtn')!.addEventListener("click", (event) => {
         event.stopPropagation();

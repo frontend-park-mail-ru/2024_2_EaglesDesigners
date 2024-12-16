@@ -14,6 +14,7 @@ export class SearchedMessageCard{
     }
 
     render(message : TChatMessage, avatar : string, person : string, chatMessages : HTMLElement, Message : ChatMessage) {
+        console.log(ChatStorage.getCurrentBranchId())
         message.datetime = getTimeString(message.datetime);
 
         avatar = avatar ? serverHost + avatar : "/assets/image/default-avatar.svg";
@@ -30,15 +31,33 @@ export class SearchedMessageCard{
             }
             else {
                 while (!chatMessages.querySelector(`[id='${messageId}']`)!){
-                    const response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getChat().chatId}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
-                    if (!response.error) {
-                        Message.renderMessages(response.messages);
+                    let response;
+                    if (ChatStorage.getCurrentBranchId()) {
+                        response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getCurrentBranchId()}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
                     }
                     else {
+                        response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getChat().chatId}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
+                   
+                    }
+                    if (!response.error && response.messages.length) {
+                        Message.renderMessages(response.messages);
+                    }
+                    else if (response.error) {
                         return;
                     }
+
+                    if (!response.messages.length) {
+                        break;
+                    }
                 }
-                message = chatMessages.querySelector(`[id='${messageId}']`)!;
+                if (!ChatStorage.getCurrentBranchId()) {
+                    message = chatMessages.querySelector(`[id='${messageId}']`)!;
+                    message.scrollIntoView({ block: "center", behavior: "smooth" });
+                    return;
+                }
+                
+                message = document.querySelector("#chat-branch")!.querySelector("#chat__messages")!.querySelector(`[id='${messageId}']`)!;
+                console.log(message, messageId)
                 message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
 
