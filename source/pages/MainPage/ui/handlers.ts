@@ -2,9 +2,9 @@ import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { TMessageWS } from "@/shared/api/types";
 
 export const renderMessage = async (message: TMessageWS) => {
-  if (message.chatId !== ChatStorage.getChat().chatId) {
+  if (message.chatId !== ChatStorage.getChat().chatId && message.parent_chat_id !== ChatStorage.getChat().chatId) {
     return;
   }
-
+  
   ChatStorage.getChatMessageInstance()?.renderNewMessage(message);
 };

@@ -54,7 +54,6 @@ export class ChatCard {
         if (chatCard) {
           chatCard.classList.add('active');
         }
-
         this.#chat.render(chat);
       }
     });

@@ -117,3 +117,52 @@ $chat-padding-top: var(--chat-padding-top);
     padding-left: 20px;
   }
 }
+
+@mixin chat {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+  
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+@mixin chat-header {
+  background: $background-shadow-50;
+  width: 100%;
+  height: $chat-header-height;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@mixin subscribe-start-btn {
+  margin-bottom: 15px;
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+
+  color: $text-over-primary;
+  font-size: 16px;
+  font-family: var(--main-font-family);
+  background-color: var(--secondary);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}

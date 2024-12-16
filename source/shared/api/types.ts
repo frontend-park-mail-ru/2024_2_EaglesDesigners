@@ -166,3 +166,7 @@ export interface searchChatsResponse {
 export interface searchMessagesResponse {
   messages: TChatMessage[];
 }
+
+export interface createBranchResponse {
+  id : string;
+}

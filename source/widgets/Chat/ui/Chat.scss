@@ -50,33 +50,22 @@ textarea {
 }
 
 .chat {
-  width: 100%;
-  min-width: 0;
-  flex: 1;
-  min-height: 0;
-  
-  box-sizing: border-box;
+  @include chat();
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+.chat-branch {
+  @include chat();
+}
+
+.start-branch{
+
+  &__button {
+    @include subscribe-start-btn(); 
+  }
 }
 
 .header {
-  background: $background-shadow-50;
-  width: 100%;
-  height: $chat-header-height;
-
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-sizing: border-box;
-
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  @include chat-header();
 
   .chat-back-button-img {
     margin-left: 12px;
@@ -127,10 +116,10 @@ textarea {
   width: 100%;
   max-width: $messages-container-max-width;
   flex: 1;
+  gap: 5px;
 
   display: flex;
   flex-direction: column-reverse;
-  gap: 5px;
 
   overflow: scroll;
   overflow-x: hidden;
@@ -304,11 +293,22 @@ textarea {
 
 .subscribe-channel {
   &__button {
-    margin-bottom: 15px;
-    max-width: 600px;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include subscribe-start-btn(); 
+  }
+}
+
+.header-branch {
+  @include chat-header();
+  cursor: default;
+
+  &__img-cancel {
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  &__span {
+    @include font-settings("Inter", 500, 20px, $text-over-primary);
   }
 }

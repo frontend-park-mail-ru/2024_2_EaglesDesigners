@@ -19,9 +19,11 @@ $messages-container-width: 700px;
 }
 
 .message {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  border-radius: 10px;
 
   &__body {
     max-width: 500px;
@@ -104,6 +106,7 @@ $messages-container-width: 700px;
         border-left: 7px solid $secondary;
       }
     }
+    
   }
 
   &.left-side {

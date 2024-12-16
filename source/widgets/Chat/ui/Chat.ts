@@ -34,6 +34,7 @@ export class Chat {
    */
   async render(chat: TChat) {
     this.#chatInfo.innerHTML = "";
+
     if (ChatStorage.getChat().chatId) {
       const currentChat = document.querySelector(`[id='${ChatStorage.getChat().chatId}']`)!;
       if (currentChat) {
@@ -46,6 +47,7 @@ export class Chat {
       
     }
     ChatStorage.setChat(chat);
+    ChatStorage.setCurrentBranchId("");
     const avatar = chat.avatarPath
         ? serverHost + chat.avatarPath
         : "/assets/image/default-avatar.svg";
@@ -101,7 +103,7 @@ export class Chat {
     ChatStorage.setChatMessageInstance(chatMessage);
 
     
-    const textArea = this.#parent.querySelector("textarea")!;
+    const textArea : HTMLTextAreaElement = this.#parent.querySelector("#textarea")!;
     if (textArea) {
       textArea.addEventListener("input", function () {
         this.style.height = "";
@@ -110,7 +112,7 @@ export class Chat {
     }
     
 
-    const sendInputMessage = async () => {
+    const sendInputMessage = async (textArea : HTMLTextAreaElement, branch : boolean) => {
       const messageText = textArea.value.trim();
       textArea.value = "";
 
@@ -141,8 +143,11 @@ export class Chat {
           
           return;
         }
-
-        SendMessage(chat.chatId, messageText);
+        if (!branch) {
+          SendMessage(chat.chatId, messageText);
+          return;
+        }
+        SendMessage(ChatStorage.getCurrentBranchId(), messageText);
       }
 
       textArea.style.height = "";
@@ -151,7 +156,10 @@ export class Chat {
     const KeyPressHandler = (event: KeyboardEvent) => {
       if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
-        sendInputMessage();
+        if (event.target instanceof HTMLTextAreaElement) {
+          sendInputMessage(event.target, false);
+        }
+        
       }
     };
 
@@ -159,10 +167,14 @@ export class Chat {
       textArea.addEventListener("keypress", KeyPressHandler);
     }
     
+    const handleSendChatMessage = () => {
+      sendInputMessage(textArea, false);
+    };
+
     if (document.querySelector("#chat__input-send-btn")!) {
         document
         .querySelector("#chat__input-send-btn")!
-        .addEventListener("click", sendInputMessage);
+        .addEventListener("click", handleSendChatMessage);
     }
     
 
@@ -263,6 +275,103 @@ export class Chat {
     });
 
     document.querySelector<HTMLElement>('#widget-import')!.style.left = '-100vw'; 
-    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw'; 
+    document.querySelector<HTMLElement>('#chat-info-container')!.style.right = '-100vw';
+    
+    const cancelBranchBtn = this.#parent.querySelector("#cancel-branch")!;
+
+    const chatWidget : HTMLElement = this.#parent.querySelector("#chat")!;
+    const branchWidget : HTMLElement = this.#parent.querySelector("#chat-branch")!;
+    const handleCancelBranch = () => {
+      chatWidget.classList.remove("hidden");
+      branchWidget.classList.add("hidden");
+
+      ChatStorage.getChatMessageInstance()?.setParent(chatWidget.querySelector('#chat__messages')!);
+      ChatStorage.setCurrentBranchId('');
+    };
+
+    cancelBranchBtn.addEventListener("click", handleCancelBranch);
+
+
+    const branchImageMessageSearch = document.getElementById("branch-search-messages")!;
+    const branchChatInfo = document.getElementById("branch-chat-info")!;
+    const branchSearchContainer : HTMLInputElement = this.#parent.querySelector("#branch-search-input")!;
+
+    const inputBranchSearch : HTMLInputElement = this.#parent.querySelector("#branch-input-search")!;
+    const handleSearchInBranch = async (event : Event) => {
+      event.stopPropagation();
+      branchSearchContainer.classList.remove('hidden');
+      branchChatInfo.classList.add('hidden');
+      branchImageMessageSearch.classList.add('hidden');
+      const messagesSearchResult : HTMLElement = this.#parent.querySelector('#branch-search-results-messages')!;
+      messagesSearchResult.innerHTML = '';
+      
+
+      const messageText = inputBranchSearch.value;
+      if (messageText !== "") {
+        const response = await API.get<searchMessagesResponse>(`/chat/${ChatStorage.getCurrentBranchId()}/messages/search?search_query=${messageText}`);
+        messagesSearchResult.innerHTML = '';
+        if (!response.error) {
+          if (response.messages) {
+            const searchMessages = new SearchedMessageCard(messagesSearchResult);
+            response.messages.forEach(async (element) => {
+              const profileUser = ChatStorage.getUsers();
+              const profile = profileUser.find((elem) => {
+                return element.authorID === elem.id;
+              });
+              if (profile) {
+                searchMessages.render(element, profile.avatarURL, profile.name, messagesImport, chatMessage);
+              }
+              else {
+                API.get<ProfileResponse>(`/profile/${element.authorID}`)
+                  .then((res) => {
+                    searchMessages.render(element, res.avatarURL, res.name, messagesImport, chatMessage);
+                  });
+              }
+            });
+          }
+        }
+      }
+      else {
+        messagesSearchResult.innerHTML = '';
+      }
+    };
+
+    const branchSearchMessage = this.#parent.querySelector("#branch-search-messages")!;
+    branchSearchMessage.addEventListener("click", handleSearchInBranch);
+    const debouncedBranchHandler = debounce(handleSearchInBranch, 250);
+    inputBranchSearch.addEventListener("input", debouncedBranchHandler);
+    inputBranchSearch.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+
+    const cancelBranchSearch = document.getElementById("branch-cancel-search")!;
+    const handleCancelBranchSearch = () => {
+      branchSearchContainer.classList.add('hidden');
+      branchChatInfo.classList.remove('hidden');
+      branchImageMessageSearch.classList.remove('hidden');
+    };
+    cancelBranchSearch.addEventListener("click", handleCancelBranchSearch);
+
+    const KeyPressBranchHandler = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        if (event.target instanceof HTMLTextAreaElement) {
+          sendInputMessage(event.target, true);
+        }
+        
+      }
+    };
+
+    const branchTextArea : HTMLElement = this.#parent.querySelector("#branch-textarea")!;
+    if (branchTextArea) {
+      branchTextArea.addEventListener("input", function () {
+        this.style.height = "";
+        this.style.height = this.scrollHeight + "px";
+      });
+    }
+    if (branchTextArea) {
+      branchTextArea.addEventListener("keypress", KeyPressBranchHandler);
+    }
   }
 }
