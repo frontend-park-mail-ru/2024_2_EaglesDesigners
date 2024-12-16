@@ -46,6 +46,13 @@ $messages-container-width: 700px;
     .contents {
       display: inline;
 
+      .message-sticker {
+        width: 200px;
+        height: 200px;
+
+        display: block;
+      }
+
       &__photos-wrapper {
         margin-bottom: 6px;
         

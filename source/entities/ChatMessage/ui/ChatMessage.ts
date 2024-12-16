@@ -77,7 +77,7 @@ export class ChatMessage {
         };
 
         this.#oldestMessage = messageWithFlags;
-      if (message.message_type === "default" || message.message_type === "with_payload") {
+      if (message.message_type === "default" || message.message_type === "with_payload" || message.message_type === "sticker") {
         
 
         if (!this.#newestMessage) {
@@ -112,7 +112,8 @@ export class ChatMessage {
               avatarURL: avatarURL,
               authorName: user?.name,
               photos: photos,
-            files: files
+              files: files,
+              sticker: message.sticker ? `${serverHost}${message.sticker}` : "",
           },
           }),
         );
@@ -137,8 +138,7 @@ export class ChatMessage {
     if(placeholder) {
       placeholder.remove();
     }
-
-    if (message.text) {
+    if (message.text || message.sticker) {
       if (
         this.#newestMessage?.last &&
         this.#newestMessage.authorID === message.authorID
@@ -170,7 +170,6 @@ export class ChatMessage {
         url: `${serverHost}${photo.url}`
       })) : [];
 
-      console.log('files', message);
       const extentionRegex = /\.([^.]+)$/;
       const nameRegex = /^(.+)\.[^.]+$/;
 
@@ -190,7 +189,8 @@ export class ChatMessage {
             avatarURL: avatarURL,
             authorName: user?.name,
             photos: photos,
-            files: files
+            files: files,
+            sticker: message.sticker ? `${serverHost}${message.sticker}` : "",
           },
         }),
       );

@@ -1,4 +1,4 @@
-export type  MessageType = "informational" | "default" | "with_payload";
+export type  MessageType = "informational" | "default" | "with_payload" | "sticker";
 
 export interface TChatMessage {
   authorID: string;
@@ -10,7 +10,13 @@ export interface TChatMessage {
   text: string;
   photos: TChatMessageAttachment[];
   files: TChatMessageAttachment[];
+  sticker: string;
   message_type: MessageType;
+}
+
+export interface TStickerPack {
+  photo: string;
+  id: string;
 }
 
 export interface TChatMessageAttachment {

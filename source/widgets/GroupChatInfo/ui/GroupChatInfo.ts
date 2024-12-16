@@ -73,7 +73,6 @@ export class GroupChatInfo {
 
     const extentionRegex = /\.([^.]+)$/;
     const nameRegex = /^(.+)\.[^.]+$/;
-    console.log('ss', ChatUsers);
       
     this.#parent.innerHTML = GroupChatInfoTemplate({
       chat: {

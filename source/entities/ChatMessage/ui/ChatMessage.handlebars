@@ -11,35 +11,39 @@
       {{message.authorName}}
     </span>
     <div class="message__contents contents">
-      {{#if message.photos}}
-        <div class="contents__photos-wrapper">
-          {{#each message.photos}}
-            <a href={{url}}>
-             <img class="message-photo" src={{url}} />
-            </a>
-          {{/each}}
-        </div>
-      {{/if}}
-      <span class="contents__text">
-        {{message.text}}
-      </span>
-      {{#if message.files}}
-        <div class="contents__files-wrapper">
-          {{#each message.files}}
-            <a class="message-file" href={{url}}>
-              <div class="message-file__upper-row">
-                <img class="message-file__icon" src="/assets/image/attached-file.svg" />
-                <div class="message-file__info">
-                  <div class="message-file__meta">
-                    <span class="message-file__extention">{{extention}}</span>
-                    <span class="message-file__size">{{size}}</span>
-                  </div>  
-                  <span class="message-file__name">{{name}}</span>
+      {{#if message.sticker}}
+        <img class="message-sticker" src={{message.sticker}} />
+      {{else}}
+        {{#if message.photos}}
+          <div class="contents__photos-wrapper">
+            {{#each message.photos}}
+              <a href={{url}}>
+              <img class="message-photo" src={{url}} />
+              </a>
+            {{/each}}
+          </div>
+        {{/if}}
+        <span class="contents__text">
+          {{message.text}}
+        </span>
+        {{#if message.files}}
+          <div class="contents__files-wrapper">
+            {{#each message.files}}
+              <a class="message-file" href={{url}}>
+                <div class="message-file__upper-row">
+                  <img class="message-file__icon" src="/assets/image/attached-file.svg" />
+                  <div class="message-file__info">
+                    <div class="message-file__meta">
+                      <span class="message-file__extention">{{extention}}</span>
+                      <span class="message-file__size">{{size}}</span>
+                    </div>  
+                    <span class="message-file__name">{{name}}</span>
+                  </div>
                 </div>
-              </div>
-            </a>
-          {{/each}}
-        </div>
+              </a>
+            {{/each}}
+          </div>
+        {{/if}}
       {{/if}}
     </div>
     <span class="message__body__meta">
