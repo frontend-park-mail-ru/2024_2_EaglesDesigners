@@ -4,12 +4,13 @@ import "./GroupChatInfo.scss";
 import { TChat } from "@/entities/Chat";
 import { UserAddChat } from "@/widgets/UserAddChat";
 import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
-import { UsersIdResponse } from "@/shared/api/types";
+import { EmptyRequest, NotificationResponse, UsersIdResponse } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 
 export class GroupChatInfo {
   #parent;
@@ -130,5 +131,19 @@ export class GroupChatInfo {
     
     this.#parent.style.right = '0';
 
+    const notificationToggle = this.#parent.querySelector("#notification-toggle")!;
+    const notificationCheckbox : HTMLInputElement = this.#parent.querySelector("#toggle")!;
+    if (ChatStorage.getChat().send_notifications) {
+      notificationCheckbox.checked = true;
+      notificationToggle.checked = true;
+    }
+
+
+    const handleNotification = async () => {
+      const responseNotification : boolean = await API.post<NotificationResponse, EmptyRequest>(`/chat/${ChatStorage.getChat().chatId}/notifications/${!notificationCheckbox.checked}`, {});
+      ChatStorage.getChat().send_notifications = responseNotification;
+    };
+
+    notificationToggle.addEventListener("click", handleNotification);
   }
 }

@@ -19,6 +19,16 @@
     </div>
     <span class="group-info-header__span-group-name">{{chat.chatName}}</span>
     <span class="group-info-header__span">{{#if chatType.channel}}Канал{{/if}}{{#if chatType.group}}Группа{{/if}}</span>
+    <div class="notifications group-notifications">
+        <span class="notifications__span">Уведомления</span>
+        <label class="Toggle" for="toggle">
+        <input type="checkbox" name="toggle" id="toggle" class="Toggle__input hidden" />
+
+        <span id="notification-toggle" class="Toggle__display">
+          
+        </span>
+      </label>
+      </div>
   </div>
   <div class="group-content">
     <div class="group-content-header">

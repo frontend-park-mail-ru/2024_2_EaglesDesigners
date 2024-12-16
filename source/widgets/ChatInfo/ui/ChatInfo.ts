@@ -7,6 +7,7 @@ import { TChat } from "@/entities/Chat";
 import { ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
 import * as moment from "moment";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 
 export class ChatInfo {
   #parent;
@@ -59,5 +60,19 @@ export class ChatInfo {
     });
 
     this.#parent.style.right = '0';
+
+    const notificationToggle = this.#parent.querySelector("#notification-toggle")!;
+    const notificationCheckbox : HTMLInputElement = this.#parent.querySelector("#toggle")!;
+    if (ChatStorage.getChat().send_notifications) {
+      notificationCheckbox.checked = true;
+      notificationToggle.checked = true;
+    }
+
+
+    const handleNotification = async () => {
+      await API.post(`/chat/${ChatStorage.getChat().chatId}/notifications/${!notificationCheckbox.checked}`, {});
+    };
+
+    notificationToggle.addEventListener("click", handleNotification);
   }
 }

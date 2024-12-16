@@ -24,6 +24,7 @@ class ChatStore {
         text: "",
       },
       countOfUsers: 0,
+      send_notification: true,
     };
     this.#role = "";
     this.#users = [];

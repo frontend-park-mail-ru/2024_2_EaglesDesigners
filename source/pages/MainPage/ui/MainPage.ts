@@ -10,8 +10,9 @@ import { ProfileForm } from "@/widgets/ProfileForm";
 import { ContactsList } from "@/widgets/ContactsList";
 import { wsConn } from "@/shared/api/ws";
 import { TChat } from "@/entities/Chat";
-import { renderMessage } from "./handlers";
+import { newChat, renderMessage } from "./handlers";
 import { serverHost } from "@/app/config";
+import { UserNotification } from "@/feature/Notification";
 
 /**
  * Mainpage class provides functions for rendering main page
@@ -38,6 +39,8 @@ export class MainPage extends View {
 
     document.body.id = 'main';
     parent.innerHTML = MainPageTemplate({ user, avatar });
+
+    UserNotification.render();
 
     const chatUserInfo : HTMLElement = parent.querySelector("#chat-info-container")!;
     const chatListParent : HTMLElement = parent.querySelector("#widget-import")!;
@@ -90,5 +93,6 @@ export class MainPage extends View {
     homeButton.addEventListener("click", handleHome);
 
     wsConn.subscribe("newMessage", renderMessage);
+    wsConn.subscribe("newChat", newChat);
   }
 }
