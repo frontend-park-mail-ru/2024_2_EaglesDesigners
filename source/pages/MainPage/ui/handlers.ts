@@ -7,7 +7,6 @@ import { ChatResponse, ChatsResponse, NewChatWS, ProfileResponse, TMessageWS } f
 import { Chat } from "@/widgets/Chat";
 
 export const renderMessage = async (message: TMessageWS) => {
-  console.log("ya tut")
   if (message.chatId !== ChatStorage.getChat().chatId && message.parent_chat_id !== ChatStorage.getChat().chatId) {
     const responseProfile = await API.get<ProfileResponse>(`/profile/${message.authorID}`);
     if (!responseProfile.error) {
@@ -34,7 +33,6 @@ export const renderMessage = async (message: TMessageWS) => {
         if (newChatResponse && newChatResponse.send_notifications) {
           chatCard.render(notificationChat, true, newChatResponse);
           UserNotification.show();
-          console.log("ya tut")
         }
         
       }
@@ -61,8 +59,6 @@ export const newChat = async (chatInfo: NewChatWS) => {
     const newChatResponse = responseChats.chats.find((elem) => {
       return elem.chatId === chatInfo.chatId;
     });
-    console.log(chatInfo)
-    console.log(newChatResponse);
     const chatUserInfo : HTMLElement = document.querySelector("#chat-info-container")!;
 
     const chatParent = document.querySelector("#chat-content")!;

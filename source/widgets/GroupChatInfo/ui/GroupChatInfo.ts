@@ -142,7 +142,6 @@ export class GroupChatInfo {
     const handleNotification = async () => {
       const responseNotification : boolean = await API.post<NotificationResponse, EmptyRequest>(`/chat/${ChatStorage.getChat().chatId}/notifications/${!notificationCheckbox.checked}`, {});
       ChatStorage.getChat().send_notifications = responseNotification;
-      console.log(responseNotification, ChatStorage.getChat()); 
     };
 
     notificationToggle.addEventListener("click", handleNotification);

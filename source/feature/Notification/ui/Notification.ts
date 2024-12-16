@@ -22,7 +22,6 @@ class Notification {
 
     show() {
         const notification : HTMLElement = this.#parent.querySelector("#notification")!;
-        console.log(notification)
         notification.classList.remove("hide");
 
         setTimeout(() => {
