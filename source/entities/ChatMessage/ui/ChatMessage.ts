@@ -10,7 +10,7 @@ import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
-import { ChatMessagesResponse } from "@/shared/api/types";
+import { ChatMessagesResponse, createBranchResponse, EmptyRequest } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 import { formatBytes } from "@/shared/helpers/formatBytes";
 import { InfoMessage } from "@/entities/InfoMessage/ui/InfoMessage";
@@ -48,19 +48,15 @@ export class ChatMessage {
     });
   }
 
-  async renderMessages(messages: TChatMessage[]) {
-    const placeholder= this.#parent.querySelector('#msg-placeholder');
-    if(placeholder) {
-      placeholder.remove();
-    }
-
-    if (
+  async renderMessages(messages: TChatMessage[], chatIsNotBranch = true) {
+    if ( 
+      this.#parent.innerHTML &&
       this.#oldestMessage?.first &&
       this.#oldestMessage.authorID === messages[0].authorID
     ) {
       this.#parent.lastElementChild!.classList.remove("first-message");
     }
-    
+
     for (const [index, message] of messages.entries()) {
       const isFirst =
           index === messages.length - 1 ||
@@ -115,6 +111,7 @@ export class ChatMessage {
               files: files,
               sticker: message.sticker ? `${serverHost}${message.sticker}` : "",
           },
+            chatIsNotBranch
           }),
         );
         if (message.isRedacted) {
@@ -125,7 +122,7 @@ export class ChatMessage {
         }
         
         const currentMessageId = this.#parent.lastElementChild!.id;
-        messageHandler(currentMessageId, messages);
+        messageHandler(currentMessageId, messages, this);
       }
       if (message.message_type === "informational") {
         const infoMessage = new InfoMessage(this.#parent);
@@ -133,7 +130,7 @@ export class ChatMessage {
       }
     }
   }
-  async renderNewMessage(message: TChatMessage) {
+  async renderNewMessage(message: TChatMessage, chatIsNotBranch = true) {
     const placeholder= this.#parent.querySelector('#msg-placeholder');
     if(placeholder) {
       placeholder.remove();
@@ -180,6 +177,9 @@ export class ChatMessage {
         size: formatBytes(file.size)
       })) : [];
     
+      if (ChatStorage.getCurrentBranchId()) {
+        chatIsNotBranch = false;
+      }  
       this.#parent.insertAdjacentHTML(
         "afterbegin",
         ChatMessageTemplate({
@@ -192,9 +192,10 @@ export class ChatMessage {
             files: files,
             sticker: message.sticker ? `${serverHost}${message.sticker}` : "",
           },
+          chatIsNotBranch
         }),
       );
-      
+
       if (message.isRedacted) {
         const redactedMessage = this.#parent.querySelector("#redacted")!;
         if (redactedMessage) {
@@ -206,13 +207,17 @@ export class ChatMessage {
       const handleMessageClick = (event : MouseEvent) => {
         
         const messageId = newMessageElement.id;
-        const message = document.getElementById(messageId)!;
+        const messageInChat = document.getElementById(messageId)!;
         if (message) {
-          const menu = message.querySelector("#menu-context")!;
-          const messageText = message.querySelector(".message__body__text")?.textContent;
+          const menu = messageInChat.querySelector("#menu-context")!;
+          const messageText = messageInChat.querySelector(".message__body__text")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            messageMenu.render(messageId, messageText, event.x-100, event.y-25);
+            if (ChatStorage.getCurrentBranchId()) {
+              messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, true);
+              return;
+            }
+            messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, false);
           }
         }
       };
@@ -221,5 +226,12 @@ export class ChatMessage {
       newMessageElement.addEventListener("contextmenu", handleMessageClick);
     }
   }
-}
 
+  getParent() {
+    return this.#parent;
+  }
+  
+  setParent(newParent : HTMLElement) {
+    this.#parent = newParent;
+  }
+}

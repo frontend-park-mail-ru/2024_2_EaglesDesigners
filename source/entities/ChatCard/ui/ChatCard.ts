@@ -5,6 +5,7 @@ import { Chat } from "@/widgets/Chat";
 import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { getTimeString } from "@/shared/helpers/getTimeString";
+import { UserNotification } from "@/feature/Notification";
 
 export class ChatCard {
   #parent;
@@ -15,7 +16,10 @@ export class ChatCard {
     this.#chat = chat;
   }
 
-  render(chat: TChat) {
+  async render(chat: TChat, notificate = false, notificationChat : TChat | null = null) {
+    if (notificationChat) {
+      chat = notificationChat;
+    }
     let avatar;
     if (chat.avatarPath !== "") {
       avatar = serverHost + chat.avatarPath;
@@ -54,7 +58,9 @@ export class ChatCard {
         if (chatCard) {
           chatCard.classList.add('active');
         }
-
+        if (notificate) {
+          UserNotification.hide();
+        }
         this.#chat.render(chat);
       }
     });

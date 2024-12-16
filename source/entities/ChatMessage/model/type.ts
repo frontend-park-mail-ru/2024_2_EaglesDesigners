@@ -12,6 +12,7 @@ export interface TChatMessage {
   files: TChatMessageAttachment[];
   sticker: string;
   message_type: MessageType;
+  parent_chat_id: string;
 }
 
 export interface TStickerPack {

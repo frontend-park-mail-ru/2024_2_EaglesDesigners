@@ -1,43 +1,43 @@
 
-<div id="header-chat" class="header">
-  <img
+<div id="chat" class="chat">
+  <div id="header-chat" class="header">
+    <img
       id="chat-back-button"
       class="chat-back-button-img"
       src="/assets/image/back-btn-img.svg"
-      alt=""
+      alt="..."
     />
-  <img id="chat-avatar" class="avatar" src="{{avatar}}" />
-  <div id="chat-info" class="info">
-    <span id="chat-name" class="info__chat-name">
-      {{chat.chatName}}
-    </span>
-    <span class="info__chat-status">
-      {{chat.chatType}}
-    </span>
-    
-  </div>
-  <div id="search-image-container" class="search-messages">
-    <img id="search-messages" class="search-messages__img" src="/assets/image/search-icon.svg" alt="">
-  </div>
-
-  <div id="message-search-input" class="input-search hidden" >
-    <div class="search-results">
-      <input id="input-search" class="input-search__input" type="text" name="text" placeholder="Поиск">
-      <div id="search-results-messages" class="search-results-messages">
-        
-      </div>
+    <img id="chat-avatar" class="avatar" src="{{avatar}}" />
+    <div id="chat-info" class="info">
+      <span id="chat-name" class="info__chat-name">
+        {{chat.chatName}}
+      </span>
+      <span class="info__chat-status">
+        {{chat.chatType}}
+      </span>
+      
+    </div>
+    <div id="search-image-container" class="search-messages">
+      <img id="search-messages" class="search-messages__img" src="/assets/image/search-icon.svg" alt="">
     </div>
 
-    <img id="cancel-search" class="search-cancel__img" src="/assets/image/cancel.svg" alt="">  
+    <div id="message-search-input" class="input-search hidden" >
+      <div class="search-results">
+        <input id="input-search" class="input-search__input" type="text" name="text" placeholder="Поиск">
+        <div id="search-results-messages" class="search-results-messages">
+          
+        </div>
+      </div>
+
+      <img id="cancel-search" class="search-cancel__img" src="/assets/image/cancel.svg" alt="">  
+      
+    </div>
+    
     
   </div>
-  
-  
-</div>
-<div class="chat">
   <div class="messages" id="chat__messages">
-    <span class="chat-messages-placeholder" id="msg-placeholder">Напишите первое сообщение</span>
   </div>
+  
   {{#if chatType.group}}
   <div class="input">
     <div class="input-bubble">
@@ -387,4 +387,65 @@
       <button id="subscribe-channel" class="subscribe-channel__button hidden">Подписаться</button>
     {{/if}}
   {{/if}}
+</div>
+<div id="chat-branch" class="chat-branch hidden">
+  <div id="header-branch" class="header-branch">
+    <img
+        id="cancel-branch"
+        class="header-branch__img-cancel"
+        src="/assets/image/cancel.svg"
+        alt=""
+      />
+    
+    <div id="branch-chat-info" class="info">
+      <span class="header-branch__span">
+        Обсуждение
+      </span>
+      {{!-- <span id="chat-name" class="info__chat-name">
+        {{chat.chatName}}
+      </span>
+      <span class="info__chat-status">
+        {{chat.chatType}}
+      </span> --}}
+      
+    </div>
+    <div id="search-image-container" class="search-messages">
+      <img id="branch-search-messages" class="search-messages__img" src="/assets/image/search-icon.svg" alt="">
+    </div>
+
+    <div id="branch-search-input" class="input-search hidden" >
+      <div class="search-results">
+        <input id="branch-input-search" class="input-search__input" type="text" name="text" placeholder="Поиск">
+        <div id="branch-search-results-messages" class="search-results-messages">
+          
+        </div>
+      </div>
+
+      <img id="branch-cancel-search" class="search-cancel__img" src="/assets/image/cancel.svg" alt="">  
+      
+    </div>
+    
+    
+  </div>
+  <div class="messages" id="chat__messages">
+  </div>
+  {{#if userType.owner}}
+    <button id="start-branch" class="start-branch__button">Начать ветку</button>
+  {{/if}}
+  {{#if userType.admin}}
+    <button id="start-branch" class="start-branch__button">Начать ветку</button>
+  {{/if}}
+  <div id="branch-input" class="input">
+    <div class="input-bubble">
+      <img class="attach-icon" src="/assets/image/Attach.svg" />
+      <textarea
+        id="branch-textarea"
+        class="text-area"
+        placeholder="Введите сообщение"
+        maxlength="1000"
+      ></textarea>
+      <img class="emoji-icon" src="/assets/image/Emoji.svg" />
+    </div>
+    <img class="input-send-btn" id="branch__input-send-btn" src="/assets/image/Send.svg" />
+  </div>
 </div>

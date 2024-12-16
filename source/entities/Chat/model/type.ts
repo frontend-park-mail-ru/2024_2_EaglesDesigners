@@ -9,6 +9,7 @@ export interface TChat {
   chatType: ChatType;
   lastMessage: TChatMessage;
   countOfUsers: number;
+  send_notifications: boolean;
 }
 
 export interface TNewChat {

@@ -7,6 +7,13 @@ import { TStickerPack } from "@/entities/ChatMessage/model/type";
 
 export type TMessageWS = TChatMessage;
 
+export type NewChatWS = NewChat;
+
+export interface NewChat {
+  chatId : string;
+  users : string[];
+}
+
 export interface ResponseChat {
   messages: TChatMessage[];
   role: string;
@@ -67,6 +74,10 @@ export interface AddUserResponse {
 export interface ChatUsersResponse {
   message: string;
   usersId: string[];
+}
+
+export interface NotificationResponse {
+  send_notifications: boolean;
 }
 
 export type EmptyRequest = {
@@ -174,4 +185,8 @@ export interface searchChatsResponse {
 
 export interface searchMessagesResponse {
   messages: TChatMessage[];
+}
+
+export interface createBranchResponse {
+  id : string;
 }

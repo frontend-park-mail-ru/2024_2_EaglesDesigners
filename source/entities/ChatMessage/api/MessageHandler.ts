@@ -1,27 +1,39 @@
 import { UserStorage } from "@/entities/User";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu";
 import { TChatMessage } from "../model/type";
+import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { ChatMessage } from "../ui/ChatMessage";
 
-export const messageHandler = (messageId : string, messages : TChatMessage[]) => {
+export const messageHandler = (messageId : string, messages : TChatMessage[], chatMessageObject : ChatMessage) => {
+    const message = document.getElementById(messageId)!;
     const handleMessageClick = (event : MouseEvent) => {
         const pickedMessage = messages.find((elem) => {
           return elem.messageId === messageId;
         });
-        if (pickedMessage?.authorID !== UserStorage.getUser().id) {
-          return;
-        }
-        const message = document.getElementById(messageId)!;
+
         if (message) {
-          const menu = document.querySelector("#menu-context")!;
+          const messageText = message.querySelector("#message-text-content")!.innerHTML; 
+          const menu = message.querySelector("#menu-context")!;
           const messageMenu = new MessageMenu(menu);
-          if (pickedMessage.text) {
-            messageMenu.render(messageId, pickedMessage.text, event.x-100, event.y-25);
-          }
+          if (messageText) {
+            if (pickedMessage?.chatId === ChatStorage.getCurrentBranchId()) {
+                messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, true);
+                return;
+            }
+
+            messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, false);
+
+           }
         }
       };
-    if (document.getElementById(messageId)) {
-        document.getElementById(messageId)!.addEventListener("contextmenu", handleMessageClick);
+
+    
+    if (message) {
+        message.addEventListener("contextmenu", handleMessageClick);
     }
+    
+        
+    
     
 };
 

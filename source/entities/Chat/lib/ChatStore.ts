@@ -6,6 +6,7 @@ class ChatStore {
   #role: string;
   #users: TChatUser[];
   #chatMessageInstance: ChatMessage | null;
+  #currentBranch : string;
 
   constructor() {
     this.#chat = {
@@ -23,10 +24,12 @@ class ChatStore {
         text: "",
       },
       countOfUsers: 0,
+      send_notification: true,
     };
     this.#role = "";
     this.#users = [];
     this.#chatMessageInstance = null;
+    this.#currentBranch = "";
   }
 
   setChat(chat: TChat) {
@@ -59,6 +62,14 @@ class ChatStore {
 
   getChatMessageInstance() {
     return this.#chatMessageInstance;
+  }
+
+  setCurrentBranchId(branchId : string) {
+    this.#currentBranch = branchId;
+  }
+
+  getCurrentBranchId() {
+    return this.#currentBranch;
   }
 }
 
