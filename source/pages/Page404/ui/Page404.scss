@@ -1,7 +1,10 @@
+$background: var(--background);
+
 .page-404 {
+  padding-top: 20%;
   align-items: center;
   height: 1080px;
-  margin-top: 20%;
+  background-color: $background;
 }
 
 .page-404__span {
