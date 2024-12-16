@@ -67,6 +67,10 @@ export interface ChatUsersResponse {
   usersId: string[];
 }
 
+export interface NotificationResponse {
+  send_notifications: boolean;
+}
+
 export type EmptyRequest = {
   [K in string]: never;
 };

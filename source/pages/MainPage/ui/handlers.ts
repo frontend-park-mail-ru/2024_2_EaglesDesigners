@@ -4,7 +4,6 @@ import { ChatCard } from "@/entities/ChatCard";
 import { UserNotification } from "@/feature/Notification";
 import { API } from "@/shared/api/api";
 import { ChatResponse, ChatsResponse, NewChatWS, ProfileResponse, TMessageWS } from "@/shared/api/types";
-import { Router } from "@/shared/Router/Router";
 import { Chat } from "@/widgets/Chat";
 
 export const renderMessage = async (message: TMessageWS) => {
@@ -19,17 +18,28 @@ export const renderMessage = async (message: TMessageWS) => {
       const contentNotification = document.getElementById("notification-content")!;
       contentNotification.innerHTML = "";
       const chatCard = new ChatCard(contentNotification, chat);
-      const notificationChat : TChat = {
-        chatId: message.chatId,
-        lastMessage: message,
-        avatarPath: responseProfile.avatarURL,
-        chatName: responseProfile.name,
+      const responseChats = await API.get<ChatsResponse>("/chats");
+      if (!responseChats.error) {
+        const newChatResponse = responseChats.chats.find((elem) => {
+          return elem.chatId === message.chatId;
+        });
+        const notificationChat : TChat = {
+          chatId: message.chatId,
+          lastMessage: message,
+          avatarPath: responseProfile.avatarURL,
+          chatName: responseProfile.name,
+          
+        };
+
+        if (newChatResponse && newChatResponse.send_notifications) {
+          chatCard.render(notificationChat, true, newChatResponse);
+          UserNotification.show();
+          console.log("ya tut")
+        }
         
-      };
+      }
       
-      chatCard.render(notificationChat);
-      UserNotification.show();
-      console.log("ya tut")
+      
     }
 
    
@@ -41,10 +51,17 @@ export const renderMessage = async (message: TMessageWS) => {
 
 export const newChat = async (chatInfo: NewChatWS) => {
   const responseChats = await API.get<ChatsResponse>("/chats");
+  const responseChatInfo = await API.get<ChatResponse>(`/chat/${chatInfo.chatId}`);
+  if (!responseChatInfo.error) {
+    if (responseChatInfo.role === "owner") {
+      return;
+    }
+  }
   if (!responseChats.error) {
     const newChatResponse = responseChats.chats.find((elem) => {
       return elem.chatId === chatInfo.chatId;
     });
+    console.log(chatInfo)
     console.log(newChatResponse);
     const chatUserInfo : HTMLElement = document.querySelector("#chat-info-container")!;
 
@@ -54,12 +71,14 @@ export const newChat = async (chatInfo: NewChatWS) => {
     contentNotification.innerHTML = "";
     const chatCard = new ChatCard(contentNotification, chat);
     
-    if (newChatResponse) {
-      chatCard.render(newChatResponse);
+    if (newChatResponse && newChatResponse.send_notifications)
+    {
+      chatCard.render(newChatResponse, true);
+
       UserNotification.show();
     }
     
   }
   return; 
-  Router.go(`/chat/${chatInfo.chatId}`);
+  
 };

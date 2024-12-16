@@ -25,9 +25,9 @@ class Notification {
         console.log(notification)
         notification.classList.remove("hide");
 
-        // setTimeout(() => {
-        //     notification.classList.add("hide");
-        // }, 3000);
+        setTimeout(() => {
+            notification.classList.add("hide");
+        }, 3000);
     }
     hide () {
         const notification : HTMLElement = this.#parent.querySelector("#notification")!;
