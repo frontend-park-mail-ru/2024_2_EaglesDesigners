@@ -257,7 +257,7 @@ export class Chat {
     ChatStorage.setChatMessageInstance(chatMessage);
 
     
-    const textArea : HTMLTextAreaElement = this.#parent.querySelector("#textarea")!;
+    const textArea : HTMLTextAreaElement = this.#parent.querySelector("#inputTextarea")!;
     if (textArea) {
       textArea.addEventListener("input", function () {
         this.style.height = "";

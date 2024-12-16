@@ -38,7 +38,7 @@ export class MessageMenu {
         const editButton = this.#parent.querySelector("#edit-message")!;
         let textArea : HTMLTextAreaElement;
         if (branch === false) {
-          textArea = document.querySelector("#textarea")!;
+          textArea = document.querySelector("#inputTextarea")!;
         }
         else {
           textArea = document.querySelector('#branch-textarea')!;

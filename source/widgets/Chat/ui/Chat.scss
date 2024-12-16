@@ -521,3 +521,28 @@ textarea {
     @include font-settings("Inter", 500, 20px, $text-over-primary);
   }
 }
+
+.branch-input {
+  width: 100%;
+  max-width: $messages-container-max-width;
+
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.branch-input-bubble {
+  background: $primary-shadow-25;
+  border-radius: 25px;
+
+  flex: 1;
+
+  box-sizing: border-box;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 15px;
+}
