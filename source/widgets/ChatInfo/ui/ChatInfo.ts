@@ -6,7 +6,6 @@ import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
 import { ChatResponse, ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
-import * as moment from "moment";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { formatBytes } from "@/shared/helpers/formatBytes";
 
@@ -28,9 +27,8 @@ export class ChatInfo {
       const profileUser = await API.get<ProfileResponse>(`/profile/${user.id}`);
       let birthdate;
       if (profileUser.birthdate) {
-        birthdate= moment(profileUser.birthdate)
-        .utc()
-        .format("DD.MM.YYYY");
+        const bhd = new Date(profileUser.birthdate);
+        birthdate = `${bhd.getUTCFullYear()}-${bhd.getUTCMonth()+1}-${bhd.getUTCDate()}`;
       }
        
       if (profileUser.avatarURL) {
