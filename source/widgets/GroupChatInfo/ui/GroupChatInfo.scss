@@ -5,7 +5,16 @@ $secondary: var(--secondary);
 $accent: var(--accent);
 
 $text-over-primary: var(--text-over-primary);
+$text-over-primary-shadow-30: var(--text-over-primary-shadow-30);
+
 $scroll-bar-color: var(--scroll-bar-color);
+
+@mixin font-settings($font-family, $font-weight, $font-size, $color) {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $color;
+}
 
 .group-info {
   flex: 1;
@@ -117,6 +126,125 @@ $scroll-bar-color: var(--scroll-bar-color);
   font-family: var(--main-font-family);
   font-size: 14px;
   opacity: 0.4;
+}
+
+.content {
+  &-buttons {
+    display: flex;
+  }
+  &-button {
+    padding: 5px;
+    box-sizing: border-box;
+
+    cursor: pointer;
+    &__name {
+      @include font-settings("Inter", 200, 16px, $accent);
+    }
+  }
+  &-carousel {
+    overflow: hidden;
+  }
+  &-tabs {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  &-tab {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+  }
+}
+
+.photos-list {
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  
+  .message-photo {
+    width: 100px;
+    height: 100px;
+
+    object-fit: cover;
+    transform: translate3d(0, 0, 1px);        
+    }
+}
+
+.files-list {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  .message-file {
+    box-sizing: border-box;
+    padding: 10px;
+    
+    text-decoration: none;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+  
+    &__upper-row {
+      display: flex;
+      gap: 2px;
+    }
+  
+    &__icon {
+      width: 36px;
+      height: 36px;
+    }
+  
+    &__info {
+      flex: 1;
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+  
+    &__extention {
+      @include font-settings("Inter", 500, 14px, $text-over-primary);
+  
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    &__size {
+      @include font-settings("Inter", 500, 12px, $text-over-primary);
+    }
+  
+    &__name {
+      @include font-settings("Inter", 500, 12px, $text-over-primary);
+  
+      display: block;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+  
+      overflow: hidden;
+      line-break: anywhere;
+    }
+  }
 }
 
 .users-list {

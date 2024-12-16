@@ -43,8 +43,56 @@
     <div class="horizontal-line-container">
       <hr class="horizontal-line" />
     </div>
-    <div id="users-list" class="users-list">
+    <div class="content-buttons">
+      {{#if chatType.group}}
+        <div class="content-button" id="group-content-users">
+          <span class="content-button__name">
+            Участники
+          </span>
+        </div>
+      {{/if}}
+      <div class="content-button" id="group-content-photos">
+        <span class="content-button__name">
+          Фото
+        </span>
+      </div>
+      <div class="content-button" id="group-content-files">
+        <span class="content-button__name">
+          Файлы
+        </span>
+      </div>
+    </div>
+    <div class="content-carousel">
+      <div class="content-tabs" id="content-tabs">
+        {{#if chatType.group}}
+        <div id="users-list" class="content-tab users-list">
 
+        </div>
+        {{/if}}
+        <div class="content-tab photos-list" id="photos-list">
+          {{#each chat.photos}}
+            <a href={{url}}>
+              <img class="message-photo" src={{url}} />
+            </a>
+          {{/each}}
+        </div>
+        <div class="content-tab files-list" id="files-list">
+          {{#each chat.files}}
+            <a class="message-file" href={{url}}>
+              <div class="message-file__upper-row">
+                <img class="message-file__icon" src="/assets/image/attached-file.svg" />
+                <div class="message-file__info">
+                  <div class="message-file__meta">
+                    <span class="message-file__extention">{{extention}}</span>
+                    <span class="message-file__size">{{size}}</span>
+                  </div>  
+                  <span class="message-file__name">{{name}}</span>
+                </div>
+              </div>
+            </a>
+          {{/each}}
+        </div>
+      </div>
     </div>
   </div>
   {{#if chatType.group}}

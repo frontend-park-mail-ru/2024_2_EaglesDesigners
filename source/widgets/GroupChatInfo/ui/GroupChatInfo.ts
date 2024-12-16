@@ -4,13 +4,14 @@ import "./GroupChatInfo.scss";
 import { TChat } from "@/entities/Chat";
 import { UserAddChat } from "@/widgets/UserAddChat";
 import { GroupUpdate } from "@/widgets/GroupUpdate/ui/GroupUpdate";
-import { EmptyRequest, NotificationResponse, UsersIdResponse } from "@/shared/api/types";
+import { ChatResponse, EmptyRequest, NotificationResponse, UsersIdResponse } from "@/shared/api/types";
 import { ContactCard } from "@/entities/ContactCard/ui/ContactCard";
 import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { formatBytes } from "@/shared/helpers/formatBytes";
 
 export class GroupChatInfo {
   #parent;
@@ -44,15 +45,55 @@ export class GroupChatInfo {
     } else{
       chatType.channel = true;
     }
+    const chatInfo = await API.get<ChatResponse>(`/chat/${chat.chatId}`);
+    const extentionRegex = /\.([^.]+)$/;
+    const nameRegex = /^(.+)\.[^.]+$/;
+      
     this.#parent.innerHTML = GroupChatInfoTemplate({
-      chat,
+      chat: {
+        ...chat,
+        files: chatInfo.files ? chatInfo.files.map(file => ({
+          url: `${serverHost}${file.url}`,
+          name: nameRegex.exec(file.filename)![1],
+          extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+          size: formatBytes(file.size),
+      })) : [],
+        photos: chatInfo.photos ? chatInfo.photos.map(photo => ({
+          url: `${serverHost}${photo.url}`
+        })) : [],
+      },
       chatType,
       avatar,
       usersCount,
       userType,
     });
 
-    const chatUsersList = this.#parent.querySelector("#users-list")! || null;
+    const usersButton = this.#parent.querySelector<HTMLElement>("#group-content-users")!;
+    const photosButton = this.#parent.querySelector<HTMLElement>("#group-content-photos")!;
+    const filesButton = this.#parent.querySelector<HTMLElement>("#group-content-files")!;
+
+    const contentImport = this.#parent.querySelector<HTMLElement>("#content-tabs")!;
+
+    if(chatType.group) {
+      usersButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(0%)`;
+      });
+      photosButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(-100%)`;
+      });
+      filesButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(-200%)`;
+      });  
+    }else {
+      photosButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(0%)`;
+      });
+      filesButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(-100%)`;
+      });   
+    }
+
+    const chatUsersList = this.#parent.querySelector("#users-list")!;
     
     if (chatType.group) {
       
@@ -122,7 +163,6 @@ export class GroupChatInfo {
     if (userType.owner) {
       updateGroupButton.addEventListener("click", handleGroupUpdate);
     }
-  
 
     this.#parent.querySelector('#group-info-close-button')!.addEventListener('click', () => {
       this.#parent.style.right = '-100vw';

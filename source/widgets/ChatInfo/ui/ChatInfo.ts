@@ -4,10 +4,11 @@ import "./ChatInfo.scss";
 import { UserStorage } from "@/entities/User";
 import { serverHost } from "@/app/config";
 import { TChat } from "@/entities/Chat";
-import { ProfileResponse, UsersIdResponse } from "@/shared/api/types";
+import { ChatResponse, ProfileResponse, UsersIdResponse } from "@/shared/api/types";
 import { Router } from "@/shared/Router/Router";
 import * as moment from "moment";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
+import { formatBytes } from "@/shared/helpers/formatBytes";
 
 export class ChatInfo {
   #parent;
@@ -37,7 +38,36 @@ export class ChatInfo {
       } else {
         profileUser.avatarURL = "/assets/image/default-avatar.svg";
       }
-      this.#parent.innerHTML = ChatInfoTemplate({ profileUser, birthdate });
+
+      const chatInfo = await API.get<ChatResponse>(`/chat/${this.#chat.chatId}`);
+      const extentionRegex = /\.([^.]+)$/;
+      const nameRegex = /^(.+)\.[^.]+$/;
+
+      this.#parent.innerHTML = ChatInfoTemplate({ profileUser, birthdate,
+        chat: {
+          files: chatInfo.files ? chatInfo.files.map(file => ({
+            url: `${serverHost}${file.url}`,
+            name: nameRegex.exec(file.filename)![1],
+            extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+            size: formatBytes(file.size),
+          })) : [],
+          photos: chatInfo.photos ? chatInfo.photos.map(photo => ({
+            url: `${serverHost}${photo.url}`
+          })) : [],
+          },
+       });
+
+      const photosButton = this.#parent.querySelector<HTMLElement>("#group-content-photos")!;
+      const filesButton = this.#parent.querySelector<HTMLElement>("#group-content-files")!;
+
+      const contentImport = this.#parent.querySelector<HTMLElement>("#content-tabs")!;
+
+      photosButton?.addEventListener('click', () => {
+      contentImport.style.transform = `translateX(0%)`;
+      });
+      filesButton?.addEventListener('click', () => {
+      contentImport.style.transform = `translateX(-100%)`;
+      });   
 
       const deleteChatButton = this.#parent.querySelector("#delete-chat")!;
 

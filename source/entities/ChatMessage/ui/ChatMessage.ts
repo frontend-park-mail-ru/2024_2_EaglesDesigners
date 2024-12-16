@@ -12,8 +12,8 @@ import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
 import { ChatMessagesResponse, createBranchResponse, EmptyRequest } from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
-import { InfoMessage } from "@/entities/InfoMessage/";
-
+import { formatBytes } from "@/shared/helpers/formatBytes";
+import { InfoMessage } from "@/entities/InfoMessage/ui/InfoMessage";
 
 export class ChatMessage {
   #parent;
@@ -73,7 +73,7 @@ export class ChatMessage {
         };
 
         this.#oldestMessage = messageWithFlags;
-      if (message.message_type === "default") {
+      if (message.message_type === "default" || message.message_type === "with_payload" || message.message_type === "sticker") {
         
 
         if (!this.#newestMessage) {
@@ -84,7 +84,21 @@ export class ChatMessage {
         const avatarURL = user.avatarURL
           ? serverHost + user.avatarURL
           : "/assets/image/default-avatar.svg";
-        
+      
+      const photos = message.photos ? message.photos.map(photo => ({
+        url: `${serverHost}${photo.url}`
+      })) : [];
+
+      const extentionRegex = /\.([^.]+)$/;
+      const nameRegex = /^(.+)\.[^.]+$/;
+
+      const files = message.files ? message.files.map(file => ({
+        url: `${serverHost}${file.url}`,
+        name: nameRegex.exec(file.filename)![1],
+        extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+        size: formatBytes(file.size)
+      })) : [];
+
         this.#parent.insertAdjacentHTML(
           "beforeend",
           ChatMessageTemplate({
@@ -93,7 +107,10 @@ export class ChatMessage {
               datetime: getTimeString(messageWithFlags.datetime),
               avatarURL: avatarURL,
               authorName: user?.name,
-            },
+              photos: photos,
+              files: files,
+              sticker: message.sticker ? `${serverHost}${message.sticker}` : "",
+          },
             chatIsNotBranch
           }),
         );
@@ -114,7 +131,11 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage, chatIsNotBranch = true) {
-    if (message.text) {
+    const placeholder= this.#parent.querySelector('#msg-placeholder');
+    if(placeholder) {
+      placeholder.remove();
+    }
+    if (message.text || message.sticker) {
       if (
         this.#newestMessage?.last &&
         this.#newestMessage.authorID === message.authorID
@@ -142,6 +163,20 @@ export class ChatMessage {
         ? serverHost + user.avatarURL
         : "/assets/image/default-avatar.svg";
 
+      const photos = message.photos ? message.photos.map(photo => ({
+        url: `${serverHost}${photo.url}`
+      })) : [];
+
+      const extentionRegex = /\.([^.]+)$/;
+      const nameRegex = /^(.+)\.[^.]+$/;
+
+      const files = message.files ? message.files.map(file => ({
+        url: `${serverHost}${file.url}`,
+        name: nameRegex.exec(file.filename)![1],
+        extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+        size: formatBytes(file.size)
+      })) : [];
+    
       if (ChatStorage.getCurrentBranchId()) {
         chatIsNotBranch = false;
       }  
@@ -153,6 +188,9 @@ export class ChatMessage {
             datetime: getTimeString(messageWithFlags.datetime),
             avatarURL: avatarURL,
             authorName: user?.name,
+            photos: photos,
+            files: files,
+            sticker: message.sticker ? `${serverHost}${message.sticker}` : "",
           },
           chatIsNotBranch
         }),

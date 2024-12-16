@@ -6,6 +6,10 @@ import { ChatMessage } from "../ui/ChatMessage";
 
 export const messageHandler = (messageId : string, messages : TChatMessage[], chatMessageObject : ChatMessage) => {
     const message = document.getElementById(messageId)!;
+    if(messages.find(messageItem => messageItem.messageId === messageId)?.message_type === "sticker") {
+      return;
+    }
+
     const handleMessageClick = (event : MouseEvent) => {
         const pickedMessage = messages.find((elem) => {
           return elem.messageId === messageId;

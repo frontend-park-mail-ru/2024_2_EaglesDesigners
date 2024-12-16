@@ -3,6 +3,7 @@ import { TContact } from "@/entities/ContactCard/index.ts";
 import { TChatMessage } from "@/entities/ChatMessage";
 import { TUser } from "@/entities/User";
 import { TChatUser, TNewChat } from "@/entities/Chat/model/type";
+import { TChatMessageAttachment, TStickerPack } from "@/entities/ChatMessage/model/type";
 
 export type TMessageWS = TChatMessage;
 
@@ -46,6 +47,16 @@ export interface ChatResponse {
   role: string;
   users: TChatUser[];
   messages: TChatMessage[];
+  files: TChatMessageAttachment[];
+  photos: TChatMessageAttachment[];
+}
+
+export interface StickerPacksResponse {
+  packs: TStickerPack[];
+}
+export interface StickersResponse {
+  photo: string;
+  stickers: string[];
 }
 
 export interface ChatsResponse {

@@ -5,6 +5,8 @@ import {
   ChatResponse,
   ProfileResponse,
   searchMessagesResponse,
+  StickerPacksResponse,
+  StickersResponse,
 } from "@/shared/api/types";
 import { ChatMessage, TChatMessage } from "@/entities/ChatMessage";
 import { TChat } from "@/entities/Chat";
@@ -18,14 +20,20 @@ import { debounce } from "@/shared/helpers/debounce";
 import { SearchedMessageCard } from "@/entities/SearchedMessageCard/ui/SearchedMessageCard";
 import { ChatList } from "@/widgets/ChatList";
 import { Router } from "@/shared/Router/Router";
+import { AttachmentCard } from "@/entities/AttachmentCard";
 import { SendMessage } from "../api/SendMessage";
+import { SendSticker } from "../api/SendSticker";
 
 export class Chat {
   #parent;
   #chatInfo;
+  #photos: File[];
+  #files: File[];
   constructor(parent: Element, chatInfo: HTMLElement) {
     this.#parent = parent;
     this.#chatInfo = chatInfo;
+    this.#photos = [];
+    this.#files = [];
   }
   /**
    * Render ChatList widget
@@ -41,11 +49,7 @@ export class Chat {
         currentChat.classList.remove('active');
       }
     }
-    const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
-    if (chatCard) {
-      chatCard.classList.add('active');
-      
-    }
+
     ChatStorage.setChat(chat);
     ChatStorage.setCurrentBranchId("");
     const avatar = chat.avatarPath
@@ -80,6 +84,156 @@ export class Chat {
       userType,
       chatType
     });
+
+    const attachFilePopup = this.#parent.querySelector<HTMLElement>('#attachPopUp')!;
+      if (attachFilePopup) {
+        const emojiCarousel = this.#parent.querySelector<HTMLElement>('#emojiCarousel')!;
+        const emojiPopup = this.#parent.querySelector<HTMLElement>('#emojiPopup')!;
+        const emojiTabBtn = this.#parent.querySelector<HTMLElement>('#emojiTabBtn')!;
+        const stickersTabBtn = this.#parent.querySelector<HTMLElement>('#stickersTabBtn')!;
+    
+        emojiTabBtn.addEventListener("click", () => {
+          emojiCarousel.style.transform = `translateX(0%)`;
+        })
+        stickersTabBtn.addEventListener("click", () => {
+          emojiCarousel.style.transform = `translateX(-100%)`;
+        })
+    
+        const emojiList = this.#parent.querySelector<HTMLElement>('.emoji-list')!;
+        
+        this.#parent.querySelector('#emojiBtn')!.addEventListener("click", (event) => {
+          event.stopPropagation();
+          emojiPopup.style.display = emojiPopup.style.display === "none" ? "flex" : "none";
+        });
+    
+        document.addEventListener("click", () => {
+          if (emojiPopup.style.display !== "none") {
+            emojiPopup.style.display = "none";
+          }
+        });
+        emojiPopup.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+    
+        const emojiString = [..."⌚⌛⌨⏏⏩⏪⏫⏬⏭⏮⏰⏱⏲⏳⏸⏹⏺Ⓜ▪▶◀◼◽◾☀☁☂☃☄☎☑☔☕☘☝☠☢☣☦☪☮☯☸☹☺♀♂♈♉♊♋♌♍♎♏♐♑♒♓♟♠♣♥♦♨♻♾♿⚒⚓⚔⚕⚖⚗⚙⚛⚜⚠⚡⚧⚪⚫⚰⚱⚽⚾⛄⛅⛈⛎⛏⛑⛔⛩⛪⛱⛲⛳⛴⛵⛷⛸⛹⛺⛽✂✅✈✊✋✌✍✏✒✔✖✝✡✨✳✴❄❇❌❎❓❔❕❗❣❤➕➖➗➡➰➿⤴⤵⬅⬆⬇⬛⭐⭕〰〽㊗㊙️🀄🃏🅰🅱🅾🅿🆎🆑🆒🆓🆔🆕🆖🆗🆘🆙🆚🇦🇧🇨🇩🇪🇫🇬🇭🇮🇯🇰🇱🇲🇳🇴🇵🇶🇷🇸🇹🇺🇻🇼🇽🇾🇿🈁🈂🈚🈯🈲🈳🈴🈵🈶🈷🈸🈹🈺🉐🉑🌀🌁🌂🌃🌄🌅🌆🌇🌈🌉🌊🌋🌌🌍🌎🌏🌐🌑🌒🌓🌔🌕🌖🌗🌘🌙🌚🌛🌜🌝🌞🌟🌠🌤🌥🌦🌧🌨🌩🌪🌫🌬🌭🌮🌯🌰🌱🌲🌳🌴🌵🌶🌷🌸🌹🌺🌻🌼🌽🌾🌿🍀🍁🍂🍃🍄🍅🍆🍇🍈🍉🍊🍋🍌🍍🍎🍏🍐🍑🍒🍓🍔🍕🍖🍗🍘🍙🍚🍛🍜🍝🍞🍟🍠🍡🍢🍣🍤🍥🍦🍧🍨🍩🍪🍫🍬🍭🍮🍯🍰🍱🍲🍳🍴🍵🍶🍷🍸🍹🍺🍻🍼🍽🍾🍿🎀🎁🎂🎃🎄🎅🎆🎇🎈🎉🎊🎋🎌🎍🎎🎏🎐🎑🎒🎓🎖🎗🎙🎚🎛🎞🎟🎠🎡🎢🎣🎤🎥🎦🎧🎨🎩🎪🎫🎬🎭🎮🎯🎰🎱🎲🎳🎴🎵🎶🎷🎸🎹🎺🎻🎼🎽🎾🎿🏀🏁🏂🏃🏄🏅🏆🏇🏈🏉🏊🏋🏌🏍🏎🏏🏐🏑🏒🏓🏔🏕🏖🏗🏘🏙🏛🏜🏝🏞🏟🏠🏡🏢🏣🏤🏥🏦🏧🏨🏩🏪🏫🏬🏭🏮🏯🏰🏳🏴🏵🏷🏸🏹🏺🏻🏼🏽🏾🏿🐀🐁🐂🐃🐄🐅🐆🐇🐈🐉🐊🐋🐌🐍🐎🐏🐐🐑🐒🐓🐔🐕🐖🐗🐘🐙🐚🐛🐜🐝🐞🐟🐠🐡🐢🐣🐤🐥🐦🐧🐨🐩🐪🐫🐬🐭🐮🐯🐰🐱🐲🐳🐴🐵🐶🐷🐸🐹🐺🐻🐼🐽🐾🐿👀👁👂👃👄👅👆👇👈👉👊👋👌👍👎👏👐👑👒👓👔👕👖👗👘👙👚👛👜👝👞👟👠👡👢👣👤👥👦👧👨👩👪👫👬👭👮👯👰👱👲👳👴👵👶👷👸👹👺👻👼👽👾👿💀💁💂💃💄💅💆💇💈💉💊💋💌💍💎💏💐💑💒💓💔💕💖💗💘💙💚💛💜💝💞💟💠💡💢💣💤💥💦💧💨💩💪💫💬💭💮💯💰💱💲💳💴💵💶💷💸💹💺💻💼💽💾💿📀📁📂📃📄📅📆📇📈📉📊📋📌📍📎📏📐📑📒📓📔📕📖📗📘📙📚📛📜📝📞📟📠📡📢📣📤📥📦📧📨📩📪📫📬📭📮📯📰📱📲📳📴📵📶📷📸📹📺📻📼📽📿🔀🔁🔂🔃🔄🔅🔆🔇🔈🔉🔊🔋🔌🔍🔎🔏🔐🔑🔒🔓🔔🔕🔖🔗🔘🔙🔚🔛🔜🔝🔞🔟🔠🔡🔢🔣🔤🔥🔦🔧🔨🔩🔪🔫🔬🔭🔮🔯🔰🔱🔲🔳🔴🔵🔶🔷🔸🔹🔺🔻🔼🔽🕉🕊🕋🕌🕍🕎🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛🕜🕝🕞🕟🕠🕡🕢🕣🕤🕥🕦🕧🕯🕰🕳🕴🕵🕶🕷🕸🕹🕺🖇🖊🖋🖌🖍🖐🖕🖖🖤🖥🖨🖱🖲🖼🗂🗃🗄🗑🗒🗓🗜🗝🗡🗣🗨🗯🗳🗺🗻🗼🗽🗾🗿😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷😸😹😺😻😼😽😾😿🙀🙁🙂🙃🙄🙅🙆🙇🙈🙉🙊🙋🙌🙍🙎🙏🚀🚁🚂🚃🚄🚅🚆🚇🚈🚉🚊🚋🚌🚍🚎🚏🚐🚑🚒🚓🚔🚕🚖🚗🚘🚙🚚🚛🚜🚝🚞🚟🚠🚡🚢🚣🚤🚥🚦🚧🚨🚩🚪🚫🚬🚭🚮🚯🚰🚱🚲🚳🚴🚵🚶🚷🚸🚹🚺🚻🚼🚽🚾🚿🛀🛁🛂🛃🛄🛅🛋🛌🛍🛎🛏🛐🛑🛒🛕🛠🛡🛢🛣🛤🛥🛩🛫🛬🛰🛳🛴🛵🛶🛷🛸🛹🛺🛼🟠🟡🟢🟣🟤🟥🟦🟧🟨🟩🟪🟫🤍🤎🤏🤐🤑🤒🤓🤔🤕🤖🤗🤘🤙🤚🤛🤜🤝🤞🤟🤠🤡🤢🤣🤤🤥🤦🤧🤨🤩🤪🤫🤬🤭🤮🤯🤰🤱🤲🤳🤴🤵🤶🤷🤸🤹🤺🤼🤽🤾🤿🥀🥁🥂🥃🥄🥅🥇🥈🥉🥊🥋🥌🥍🥎🥏🥐🥑🥒🥓🥔🥕🥖🥗🥘🥙🥚🥛🥜🥝🥞🥟🥠🥡🥢🥣🥤🥥🥦🥧🥨🥩🥪🥫🥬🥭🥮🥯🥰🥱🥳🥴🥵🥶🥺🥻🥼🥽🥾🥿🦀🦁🦂🦃🦄🦅🦆🦇🦈🦉🦊🦋🦌🦍🦎🦏🦐🦑🦒🦓🦔🦕🦖🦗🦘🦙🦚🦛🦜🦝🦞🦟🦠🦡🦢🦥🦦🦧🦨🦩🦪🦫🦮🦯🦰🦱🦲🦳🦴🦵🦶🦷🦸🦹🦺🦻🦼🦽🦾🦿🧀🧁🧂🧃🧄🧅🧆🧇🧈🧉🧊🧋🧍🧎🧏🧐🧑🧒🧓🧔🧕🧖🧗🧘🧙🧚🧛🧜🧝🧞🧟🧠🧡🧢🧣🧤🧥🧦🧧🧨🧩🧪🧫🧬🧭🧮🧯🧰🧱🧲🧳🧴🧵🧶🧷🧸🧹🧺🧻🧼🧽🧾🧿🩰🩱🩲🩳🩴🩸🩹🩺🪀🪁🪂🪐🪑🪒🪓🪔🪕"];
+        emojiString.map((emoji) => {
+          emojiList.insertAdjacentHTML("beforeend", `<div class="emoji-list__item">${emoji}</div>`);
+          emojiList.lastElementChild?.addEventListener('click', () => {
+            textArea.value = textArea.value + emoji;
+          })
+        })
+    
+        const stickersList = this.#parent.querySelector<HTMLElement>('#stickers-list')!;
+        const packsList = this.#parent.querySelector<HTMLElement>('#packs-list')!;
+    
+        const response = await API.get<StickerPacksResponse>('/stickerpacks');
+        const packs = response.packs;
+        packs.map((pack) => {
+          packsList.insertAdjacentHTML("beforeend", `<img class="sticker-list__packs__item" src="${serverHost}${pack.photo}" alt=""/>`);
+          packsList.lastElementChild?.addEventListener('click', async () => {
+            const response = await API.get<StickersResponse>(`/stickerpacks/${pack.id}`); 
+            const stickers = response.stickers;
+            stickersList.innerHTML = '';
+            stickers.map((sticker) => {
+              stickersList.insertAdjacentHTML("beforeend", `<img class="sticker-list__stickers__item" src="${serverHost}${sticker}" alt="">`);
+              stickersList.lastElementChild?.addEventListener('click', () => {
+                SendSticker(chat.chatId, sticker);
+                emojiPopup.style.display = 'none';
+              })
+            })
+          })
+        });
+      this.#parent.querySelector('#attachBtn')!.addEventListener("click", (event) => {
+        event.stopPropagation();
+        attachFilePopup.style.display = attachFilePopup.style.display === "none" ? "flex" : "none";
+      });
+
+      document.addEventListener("click", () => {
+        if (attachFilePopup.style.display !== "none") {
+          attachFilePopup.style.display = "none";
+        }
+      });
+
+      const filesCarousel = this.#parent.querySelector<HTMLElement>('#filesWrapper')!;
+      const filesContainer = document.querySelector<HTMLElement>('#filesContainer')!;
+
+      const attachmentCard = new AttachmentCard(filesContainer);
+      
+      const photoInput = this.#parent.querySelector<HTMLInputElement>("#attach-photo")!;
+      const handlePhotoAttachment = () => {
+        if (photoInput.files) {
+          const file = photoInput.files[0];
+          if (file) {
+            this.#photos.push(file);
+            attachmentCard.renderPhoto(file);
+            
+            filesCarousel.style.display = 'block';
+            updateButtonsVisibility();
+          }
+        }
+      };
+      photoInput.addEventListener("change", handlePhotoAttachment);
+
+      const fileInput: HTMLInputElement = this.#parent.querySelector("#attach-file")!;
+      const handleFileAttachment = () => {
+        if (fileInput.files) {
+          const file = fileInput.files[0];
+          if (file) {
+            this.#files.push(file);
+            attachmentCard.renderFile(file);
+
+            filesCarousel.style.display = 'block';
+            updateButtonsVisibility();
+          }
+        }
+      };
+      fileInput.addEventListener("change", handleFileAttachment);
+
+      const filesPrevBtn = document.querySelector<HTMLElement>('#inputPrevBtn')!;
+      const filesNextBtn = document.querySelector<HTMLElement>('#inputNextBtn')!;
+      const attachments = filesContainer!.children;
+
+      let currentIndex = 0;
+      const fileCardWidth = 100;
+      const fileCardsGap = 10;
+
+      const getVisibleCardsCount = () => {
+        const containerWidth = filesContainer.parentElement!.clientWidth;
+        return 1 + Math.floor((containerWidth - fileCardWidth)/(fileCardWidth + fileCardsGap));
+      }
+
+      const updateButtonsVisibility = () => {
+        filesPrevBtn.style.display = currentIndex === 0 ? 'none' : 'block';
+        const visibleCardsCount = getVisibleCardsCount();
+        filesNextBtn.style.display = attachments.length > visibleCardsCount && currentIndex !== attachments.length - 1 - attachments.length % visibleCardsCount ? 'block' : 'none';
+      }
+
+      const updateTransform = () => {
+        const offset = currentIndex*(fileCardWidth + fileCardsGap);
+
+        filesContainer.style.transform = `translateX(-${offset}px)`;
+      }
+
+      filesPrevBtn.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - getVisibleCardsCount(), 0);
+
+        updateButtonsVisibility();
+        updateTransform();
+      });
+
+      filesNextBtn.addEventListener('click', () => {
+        const visibleCardsCount = getVisibleCardsCount();
+        currentIndex = Math.min(currentIndex + visibleCardsCount, attachments.length - 1 - attachments.length % visibleCardsCount);
+        
+        updateButtonsVisibility();
+        updateTransform();
+      });
+    }
+
+    const chatCard : HTMLElement = document.querySelector(`[id='${chat.chatId}']`)!;
+    if (chatCard) {
+      chatCard.classList.add('active');
+    }
     const subscribeButton : HTMLElement = this.#parent.querySelector("#subscribe-channel")!;
     const handleSubscribe = async () => {
       const responseSubscribe = await API.post(`/channel/${chat.chatId}/join`, {});
@@ -103,7 +257,7 @@ export class Chat {
     ChatStorage.setChatMessageInstance(chatMessage);
 
     
-    const textArea : HTMLTextAreaElement = this.#parent.querySelector("#textarea")!;
+    const textArea : HTMLTextAreaElement = this.#parent.querySelector("#inputTextarea")!;
     if (textArea) {
       textArea.addEventListener("input", function () {
         this.style.height = "";
@@ -135,7 +289,7 @@ export class Chat {
             textArea.classList.remove(messageId);
             const message = document.getElementById(messageId)!;
             const redactedMessage = message.querySelector("#redacted")!;
-            const messageBody = message.querySelector(".message__body__text")!;
+            const messageBody = message.querySelector("#message-text-content")!;
             messageBody.textContent = messageText;
             redactedMessage.classList.remove("hidden");
           
@@ -144,10 +298,18 @@ export class Chat {
           return;
         }
         if (!branch) {
-          SendMessage(chat.chatId, messageText);
-          return;
+          SendMessage( chat.chatId, messageText, this.#files, this.#photos);
+        }else {
+          SendMessage(ChatStorage.getCurrentBranchId(), messageText, this.#files, this.#photos);
         }
-        SendMessage(ChatStorage.getCurrentBranchId(), messageText);
+        this.#files = [];
+        this.#photos = [];
+        const filesCarousel = this.#parent.querySelector<HTMLElement>('#filesWrapper')!;
+        const filesContainer = document.querySelector<HTMLElement>('#filesContainer')!;
+        if(filesCarousel){
+          filesCarousel.style.display = 'none';
+          filesContainer.innerHTML = '';
+        }
       }
 
       textArea.style.height = "";
