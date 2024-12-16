@@ -109,11 +109,12 @@ $chat-padding-top: var(--chat-padding-top);
 @mixin right-column {
   padding-top: $chat-padding-top;
   padding-right: 20px;
-  min-width: $main-page-right-column-width;
+  max-width: $main-page-right-column-width;
 
   background: $primary;
 
   @media screen and (max-width: 950px) {
     padding-left: 20px;
+    max-width: unset;
   }
 }

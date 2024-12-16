@@ -10,6 +10,7 @@ import { TContact } from "@/entities/ContactCard";
 import { Router } from "@/shared/Router/Router";
 import { serverHost } from "@/app/config";
 import { UserType } from "@/widgets/AddChannelForm/lib/types";
+import { formatBytes } from "@/shared/helpers/formatBytes";
 
 export class GroupChatInfo {
   #parent;
@@ -43,15 +44,82 @@ export class GroupChatInfo {
     } else{
       chatType.channel = true;
     }
+
+    const files = [
+                  {
+                      "url": "/files/675f466313dbaf51a93aa2e1",
+                      "filename": "Технопарк. Ведомость. WEB. Весна 2024 - Модуль 1.pdf",
+                      "size": 73677
+                  },
+                  {
+                      "url": "/files/675f466313dbaf51a93aa2e4",
+                      "filename": ".~lock.Lecture5 (1).pptx#",
+                      "size": 109
+                  }
+              ];
+
+    const photos = [
+                {
+                    "url": "/files/675f473513dbaf51a93aa2e7",
+                    "filename": "9d5b031369cec9acdc54614a4d928d8e.jpg",
+                    "size": 904891
+                },
+                {
+                    "url": "/files/675f473513dbaf51a93aa2ec",
+                    "filename": "s-l500.jpg",
+                    "size": 13863
+                }
+            ];
+
+    const extentionRegex = /\.([^.]+)$/;
+    const nameRegex = /^(.+)\.[^.]+$/;
+    console.log('ss', ChatUsers);
+      
     this.#parent.innerHTML = GroupChatInfoTemplate({
-      chat,
+      chat: {
+        ...chat,
+        files: files ? files.map(file => ({
+          url: `${serverHost}${file.url}`,
+          name: nameRegex.exec(file.filename)![1],
+          extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+          size: formatBytes(file.size),
+      })) : [],
+        photos: photos ? photos.map(photo => ({
+          url: `${serverHost}${photo.url}`
+        })) : [],
+      },
       chatType,
       avatar,
       usersCount,
       userType,
     });
 
-    const chatUsersList = this.#parent.querySelector("#users-list")! || null;
+    const usersButton = this.#parent.querySelector<HTMLElement>("#group-content-users")!;
+    const photosButton = this.#parent.querySelector<HTMLElement>("#group-content-photos")!;
+    const filesButton = this.#parent.querySelector<HTMLElement>("#group-content-files")!;
+
+    const contentImport = this.#parent.querySelector<HTMLElement>("#content-tabs")!;
+
+    if(chatType.group) {
+      usersButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(0%)`;
+      });
+      photosButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(-100%)`;
+      });
+      filesButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(-200%)`;
+      });  
+    }else {
+      photosButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(0%)`;
+      });
+      filesButton?.addEventListener('click', () => {
+        contentImport.style.transform = `translateX(-100%)`;
+      });   
+    }
+
+    const chatUsersList = this.#parent.querySelector("#users-list")!;
     
     if (chatType.group) {
       
@@ -121,7 +189,6 @@ export class GroupChatInfo {
     if (userType.owner) {
       updateGroupButton.addEventListener("click", handleGroupUpdate);
     }
-  
 
     this.#parent.querySelector('#group-info-close-button')!.addEventListener('click', () => {
       this.#parent.style.right = '-100vw';

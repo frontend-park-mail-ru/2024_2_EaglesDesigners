@@ -25,6 +25,46 @@
       </div>
     </div>
   </div>
+  <div class="content-buttons">
+      <div class="content-button" id="group-content-photos">
+        <span class="content-button__name">
+          Фото
+        </span>
+      </div>
+      <div class="content-button" id="group-content-files">
+        <span class="content-button__name">
+          Файлы
+        </span>
+      </div>
+    </div>
+    <div class="content-carousel">
+      <div class="content-tabs" id="content-tabs">
+        <div class="content-tab photos-list" id="photos-list">
+          {{#each chat.photos}}
+            <a href={{url}}>
+              <img class="message-photo" src={{url}} />
+            </a>
+          {{/each}}
+        </div>
+        <div class="content-tab files-list" id="files-list">
+          {{#each chat.files}}
+            <a class="message-file" href={{url}}>
+              <div class="message-file__upper-row">
+                <img class="message-file__icon" src="/assets/image/attached-file.svg" />
+                <div class="message-file__info">
+                  <div class="message-file__meta">
+                    <span class="message-file__extention">{{extention}}</span>
+                    <span class="message-file__size">{{size}}</span>
+                  </div>  
+                  <span class="message-file__name">{{name}}</span>
+                </div>
+              </div>
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
   <button id="delete-chat" class="delete-chat-btn__button">
     Удалить чат
   </button>

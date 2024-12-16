@@ -93,17 +93,14 @@ export class ChatMessage {
         url: `${serverHost}${photo.url}`
       })) : [];
 
-      console.log('files', message);
       const extentionRegex = /\.([^.]+)$/;
       const nameRegex = /^(.+)\.[^.]+$/;
 
-      const files = message.files ? await Promise.all(message.files.map(async (file) => {
-
-        return {
-          name: nameRegex.exec(file.filename)![1],
-          extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
-          size: formatBytes(file.size)
-        };
+      const files = message.files ? message.files.map(file => ({
+        url: `${serverHost}${file.url}`,
+        name: nameRegex.exec(file.filename)![1],
+        extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+        size: formatBytes(file.size)
       })) : [];
 
         this.#parent.insertAdjacentHTML(
@@ -177,13 +174,11 @@ export class ChatMessage {
       const extentionRegex = /\.([^.]+)$/;
       const nameRegex = /^(.+)\.[^.]+$/;
 
-      const files = message.files ? await Promise.all(message.files.map(async (file) => {
-
-        return {
-          name: nameRegex.exec(file.filename)![1],
-          extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
-          size: formatBytes(file.size)
-        };
+      const files = message.files ? message.files.map(file => ({
+        url: `${serverHost}${file.url}`,
+        name: nameRegex.exec(file.filename)![1],
+        extention: extentionRegex.exec(file.filename)![1].toUpperCase(),
+        size: formatBytes(file.size)
       })) : [];
     
       this.#parent.insertAdjacentHTML(
