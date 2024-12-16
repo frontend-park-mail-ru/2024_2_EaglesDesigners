@@ -39,17 +39,25 @@ export class SearchedMessageCard{
                         response = await API.get<ChatMessagesResponse>(`/chat/${ChatStorage.getChat().chatId}/messages/pages/${chatMessages.lastElementChild?.id}`)!;
                    
                     }
-                     if (!response.error) {
+                    if (!response.error && response.messages.length) {
                         Message.renderMessages(response.messages);
                     }
-                    else {
+                    else if (response.error) {
                         return;
                     }
+
                     if (!response.messages.length) {
-                        return;
+                        break;
                     }
                 }
-                message = chatMessages.querySelector(`[id='${messageId}']`)!;
+                if (!ChatStorage.getCurrentBranchId()) {
+                    message = chatMessages.querySelector(`[id='${messageId}']`)!;
+                    message.scrollIntoView({ block: "center", behavior: "smooth" });
+                    return;
+                }
+                
+                message = document.querySelector("#chat-branch")!.querySelector("#chat__messages")!.querySelector(`[id='${messageId}']`)!;
+                console.log(message, messageId)
                 message.scrollIntoView({ block: "center", behavior: "smooth" });
             }
 

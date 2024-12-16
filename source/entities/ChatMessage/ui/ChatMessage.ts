@@ -211,9 +211,10 @@ export class ChatMessage {
         const messageInChat = document.getElementById(messageId)!;
         if (message) {
           const menu = messageInChat.querySelector("#menu-context")!;
-          const messageText = messageInChat.querySelector(".message__body__text")?.textContent;
+          const messageText = messageInChat.querySelector("#message-text-content")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
+            console.log("hihihi")
             if (ChatStorage.getCurrentBranchId()) {
               messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, true);
               return;
