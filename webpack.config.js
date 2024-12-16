@@ -5,6 +5,7 @@ const ServiceWorkerWebpackPlugin = require("serviceworker-webpack5-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   entry: './source/index.ts',
@@ -51,7 +52,32 @@ module.exports = {
   ],
   optimization: {
     minimize: true,
-    minimizer: [new TerserWebpackPlugin()],
+    minimizer: [
+      new TerserWebpackPlugin(),
+      "...",
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.sharpMinify,
+          options: {
+            encodeOptions: {
+              jpeg: {
+                quality: 100,
+              },
+              webp: {
+                lossless: true,
+              },
+              avif: {
+                lossless: true,
+              },
+
+              png: {},
+
+              gif: {},
+            },
+          },
+        },
+      }),
+    ],
   },
 
 
