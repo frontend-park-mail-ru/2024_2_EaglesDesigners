@@ -5,9 +5,9 @@ import { ChatMessage } from "../ui/ChatMessage";
 
 export const messageHandler = (messageId : string, messages : TChatMessage[], chatMessageObject : ChatMessage) => {
     const message = document.getElementById(messageId)!;
-    if(messages.find(messageItem => messageItem.messageId === messageId)?.message_type === "sticker") {
-      return;
-    }
+    // if(messages.find(messageItem => messageItem.messageId === messageId)?.message_type === "sticker") {
+    //   return;
+    // }
 
     const handleMessageClick = (event : MouseEvent) => {
         const pickedMessage = messages.find((elem) => {
@@ -15,7 +15,8 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
         });
 
         if (message) {
-          const messageText = message.querySelector("#message-text-content")!.innerHTML; 
+          const messageTxt = message.querySelector("#message-text-content")!;
+          const messageText = messageTxt ? message.querySelector("#message-text-content")!.textContent : "";
           const menu = message.querySelector("#menu-context")!;
           const messageMenu = new MessageMenu(menu);
           console.log(message)
@@ -27,10 +28,11 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
 
             messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, false, true);
 
-           }
-           else {
-            messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, false, false);
-           }
+          }
+          else {
+            console.log("я стикер")
+          messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, false, false);
+          }
         }
       };
 

@@ -24,7 +24,8 @@ export class MessageMenu {
         }
         const notBranch = !branch;
         const notPersonalChat = true;
-        this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch, thisUser, notPersonalChat, noSticker});
+        const messageIsNoSticker = message.sticker ? false : true;
+        this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch, thisUser, notPersonalChat, noSticker, messageIsNoSticker});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
         const handleDelete = async () => {
