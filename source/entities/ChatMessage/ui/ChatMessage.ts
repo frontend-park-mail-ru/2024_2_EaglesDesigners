@@ -132,6 +132,10 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage, chatIsNotBranch = true) {
+    if (message.chatId !== ChatStorage.getChat().chatId && ChatStorage.getCurrentBranchId() !== message.chatId) {
+      console.log("sam")
+      return;
+    }
     const placeholder= this.#parent.querySelector('#msg-placeholder');
     if(placeholder) {
       placeholder.remove();
