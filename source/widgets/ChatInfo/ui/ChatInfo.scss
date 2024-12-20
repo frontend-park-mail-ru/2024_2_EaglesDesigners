@@ -9,6 +9,7 @@ $delete-button-color: var(--delete-button-color);
 
 .chat-info-column{
   flex: 1;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
@@ -43,6 +44,7 @@ $delete-button-color: var(--delete-button-color);
     color: $text-over-secondary;
     font-family: var(--main-font-family);
     font-size: 20px;
+    line-break: anywhere;
   }
 
   &__span-online-status {
@@ -86,6 +88,7 @@ $delete-button-color: var(--delete-button-color);
     font-size: var(--base-font-size);
     font-family: var(--main-font-family);
     color: $text-over-secondary;
+    line-break: anywhere;
   }
 }
 
