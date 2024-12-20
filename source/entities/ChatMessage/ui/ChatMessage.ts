@@ -49,7 +49,6 @@ export class ChatMessage {
   }
 
   async renderMessages(messages: TChatMessage[], chatIsNotBranch = true) {
-    console.log(messages);
     if ( 
       this.#parent.innerHTML &&
       this.#oldestMessage?.first &&
@@ -215,7 +214,6 @@ export class ChatMessage {
           const messageText = messageInChat.querySelector("#message-text-content")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            console.log("hihihi")
             if (ChatStorage.getCurrentBranchId()) {
               messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, true);
               return;

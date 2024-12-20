@@ -19,7 +19,6 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
           const messageText = messageTxt ? message.querySelector("#message-text-content")!.textContent : "";
           const menu = message.querySelector("#menu-context")!;
           const messageMenu = new MessageMenu(menu);
-          console.log(message)
           if (messageText) {
             if (pickedMessage?.chatId === ChatStorage.getCurrentBranchId()) {
                 messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, true);
@@ -30,7 +29,6 @@ export const messageHandler = (messageId : string, messages : TChatMessage[], ch
 
           }
           else {
-            console.log("я стикер")
           messageMenu.render(pickedMessage, messageId, messageText, event.x-100, event.y-25, chatMessageObject, false, false);
           }
         }

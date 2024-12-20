@@ -25,8 +25,6 @@ export const renderMessage = async (message: TMessageWS) => {
         if (!message.text) {
           message.text = "file";
         }
-        console.log(message)
-        console.log(message.text)
         const notificationChat : TChat = {
           chatId: message.chatId,
           lastMessage: message,
@@ -36,7 +34,6 @@ export const renderMessage = async (message: TMessageWS) => {
         };
 
         if (newChatResponse && newChatResponse.send_notifications) {
-          console.log(message)
           chatCard.render(notificationChat, true, newChatResponse);
           UserNotification.show();
         }
