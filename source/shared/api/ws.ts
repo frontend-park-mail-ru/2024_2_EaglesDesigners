@@ -25,6 +25,7 @@ class wsConnection {
     this.ws.onmessage = (event: MessageEvent) => {
       try {
         const res = JSON.parse(event.data);
+        console.log('ws', res);
         
         if (res.messageType === "error") {
           return;

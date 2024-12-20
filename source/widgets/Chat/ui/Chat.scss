@@ -114,6 +114,7 @@ textarea {
 }
 
 .messages {
+  padding-block: 40px;
   width: 100%;
   max-width: $messages-container-max-width;
   flex: 1;
