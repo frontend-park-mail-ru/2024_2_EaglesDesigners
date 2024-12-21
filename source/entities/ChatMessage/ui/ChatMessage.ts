@@ -10,7 +10,7 @@ import { serverHost } from "@/app/config";
 import { ChatStorage } from "@/entities/Chat/lib/ChatStore";
 import { API } from "@/shared/api/api";
 import { MessageMenu } from "@/widgets/MessageMenu/ui/MessageMenu.ts";
-import { ChatMessagesResponse, createBranchResponse, EmptyRequest } from "@/shared/api/types";
+import { ChatMessagesResponse} from "@/shared/api/types";
 import { messageHandler } from "../api/MessageHandler";
 import { formatBytes } from "@/shared/helpers/formatBytes";
 import { InfoMessage } from "@/entities/InfoMessage/ui/InfoMessage";
@@ -49,7 +49,6 @@ export class ChatMessage {
   }
 
   async renderMessages(messages: TChatMessage[], chatIsNotBranch = true) {
-    console.log(messages);
     if ( 
       this.#parent.innerHTML &&
       this.#oldestMessage?.first &&
@@ -121,7 +120,6 @@ export class ChatMessage {
             redactedMessage.classList.remove("hidden");
           }
         }
-        
         const currentMessageId = this.#parent.lastElementChild!.id;
         messageHandler(currentMessageId, messages, this);
       }
@@ -132,11 +130,14 @@ export class ChatMessage {
     }
   }
   async renderNewMessage(message: TChatMessage, chatIsNotBranch = true) {
+    if (message.chatId !== ChatStorage.getChat().chatId && ChatStorage.getCurrentBranchId() !== message.chatId) {
+      return;
+    }
     const placeholder= this.#parent.querySelector('#msg-placeholder');
     if(placeholder) {
       placeholder.remove();
     }
-    if (message.text || message.sticker) {
+    if (message.text || message.sticker || message.files || message.photos) {
       if (
         this.#newestMessage?.last &&
         this.#newestMessage.authorID === message.authorID
@@ -206,7 +207,6 @@ export class ChatMessage {
 
       const newMessageElement = document.getElementById(message.messageId)!;
       const handleMessageClick = (event : MouseEvent) => {
-        
         const messageId = newMessageElement.id;
         const messageInChat = document.getElementById(messageId)!;
         if (message) {
@@ -214,12 +214,14 @@ export class ChatMessage {
           const messageText = messageInChat.querySelector("#message-text-content")?.textContent;
           const messageMenu = new MessageMenu(menu);
           if (messageText) {
-            console.log("hihihi")
             if (ChatStorage.getCurrentBranchId()) {
               messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, true);
               return;
             }
             messageMenu.render(message, messageId, messageText, event.x-100, event.y-25, this, false);
+          }
+          else {
+            messageMenu.render(message, messageId, "", event.x-100, event.y-25, this, false);
           }
         }
       };

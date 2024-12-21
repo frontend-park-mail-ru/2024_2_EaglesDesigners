@@ -38,6 +38,7 @@ $messages-container-width: 700px;
 
     &__username {
       @include font-settings("Inter", 400, 14px, $secondary);
+      margin-bottom: 2px;
 
       overflow: hidden;
       text-overflow: ellipsis;
@@ -157,7 +158,6 @@ $messages-container-width: 700px;
   }
   &__avatar {
     width: 40px;
-    height: 40px;
 
     display: flex;
     align-items: flex-end;
@@ -165,6 +165,8 @@ $messages-container-width: 700px;
     padding: 0px 5px;
 
     &__img {
+      position: absolute;
+      
       width: 40px;
       height: 40px;
       border-radius: 100%;

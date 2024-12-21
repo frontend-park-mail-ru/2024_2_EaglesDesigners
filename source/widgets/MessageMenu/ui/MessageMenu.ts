@@ -13,18 +13,19 @@ export class MessageMenu {
         this.#parent = parent;
     }
 
-    render(message : TChatMessage, messageId : string, messageText : string, x : number, y : number, chatMessageObject : ChatMessage, branch : boolean = false) {
+    render(message : TChatMessage, messageId : string, messageText : string, x : number, y : number, chatMessageObject : ChatMessage, branch : boolean = false, noSticker : boolean = true) {
         
         let thisUser = true;
         if (message.authorID !== UserStorage.getUser().id) {
           thisUser = false;
+          if (ChatStorage.getChat().chatType === "personal") {
+            return;
+          }
         }
         const notBranch = !branch;
         const notPersonalChat = true;
-        if (ChatStorage.getChat().chatType === "personal") {
-          return;
-        }
-        this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch, thisUser, notPersonalChat});
+        const messageIsNoSticker = message.sticker ? false : true;
+        this.#parent.innerHTML = MessageMenuTemplate({x, y, notBranch, thisUser, notPersonalChat, noSticker, messageIsNoSticker});
         const deleteButton = this.#parent.querySelector("#delete-message")!;
 
         const handleDelete = async () => {

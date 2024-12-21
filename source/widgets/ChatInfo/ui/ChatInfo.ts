@@ -98,7 +98,8 @@ export class ChatInfo {
 
 
     const handleNotification = async () => {
-      await API.post(`/chat/${ChatStorage.getChat().chatId}/notifications/${!notificationCheckbox.checked}`, {});
+      const responseNotification : boolean = await API.post(`/chat/${ChatStorage.getChat().chatId}/notifications/${!notificationCheckbox.checked}`, {});
+      ChatStorage.getChat().send_notifications = responseNotification;
     };
 
     notificationToggle.addEventListener("click", handleNotification);
