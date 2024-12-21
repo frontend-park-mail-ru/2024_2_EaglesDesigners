@@ -270,7 +270,7 @@ export class Chat {
       const messageText = textArea.value.trim();
       textArea.value = "";
 
-      if (messageText) {
+      if (messageText || this.#files.length || this.#photos.length) {
         
         if (textArea.classList.contains('edit')) {
           const messageId = textArea.classList[2]!;
